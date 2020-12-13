@@ -21,7 +21,7 @@ def signupFunction():
             password = request.form.get("password")
             confirmPassword  = request.form.get("confirm-password")
 
-            with sqlite3.connect("database") as connection:
+            with sqlite3.connect("./database") as connection:
                 print("Opened database successfully")
                 current = connection.cursor()
 
@@ -33,22 +33,25 @@ def signupFunction():
                     return flash("must provide username")
 
                 # Ensure password was submitted
-                elif not password:
+                if not password:
                     return flash("must provide password")
 
                 # Ensure confirm password is correct
-                elif password != confirmPassword:
+                if password != confirmPassword:
                     return flash("The passwords don't match")
 
                 # Query database for username if already exists
-                elif current.execute("SELECT * FROM users WHERE username = :username", username=username):
+                current.execute("SELECT * FROM users WHERE username = :username", username=username)
+                if current.fetchall() == username: 
                     return flash("Username already taken")
 
                 # Insert user and hash of the password into the table
                 current.execute("INSERT INTO users(username, hash) VALUES (:username, :hash)", username=username, hash=generate_password_hash(password))
+                current.commit()
 
                 # Query database for username
-                rows = current.execute("SELECT * FROM users WHERE username = :username", username=username)
+                current.execute("SELECT * FROM users WHERE username = :username", username=username)
+                rows = current.fetchall()
 
                 # Remember which user has logged in
                 session["user_id"] = rows[0]["id"]
