@@ -5,10 +5,10 @@
 {% endblock %}
 
 {% block main %}
-    <p>Register or <a href='/signin'>login</a> if you already have an account</p><br>
+    <p>Register or <a href='/signin'>login</a></p><br>
     <form action="/signup" method="post">
         <div>
-            <p>Username (6 characters min.)</p>
+            <p>Username (6 characters min).</p>
             <input id="username" autocomplete="off" autofocus class="form-control" name="username" placeholder="Username" type="text">
         </div>
         <br>
@@ -18,14 +18,14 @@
         </div>
         <br>
         <div>
-            <p>Password (7 to 15 characters, one numeric, one special)</p>
+            <p>Password (7 to 15 characters, 1 numeric, 1 special).</p>
             <input id="password" name="password" placeholder="Password" type="password">
         </div>
         <div>
             <input id="confirm-pass" name="confirm-password" placeholder="Confirm Password" type="password">
         </div>
         <br>
-        <button id="submit" type="submit">Register</button>
+        <button id="submit" type="submit">Sign Up</button>
         <br>
     </form>
 

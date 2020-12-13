@@ -24,11 +24,11 @@ def signinFunction():
                 current = connection.cursor()
 
                 # Ensure username was submitted
-                if not request.form.get("username"):
+                if not username:
                     return flash("must provide username")
 
                 # Ensure password was submitted
-                elif not request.form.get("password"):
+                elif not password:
                     return flash("must provide password")
 
                 # Query database for username
