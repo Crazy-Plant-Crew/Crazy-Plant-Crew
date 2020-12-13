@@ -11,7 +11,7 @@
         <meta name="description" content="The Crazy Plant Crew website" />
 
         <!-- documentation at http://getbootstrap.com/docs/4.1/, alternative themes at https://bootswatch.com/ -->
-        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+        <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet"> -->
         <link href="/static/favicon.ico" rel="icon">
         <link href="/static/styles.css" rel="stylesheet">
 
@@ -24,9 +24,41 @@
     </head>
 
     <body>
+        <nav>
+            <a href="/"><span>Crazy Plant Crew</span></a>
+            <div>
+                {% if session.user_id %}
+                    <ul>
+                        <li><a href="/">Index</a></li>
+                    </ul>
+                    <ul>
+                        <li><a href="/profile">{{ name }}</a></li>
+                        <li><a href="/logout">Log Out</a></li>
+                    </ul>
+                {% else %}
+                    <ul class="navbar-nav ml-auto mt-2">
+                        <li><a href="/signup">Sign Up</a></li>
+                        <li><a href="/signin">Log In</a></li>
+                    </ul>
+                {% endif %}
+            </div>
+        </nav>
+
+        {% if get_flashed_messages() %}
+            <header>
+                <div role="alert">
+                    {{ get_flashed_messages() | join(" ") }}
+                </div>
+            </header>
+        {% endif %}
+
         <main>
             {% block main %}{% endblock %}
         </main>
+
+        <footer>
+            © The Crazy Plant Crew 2020
+        </footer>
     </body>
 
 </html>
