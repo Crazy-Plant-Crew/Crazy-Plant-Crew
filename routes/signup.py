@@ -22,6 +22,7 @@ def signupFunction():
             confirmPassword  = request.form.get("confirm-password")
 
             with sqlite3.connect("database") as connection:
+                print("Opened database successfully")
                 current = connection.cursor()
 
                 # Ensure email was submitted
@@ -51,6 +52,11 @@ def signupFunction():
 
                 # Remember which user has logged in
                 session["user_id"] = rows[0]["id"]
+
+                # Commit to databse
+                connection.commit()
+
+                print("Database operation succesful")
             
         except:
             connection.rollback()
