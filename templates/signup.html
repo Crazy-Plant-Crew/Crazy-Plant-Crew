@@ -8,35 +8,46 @@
     <p>Register or <a href='/signin'>login</a> if you already have an account</p><br>
     <form action="/signup" method="post">
         <div>
-            <br><p>Username must be 6 characters minimum. </p><br>
+            <p>Username (6 characters min.)</p>
             <input id="username" autocomplete="off" autofocus class="form-control" name="username" placeholder="Username" type="text">
         </div>
+        <br>
         <div>
-            <br><p>Password must be between 7 to 15 characters. <br>
-            And must contain at least one numeric digit and a special character.</p><br>
+            <p>Email.</p>
+            <input id="email" autocomplete="off" autofocus class="form-control" name="email" placeholder="Email" type="text">
+        </div>
+        <br>
+        <div>
+            <p>Password (7 to 15 characters, one numeric, one special)</p>
             <input id="password" name="password" placeholder="Password" type="password">
         </div>
         <div>
             <input id="confirm-pass" name="confirm-password" placeholder="Confirm Password" type="password">
         </div>
+        <br>
         <button id="submit" type="submit">Register</button>
+        <br>
     </form>
 
     <script>
-    // Password must be between 7 to 15 characters which contain at least one numeric digit and a special character
-        document.querySelector('#submit').disabled = true;
+        // Password must be between 7 to 15 characters which contain at least one numeric digit and a special character
+        document.querySelector("#submit").disabled = true;
 
-        document.querySelector('#confirm-pass').onkeyup = function() {
-            let password = document.querySelector('#password').value;
-            let username = document.querySelector('#username').value;
-            let confirmation = document.querySelector('#confirm-pass').value;
+        document.querySelector("#confirm-pass").onkeyup = function() {
+            let password = document.querySelector("#password").value;
+            let username = document.querySelector("#username").value;
+            let email = document.querySelector("#email").value;
+            let confirmation = document.querySelector("#confirm-pass").value;
 
             if (password.match(/^^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/i)) {
-                document.querySelector('#submit').disabled = true;
-                if (username.length > 5) {
-                    document.querySelector('#submit').disabled = true;
-                    if (confirmation === password) {
-                        document.querySelector('#submit').disabled = false;
+                document.querySelector("#submit").disabled = true;
+                if (email.match(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i)) {
+                    document.querySelector("#submit").disabled = true;
+                    if (username.length > 5) {
+                        document.querySelector("#submit").disabled = true;
+                        if (confirmation === password) {
+                            document.querySelector("#submit").disabled = false;
+                        }
                     }
                 }
             }
