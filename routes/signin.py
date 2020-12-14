@@ -41,9 +41,6 @@ def signinFunction():
                 # Remember which user has logged in
                 session["user_id"] = rows[0]["id"]
 
-                # Commit to databse
-                connection.commit()
-
                 print("Database operation succesful")
 
         except:
