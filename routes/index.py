@@ -13,7 +13,7 @@ def indexFunction():
 
     if request.method == "POST":
 
-        print("post stuff")
+        print("index")
 
     else:
 
