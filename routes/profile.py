@@ -8,11 +8,7 @@ from application import profileName
 # Set Blueprints
 profile = Blueprint('profile', __name__,)
 
-@profile.route("/profile", methods=["GET", "POST"])
+@profile.route("/profile")
 def profileFunction():
-
-    if request.method == "POST":
-
-        print("profile")
     
     return render_template("profile.html", name=profileName())

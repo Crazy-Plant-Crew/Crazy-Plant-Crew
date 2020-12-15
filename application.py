@@ -78,6 +78,7 @@ def uploadPicture(picture):
         return None
 """
 
+# Get username to be displayed 
 def profileName():
     try:
 
