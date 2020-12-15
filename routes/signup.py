@@ -44,9 +44,11 @@ def signupFunction():
             sqliteConnection = sqlite3.connect("database.db")
             cursor = sqliteConnection.cursor()
             
-            cursor.execute("SELECT * FROM users WHERE username=:username", {"username": username})
+            # Query database for username
+            cursor.execute("SELECT * FROM users WHERE username=:username;", {"username": username})
             record = cursor.fetchall()
 
+            # Check if username is free
             if record == username: 
                 return flash("Username already taken")
 
@@ -101,9 +103,11 @@ def signupFunction():
             sqliteConnection = sqlite3.connect("database.db")
             cursor = sqliteConnection.cursor()
             
+            # Query database for username
             cursor.execute("SELECT * FROM users WHERE username=:username;", {"username": username})
             record = cursor.fetchall()
-
+            
+            # Remember which user has logged in
             session["user_id"] = record[0][0]
 
             cursor.close()

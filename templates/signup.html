@@ -43,7 +43,7 @@
                 document.querySelector("#submit").disabled = true;
                 if (email.match(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i)) {
                     document.querySelector("#submit").disabled = true;
-                    if (username.length > 5) {
+                    if (username.length > 5 && username.match(/^[A-Za-z0-9 ]+$/)) {
                         document.querySelector("#submit").disabled = true;
                         if (confirmation === password) {
                             document.querySelector("#submit").disabled = false;
