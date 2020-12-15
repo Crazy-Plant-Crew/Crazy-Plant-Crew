@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Email
+{% endblock %}
+
+{% block main %}
+<form action="/email" method="post">
+    <div>
+        <p>Email.</p>
+        <input id="email" autocomplete="off" autofocus class="form-control" name="email" placeholder="Email" type="text">
+        <button id="updateEmail" type="submit">Update</button>
+    </div>
+</form>
+{% endblock %}

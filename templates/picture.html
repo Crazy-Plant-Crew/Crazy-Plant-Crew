@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Picture
+{% endblock %}
+
+{% block main %}
+    <form action="/picture" method="post">
+        <div>
+            <p>Profile picture (32mb max).</p>
+            <input type="file" id="myFile" name="filename">
+            <input type="submit" value="Upload">
+        </div>
+    </form>
+{% endblock %}

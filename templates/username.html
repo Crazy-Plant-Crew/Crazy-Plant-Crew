@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Username
+{% endblock %}
+
+{% block main %}
+    <form action="/username" method="post">
+        <div>
+            <p>Username (6 characters min).</p>
+            <input id="username" autocomplete="off" autofocus class="form-control" name="username" placeholder="Username" type="text">
+            <button id="updateUsername" type="submit">Update</button>
+        </div>
+    </form>
+{% endblock %}
