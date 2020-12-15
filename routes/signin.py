@@ -23,11 +23,11 @@ def signinFunction():
 
         # Ensure username was submitted
         if not username:
-            return print("must provide username")
+            return flash("must provide username")
 
         # Ensure password was submitted
         if not password:
-            return print("must provide password")
+            return flash("must provide password")
 
         # Query database for username if already exists
         try:
@@ -41,7 +41,7 @@ def signinFunction():
 
             # Ensure username exists and password is correct
             if len(record) != 1 or not check_password_hash(record[0][3], password):
-                return print("invalid username and/or password")
+                return flash("invalid username and/or password")
 
             # Remember which user has logged in
             session["user_id"] = record[0][0]
