@@ -3,7 +3,7 @@ import traceback
 import sys
 
 from flask import Blueprint, render_template, redirect, session, request
-from application import profileName
+from application import profileName, profilePicture
 
 # Set Blueprints
 message = Blueprint('message', __name__,)
@@ -15,4 +15,4 @@ def messageFunction():
 
         print("message")
     
-    return render_template("message.html", name=profileName())
+    return render_template("message.html", name=profileName(), picture=profilePicture())

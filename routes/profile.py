@@ -3,7 +3,7 @@ import traceback
 import sys
 
 from flask import Blueprint, render_template, redirect, session, request
-from application import profileName
+from application import profileName, profilePicture
 
 # Set Blueprints
 profile = Blueprint('profile', __name__,)
@@ -11,4 +11,4 @@ profile = Blueprint('profile', __name__,)
 @profile.route("/profile")
 def profileFunction():
     
-    return render_template("profile.html", name=profileName())
+    return render_template("profile.html", name=profileName(), picture=profilePicture())

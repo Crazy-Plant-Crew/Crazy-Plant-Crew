@@ -6,9 +6,9 @@ from flask import Blueprint, render_template, redirect, session, request
 from application import profileName, profilePicture
 
 # Set Blueprints
-email = Blueprint('email', __name__,)
+delete = Blueprint('delete', __name__,)
 
-@email.route("/email", methods=["GET", "POST"])
+@delete.route("/delete", methods=["GET", "POST"])
 def emailFunction():
 
-    return render_template("email.html", name=profileName(), picture=profilePicture())
+    return render_template("delete.html", name=profileName(), picture=profilePicture())

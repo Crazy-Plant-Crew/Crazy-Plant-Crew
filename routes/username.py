@@ -3,7 +3,7 @@ import traceback
 import sys
 
 from flask import Blueprint, render_template, redirect, session, request
-from application import profileName
+from application import profileName, profilePicture
 
 # Set Blueprints
 username = Blueprint('username', __name__,)
@@ -11,4 +11,4 @@ username = Blueprint('username', __name__,)
 @username.route("/username", methods=["GET", "POST"])
 def usernameFunction():
 
-    return render_template("username.html", name=profileName())
+    return render_template("username.html", name=profileName(), picture=profilePicture())

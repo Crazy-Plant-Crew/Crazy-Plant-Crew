@@ -5,6 +5,7 @@ import sys
 from flask import Blueprint, render_template, redirect, session, request, flash
 from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
 from werkzeug.security import check_password_hash, generate_password_hash
+from application import uploadPicture
 
 # Set Blueprints
 signup = Blueprint('signup', __name__,)
@@ -22,6 +23,8 @@ def signupFunction():
         username = request.form.get("username")
         password = request.form.get("password")
         confirmPassword  = request.form.get("confirm-password")
+        picture = request.form.get("picture")
+        
 
         # Ensure email was submitted
         if not email:
@@ -126,6 +129,66 @@ def signupFunction():
 
             if (sqliteConnection):
                 sqliteConnection.close()
+
+
+        # Insert user into the profiles table and check if a picture is uploaded
+        if picture:
+
+            try:
+
+                sqliteConnection = sqlite3.connect("database.db")
+                cursor = sqliteConnection.cursor()
+
+                userId = session["user_id"]
+                
+                cursor.execute("INSERT INTO profiles(user_id, picture) VALUES (:username, :picture);", {"user_id": userId, "picture": picture})
+                record = sqliteConnection.commit()
+
+                cursor.close()
+
+            except sqlite3.Error as error:
+            
+                print("Failed to read data from sqlite table", error)
+                print("Exception class is: ", error.__class__)
+                print("Exception is", error.args)
+
+                print('Printing detailed SQLite exception traceback: ')
+                exc_type, exc_value, exc_tb = sys.exc_info()
+                print(traceback.format_exception(exc_type, exc_value, exc_tb))
+
+            finally:
+
+                if (sqliteConnection):
+                    sqliteConnection.close()
+
+        else:
+
+            try:
+
+                sqliteConnection = sqlite3.connect("database.db")
+                cursor = sqliteConnection.cursor()
+
+                userId = session["user_id"]
+                
+                cursor.execute("INSERT INTO profiles(user_id, picture) VALUES (:username);", {"user_id": userId})
+                record = sqliteConnection.commit()
+
+                cursor.close()
+
+            except sqlite3.Error as error:
+            
+                print("Failed to read data from sqlite table", error)
+                print("Exception class is: ", error.__class__)
+                print("Exception is", error.args)
+
+                print('Printing detailed SQLite exception traceback: ')
+                exc_type, exc_value, exc_tb = sys.exc_info()
+                print(traceback.format_exception(exc_type, exc_value, exc_tb))
+
+            finally:
+
+                if (sqliteConnection):
+                    sqliteConnection.close()
 
         return redirect("/")
 

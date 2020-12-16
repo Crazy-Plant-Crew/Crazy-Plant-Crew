@@ -3,6 +3,7 @@ import sqlite3
 import urllib.parse
 import sys
 import traceback
+import requests
 
 from flask import Flask, flash, jsonify, redirect, render_template, request, session
 from flask_session import Session
@@ -55,28 +56,25 @@ def login_required(f):
         return f(*args, **kwargs)
     return decorated_function
 
-"""
-def uploadPicture(picture):
+# ImgBB API upload function
+def uploadPicture(file):
 
     # Contact API
     try:
         api_key = os.environ.get("IMGBB_API")
-        response = requests.get(f"https://cloud-sse.iexapis.com/stable/stock/{urllib.parse.quote_plus(symbol)}/quote?token={api_key}")
+        response = requests.get(f"https://api.imgbb.com/1/upload?expiration=600&key={api_key}")
         response.raise_for_status()
     except requests.RequestException:
         return None
 
     # Parse response
     try:
-        quote = response.json()
+        image = response.json()
         return {
-            "name": quote["companyName"],
-            "price": float(quote["latestPrice"]),
-            "symbol": quote["symbol"]
+            "picture": image["data"]["url"],
         }
     except (KeyError, TypeError, ValueError):
         return None
-"""
 
 # Get username to be displayed 
 def profileName():
@@ -111,6 +109,39 @@ def profileName():
         
         return name
 
+# Get profile picture to be displayed 
+def profilePicture():
+    try:
+
+        sqliteConnection = sqlite3.connect("database.db")
+        cursor = sqliteConnection.cursor()
+
+        # Check who's id is logged in
+        loggedId = session["user_id"]
+        
+        # Query database for username
+        cursor.execute("SELECT picture FROM profiles WHERE id=:id", {"id": loggedId})
+        picture = cursor.fetchall()[0][0]
+
+        cursor.close()
+
+    except sqlite3.Error as error:
+    
+        print("Failed to read data from sqlite table", error)
+        print("Exception class is: ", error.__class__)
+        print("Exception is", error.args)
+
+        print('Printing detailed SQLite exception traceback: ')
+        exc_type, exc_value, exc_tb = sys.exc_info()
+        print(traceback.format_exception(exc_type, exc_value, exc_tb))
+
+    finally:
+    
+        if (sqliteConnection):
+            sqliteConnection.close()   
+        
+        return picture
+
 # Import routes after to avoid circular import
 from routes.profile import profile
 from routes.message import message
@@ -122,6 +153,7 @@ from routes.username import username
 from routes.password import password
 from routes.email import email
 from routes.picture import picture
+from routes.delete import delete
 
 # Configure Blueprints
 app.register_blueprint(signin)
@@ -134,3 +166,4 @@ app.register_blueprint(username)
 app.register_blueprint(password)
 app.register_blueprint(email)
 app.register_blueprint(picture)
+app.register_blueprint(delete)

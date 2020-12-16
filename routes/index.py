@@ -3,7 +3,7 @@ import traceback
 import sys
 
 from flask import Blueprint, render_template, redirect, session, request
-from application import profileName
+from application import profileName, profilePicture
 
 # Set Blueprints
 index = Blueprint('index', __name__,)
@@ -15,4 +15,4 @@ def indexFunction():
 
         print("index")
     
-    return render_template("index.html", name=profileName())
+    return render_template("index.html", name=profileName(), picture=profilePicture())
