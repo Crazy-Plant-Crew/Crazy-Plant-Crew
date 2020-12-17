@@ -62,7 +62,7 @@ def uploadPicture(file):
     # Contact API
     try:
         api_key = os.environ.get("IMGBB_API")
-        response = requests.get(f"https://api.imgbb.com/1/upload?expiration=600&key={api_key}")
+        response = requests.post(f"https://api.imgbb.com/1/upload?expiration=600&key={api_key}")
         response.raise_for_status()
     except requests.RequestException:
         return None

@@ -23,7 +23,7 @@ def signupFunction():
         username = request.form.get("username")
         password = request.form.get("password")
         confirmPassword  = request.form.get("confirm-password")
-        # picture = request.files["picture"]
+        picture = request.files["picture"]
         
 
         # Ensure email was submitted
@@ -132,7 +132,6 @@ def signupFunction():
 
 
         # Insert user into the profiles table and check if a picture is uploaded
-        """
         if picture:
 
             try:
@@ -140,10 +139,9 @@ def signupFunction():
                 sqliteConnection = sqlite3.connect("database.db")
                 cursor = sqliteConnection.cursor()
 
-                userId = session["user_id"]
                 upload = uploadPicture(picture)
                 
-                cursor.execute("INSERT INTO users(picture) VALUES (:picture);", {picture": upload})
+                cursor.execute("INSERT INTO users(picture) VALUES (:picture);", {"picture": upload})
                 record = sqliteConnection.commit()
 
                 cursor.close()
@@ -162,13 +160,9 @@ def signupFunction():
 
                 if (sqliteConnection):
                     sqliteConnection.close()
-
-
-        else:
-        """
         
 
-        return redirect("/")
+            return redirect("/")
 
     # User reached route via GET (as by clicking a link or via redirect)
     else:

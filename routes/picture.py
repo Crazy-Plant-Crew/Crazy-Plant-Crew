@@ -11,4 +11,43 @@ picture = Blueprint('picture', __name__,)
 @picture.route("/picture", methods=["GET", "POST"])
 def pictureFunction():
 
-    return render_template("picture.html", name=profileName(), picture=profilePicture())
+    if request.method == "POST":
+
+        if request.files:
+
+            picture = request.files["picture"]
+
+            try:
+
+                sqliteConnection = sqlite3.connect("database.db")
+                cursor = sqliteConnection.cursor()
+
+                upload = uploadPicture(picture)
+                
+                cursor.execute("INSERT INTO users(picture) VALUES (:picture);", {"picture": upload})
+                record = sqliteConnection.commit()
+                print(record)
+
+                cursor.close()
+
+            except sqlite3.Error as error:
+            
+                print("Failed to read data from sqlite table", error)
+                print("Exception class is: ", error.__class__)
+                print("Exception is", error.args)
+
+                print('Printing detailed SQLite exception traceback: ')
+                exc_type, exc_value, exc_tb = sys.exc_info()
+                print(traceback.format_exception(exc_type, exc_value, exc_tb))
+
+            finally:
+
+                if (sqliteConnection):
+                    sqliteConnection.close()
+        
+
+        return redirect("/")
+
+    else:
+
+        return render_template("picture.html", name=profileName(), picture=profilePicture())
