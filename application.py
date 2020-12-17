@@ -70,9 +70,10 @@ def uploadPicture(file):
     # Parse response
     try:
         image = response.json()
-        return {
+        file = {
             "picture": image["data"]["url"],
         }
+        return file
     except (KeyError, TypeError, ValueError):
         return None
 
@@ -120,7 +121,7 @@ def profilePicture():
         loggedId = session["user_id"]
         
         # Query database for username
-        cursor.execute("SELECT picture FROM profiles WHERE id=:id", {"id": loggedId})
+        cursor.execute("SELECT picture FROM users WHERE id=:id", {"id": loggedId})
         picture = cursor.fetchall()[0][0]
 
         cursor.close()

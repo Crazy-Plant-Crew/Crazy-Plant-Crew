@@ -23,7 +23,7 @@ def signupFunction():
         username = request.form.get("username")
         password = request.form.get("password")
         confirmPassword  = request.form.get("confirm-password")
-        picture = request.form.get("picture")
+        # picture = request.files["picture"]
         
 
         # Ensure email was submitted
@@ -132,6 +132,7 @@ def signupFunction():
 
 
         # Insert user into the profiles table and check if a picture is uploaded
+        """
         if picture:
 
             try:
@@ -140,8 +141,9 @@ def signupFunction():
                 cursor = sqliteConnection.cursor()
 
                 userId = session["user_id"]
+                upload = uploadPicture(picture)
                 
-                cursor.execute("INSERT INTO profiles(user_id, picture) VALUES (:username, :picture);", {"user_id": userId, "picture": picture})
+                cursor.execute("INSERT INTO users(picture) VALUES (:picture);", {picture": upload})
                 record = sqliteConnection.commit()
 
                 cursor.close()
@@ -160,35 +162,11 @@ def signupFunction():
 
                 if (sqliteConnection):
                     sqliteConnection.close()
+
 
         else:
-
-            try:
-
-                sqliteConnection = sqlite3.connect("database.db")
-                cursor = sqliteConnection.cursor()
-
-                userId = session["user_id"]
-                
-                cursor.execute("INSERT INTO profiles(user_id, picture) VALUES (:username);", {"user_id": userId})
-                record = sqliteConnection.commit()
-
-                cursor.close()
-
-            except sqlite3.Error as error:
-            
-                print("Failed to read data from sqlite table", error)
-                print("Exception class is: ", error.__class__)
-                print("Exception is", error.args)
-
-                print('Printing detailed SQLite exception traceback: ')
-                exc_type, exc_value, exc_tb = sys.exc_info()
-                print(traceback.format_exception(exc_type, exc_value, exc_tb))
-
-            finally:
-
-                if (sqliteConnection):
-                    sqliteConnection.close()
+        """
+        
 
         return redirect("/")
 
