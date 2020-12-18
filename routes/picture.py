@@ -16,18 +16,17 @@ def pictureFunction():
         if request.files:
 
             picture = request.files["picture"]
+            upload = uploadPicture(picture)
 
             try:
 
                 sqliteConnection = sqlite3.connect("database.db")
                 cursor = sqliteConnection.cursor()
-
-                upload = uploadPicture(picture)
                 
                 cursor.execute("INSERT INTO users(picture) VALUES (:picture);", {"picture": upload})
                 record = sqliteConnection.commit()
                 print(record)
-
+ 
                 cursor.close()
 
             except sqlite3.Error as error:

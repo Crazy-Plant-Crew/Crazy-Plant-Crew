@@ -4,6 +4,7 @@ import urllib.parse
 import sys
 import traceback
 import requests
+import base64
 
 from flask import Flask, flash, jsonify, redirect, render_template, request, session
 from flask_session import Session
@@ -57,23 +58,34 @@ def login_required(f):
     return decorated_function
 
 # ImgBB API upload function
-def uploadPicture(file):
+def uploadPicture(upload):
+    print(upload)
 
     # Contact API
     try:
-        api_key = os.environ.get("IMGBB_API")
-        response = requests.post(f"https://api.imgbb.com/1/upload?expiration=600&key={api_key}")
-        response.raise_for_status()
+                    
+        with open("upload", "rb") as file:
+            print(file)
+            url = "https://api.imgbb.com/1/upload"
+            payload = {
+                "key": os.environ.get("IMGBB_API"),
+                "image": base64.b64encode(file.read()),
+            }
+            response = requests.post(url, payload)
+            print(response)
+            response.raise_for_status()
+
     except requests.RequestException:
         return None
 
     # Parse response
     try:
         image = response.json()
-        file = {
+        print(image)
+        return {
             "picture": image["data"]["url"],
         }
-        return file
+
     except (KeyError, TypeError, ValueError):
         return None
 
