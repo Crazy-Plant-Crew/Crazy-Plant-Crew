@@ -1,6 +1,7 @@
 import sqlite3
 import traceback
 import sys
+import os
 
 from flask import Blueprint, render_template, redirect, session, request, flash
 from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
@@ -24,8 +25,7 @@ def signupFunction():
         username = request.form.get("username")
         password = request.form.get("password")
         confirmPassword  = request.form.get("confirm-password")
-        picture = request.files["picture"]
-        
+
 
         # Ensure email was submitted
         if not email:
@@ -74,7 +74,7 @@ def signupFunction():
                 sqliteConnection.close()
         
 
-        # Insert user and hash of the password into the table
+        # Insert username, email and hash of the password into the table
         try:
 
             sqliteConnection = sqlite3.connect("database.db")
@@ -132,35 +132,49 @@ def signupFunction():
                 sqliteConnection.close()
 
 
-        # Insert user into the profiles table and check if a picture is uploaded
-        if picture:
+        # check if the post request has the file part
+        if "picture" not in request.files:
+            flash("No file part")
+            return redirect("/picture")
 
-            try:
+        file = request.files["picture"]
 
-                sqliteConnection = sqlite3.connect("database.db")
-                cursor = sqliteConnection.cursor()
+        # if user does not select file, browser also submit a empty part without filename
+        if file.filename == "":
+            flash("No selected file")
+            return redirect("/picture")
 
-                upload = uploadPicture(picture)
-                
-                cursor.execute("INSERT INTO users(picture) VALUES (:picture);", {"picture": upload})
-                record = sqliteConnection.commit()
+        # Check if all conditions are satisfied
+        if file and file.filename:
+            filename = secure_filename(file.filename)
+            file.save(os.path.join("./static", filename))
+            upload = uploadPicture("./static/" + filename)          
 
-                cursor.close()
+        # Update database with new image url 
+        try:
 
-            except sqlite3.Error as error:
+            sqliteConnection = sqlite3.connect("database.db")
+            cursor = sqliteConnection.cursor()
             
-                print("Failed to read data from sqlite table", error)
-                print("Exception class is: ", error.__class__)
-                print("Exception is", error.args)
+            cursor.execute("INSERT INTO users(picture) VALUES (:picture);", {"picture": upload})
+            sqliteConnection.commit()
 
-                print('Printing detailed SQLite exception traceback: ')
-                exc_type, exc_value, exc_tb = sys.exc_info()
-                print(traceback.format_exception(exc_type, exc_value, exc_tb))
+            cursor.close()
 
-            finally:
+        except sqlite3.Error as error:
+        
+            print("Failed to read data from sqlite table", error)
+            print("Exception class is: ", error.__class__)
+            print("Exception is", error.args)
 
-                if (sqliteConnection):
-                    sqliteConnection.close()
+            print('Printing detailed SQLite exception traceback: ')
+            exc_type, exc_value, exc_tb = sys.exc_info()
+            print(traceback.format_exception(exc_type, exc_value, exc_tb))
+
+        finally:
+
+            if (sqliteConnection):
+                sqliteConnection.close()
         
 
             return redirect("/")

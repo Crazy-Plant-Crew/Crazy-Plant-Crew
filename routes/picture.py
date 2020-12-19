@@ -33,6 +33,7 @@ def pictureFunction():
             file.save(os.path.join("./static", filename))
             upload = uploadPicture("./static/" + filename)          
 
+        # Update database with new image url 
         try:
 
             sqliteConnection = sqlite3.connect("database.db")
