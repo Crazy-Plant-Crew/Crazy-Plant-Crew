@@ -32,7 +32,7 @@ def pictureFunction():
             filename = secure_filename(file.filename)
             file.save(os.path.join("./static", filename))
 
-            upload = uploadPicture(file)
+            upload = uploadPicture("./static/" + filename)            
 
         try:
 

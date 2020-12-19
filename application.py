@@ -64,7 +64,7 @@ def uploadPicture(upload):
     # Contact API
     try:
                     
-        with open("upload", "rb") as file:
+        with open(upload, "rb") as file:
 
             url = "https://api.imgbb.com/1/upload"
             payload = {
