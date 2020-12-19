@@ -11,6 +11,7 @@ from flask_session import Session
 from tempfile import mkdtemp
 from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
 from werkzeug.security import check_password_hash, generate_password_hash
+from werkzeug.utils import secure_filename
 from functools import wraps
 
 # Configure application
@@ -59,21 +60,20 @@ def login_required(f):
 
 # ImgBB API upload function
 def uploadPicture(upload):
-    print(upload)
 
     # Contact API
     try:
                     
         with open("upload", "rb") as file:
-            print(file)
+
             url = "https://api.imgbb.com/1/upload"
             payload = {
                 "key": os.environ.get("IMGBB_API"),
-                "image": base64.b64encode(file.read()),
+                "image": base64.b64encode(file.read())
             }
+
             response = requests.post(url, payload)
             print(response)
-            response.raise_for_status()
 
     except requests.RequestException:
         return None

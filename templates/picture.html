@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block main %}
-    <form action="/picture" method="post">
+    <form action="/picture" method="post" enctype="multipart/form-data">
         <div>
             <p>Profile picture (32mb max).</p>
             <input type="file" id="picture" name="picture">

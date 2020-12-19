@@ -5,6 +5,7 @@ import sys
 from flask import Blueprint, render_template, redirect, session, request, flash
 from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
 from werkzeug.security import check_password_hash, generate_password_hash
+from werkzeug.utils import secure_filename
 from application import uploadPicture
 
 # Set Blueprints
