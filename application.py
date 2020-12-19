@@ -73,18 +73,18 @@ def uploadPicture(upload):
             }
 
             response = requests.post(url, payload)
-            print(response)
 
     except requests.RequestException:
         return None
 
     # Parse response
     try:
+        
         image = response.json()
-        print(image)
-        return {
+        dbReturn =  {
             "picture": image["data"]["url"],
         }
+        return dbReturn["picture"]
 
     except (KeyError, TypeError, ValueError):
         return None

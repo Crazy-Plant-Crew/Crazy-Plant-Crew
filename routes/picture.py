@@ -31,15 +31,16 @@ def pictureFunction():
         if file and file.filename:
             filename = secure_filename(file.filename)
             file.save(os.path.join("./static", filename))
-
-            upload = uploadPicture("./static/" + filename)            
+            upload = uploadPicture("./static/" + filename)          
 
         try:
 
             sqliteConnection = sqlite3.connect("database.db")
             cursor = sqliteConnection.cursor()
+            user_id = session["user_id"]
+            print(user_id)
             
-            cursor.execute("INSERT INTO users(picture) VALUES (:picture);", {"picture": upload})
+            cursor.execute("UPDATE users SET picture=:picture WHERE id=:user_id;", {"picture": upload, "user_id": user_id})
             record = sqliteConnection.commit()
             print(record)
 
