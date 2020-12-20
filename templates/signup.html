@@ -6,7 +6,7 @@
 
 {% block main %}
     <p>Register or <a href='/signin'>login</a></p><br>
-    <form action="/signup" method="post">
+    <form action="/signup" method="post" enctype="multipart/form-data">
         <div>
             <p>Username (6 characters min).</p>
             <input id="username" autocomplete="off" autofocus class="form-control" name="username" placeholder="Username" type="text">
@@ -30,7 +30,7 @@
 
         <div>
             <p>Profile picture (32mb max).</p>
-            <input type="file" id="picture" name="picture" enctype="multipart/form-data">
+            <input type="file" id="picture" name="picture">
         </div>
         <br>
         

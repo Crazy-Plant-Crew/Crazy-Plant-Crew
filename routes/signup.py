@@ -135,14 +135,14 @@ def signupFunction():
         # check if the post request has the file part
         if "picture" not in request.files:
             flash("No file part")
-            return redirect("/picture")
+            return redirect("/signup")
 
         file = request.files["picture"]
 
         # if user does not select file, browser also submit a empty part without filename
         if file.filename == "":
             flash("No selected file")
-            return redirect("/picture")
+            return redirect("/signup")
 
         # Check if all conditions are satisfied
         if file and file.filename:
@@ -155,8 +155,9 @@ def signupFunction():
 
             sqliteConnection = sqlite3.connect("database.db")
             cursor = sqliteConnection.cursor()
+            user_id = session["user_id"]
             
-            cursor.execute("INSERT INTO users(picture) VALUES (:picture);", {"picture": upload})
+            cursor.execute("UPDATE users SET picture=:picture WHERE id=:user_id;", {"picture": upload, "user_id": user_id})
             sqliteConnection.commit()
 
             cursor.close()
