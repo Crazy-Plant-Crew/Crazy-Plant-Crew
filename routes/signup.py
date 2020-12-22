@@ -7,10 +7,14 @@ from flask import Blueprint, render_template, redirect, session, request, flash
 from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
 from werkzeug.security import check_password_hash, generate_password_hash
 from werkzeug.utils import secure_filename
-from application import uploadPicture
+from application import uploadPicture, generate_confirmation_token, confirm_token, is_human
+
 
 # Set Blueprints
 signup = Blueprint('signup', __name__,)
+
+# Assign public key
+pub_key = os.environ.get("SITE_KEY")
 
 @signup.route("/signup", methods=["GET", "POST"])
 def signupFunction():
@@ -25,8 +29,14 @@ def signupFunction():
         username = request.form.get("username")
         password = request.form.get("password")
         confirmPassword  = request.form.get("confirm-password")
+        captcha_response = request.form['g-recaptcha-response']
 
+        # token = generate_confirmation_token(email)
 
+        # Ensure captcha was correct
+        if is_human(captcha_response) != True:
+            return flash("must completed captcha")
+            
         # Ensure email was submitted
         if not email:
             return flash("must provide email")
@@ -180,7 +190,10 @@ def signupFunction():
 
             return redirect("/")
 
+    
+
     # User reached route via GET (as by clicking a link or via redirect)
     else:
-        return render_template("signup.html")
+
+        return render_template("signup.html", pub_key=pub_key)
 

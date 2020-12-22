@@ -6,6 +6,7 @@
 
 {% block main %}
     <p>Register or <a href='/signin'>login</a></p><br>
+    <script src="https://www.google.com/recaptcha/api.js"></script>
     <form action="/signup" method="post" enctype="multipart/form-data">
         <div>
             <p>Username (6 characters min).</p>
@@ -34,34 +35,59 @@
         </div>
         <br>
         
+        <div class="g-recaptcha" id="reCaptcha" data-sitekey="{{ pub_key }}"></div>
+        <br>
+
+        <div>
+            <input type="checkbox" id="cookies" name="cookies" value="Accept cookies">
+            <label for="cookies">Accept website cookies</label><br>
+        </div>
+        <br>
+       
         <button id="submit" type="submit">Sign Up</button>
         <br>
+
+        <div>
+            Confirm signup mail
+        </div>
+        <div>
+            Activation here
+        </div>
     </form>
 
     <script>
-        // Passwortrued must be between 7 to 15 characters which contain at least one numeric digit and a special character
+        // Password must be between 7 to 15 characters which contain at least one numeric digit and a special character
         document.querySelector("#submit").disabled = true;
 
-        document.querySelector("#confirm-pass").onkeyup = function() {
+        document.getElementById("cookies").onclick = function() {
+
+            function isCaptchaChecked() {
+            return grecaptcha && grecaptcha.getResponse().length !== 0;
+            }
+
             let password = document.querySelector("#password").value;
             let username = document.querySelector("#username").value;
             let email = document.querySelector("#email").value;
             let confirmation = document.querySelector("#confirm-pass").value;
+            let checkbox = document.getElementById("cookies")
 
-            if (password.match(/^^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/i)) {
+            if (username.length > 5 && username.match(/^[A-Za-z0-9 ]+$/)) {
                 document.querySelector("#submit").disabled = true;
                 if (email.match(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i)) {
                     document.querySelector("#submit").disabled = true;
-                    if (username.length > 5 && username.match(/^[A-Za-z0-9 ]+$/)) {
+                    if (password.match(/^^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/i)) {
                         document.querySelector("#submit").disabled = true;
                         if (confirmation === password) {
-                            document.querySelector("#submit").disabled = false;
+                            document.querySelector("#submit").disabled = true;
+                            if (isCaptchaChecked()) {
+                                document.querySelector("#submit").disabled = true;
+                                if (checkbox.checked === true) {
+                                    document.querySelector("#submit").disabled = false;
+                                }
+                            }
                         }
                     }
                 }
-            }
-            else {
-                document.querySelector('#submit').disabled = true;
             }
         }
     </script>
