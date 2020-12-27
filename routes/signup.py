@@ -156,7 +156,8 @@ def signupFunction():
         if file and file.filename:
             filename = secure_filename(file.filename)
             file.save(os.path.join("./static", filename))
-            upload = uploadPicture("./static/" + filename)          
+            upload = uploadPicture("./static/" + filename)
+            os.remove("./static/" + filename)
 
         # Update database with new image url 
         try:
