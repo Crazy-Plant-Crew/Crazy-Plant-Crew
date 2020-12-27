@@ -9,7 +9,7 @@
     <script src="https://www.google.com/recaptcha/api.js"></script>
     <form action="/signup" method="post" enctype="multipart/form-data">
         <div>
-            <p>Username (6 characters min).</p>
+            <p>Username (between 2 & 20 characters).</p>
             <input id="username" autocomplete="off" autofocus class="form-control" name="username" placeholder="Username" type="text">
         </div>
         <br>
@@ -71,7 +71,7 @@
             let confirmation = document.querySelector("#confirm-pass").value;
             let checkbox = document.getElementById("cookies")
 
-            if (username.length > 5 && username.match(/^[A-Za-z0-9 ]+$/)) {
+            if (username.length > 1 && username.length < 21 && username.match(/^[A-Za-z0-9 ]+$/)) {
                 document.querySelector("#submit").disabled = true;
                 if (email.match(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i)) {
                     document.querySelector("#submit").disabled = true;

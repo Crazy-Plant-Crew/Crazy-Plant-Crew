@@ -1,6 +1,7 @@
 import sqlite3
 import traceback
 import sys
+import re
 
 from flask import Blueprint, render_template, redirect, session, request, flash
 from application import profileName, profilePicture
@@ -19,6 +20,10 @@ def usernameFunction():
         # Ensure username was submitted
         if not username:
             return flash("must provide username")
+
+        # Ensure username fits server-side
+        if not re.search("^[a-zA-Z0-9]{2,20}$", username):
+            return flash("Invalid username")
 
         # Query database for username if already exists
         try:

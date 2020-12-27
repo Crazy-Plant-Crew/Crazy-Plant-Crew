@@ -2,6 +2,7 @@ import sqlite3
 import traceback
 import sys
 import os
+import re
 
 from flask import Blueprint, render_template, redirect, session, request, flash
 from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
@@ -51,6 +52,15 @@ def signupFunction():
         # Ensure confirm password is correct
         if password != confirmPassword:
             return flash("The passwords don't match")
+
+        # Ensure username fits server-side
+        if not re.search("^[a-zA-Z0-9]{2,20}$", username):
+            return flash("Invalid username")
+
+        # Ensure email fits server-side
+        if not re.search("^[a-z]([w-]*[a-z]|[w-.]*[a-z]{2,}|[a-z])*@[a-z]([w-]*[a-z]|[w-.]*[a-z]{2,}|[a-z]){4,}?.[a-z]{2,}$", email):
+            return flash("Invalid email")
+
 
         # Query database for username if already exists
         try:

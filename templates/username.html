@@ -7,7 +7,7 @@
 {% block main %}
     <form action="/username" method="post">
         <div>
-            <p>Username (6 characters min).</p>
+            <p>Username (between 2 & 20 characters).</p>
             <input id="username" autocomplete="off" autofocus class="form-control" name="username" placeholder="Username" type="text">
             <button id="updateUsername" type="submit">Update</button>
         </div>
@@ -20,7 +20,7 @@
         document.querySelector("#username").onkeyup = function() {
             let username = document.querySelector("#username").value;
 
-            if (username.length > 5 && username.match(/^[A-Za-z0-9 ]+$/)) {
+            if (username.length > 5 && username.length < 21 && username.match(/^[A-Za-z0-9 ]+$/)) {
                 document.querySelector("#updateUsername").disabled = false;
 
             }

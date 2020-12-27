@@ -1,6 +1,7 @@
 import sqlite3
 import traceback
 import sys
+import re
 
 from flask import Blueprint, render_template, redirect, session, request, flash
 from application import profileName, profilePicture
@@ -19,6 +20,10 @@ def emailFunction():
         # Ensure email was submitted
         if not email:
             return flash("must provide email")
+
+        # Ensure email fits server-side
+        if not re.search("^[a-z]([w-]*[a-z]|[w-.]*[a-z]{2,}|[a-z])*@[a-z]([w-]*[a-z]|[w-.]*[a-z]{2,}|[a-z]){4,}?.[a-z]{2,}$", email):
+            return flash("Invalid email")
 
         # Query database for email if already exists
         try:
