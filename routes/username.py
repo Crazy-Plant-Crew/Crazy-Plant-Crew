@@ -24,15 +24,48 @@ def usernameFunction():
         # Ensure username fits server-side
         if not re.search("^[a-zA-Z0-9]{2,20}$", username):
             return flash("Invalid username")
+            
 
         # Query database for username if already exists
         try:
 
             sqliteConnection = sqlite3.connect("database.db")
             cursor = sqliteConnection.cursor()
-            user_id = session["user_id"]
             
             # Query database for username
+            cursor.execute("SELECT * FROM users WHERE username=:username;", {"username": username})
+            record = cursor.fetchall()
+
+            # Check if username is free
+            if record == username: 
+                return flash("Username already taken")
+
+            cursor.close()
+
+        except sqlite3.Error as error:
+        
+            print("Failed to read data from sqlite table", error)
+            print("Exception class is: ", error.__class__)
+            print("Exception is", error.args)
+
+            print('Printing detailed SQLite exception traceback: ')
+            exc_type, exc_value, exc_tb = sys.exc_info()
+            print(traceback.format_exception(exc_type, exc_value, exc_tb))
+
+        finally:
+
+            if (sqliteConnection):
+                sqliteConnection.close()
+
+
+        # Update database with username
+        try:
+
+            sqliteConnection = sqlite3.connect("database.db")
+            cursor = sqliteConnection.cursor()
+            user_id = session["user_id"]
+            
+            # Update database for username
             cursor.execute("UPDATE users SET username=:username WHERE id=:user_id;", {"username": username, "user_id": user_id})
             sqliteConnection.commit()
 

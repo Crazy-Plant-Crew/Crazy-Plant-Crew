@@ -92,6 +92,38 @@ def signupFunction():
 
             if (sqliteConnection):
                 sqliteConnection.close()
+
+
+        # Query database for email if already exists
+        try:
+
+            sqliteConnection = sqlite3.connect("database.db")
+            cursor = sqliteConnection.cursor()
+            
+            # Query database for email
+            cursor.execute("SELECT * FROM users WHERE email=:email;", {"email": email})
+            record = cursor.fetchall()
+
+            # Check if email is free
+            if record == email: 
+                return flash("Email already taken")
+
+            cursor.close()
+
+        except sqlite3.Error as error:
+        
+            print("Failed to read data from sqlite table", error)
+            print("Exception class is: ", error.__class__)
+            print("Exception is", error.args)
+
+            print('Printing detailed SQLite exception traceback: ')
+            exc_type, exc_value, exc_tb = sys.exc_info()
+            print(traceback.format_exception(exc_type, exc_value, exc_tb))
+
+        finally:
+
+            if (sqliteConnection):
+                sqliteConnection.close()
         
 
         # Insert username, email and hash of the password into the table

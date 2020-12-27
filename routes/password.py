@@ -21,14 +21,14 @@ def passwordFunction():
         if not password:
             return flash("must provide password")
 
-        # Query database for password if already exists
+        # Update database with password hash
         try:
 
             sqliteConnection = sqlite3.connect("database.db")
             cursor = sqliteConnection.cursor()
             user_id = session["user_id"]
             
-            # Query database for password
+            # Update database with password hash
             cursor.execute("UPDATE users SET hash=:hash WHERE id=:user_id;", {"hash": generate_password_hash(password), "user_id": user_id})
             sqliteConnection.commit()
 
