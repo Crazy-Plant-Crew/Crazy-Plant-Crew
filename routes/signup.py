@@ -145,14 +145,12 @@ def signupFunction():
         # check if the post request has the file part
         if "picture" not in request.files:
             flash("No file part")
-            return redirect("/signup")
 
         file = request.files["picture"]
 
         # if user does not select file, browser also submit a empty part without filename
         if file.filename == "":
             flash("No selected file")
-            return redirect("/signup")
 
         # Check if all conditions are satisfied
         if file and file.filename:
