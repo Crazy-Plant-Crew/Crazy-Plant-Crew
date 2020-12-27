@@ -2,7 +2,7 @@ import sqlite3
 import traceback
 import sys
 
-from flask import Blueprint, render_template, redirect, session, request, flash
+from flask import Blueprint, render_template, redirect, session, request, flash, get_flashed_messages
 from werkzeug.security import check_password_hash, generate_password_hash
 from application import profileName, profilePicture
 
@@ -12,6 +12,9 @@ password = Blueprint('password', __name__,)
 @password.route("/password", methods=["GET", "POST"])
 def passwordFunction():
 
+    # Force flash() to get the messages on the same page as the redirect.
+    get_flashed_messages()
+
     # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
 
@@ -19,7 +22,8 @@ def passwordFunction():
 
         # Ensure password was submitted
         if not password:
-            return flash("must provide password")
+            flash("must provide password")
+            return redirect("/password")
 
         # Update database with password hash
         try:

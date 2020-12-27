@@ -3,7 +3,7 @@ import traceback
 import sys
 import re
 
-from flask import Blueprint, render_template, redirect, session, request, flash
+from flask import Blueprint, render_template, redirect, session, request, flash, get_flashed_messages
 from application import profileName, profilePicture
 
 # Set Blueprints
@@ -12,6 +12,9 @@ username = Blueprint('username', __name__,)
 @username.route("/username", methods=["GET", "POST"])
 def usernameFunction():
 
+    # Force flash() to get the messages on the same page as the redirect.
+    get_flashed_messages()
+
     # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
 
@@ -19,12 +22,14 @@ def usernameFunction():
 
         # Ensure username was submitted
         if not username:
-            return flash("must provide username")
+            flash("must provide username")
+            return redirect("/username")
 
         # Ensure username fits server-side
         if not re.search("^[a-zA-Z0-9]{2,20}$", username):
-            return flash("Invalid username")
-            
+            flash("Invalid username")
+            return redirect("/username")
+
 
         # Query database for username if already exists
         try:
@@ -37,8 +42,9 @@ def usernameFunction():
             record = cursor.fetchall()
 
             # Check if username is free
-            if record == username: 
-                return flash("Username already taken")
+            if record[0][1] == username: 
+                flash("Username already taken")
+                return redirect("/username")
 
             cursor.close()
 

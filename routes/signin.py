@@ -1,8 +1,9 @@
 import sqlite3
 import traceback
 import sys
+import re
 
-from flask import Blueprint, render_template, redirect, session, request, flash
+from flask import Blueprint, render_template, redirect, session, request, flash, get_flashed_messages
 from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
 from werkzeug.security import check_password_hash, generate_password_hash
 
@@ -11,6 +12,9 @@ signin = Blueprint('signin', __name__,)
 
 @signin.route("/signin", methods=["GET", "POST"])
 def signinFunction():
+
+    # Force flash() to get the messages on the same page as the redirect.
+    get_flashed_messages()
 
     # Forget any user_id
     session.clear()
@@ -23,11 +27,18 @@ def signinFunction():
 
         # Ensure username was submitted
         if not username:
-            return flash("must provide username")
+            flash("must provide username")
+            return redirect("/signin")
+
+        # Ensure username fits server-side
+        if not re.search("^[a-zA-Z0-9]{2,20}$", username):
+            flash("Invalid username")
+            return redirect("/signin")
 
         # Ensure password was submitted
         if not password:
-            return flash("must provide password")
+            flash("must provide password")
+            return redirect("/signin")
 
         # Query database for username if already exists
         try:
@@ -41,7 +52,8 @@ def signinFunction():
 
             # Ensure username exists and password is correct
             if len(record) != 1 or not check_password_hash(record[0][3], password):
-                return flash("invalid username and/or password")
+                flash("invalid username and/or password")
+                return redirect("/signin")
 
             # Remember which user has logged in
             session["user_id"] = record[0][0]

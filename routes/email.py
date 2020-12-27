@@ -3,7 +3,7 @@ import traceback
 import sys
 import re
 
-from flask import Blueprint, render_template, redirect, session, request, flash
+from flask import Blueprint, render_template, redirect, session, request, flash, get_flashed_messages
 from application import profileName, profilePicture
 
 # Set Blueprints
@@ -12,6 +12,9 @@ email = Blueprint('email', __name__,)
 @email.route("/email", methods=["GET", "POST"])
 def emailFunction():
 
+    # Force flash() to get the messages on the same page as the redirect.
+    get_flashed_messages()
+
     # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
 
@@ -19,11 +22,13 @@ def emailFunction():
 
         # Ensure email was submitted
         if not email:
-            return flash("must provide email")
+            flash("must provide email")
+            return redirect("/email")
 
         # Ensure email fits server-side
         if not re.search(r"^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$", email):
-            return flash("Invalid email")
+            flash("Invalid email")
+            return redirect("/email")
 
 
         # Query database for email if already exists
@@ -37,8 +42,9 @@ def emailFunction():
             record = cursor.fetchall()
 
             # Check if email is free
-            if record == email: 
-                return flash("Email already taken")
+            if record[0][2] == email:
+                flash("Email already taken")
+                return redirect("/email")
 
             cursor.close()
 
