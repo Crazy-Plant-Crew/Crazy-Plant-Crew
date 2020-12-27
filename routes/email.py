@@ -22,7 +22,7 @@ def emailFunction():
             return flash("must provide email")
 
         # Ensure email fits server-side
-        if not re.search("^[a-z]([w-]*[a-z]|[w-.]*[a-z]{2,}|[a-z])*@[a-z]([w-]*[a-z]|[w-.]*[a-z]{2,}|[a-z]){4,}?.[a-z]{2,}$", email):
+        if not re.search(r"^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$", email):
             return flash("Invalid email")
 
 
@@ -56,7 +56,7 @@ def emailFunction():
 
             if (sqliteConnection):
                 sqliteConnection.close()
-                
+
 
         # Update database with email
         try:

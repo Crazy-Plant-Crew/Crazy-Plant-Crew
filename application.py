@@ -24,6 +24,10 @@ app = Flask(__name__)
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 
 
+# Set secre"t key for site
+app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY") 
+
+
 # Ensure responses aren't cached
 @app.after_request
 def after_request(response):
@@ -76,7 +80,7 @@ def is_human(captcha_response):
     """ Validating recaptcha response from google server
         Returns True captcha test passed for submitted form else returns False.
     """
-    secret = os.environ.get("SECRET_KEY")
+    secret = os.environ.get("SITE_SECRET_KEY")
     payload = {'response':captcha_response, 'secret':secret}
     response = requests.post("https://www.google.com/recaptcha/api/siteverify", payload)
     response_text = json.loads(response.text)
@@ -187,11 +191,11 @@ def profilePicture():
         
         return picture
 
-
+"""
 # Confirmation token generator
 def generate_confirmation_token(email):
 
-    serializer = URLSafeTimedSerializer(app.config["SECRET_KEY"])
+    serializer = URLSafeTimedSerializer(app.config["SITE_SECRET_KEY"])
 
     return serializer.dumps(email, salt=app.config["SECURITY_PASSWORD_SALT"])
 
@@ -199,7 +203,7 @@ def generate_confirmation_token(email):
 # Confirmation token checker
 def confirm_token(token, expiration=3600):
 
-    serializer = URLSafeTimedSerializer(app.config["SECRET_KEY"])
+    serializer = URLSafeTimedSerializer(app.config["SITE_SECRET_KEY"])
 
     try:
         email = serializer.loads(token, salt=app.config["SECURITY_PASSWORD_SALT"], max_age=expiration)
@@ -233,6 +237,7 @@ MAIL_PASSWORD = os.environ['APP_MAIL_PASSWORD']
 
 # mail accounts
 MAIL_DEFAULT_SENDER = "crazy.plant.crew.2020@gmail.com"
+"""
 
 
 # Import routes after to avoid circular import

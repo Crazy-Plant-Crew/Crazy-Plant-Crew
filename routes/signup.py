@@ -4,11 +4,11 @@ import sys
 import os
 import re
 
-from flask import Blueprint, render_template, redirect, session, request, flash
+from flask import Blueprint, render_template, redirect, session, request, flash, get_flashed_messages
 from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
 from werkzeug.security import check_password_hash, generate_password_hash
 from werkzeug.utils import secure_filename
-from application import uploadPicture, generate_confirmation_token, confirm_token, is_human
+from application import uploadPicture, is_human
 
 
 # Set Blueprints
@@ -19,6 +19,9 @@ pub_key = os.environ.get("SITE_KEY")
 
 @signup.route("/signup", methods=["GET", "POST"])
 def signupFunction():
+
+    # Force flash() to get the messages on the same page as the redirect.
+    get_flashed_messages()
 
     # Forget any user_id
     session.clear()
@@ -36,30 +39,39 @@ def signupFunction():
 
         # Ensure captcha was correct
         if is_human(captcha_response) != True:
-            return flash("must completed captcha")
+            flash("must completed captcha")
+            return redirect("/signup")
+
             
         # Ensure email was submitted
         if not email:
-            return flash("must provide email")
+            flash("must provide email")
+            return redirect("/signup")
+
         # Ensure username was submitted
         if not username:
-            return flash("must provide username")
+            flash("must provide username")
+            return redirect("/signup")
 
         # Ensure password was submitted
         if not password:
-            return flash("must provide password")
+            flash("must provide password")
+            return redirect("/signup")
 
         # Ensure confirm password is correct
         if password != confirmPassword:
-            return flash("The passwords don't match")
+            flash("The passwords don't match")
+            return redirect("/signup")
 
         # Ensure username fits server-side
         if not re.search("^[a-zA-Z0-9]{2,20}$", username):
-            return flash("Invalid username")
+            flash("Invalid username")
+            return redirect("/signup")
 
         # Ensure email fits server-side
-        if not re.search("^[a-z]([w-]*[a-z]|[w-.]*[a-z]{2,}|[a-z])*@[a-z]([w-]*[a-z]|[w-.]*[a-z]{2,}|[a-z]){4,}?.[a-z]{2,}$", email):
-            return flash("Invalid email")
+        if not re.search(r"^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$", email):
+            flash("Invalid email")
+            return redirect("/signup")
 
 
         # Query database for username if already exists
@@ -73,8 +85,9 @@ def signupFunction():
             record = cursor.fetchall()
 
             # Check if username is free
-            if record == username: 
-                return flash("Username already taken")
+            if record[0][1] == username:
+                flash("Username already taken")
+                return redirect("/signup")
 
             cursor.close()
 
@@ -105,8 +118,9 @@ def signupFunction():
             record = cursor.fetchall()
 
             # Check if email is free
-            if record == email: 
-                return flash("Email already taken")
+            if record[0][2] == email:
+                flash("Email already taken")
+                return redirect("/signup")
 
             cursor.close()
 
@@ -183,18 +197,9 @@ def signupFunction():
             if (sqliteConnection):
                 sqliteConnection.close()
 
-
-        # check if the post request has the file part
-        if "picture" not in request.files:
-            flash("No file part")
-
         file = request.files["picture"]
 
-        # if user does not select file, browser also submit a empty part without filename
-        if file.filename == "":
-            flash("No selected file")
-
-        # Check if all conditions are satisfied
+        # Save, upload and delete picture file
         if file and file.filename:
             filename = secure_filename(file.filename)
             file.save(os.path.join("./static", filename))
@@ -229,7 +234,7 @@ def signupFunction():
                 sqliteConnection.close()
         
 
-            return redirect("/")
+        return redirect("/")
 
     
 

@@ -44,13 +44,17 @@
             </div>
         </nav>
 
-        {% if get_flashed_messages() %}
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
             <header>
-                <div role="alert">
-                    {{ get_flashed_messages() | join(" ") }}
-                </div>
+                <ul class=flashes>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
             </header>
-        {% endif %}
+            {% endif %}
+        {% endwith %}
 
         <main>
             {% block main %}{% endblock %}
