@@ -20,7 +20,7 @@
         document.querySelector("#username").onkeyup = function() {
             let username = document.querySelector("#username").value;
 
-            if (username.length > 5 && username.length < 21 && username.match(/^[A-Za-z0-9 ]+$/)) {
+            if (username.length > 1 && username.length < 21 && username.match(/^[A-Za-z0-9 ]+$/)) {
                 document.querySelector("#updateUsername").disabled = false;
 
             }

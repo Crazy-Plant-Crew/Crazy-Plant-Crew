@@ -42,7 +42,7 @@ def usernameFunction():
             record = cursor.fetchall()
 
             # Check if username is free
-            if record[0][1] == username: 
+            if len(record) != 1:
                 flash("Username already taken")
                 return redirect("/username")
 

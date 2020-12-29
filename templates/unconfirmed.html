@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Unconfirmed
+{% endblock %}
+
+{% block main %}
+<form action="/unconfirmed" method="post">
+    <div>
+        <button id="submit" type="submit">Send email</button>
+    </div>
+    <br>
+</form>
+{% endblock %}

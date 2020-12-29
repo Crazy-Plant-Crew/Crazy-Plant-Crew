@@ -15,6 +15,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from werkzeug.utils import secure_filename
 from functools import wraps
 from itsdangerous import URLSafeTimedSerializer
+from flask_mail import Message, Mail
 
 # Configure application
 app = Flask(__name__)
@@ -24,7 +25,7 @@ app = Flask(__name__)
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 
 
-# Set secre"t key for site
+# Set secret key for site
 app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY") 
 
 
@@ -59,12 +60,42 @@ for code in default_exceptions:
     app.errorhandler(code)(errorhandler)
 
 
-# Ensure user must be logged in
+# Check if user is confirmed via email
+def isConfirmed():
+    try:
+
+        sqliteConnection = sqlite3.connect("database.db")
+        cursor = sqliteConnection.cursor()
+
+        # Check who's id is logged in
+        loggedId = session["user_id"]
+        
+        # Query database for unconfirmed user
+        cursor.execute("SELECT confirmed FROM users WHERE id=:id", {"id": loggedId})
+        confirmed = cursor.fetchall()[0][0]
+
+        cursor.close()
+
+    except sqlite3.Error as error:
+    
+        print("Failed to read data from sqlite table", error)
+        print("Exception class is: ", error.__class__)
+        print("Exception is", error.args)
+
+        print('Printing detailed SQLite exception traceback: ')
+        exc_type, exc_value, exc_tb = sys.exc_info()
+        print(traceback.format_exception(exc_type, exc_value, exc_tb))
+
+    finally:
+    
+        if (sqliteConnection):
+            sqliteConnection.close()
+
+    return confirmed
+
+
+# Decorator to ensure user must be logged in
 def login_required(f):
-    """
-    Decorate routes to require login.
-    http://flask.pocoo.org/docs/1.0/patterns/viewdecorators/
-    """
     @wraps(f)
     def decorated_function(*args, **kwargs):
 
@@ -76,14 +107,29 @@ def login_required(f):
     return decorated_function
 
 
+# Decorator to ensure user is confirmed via email
+def check_confirmed(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+
+        if isConfirmed() == "no":
+
+            flash("Please enter secrect code sent to the given email address")
+            return redirect("/unconfirmed")
+
+        return f(*args, **kwargs)
+
+    return decorated_function
+
+
+# Check if captcha is valided
 def is_human(captcha_response):
-    """ Validating recaptcha response from google server
-        Returns True captcha test passed for submitted form else returns False.
-    """
+
     secret = os.environ.get("SITE_SECRET_KEY")
     payload = {'response':captcha_response, 'secret':secret}
     response = requests.post("https://www.google.com/recaptcha/api/siteverify", payload)
     response_text = json.loads(response.text)
+
     return response_text['success']
 
 
@@ -106,7 +152,6 @@ def uploadPicture(upload):
     except requests.RequestException:
 
         return None
-
 
     # Parse response
     try:
@@ -191,53 +236,30 @@ def profilePicture():
         
         return picture
 
-"""
-# Confirmation token generator
-def generate_confirmation_token(email):
 
-    serializer = URLSafeTimedSerializer(app.config["SITE_SECRET_KEY"])
+# Configure mail 
+mail = Mail(app)
 
-    return serializer.dumps(email, salt=app.config["SECURITY_PASSWORD_SALT"])
+class BaseConfig(object):
 
+    # Email configuration
+    SECRET_KEY = os.environ["EMAIL_SECRET_KEY"]
+    SECURITY_PASSWORD_SALT = os.environ["EMAIL_SECURITY_PASSWORD_SALT"]
+    DEBUG = False
+    BCRYPT_LOG_ROUNDS = 13
+    WTF_CSRF_ENABLED = True
+    DEBUG_TB_ENABLED = False
+    DEBUG_TB_INTERCEPT_REDIRECTS = False
 
-# Confirmation token checker
-def confirm_token(token, expiration=3600):
+    MAIL_SERVER = "smtp.googlemail.com"
+    MAIL_PORT = 465
+    MAIL_USE_TLS = False
+    MAIL_USE_SSL = True
 
-    serializer = URLSafeTimedSerializer(app.config["SITE_SECRET_KEY"])
+    MAIL_USERNAME = os.environ["APP_MAIL_USERNAME"]
+    MAIL_PASSWORD = os.environ["APP_MAIL_PASSWORD"]
 
-    try:
-        email = serializer.loads(token, salt=app.config["SECURITY_PASSWORD_SALT"], max_age=expiration)
-
-    except:
-
-        return False
-
-    return email
-
-
-# Email configuration
-# main config
-SECRET_KEY = "CPC2020SK!!"
-SECURITY_PASSWORD_SALT = "CPC2020SPS!!"
-DEBUG = False
-BCRYPT_LOG_ROUNDS = 13
-WTF_CSRF_ENABLED = True
-DEBUG_TB_ENABLED = False
-DEBUG_TB_INTERCEPT_REDIRECTS = False
-
-# mail settings
-MAIL_SERVER = 'smtp.googlemail.com'
-MAIL_PORT = 465
-MAIL_USE_TLS = False
-MAIL_USE_SSL = True
-
-# gmail authentication
-MAIL_USERNAME = os.environ['APP_MAIL_USERNAME']
-MAIL_PASSWORD = os.environ['APP_MAIL_PASSWORD']
-
-# mail accounts
-MAIL_DEFAULT_SENDER = "crazy.plant.crew.2020@gmail.com"
-"""
+    MAIL_DEFAULT_SENDER = "crazy.plant.crew.2020@gmail.com"
 
 
 # Import routes after to avoid circular import
@@ -252,6 +274,7 @@ from routes.password import password
 from routes.email import email
 from routes.picture import picture
 from routes.delete import delete
+from routes.unconfirmed import unconfirmed
 
 
 # Configure Blueprints
@@ -266,3 +289,4 @@ app.register_blueprint(password)
 app.register_blueprint(email)
 app.register_blueprint(picture)
 app.register_blueprint(delete)
+app.register_blueprint(unconfirmed)

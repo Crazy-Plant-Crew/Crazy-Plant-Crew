@@ -85,7 +85,7 @@ def signupFunction():
             record = cursor.fetchall()
 
             # Check if username is free
-            if record[0][1] == username:
+            if len(record) != 0:
                 flash("Username already taken")
                 return redirect("/signup")
 
@@ -118,10 +118,10 @@ def signupFunction():
             record = cursor.fetchall()
 
             # Check if email is free
-            if record[0][2] == email:
+            if len(record) != 0:
                 flash("Email already taken")
                 return redirect("/signup")
-
+            
             cursor.close()
 
         except sqlite3.Error as error:
@@ -197,43 +197,45 @@ def signupFunction():
             if (sqliteConnection):
                 sqliteConnection.close()
 
+        
+        # Save, upload and delete picture file
         file = request.files["picture"]
 
-        # Save, upload and delete picture file
         if file and file.filename:
+
             filename = secure_filename(file.filename)
             file.save(os.path.join("./static", filename))
             upload = uploadPicture("./static/" + filename)
             os.remove("./static/" + filename)
 
-        # Update database with new image url 
-        try:
+            # Update database with new image url 
+            try:
 
-            sqliteConnection = sqlite3.connect("database.db")
-            cursor = sqliteConnection.cursor()
-            user_id = session["user_id"]
+                sqliteConnection = sqlite3.connect("database.db")
+                cursor = sqliteConnection.cursor()
+                user_id = session["user_id"]
+                
+                cursor.execute("UPDATE users SET picture=:picture WHERE id=:user_id;", {"picture": upload, "user_id": user_id})
+                sqliteConnection.commit()
+
+                cursor.close()
+
+            except sqlite3.Error as error:
             
-            cursor.execute("UPDATE users SET picture=:picture WHERE id=:user_id;", {"picture": upload, "user_id": user_id})
-            sqliteConnection.commit()
+                print("Failed to read data from sqlite table", error)
+                print("Exception class is: ", error.__class__)
+                print("Exception is", error.args)
 
-            cursor.close()
+                print('Printing detailed SQLite exception traceback: ')
+                exc_type, exc_value, exc_tb = sys.exc_info()
+                print(traceback.format_exception(exc_type, exc_value, exc_tb))
 
-        except sqlite3.Error as error:
+            finally:
+
+                if (sqliteConnection):
+                    sqliteConnection.close()
+
         
-            print("Failed to read data from sqlite table", error)
-            print("Exception class is: ", error.__class__)
-            print("Exception is", error.args)
-
-            print('Printing detailed SQLite exception traceback: ')
-            exc_type, exc_value, exc_tb = sys.exc_info()
-            print(traceback.format_exception(exc_type, exc_value, exc_tb))
-
-        finally:
-
-            if (sqliteConnection):
-                sqliteConnection.close()
-        
-
         return redirect("/")
 
     

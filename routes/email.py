@@ -42,7 +42,7 @@ def emailFunction():
             record = cursor.fetchall()
 
             # Check if email is free
-            if record[0][2] == email:
+            if len(record) != 1:
                 flash("Email already taken")
                 return redirect("/email")
 
