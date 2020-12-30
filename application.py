@@ -6,6 +6,7 @@ import traceback
 import requests
 import base64
 import json
+import random
 
 from flask import Flask, flash, jsonify, redirect, render_template, request, session
 from flask_session import Session
@@ -134,7 +135,7 @@ def check_confirmed(f):
 
         if isConfirmed() == "no":
 
-            flash("Please enter secrect code sent to the given email address")
+            flash("Please enter the PIN code sent to the given email address")
             return redirect("/unconfirmed")
 
         return f(*args, **kwargs)
@@ -187,6 +188,43 @@ def uploadPicture(upload):
         return None
 
 
+# Send PIN code with confirmation email and save it to database
+def sendPin(email):
+
+    # Create activation email with a random PIN
+    pin = random.randint(100000,999999)
+    subject = "Welcome!"
+    body = render_template('activate.html', name=profileName(), pin=pin)
+
+    messsage = Message(subject=subject, recipients=[email], body=body)
+    mail.send(messsage)    
+
+    try:
+
+        sqliteConnection = sqlite3.connect("database.db")
+        cursor = sqliteConnection.cursor()
+        
+        cursor.execute("INSERT INTO users(pin) VALUES (:pin);", {"pin": pin})
+        sqliteConnection.commit()
+
+        cursor.close()
+
+    except sqlite3.Error as error:
+    
+        print("Failed to read data from sqlite table", error)
+        print("Exception class is: ", error.__class__)
+        print("Exception is", error.args)
+
+        print('Printing detailed SQLite exception traceback: ')
+        exc_type, exc_value, exc_tb = sys.exc_info()
+        print(traceback.format_exception(exc_type, exc_value, exc_tb))
+
+    finally:
+
+        if (sqliteConnection):
+            sqliteConnection.close()
+
+
 # Get username to be displayed 
 def profileName():
 
@@ -220,6 +258,111 @@ def profileName():
             sqliteConnection.close()   
         
         return name
+
+
+# Get the user email address
+def getUserEmail():
+
+    try:
+
+        sqliteConnection = sqlite3.connect("database.db")
+        cursor = sqliteConnection.cursor()
+
+        # Check who's id is logged in
+        loggedId = session["user_id"]
+        
+        # Query database for username
+        cursor.execute("SELECT email FROM users WHERE id=:id", {"id": loggedId})
+        email = cursor.fetchall()[0][0]
+
+        cursor.close()
+
+    except sqlite3.Error as error:
+    
+        print("Failed to read data from sqlite table", error)
+        print("Exception class is: ", error.__class__)
+        print("Exception is", error.args)
+
+        print('Printing detailed SQLite exception traceback: ')
+        exc_type, exc_value, exc_tb = sys.exc_info()
+        print(traceback.format_exception(exc_type, exc_value, exc_tb))
+
+    finally:
+    
+        if (sqliteConnection):
+            sqliteConnection.close()   
+        
+        return email
+
+
+# Get the user current PIN
+def getUserPin():
+
+    try:
+
+        sqliteConnection = sqlite3.connect("database.db")
+        cursor = sqliteConnection.cursor()
+
+        # Check who's id is logged in
+        loggedId = session["user_id"]
+        
+        # Query database for username
+        cursor.execute("SELECT pin FROM users WHERE id=:id", {"id": loggedId})
+        pin = cursor.fetchall()[0][0]
+
+        cursor.close()
+
+    except sqlite3.Error as error:
+    
+        print("Failed to read data from sqlite table", error)
+        print("Exception class is: ", error.__class__)
+        print("Exception is", error.args)
+
+        print('Printing detailed SQLite exception traceback: ')
+        exc_type, exc_value, exc_tb = sys.exc_info()
+        print(traceback.format_exception(exc_type, exc_value, exc_tb))
+
+    finally:
+    
+        if (sqliteConnection):
+            sqliteConnection.close()   
+        
+        return pin
+
+
+# Get the user registration time
+def getUserTime():
+
+    try:
+
+        sqliteConnection = sqlite3.connect("database.db")
+        cursor = sqliteConnection.cursor()
+
+        # Check who's id is logged in
+        loggedId = session["user_id"]
+        
+        # Query database for username
+        cursor.execute("SELECT time FROM users WHERE id=:id", {"id": loggedId})
+        time = cursor.fetchall()[0][0]
+
+        cursor.close()
+
+    except sqlite3.Error as error:
+    
+        print("Failed to read data from sqlite table", error)
+        print("Exception class is: ", error.__class__)
+        print("Exception is", error.args)
+
+        print('Printing detailed SQLite exception traceback: ')
+        exc_type, exc_value, exc_tb = sys.exc_info()
+        print(traceback.format_exception(exc_type, exc_value, exc_tb))
+
+    finally:
+    
+        if (sqliteConnection):
+            sqliteConnection.close()   
+        
+        return time
 
 
 # Get profile picture to be displayed 

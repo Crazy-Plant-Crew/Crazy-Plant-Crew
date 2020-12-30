@@ -8,7 +8,8 @@ from flask import Blueprint, render_template, redirect, session, request, flash,
 from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
 from werkzeug.security import check_password_hash, generate_password_hash
 from werkzeug.utils import secure_filename
-from application import uploadPicture, is_human
+from application import uploadPicture, is_human, sendPin
+from time import time
 
 
 # Set Blueprints
@@ -140,13 +141,16 @@ def signupFunction():
                 sqliteConnection.close()
         
 
-        # Insert username, email and hash of the password into the table
+        # Insert username, email, hash of the password and time into the table
         try:
 
             sqliteConnection = sqlite3.connect("database.db")
             cursor = sqliteConnection.cursor()
+
+            # Get time
+            date = int(time())
             
-            cursor.execute("INSERT INTO users(username, hash, email) VALUES (:username, :hash, :email);", {"username": username, "hash": generate_password_hash(password), "email": email})
+            cursor.execute("INSERT INTO users(username, hash, email, time) VALUES (:username, :hash, :email, :time);", {"username": username, "hash": generate_password_hash(password), "email": email, "time": date})
             record = sqliteConnection.commit()
 
             cursor.close()
@@ -236,6 +240,8 @@ def signupFunction():
                     sqliteConnection.close()
 
         
+        sendPin(email)
+
         return redirect("/")
 
     
