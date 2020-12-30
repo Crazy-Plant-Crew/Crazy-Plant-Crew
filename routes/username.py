@@ -4,12 +4,14 @@ import sys
 import re
 
 from flask import Blueprint, render_template, redirect, session, request, flash, get_flashed_messages
-from application import profileName, profilePicture
+from application import profileName, profilePicture, login_required, check_confirmed
 
 # Set Blueprints
 username = Blueprint('username', __name__,)
 
 @username.route("/username", methods=["GET", "POST"])
+@login_required
+@check_confirmed
 def usernameFunction():
 
     # Force flash() to get the messages on the same page as the redirect.

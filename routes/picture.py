@@ -4,13 +4,15 @@ import sys
 import os
 
 from flask import Blueprint, render_template, redirect, session, request, flash
-from application import profileName, uploadPicture, profilePicture
+from application import profileName, uploadPicture, profilePicture, login_required, check_confirmed
 from werkzeug.utils import secure_filename
 
 # Set Blueprints
 picture = Blueprint('picture', __name__,)
 
 @picture.route("/picture", methods=["GET", "POST"])
+@login_required
+@check_confirmed
 def pictureFunction():
 
     if request.method == "POST":

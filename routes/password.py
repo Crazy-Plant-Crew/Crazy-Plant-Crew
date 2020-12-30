@@ -4,12 +4,14 @@ import sys
 
 from flask import Blueprint, render_template, redirect, session, request, flash, get_flashed_messages
 from werkzeug.security import check_password_hash, generate_password_hash
-from application import profileName, profilePicture
+from application import profileName, profilePicture, login_required, check_confirmed
 
 # Set Blueprints
 password = Blueprint('password', __name__,)
 
 @password.route("/password", methods=["GET", "POST"])
+@login_required
+@check_confirmed
 def passwordFunction():
 
     # Force flash() to get the messages on the same page as the redirect.
