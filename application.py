@@ -29,6 +29,26 @@ app.config["TEMPLATES_AUTO_RELOAD"] = True
 app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY") 
 
 
+# Email configuration
+app.config["SECURITY_PASSWORD_SALT"] = os.environ["EMAIL_SECURITY_PASSWORD_SALT"]
+app.config["DEBUG"] = False
+app.config["BCRYPT_LOG_ROUNDS"] = 13
+app.config["WTF_CSRF_ENABLED"] = True
+app.config["DEBUG_TB_ENABLED"] = False
+app.config["DEBUG_TB_INTERCEPT_REDIRECTS"] = False
+app.config["MAIL_SERVER"] = "smtp.googlemail.com"
+app.config["MAIL_PORT"] = 465
+app.config["MAIL_USE_TLS"] = False
+app.config["MAIL_USE_SSL"] = True
+app.config["MAIL_USERNAME"] = os.environ["APP_MAIL_USERNAME"]
+app.config["MAIL_PASSWORD"] = os.environ["APP_MAIL_PASSWORD"]
+app.config["MAIL_DEFAULT_SENDER"] = "crazy.plant.crew.2020@gmail.com"
+
+
+# Configure mail 
+mail = Mail(app)
+
+
 # Ensure responses aren't cached
 @app.after_request
 def after_request(response):
@@ -235,31 +255,6 @@ def profilePicture():
             sqliteConnection.close()   
         
         return picture
-
-
-# Configure mail 
-mail = Mail(app)
-
-class BaseConfig(object):
-
-    # Email configuration
-    SECRET_KEY = os.environ["EMAIL_SECRET_KEY"]
-    SECURITY_PASSWORD_SALT = os.environ["EMAIL_SECURITY_PASSWORD_SALT"]
-    DEBUG = False
-    BCRYPT_LOG_ROUNDS = 13
-    WTF_CSRF_ENABLED = True
-    DEBUG_TB_ENABLED = False
-    DEBUG_TB_INTERCEPT_REDIRECTS = False
-
-    MAIL_SERVER = "smtp.googlemail.com"
-    MAIL_PORT = 465
-    MAIL_USE_TLS = False
-    MAIL_USE_SSL = True
-
-    MAIL_USERNAME = os.environ["APP_MAIL_USERNAME"]
-    MAIL_PASSWORD = os.environ["APP_MAIL_PASSWORD"]
-
-    MAIL_DEFAULT_SENDER = "crazy.plant.crew.2020@gmail.com"
 
 
 # Import routes after to avoid circular import

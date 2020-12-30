@@ -4,13 +4,14 @@ import sys
 import re
 
 from flask import Blueprint, render_template, redirect, session, request, flash, get_flashed_messages
-from application import profileName, profilePicture, mail
+from application import profileName, profilePicture, mail, login_required
 from flask_mail import Message, Mail
 
 # Set Blueprints
 unconfirmed = Blueprint('unconfirmed', __name__,)
 
 @unconfirmed.route("/unconfirmed", methods=["GET", "POST"])
+@login_required
 def unconfirmedFunction():
 
     # Force flash() to get the messages on the same page as the redirect.
