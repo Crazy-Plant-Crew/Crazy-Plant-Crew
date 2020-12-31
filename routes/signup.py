@@ -141,16 +141,13 @@ def signupFunction():
                 sqliteConnection.close()
         
 
-        # Insert username, email, hash of the password and time into the table
+        # Insert username, email and hash of the password into the table
         try:
 
             sqliteConnection = sqlite3.connect("database.db")
             cursor = sqliteConnection.cursor()
-
-            # Get time
-            date = int(time())
             
-            cursor.execute("INSERT INTO users(username, hash, email, time) VALUES (:username, :hash, :email, :time);", {"username": username, "hash": generate_password_hash(password), "email": email, "time": date})
+            cursor.execute("INSERT INTO users(username, hash, email) VALUES (:username, :hash, :email)", {"username": username, "hash": generate_password_hash(password), "email": email})
             record = sqliteConnection.commit()
 
             cursor.close()
@@ -219,7 +216,7 @@ def signupFunction():
                 cursor = sqliteConnection.cursor()
                 user_id = session["user_id"]
                 
-                cursor.execute("UPDATE users SET picture=:picture WHERE id=:user_id;", {"picture": upload, "user_id": user_id})
+                cursor.execute("UPDATE users SET picture=:picture WHERE id=:id;", {"picture": upload, "id": user_id})
                 sqliteConnection.commit()
 
                 cursor.close()

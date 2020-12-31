@@ -17,6 +17,7 @@ from werkzeug.utils import secure_filename
 from functools import wraps
 from itsdangerous import URLSafeTimedSerializer
 from flask_mail import Message, Mail
+from time import time
 
 # Configure application
 app = Flask(__name__)
@@ -195,6 +196,8 @@ def sendPin(email):
     pin = random.randint(100000,999999)
     subject = "Welcome!"
     body = render_template('activate.html', name=profileName(), pin=pin)
+    user_id = session["user_id"]
+    date = int(time())
 
     messsage = Message(subject=subject, recipients=[email], body=body)
     mail.send(messsage)    
@@ -204,7 +207,7 @@ def sendPin(email):
         sqliteConnection = sqlite3.connect("database.db")
         cursor = sqliteConnection.cursor()
         
-        cursor.execute("INSERT INTO users(pin) VALUES (:pin);", {"pin": pin})
+        cursor.execute("UPDATE users SET time=:date, pin=:pin WHERE id=:id;", {"date": date, "pin": pin, "id": user_id})
         sqliteConnection.commit()
 
         cursor.close()

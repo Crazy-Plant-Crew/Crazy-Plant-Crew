@@ -27,7 +27,7 @@
         <nav>
             <a href="/"><span>Crazy Plant Crew</span></a>
             <div>
-                {% if session.user_id and isConfirmed == "yes" %}
+                {% if session.user_id and isConfirmed() == "yes" %}
                     <ul>
                         <li><a href="/">Index</a></li>
                         <li><a href="/profile">{{ name }}</a></li>
@@ -35,7 +35,7 @@
                         <li><a href="/logout">Log Out</a></li>
                     </ul>
                     <img src="{{ picture }}" alt="Profile picture of {{ name }}"> 
-                {% elif session.user_id and isConfirmed == "no" %}
+                {% elif session.user_id and isConfirmed() == "no" %}
                     <ul>
                         <li><a href="/signup">Sign Up</a></li>
                         <li><a href="/signin">Log In</a></li>

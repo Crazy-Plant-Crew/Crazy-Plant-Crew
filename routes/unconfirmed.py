@@ -17,19 +17,14 @@ def unconfirmedFunction():
 
     # Force flash() to get the messages on the same page as the redirect.
     get_flashed_messages()
-
     # Get user email
     email = getUserEmail()
-
     # Get current time
     now = int(time())
-
     # Get signup time
     date = getUserTime()
-
     # Get user PIN
     pin = getUserPin()
-
     # Get given PIN
     sample = request.form.get("pin")
 
@@ -37,9 +32,9 @@ def unconfirmedFunction():
     # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
 
-        if request.form.get("pin"):
+        if request.form.get("confirm"):
 
-            if sample == pin and now - date < 600:
+            if int(sample) == int(pin) and int(now - date) < 600:
 
                 # Update database with confirmation
                 try:
@@ -49,7 +44,7 @@ def unconfirmedFunction():
                     user_id = session["user_id"]
                     status = "yes"
                     
-                    cursor.execute("UPDATE users SET confirmed=:status WHERE id=:user_id;", {"status": status, "user_id": user_id})
+                    cursor.execute("UPDATE users SET confirmed=:status WHERE id=:id;", {"status": status, "id": user_id})
                     sqliteConnection.commit()
 
                     cursor.close()
@@ -70,12 +65,21 @@ def unconfirmedFunction():
                         sqliteConnection.close()
 
                 return redirect("/")
+                
+            else:
+
+                flash("Wrong PIN entered and/or PIN timed out.")
+                return redirect("/unconfirmed")
 
                 
         if request.form.get("send"):
 
             sendPin(email)
             flash("An new activation PIN has been sent to your email")
+
+            return redirect("/unconfirmed")
+
+        else:
 
             return redirect("/unconfirmed")
 
