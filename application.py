@@ -416,6 +416,7 @@ from routes.email import email
 from routes.picture import picture
 from routes.delete import delete
 from routes.unconfirmed import unconfirmed
+from routes.forget import forget
 
 
 # Configure Blueprints
@@ -431,3 +432,4 @@ app.register_blueprint(email)
 app.register_blueprint(picture)
 app.register_blueprint(delete)
 app.register_blueprint(unconfirmed)
+app.register_blueprint(forget)
