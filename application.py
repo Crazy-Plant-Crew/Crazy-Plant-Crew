@@ -7,6 +7,7 @@ import requests
 import base64
 import json
 import random
+import string
 
 from flask import Flask, flash, jsonify, redirect, render_template, request, session
 from flask_session import Session
@@ -93,7 +94,7 @@ def isConfirmed():
         loggedId = session["user_id"]
         
         # Query database for unconfirmed user
-        cursor.execute("SELECT confirmed FROM users WHERE id=:id", {"id": loggedId})
+        cursor.execute("SELECT confirmed FROM users WHERE id=:id;", {"id": loggedId})
         confirmed = cursor.fetchall()[0][0]
 
         cursor.close()
@@ -240,7 +241,7 @@ def profileName():
         loggedId = session["user_id"]
         
         # Query database for username
-        cursor.execute("SELECT username FROM users WHERE id=:id", {"id": loggedId})
+        cursor.execute("SELECT username FROM users WHERE id=:id;", {"id": loggedId})
         name = cursor.fetchall()[0][0]
 
         cursor.close()
@@ -275,7 +276,7 @@ def getUserEmail():
         loggedId = session["user_id"]
         
         # Query database for username
-        cursor.execute("SELECT email FROM users WHERE id=:id", {"id": loggedId})
+        cursor.execute("SELECT email FROM users WHERE id=:id;", {"id": loggedId})
         email = cursor.fetchall()[0][0]
 
         cursor.close()
@@ -345,7 +346,7 @@ def getUserTime():
         loggedId = session["user_id"]
         
         # Query database for username
-        cursor.execute("SELECT time FROM users WHERE id=:id", {"id": loggedId})
+        cursor.execute("SELECT time FROM users WHERE id=:id;", {"id": loggedId})
         time = cursor.fetchall()[0][0]
 
         cursor.close()
@@ -380,7 +381,7 @@ def profilePicture():
         loggedId = session["user_id"]
         
         # Query database for username
-        cursor.execute("SELECT picture FROM users WHERE id=:id", {"id": loggedId})
+        cursor.execute("SELECT picture FROM users WHERE id=:id;", {"id": loggedId})
         picture = cursor.fetchall()[0][0]
 
         cursor.close()
@@ -401,6 +402,17 @@ def profilePicture():
             sqliteConnection.close()   
         
         return picture
+
+
+# Generate random password
+def randomPassword():
+    
+    result = ""
+    while len(result) <= 12:
+        character = random.choice(string.printable)
+        result += character
+    
+    return result
 
 
 # Import routes after to avoid circular import
