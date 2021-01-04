@@ -6,7 +6,7 @@ import string
 
 from flask import Blueprint, render_template, redirect, session, request, flash, get_flashed_messages
 from werkzeug.security import check_password_hash, generate_password_hash
-from application import randomPassword, profileName, mail
+from application import randomPassword, getUserName, mail
 from flask_mail import Message, Mail
 
 # Set Blueprints
@@ -126,20 +126,6 @@ def forgetFunction():
     else:
 
         return render_template("forget.html")
-
-
-    
-
-
-    """
-    nuke password
-    inject random string
-    send string
-    redirect to login
-    """
-    
-    
-
 
 
 

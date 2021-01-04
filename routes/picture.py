@@ -4,7 +4,7 @@ import sys
 import os
 
 from flask import Blueprint, render_template, redirect, session, request, flash
-from application import profileName, uploadPicture, profilePicture, login_required, check_confirmed
+from application import getUserName, uploadPicture, getUserPicture, login_required, confirmed_required, getUserRole
 from werkzeug.utils import secure_filename
 
 # Set Blueprints
@@ -12,7 +12,7 @@ picture = Blueprint('picture', __name__,)
 
 @picture.route("/picture", methods=["GET", "POST"])
 @login_required
-@check_confirmed
+@confirmed_required
 def pictureFunction():
 
     if request.method == "POST":
@@ -67,4 +67,4 @@ def pictureFunction():
 
     else:
 
-        return render_template("picture.html", name=profileName(), picture=profilePicture())
+        return render_template("picture.html", name=getUserName(), picture=getUserPicture(), role=getUserRole())

@@ -3,14 +3,14 @@ import traceback
 import sys
 
 from flask import Blueprint, render_template, redirect, session, request
-from application import profileName, profilePicture, login_required, check_confirmed
+from application import getUserName, getUserPicture, login_required, confirmed_required, getUserRole
 
 # Set Blueprints
 delete = Blueprint('delete', __name__,)
 
 @delete.route("/delete", methods=["GET", "POST"])
 @login_required
-@check_confirmed
+@confirmed_required
 def emailFunction():
 
     # User reached route via POST (as by submitting a form via POST)
@@ -49,4 +49,4 @@ def emailFunction():
 
     else:
 
-        return render_template("delete.html", name=profileName(), picture=profilePicture())
+        return render_template("delete.html", name=getUserName(), picture=getUserPicture(), role=getUserRole())

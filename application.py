@@ -83,40 +83,6 @@ for code in default_exceptions:
     app.errorhandler(code)(errorhandler)
 
 
-# Check if user is confirmed via email
-def isConfirmed():
-    try:
-
-        sqliteConnection = sqlite3.connect("database.db")
-        cursor = sqliteConnection.cursor()
-
-        # Check who's id is logged in
-        loggedId = session["user_id"]
-        
-        # Query database for unconfirmed user
-        cursor.execute("SELECT confirmed FROM users WHERE id=:id;", {"id": loggedId})
-        confirmed = cursor.fetchall()[0][0]
-
-        cursor.close()
-
-    except sqlite3.Error as error:
-    
-        print("Failed to read data from sqlite table", error)
-        print("Exception class is: ", error.__class__)
-        print("Exception is", error.args)
-
-        print('Printing detailed SQLite exception traceback: ')
-        exc_type, exc_value, exc_tb = sys.exc_info()
-        print(traceback.format_exception(exc_type, exc_value, exc_tb))
-
-    finally:
-    
-        if (sqliteConnection):
-            sqliteConnection.close()
-
-    return confirmed
-
-
 # Decorator to ensure user must be logged in
 def login_required(f):
     @wraps(f)
@@ -131,14 +97,29 @@ def login_required(f):
 
 
 # Decorator to ensure user is confirmed via email
-def check_confirmed(f):
+def confirmed_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
 
-        if isConfirmed() == "no":
+        if getUserConfirmed() == "no":
 
             flash("Please enter the PIN code sent to the given email address")
             return redirect("/unconfirmed")
+
+        return f(*args, **kwargs)
+
+    return decorated_function
+
+
+# Decorator to ensure user is authorized
+def role_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+
+        if getUserRole() == "user":
+
+            flash("You are not authorized to access this page")
+            return redirect("/")
 
         return f(*args, **kwargs)
 
@@ -196,7 +177,7 @@ def sendPin(email):
     # Create activation email with a random PIN
     pin = random.randint(100000,999999)
     subject = "Welcome!"
-    body = render_template('activate.html', name=profileName(), pin=pin)
+    body = render_template('activate.html', name=getUserName(), pin=pin)
     user_id = session["user_id"]
     date = int(time())
 
@@ -229,8 +210,42 @@ def sendPin(email):
             sqliteConnection.close()
 
 
+# Check if user is confirmed via email
+def getUserConfirmed():
+    try:
+
+        sqliteConnection = sqlite3.connect("database.db")
+        cursor = sqliteConnection.cursor()
+
+        # Check who's id is logged in
+        loggedId = session["user_id"]
+        
+        # Query database for unconfirmed user
+        cursor.execute("SELECT confirmed FROM users WHERE id=:id;", {"id": loggedId})
+        confirmed = cursor.fetchall()[0][0]
+
+        cursor.close()
+
+    except sqlite3.Error as error:
+    
+        print("Failed to read data from sqlite table", error)
+        print("Exception class is: ", error.__class__)
+        print("Exception is", error.args)
+
+        print('Printing detailed SQLite exception traceback: ')
+        exc_type, exc_value, exc_tb = sys.exc_info()
+        print(traceback.format_exception(exc_type, exc_value, exc_tb))
+
+    finally:
+    
+        if (sqliteConnection):
+            sqliteConnection.close()
+
+    return confirmed
+
+
 # Get username to be displayed 
-def profileName():
+def getUserName():
 
     try:
 
@@ -275,7 +290,7 @@ def getUserEmail():
         # Check who's id is logged in
         loggedId = session["user_id"]
         
-        # Query database for username
+        # Query database for email
         cursor.execute("SELECT email FROM users WHERE id=:id;", {"id": loggedId})
         email = cursor.fetchall()[0][0]
 
@@ -299,6 +314,41 @@ def getUserEmail():
         return email
 
 
+# Get the user role
+def getUserRole():
+
+    try:
+
+        sqliteConnection = sqlite3.connect("database.db")
+        cursor = sqliteConnection.cursor()
+
+        # Check who's id is logged in
+        loggedId = session["user_id"]
+        
+        # Query database for role
+        cursor.execute("SELECT role FROM users WHERE id=:id;", {"id": loggedId})
+        role = cursor.fetchall()[0][0]
+
+        cursor.close()
+
+    except sqlite3.Error as error:
+    
+        print("Failed to read data from sqlite table", error)
+        print("Exception class is: ", error.__class__)
+        print("Exception is", error.args)
+
+        print('Printing detailed SQLite exception traceback: ')
+        exc_type, exc_value, exc_tb = sys.exc_info()
+        print(traceback.format_exception(exc_type, exc_value, exc_tb))
+
+    finally:
+    
+        if (sqliteConnection):
+            sqliteConnection.close()   
+        
+        return role
+
+
 # Get the user current PIN
 def getUserPin():
 
@@ -310,7 +360,7 @@ def getUserPin():
         # Check who's id is logged in
         loggedId = session["user_id"]
         
-        # Query database for username
+        # Query database for PIN
         cursor.execute("SELECT pin FROM users WHERE id=:id", {"id": loggedId})
         pin = cursor.fetchall()[0][0]
 
@@ -345,7 +395,7 @@ def getUserTime():
         # Check who's id is logged in
         loggedId = session["user_id"]
         
-        # Query database for username
+        # Query database for time
         cursor.execute("SELECT time FROM users WHERE id=:id;", {"id": loggedId})
         time = cursor.fetchall()[0][0]
 
@@ -370,7 +420,7 @@ def getUserTime():
 
 
 # Get profile picture to be displayed 
-def profilePicture():
+def getUserPicture():
 
     try:
 
@@ -380,7 +430,7 @@ def profilePicture():
         # Check who's id is logged in
         loggedId = session["user_id"]
         
-        # Query database for username
+        # Query database for picture
         cursor.execute("SELECT picture FROM users WHERE id=:id;", {"id": loggedId})
         picture = cursor.fetchall()[0][0]
 
@@ -429,6 +479,7 @@ from routes.picture import picture
 from routes.delete import delete
 from routes.unconfirmed import unconfirmed
 from routes.forget import forget
+from routes.administration import administration
 
 
 # Configure Blueprints
@@ -445,3 +496,4 @@ app.register_blueprint(picture)
 app.register_blueprint(delete)
 app.register_blueprint(unconfirmed)
 app.register_blueprint(forget)
+app.register_blueprint(administration)

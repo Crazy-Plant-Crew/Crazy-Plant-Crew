@@ -32,9 +32,10 @@
                         <li><a href="/">Index</a></li>
                         <li><a href="/profile">{{ name }}</a></li>
                         <li><a href="/message">Message</a></li>
+                        {% block navigation %}{% endblock %}
                         <li><a href="/logout">Log Out</a></li>
                     </ul>
-                    <img src="{{ picture }}" alt="Profile picture of {{ name }}"> 
+                    <img src="{{ picture }}" alt="Profile picture of {{ name }}" height="500"> 
                 {% else %}
                     <ul>
                         <li><a href="/signup">Sign Up</a></li>

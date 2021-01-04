@@ -3,6 +3,18 @@
 {% block title %}
     Profile
 {% endblock %}
+
+{% block navigation %}
+    {% if role == "admin" %}
+        <li><a href="/administration">Administration</a></li>
+    {% endif %}
+{% endblock %}
+
+{% block navigation %}
+    {% if role == "admin" %}
+        <li><a href="/administration">Administration</a></li>
+    {% endif %}
+{% endblock %}
     
 {% block main %}
 <div>

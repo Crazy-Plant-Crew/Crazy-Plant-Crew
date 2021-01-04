@@ -4,7 +4,7 @@ import sys
 import re
 
 from flask import Blueprint, render_template, redirect, session, request, flash, get_flashed_messages
-from application import profileName, profilePicture, mail, login_required, getUserEmail, sendPin, getUserPin, getUserTime
+from application import getUserName, getUserPicture, mail, login_required, getUserEmail, sendPin, getUserPin, getUserTime
 from flask_mail import Message, Mail
 from time import time
 
@@ -85,4 +85,4 @@ def unconfirmedFunction():
 
     else:
 
-        return render_template("unconfirmed.html", name=profileName(), picture=profilePicture())
+        return render_template("unconfirmed.html", name=getUserName(), picture=getUserPicture())

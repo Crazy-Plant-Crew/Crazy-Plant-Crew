@@ -4,6 +4,12 @@
     Picture
 {% endblock %}
 
+{% block navigation %}
+    {% if role == "admin" %}
+        <li><a href="/administration">Administration</a></li>
+    {% endif %}
+{% endblock %}
+
 {% block main %}
     <form action="/picture" method="post" enctype="multipart/form-data">
         <div>

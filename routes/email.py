@@ -4,14 +4,14 @@ import sys
 import re
 
 from flask import Blueprint, render_template, redirect, session, request, flash, get_flashed_messages
-from application import profileName, profilePicture, login_required, check_confirmed
+from application import getUserName, getUserPicture, login_required, confirmed_required, getUserRole
 
 # Set Blueprints
 email = Blueprint('email', __name__,)
 
 @email.route("/email", methods=["GET", "POST"])
 @login_required
-@check_confirmed
+@confirmed_required
 def emailFunction():
 
     # Force flash() to get the messages on the same page as the redirect.
@@ -96,4 +96,4 @@ def emailFunction():
 
         return redirect("/profile")
 
-    return render_template("email.html", name=profileName(), picture=profilePicture())
+    return render_template("email.html", name=getUserName(), picture=getUserPicture(), role=getUserRole())

@@ -4,6 +4,12 @@
     Message
 {% endblock %}
 
+{% block navigation %}
+    {% if role == "admin" %}
+        <li><a href="/administration">Administration</a></li>
+    {% endif %}
+{% endblock %}
+
 {% block main %}
     Message page
 {% endblock %}
