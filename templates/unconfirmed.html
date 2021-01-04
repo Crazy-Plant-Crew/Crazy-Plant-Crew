@@ -5,18 +5,22 @@
 {% endblock %}
 
 {% block main %}
-<form action="/unconfirmed" method="post">
-    <div>
-        <input id="pin" autocomplete="off" autofocus class="form-control" name="pin" placeholder="Enter PIN" type="text">
-    </div>
+    <form action="/unconfirmed" method="post">
+        <div>
+            <input id="pin" autocomplete="off" autofocus class="form-control" name="pin" placeholder="Enter PIN" type="text">
+        </div>
+        <br>
+        <div>
+            <button id="confirm" type="submit" name="confirm" value="confirm">Confirm</button>
+        </div>
+        <br>
+        <div>
+            <button id="send" type="submit" name="send" value="send">Send email again?</button>
+        </div>
+        <br>
+    </form>
     <br>
     <div>
-        <button id="confirm" type="submit" name="confirm" value="confirm">Confirm</button>
+        <a href="/signin">Back</a>
     </div>
-    <br>
-    <div>
-        <button id="send" type="submit" name="send" value="send">Send email again?</button>
-    </div>
-    <br>
-</form>
 {% endblock %}

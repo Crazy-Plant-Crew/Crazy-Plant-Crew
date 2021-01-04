@@ -9,27 +9,28 @@
         <li><a href="/administration">Administration</a></li>
     {% endif %}
 {% endblock %}
-
-{% block navigation %}
-    {% if role == "admin" %}
-        <li><a href="/administration">Administration</a></li>
-    {% endif %}
-{% endblock %}
     
 {% block main %}
-<div>
-    <a href="/username">Change Username</a>
-</div>
-<div>
-    <a href="/password">Change Password</a>
-</div>
-<div>
-    <a href="/email">Change Email</a>
-</div>
-<div>
-    <a href="/picture">Change Picture</a>
-</div>
-<div>
-    <a href="/delete">Delete Account</a>
-</div>
+    <div>
+        <a href="/username">Change Username</a>
+    </div>
+    <div>
+        <a href="/password">Change Password</a>
+    </div>
+    <div>
+        <a href="/email">Change Email</a>
+    </div>
+    <div>
+        <a href="/picture">Change Picture</a>
+    </div>
+    <div>
+        <a href="/mailing">Update Newsletter</a>
+    </div>
+    <div>
+        <a href="/delete">Delete Account</a>
+    </div>
+    <br>
+    <div>
+        <a href="/">Back</a>
+    </div>
 {% endblock %}

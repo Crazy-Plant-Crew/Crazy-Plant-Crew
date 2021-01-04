@@ -5,27 +5,31 @@
 {% endblock %}
 
 {% block main %}
-<form action="/email" method="post">
-    <div>
-        <p>Email.</p>
-        <input id="email" autocomplete="off" autofocus class="form-control" name="email" placeholder="Email" type="text">
-        <button id="updateEmail" type="submit">Update</button>
-    </div>
-</form>
+    <form action="/email" method="post">
+        <div>
+            <p>Email.</p>
+            <input id="email" autocomplete="off" autofocus class="form-control" name="email" placeholder="Email" type="text">
+            <button id="updateEmail" type="submit">Update</button>
+        </div>
+        <br>
+        <div>
+            <a href="/profile">Back</a>
+        </div>
+    </form>
 
-<script>
+    <script>
 
-    document.querySelector("#updateEmail").disabled = true;
+        document.querySelector("#updateEmail").disabled = true;
 
-    document.querySelector("#email").onkeyup = function() {
-        let email = document.querySelector("#email").value;
+        document.querySelector("#email").onkeyup = function() {
+            let email = document.querySelector("#email").value;
 
-        if (email.match(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i)) {
-            document.querySelector("#updateEmail").disabled = false;
+            if (email.match(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i)) {
+                document.querySelector("#updateEmail").disabled = false;
+            }
+            else {
+                document.querySelector('#updateEmail').disabled = true;
+            }
         }
-        else {
-            document.querySelector('#updateEmail').disabled = true;
-        }
-    }
-</script>
+    </script>
 {% endblock %}

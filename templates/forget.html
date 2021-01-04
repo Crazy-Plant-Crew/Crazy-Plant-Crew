@@ -5,11 +5,15 @@
 {% endblock %}
     
 {% block main %}
-<form action="/forget" method="post">
-    <div>
-        <input autocomplete="off" autofocus class="form-control" name="username" placeholder="Username" type="text">
-    </div>
-    <button type="submit">Reset</button>
+    <form action="/forget" method="post">
+        <div>
+            <input autocomplete="off" autofocus class="form-control" name="username" placeholder="Username" type="text">
+        </div>
+        <button type="submit">Reset</button>
+        <br>
+    </form>
     <br>
-</form>
+    <div>
+        <a href="/signin">Back</a>
+    </div>
 {% endblock %}
