@@ -480,6 +480,11 @@ from routes.delete import delete
 from routes.unconfirmed import unconfirmed
 from routes.forget import forget
 from routes.administration import administration
+from routes.add import add
+from routes.remove import remove
+from routes.communication import communication
+from routes.newsletter import newsletter
+
 
 
 # Configure Blueprints
@@ -497,3 +502,7 @@ app.register_blueprint(delete)
 app.register_blueprint(unconfirmed)
 app.register_blueprint(forget)
 app.register_blueprint(administration)
+app.register_blueprint(add)
+app.register_blueprint(remove)
+app.register_blueprint(newsletter)
+app.register_blueprint(communication)
