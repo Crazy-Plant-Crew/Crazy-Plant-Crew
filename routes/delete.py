@@ -2,7 +2,7 @@ import sqlite3
 import traceback
 import sys
 
-from flask import Blueprint, render_template, redirect, session, request
+from flask import Blueprint, render_template, redirect, session, request, flash, get_flashed_messages
 from application import getUserName, getUserPicture, login_required, confirmed_required, getUserRole
 
 # Set Blueprints
@@ -12,6 +12,9 @@ delete = Blueprint('delete', __name__,)
 @login_required
 @confirmed_required
 def emailFunction():
+
+    # Force flash() to get the messages on the same page as the redirect.
+    get_flashed_messages()
 
     # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
@@ -45,6 +48,7 @@ def emailFunction():
             if (sqliteConnection):
                 sqliteConnection.close()
 
+        flash("Account deleted")
         return redirect("/signin")
 
     else:

@@ -94,6 +94,7 @@ def usernameFunction():
             if (sqliteConnection):
                 sqliteConnection.close()
 
+        flash("Username updated")
         return redirect("/profile")
     
     else:

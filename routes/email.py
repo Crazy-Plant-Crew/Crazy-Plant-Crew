@@ -94,6 +94,7 @@ def emailFunction():
             if (sqliteConnection):
                 sqliteConnection.close()
 
+        flash("Email address updated")
         return redirect("/profile")
 
     return render_template("email.html", name=getUserName(), picture=getUserPicture(), role=getUserRole())

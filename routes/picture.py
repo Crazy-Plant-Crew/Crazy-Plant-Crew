@@ -63,6 +63,7 @@ def pictureFunction():
             if (sqliteConnection):
                 sqliteConnection.close()
 
+        flash("Profile picture updated")
         return redirect("/")
 
     else:

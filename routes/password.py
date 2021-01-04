@@ -55,6 +55,7 @@ def passwordFunction():
             if (sqliteConnection):
                 sqliteConnection.close()
 
+        flash("Password updated")
         return redirect("/profile")
 
     return render_template("password.html", name=getUserName(), picture=getUserPicture(), role=getUserRole())
