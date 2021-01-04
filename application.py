@@ -477,6 +477,7 @@ from routes.password import password
 from routes.email import email
 from routes.picture import picture
 from routes.delete import delete
+from routes.article import article
 from routes.unconfirmed import unconfirmed
 from routes.forget import forget
 from routes.administration import administration
@@ -484,7 +485,7 @@ from routes.add import add
 from routes.remove import remove
 from routes.communication import communication
 from routes.newsletter import newsletter
-
+from routes.basket import basket
 
 
 # Configure Blueprints
@@ -499,6 +500,7 @@ app.register_blueprint(password)
 app.register_blueprint(email)
 app.register_blueprint(picture)
 app.register_blueprint(delete)
+app.register_blueprint(article)
 app.register_blueprint(unconfirmed)
 app.register_blueprint(forget)
 app.register_blueprint(administration)
@@ -506,3 +508,4 @@ app.register_blueprint(add)
 app.register_blueprint(remove)
 app.register_blueprint(newsletter)
 app.register_blueprint(communication)
+app.register_blueprint(basket)
