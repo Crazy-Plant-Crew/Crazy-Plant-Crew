@@ -11,9 +11,34 @@
 {% endblock %}
 
 {% block main %}
-    Add page
-    <br>
-    <div>
-        <a href="/administration">Back</a>
-    </div>
+    <form action="/add" method="post" enctype="multipart/form-data">
+        <div>
+            <input id="name" autocomplete="off" autofocus class="form-control" name="plantname" placeholder="Name" type="text">
+        </div>
+        <br>
+        <div>
+            <input id="stock" autocomplete="off" autofocus class="form-control" name="stock" placeholder="Stock" type="number" min="0">
+        </div>
+        <br>
+        <div>
+            <textarea id="description" autocomplete="off" autofocus class="form-control" name="description" placeholder=" Description" type="text" cols="100" rows="10"></textarea>
+        </div>
+        <br>
+        <div>
+            <input type="file" id="picture" name="picture">
+        </div>
+        <br>
+        <div>
+            <input type="checkbox" id="show" name="show" value="show">
+            <label for="show"> Show?</label><br>
+        </div>
+        <br>
+        <div>
+            <button id="submit" type="submit" name="submit" value="submit">Save plant.</button>
+        </div>
+        <br>
+        <div>
+            <a href="/administration">Back</a>
+        </div>
+    </form>
 {% endblock %}
