@@ -101,7 +101,7 @@ def confirmed_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
 
-        if getUserConfirmed() == "no":
+        if getUserConfirmed() == "False":
 
             flash("Please enter the PIN code sent to the given email address")
             return redirect("/unconfirmed")

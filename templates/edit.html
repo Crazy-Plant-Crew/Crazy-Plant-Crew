@@ -13,8 +13,41 @@
 {% endblock %}
 
 {% block main %}
-    <br>
-    <div>
-        <a href="/administration">Back</a>
-    </div>
+        <form action="/edit" method="post" enctype="multipart/form-data">
+            <div>
+                <input type='hidden' name='plant_id' value='{{ plants[0]}}'>
+            </div>
+            <div>
+                <input id="name" autocomplete="off" autofocus class="form-control" name="name" placeholder="Name" type="text" value="{{ plants[1] }}">
+            </div>
+            <br>
+            <div>
+                <input id="stock" autocomplete="off" autofocus class="form-control" name="stock" placeholder="Stock" type="number" min="0" value="{{ plants[2] }}">
+            </div>
+            <br>
+            <div>
+                <input id="price" autocomplete="off" autofocus class="form-control" name="price" placeholder="Price" type="number" min="0" value="{{ plants[3] }}">
+            </div>
+            <br>
+            <div>
+                <textarea id="description" autocomplete="off" autofocus class="form-control" name="description" placeholder=" Description" type="text" cols="100" rows="10">{{ plants[5] }}</textarea>
+            </div>
+            <br>
+            <div>
+                <input type="file" id="picture" name="picture">
+            </div>
+            <br>
+            <div>
+                <input type="checkbox" id="show" name="show" value="show" checked="{{ plants[6] }}">
+                <label for="show"> Show?</label><br>
+            </div>
+            <br>
+            <div>
+                <button id="submit" type="submit" name="submit" value="submit">Save.</button>
+            </div>
+            <br>
+            <div>
+                <a href="/administration">Back</a>
+            </div>
+        </form>
 {% endblock %}

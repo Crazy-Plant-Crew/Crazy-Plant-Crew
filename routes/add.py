@@ -22,8 +22,10 @@ def addFunction():
 
     if request.method == "POST":
 
+        # Get variables
         name = request.form.get("name")
         stock = request.form.get("stock")
+        price = request.form.get("price")
         description = request.form.get("description")
 
         # Ensure the plant name was submitted
@@ -46,6 +48,16 @@ def addFunction():
             flash("Invalid plant stock")
             return redirect("/add")
 
+        # Ensure the plant price was submitted
+        if not stock:
+            flash("must provide plant price")
+            return redirect("/add")
+
+        # Ensure the plant price fits server-side
+        if not re.search("^[0-9]+$", stock):
+            flash("Invalid plant price")
+            return redirect("/add")
+
         # Ensure the plant description was submitted
         if not description:
             flash("must provide plant description")
@@ -56,12 +68,8 @@ def addFunction():
             flash("Invalid plant description")
             return redirect("/add")
 
-        # Check show status
+        # Check show bool status
         show = "show" in request.form
-        if show == False:
-            show = "no"
-        else:
-            show = "yes"
 
 
         # Insert plant name, stock, description and show status into the table
@@ -70,7 +78,7 @@ def addFunction():
             sqliteConnection = sqlite3.connect("database.db")
             cursor = sqliteConnection.cursor()
             
-            cursor.execute("INSERT INTO plants(name, stock, description, show) VALUES (:name, :stock, :description, :show)", {"name": name, "stock": stock, "description": description, "show": show})
+            cursor.execute("INSERT INTO plants(name, stock, price, description, show) VALUES (:name, :stock, :price, :description, :show)", {"name": name, "stock": stock, "price": price, "description": description, "show": show})
             sqliteConnection.commit()
 
             cursor.close()

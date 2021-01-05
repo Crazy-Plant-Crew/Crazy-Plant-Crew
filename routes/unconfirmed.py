@@ -42,7 +42,7 @@ def unconfirmedFunction():
                     sqliteConnection = sqlite3.connect("database.db")
                     cursor = sqliteConnection.cursor()
                     user_id = session["user_id"]
-                    status = "yes"
+                    status = "True"
                     
                     cursor.execute("UPDATE users SET confirmed=:status WHERE id=:id;", {"status": status, "id": user_id})
                     sqliteConnection.commit()

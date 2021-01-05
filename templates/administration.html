@@ -19,6 +19,7 @@
                 <tr>
                     <th scope="col">Name</th>
                     <th scope="col">Stock</th>
+                    <th scope="col">Price</th>
                     <th scope="col">Thumbnail</th>
                     <th scope="col">Description</th>
                     <th scope="col">Show</th>
@@ -30,9 +31,10 @@
                 <tr>
                     <td>{{ plant[1] }}</td>
                     <td>{{ plant[2] }}</td>
-                    <td><img src="{{ plant[3] }}" alt="plant picture of {{ plant[1] }}" height="50"></td>
-                    <td>{{ plant[4] }}</td>
+                    <td>{{ plant[3] }}</td>
+                    <td><img src="{{ plant[4] }}" alt="plant picture of {{ plant[1] }}" height="50"></td>
                     <td>{{ plant[5] }}</td>
+                    <td>{{ plant[6] }}</td>
                     <td><button name="delete" value="{{ plant[0] }}" type="submit">Delete</button></td>
                     <td><button name="edit" value="{{ plant[0] }}" type="submit">Edit</button></td>
                 </tr>
