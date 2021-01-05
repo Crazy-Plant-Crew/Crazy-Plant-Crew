@@ -7,11 +7,12 @@
 {% block navigation %}
     {% if role == "admin" %}
         <li><a href="/administration">Administration</a></li>
+        <li><a href="/communication">Update blog</a></li>
+        <li><a href="/newsletter">Send newsletter</a></li>
     {% endif %}
 {% endblock %}
 
 {% block main %}
-    Edit page
     <br>
     <div>
         <a href="/administration">Back</a>

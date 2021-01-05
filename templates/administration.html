@@ -7,25 +7,41 @@
 {% block navigation %}
     {% if role == "admin" %}
         <li><a href="/administration">Administration</a></li>
+        <li><a href="/communication">Update blog</a></li>
+        <li><a href="/newsletter">Send newsletter</a></li>
     {% endif %}
 {% endblock %}
 
 {% block main %}
-    <div>
-        <a href="/add">Add plant</a>
-    </div>
-    <div>
-        <a href="/edit">Edit plant</a>
-    </div>
-    <div>
-        <a href="/remove">Remove plant</a>
-    </div>
-    <div>
-        <a href="/communication">Update blog</a>
-    </div>
-    <div>
-        <a href="/newsletter">Send newsletter</a>
-    </div>
+    <form action="/administration" method="post">
+        <table>
+            <thead>
+                <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Stock</th>
+                <th scope="col">Description</th>
+                <th scope="col">Show</th>
+                </tr>
+            </thead>
+
+            <tbody>
+            {% for plant in plants %}
+            <tr>
+                <td>{{ plant[1] }}</td>
+                <td>{{ plant[2] }}</td>
+                <td>{{ plant[4] }}</td>
+                <td>{{ plant[5] }}</td>
+                <td> <button name="delete" class="btn btn-primary" value="{{ plant[1] }}" type="submit">Delete</button> </td>
+                <td> <button name="edit" class="btn btn-primary" value="{{ plant[1] }}" type="submit">Edit</button> </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <div>
+            <a href="/add">Add plant</a>
+        </div>
+    </form>
+
     <br>
     <div>
         <a href="/">Back</a>
