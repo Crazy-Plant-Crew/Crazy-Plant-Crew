@@ -242,7 +242,6 @@ def signupFunction():
         return redirect("/")
 
     
-
     # User reached route via GET (as by clicking a link or via redirect)
     else:
 
