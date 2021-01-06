@@ -137,6 +137,17 @@ def is_human(captcha_response):
     return response_text['success']
 
 
+# Generate random password
+def randomPassword():
+    
+    result = ""
+    while len(result) <= 12:
+        character = random.choice(string.printable)
+        result += character
+    
+    return result
+
+
 # ImgBB API upload function
 def uploadPicture(upload):
 
@@ -208,6 +219,12 @@ def sendPin(email):
 
         if (sqliteConnection):
             sqliteConnection.close()
+
+
+# Send email
+def sendMail(subject, email, body):
+    messsage = Message(subject=subject, recipients=[email], body=body)
+    mail.send(messsage)
 
 
 # Check if user is confirmed via email
@@ -452,17 +469,6 @@ def getUserPicture():
             sqliteConnection.close()   
         
         return picture
-
-
-# Generate random password
-def randomPassword():
-    
-    result = ""
-    while len(result) <= 12:
-        character = random.choice(string.printable)
-        result += character
-    
-    return result
 
 
 # Import routes after to avoid circular import

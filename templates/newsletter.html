@@ -13,9 +13,27 @@
 {% endblock %}
 
 {% block main %}
-    Newsletter page
-    <br>
-    <div>
-        <a href="/">Back</a>
-    </div>
+    <form action="/newsletter" method="post" enctype="multipart/form-data">
+        <div>
+            <input id="address" autocomplete="off" autofocus class="form-control" name="address" placeholder="Address" type="text">
+            <input type="checkbox" id="newsletter" name="newsletter" value="newsletter">
+            <label for="newsletter"> Newsletter?</label>
+        </div>
+        <br>
+        <div>
+            <textarea id="subject" autocomplete="off" autofocus class="form-control" name="subject" placeholder=" Subject" type="text" cols="75" rows="1"></textarea>
+        </div>
+        <br>
+        <div>
+            <textarea id="body" autocomplete="off" autofocus class="form-control" name="body" placeholder=" Body" type="text" cols="100" rows="50"></textarea>
+        </div>
+        <br>
+        <div>
+            <button id="submit" type="submit" name="submit" value="submit">Send.</button>
+        </div>
+        <br>
+        <div>
+            <a href="/">Back</a>
+        </div>
+    </form>
 {% endblock %}

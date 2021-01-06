@@ -27,6 +27,13 @@ def addFunction():
         stock = request.form.get("stock")
         price = request.form.get("price")
         description = request.form.get("description")
+        show = request.form.get("show")
+
+        # Convert show value to string
+        if show == None:
+            show = "No"
+        if show == "show":
+            show = "Yes"
 
         # Ensure the plant name was submitted
         if not name:
@@ -67,9 +74,6 @@ def addFunction():
         if not re.search("^(?!;).+", description):
             flash("Invalid plant description")
             return redirect("/add")
-
-        # Check show bool status
-        show = "show" in request.form
 
 
         # Insert plant name, stock, description and show status into the table

@@ -21,9 +21,10 @@ def indexFunction():
 
         sqliteConnection = sqlite3.connect("database.db")
         cursor = sqliteConnection.cursor()
+        status = "Yes"
         
         # Query database
-        cursor.execute("SELECT * FROM plants;")
+        cursor.execute("SELECT * FROM plants WHERE show=:show;", {"show": status})
         record = cursor.fetchall()
 
         cursor.close()
