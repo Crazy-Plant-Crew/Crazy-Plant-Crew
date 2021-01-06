@@ -9,17 +9,38 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="author" content="Benoit Hage - hage.benoit@gmail.com" />
         <meta name="description" content="The Crazy Plant Crew website" />
+        <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 
         <!-- documentation at http://getbootstrap.com/docs/4.1/, alternative themes at https://bootswatch.com/ -->
         <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet"> -->
         <link href="/static/favicon.ico" rel="icon">
         <link href="/static/styles.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+        <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.css' rel='stylesheet' />
 
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+        <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.js'></script>
 
         <title>Crazy Plant Crew: {% block title %}{% endblock %}</title>
+
+        <style>
+            #map {
+                position: absolute;
+                height: 250px;
+                width: 250px;
+            }
+            .marker {
+                background-image: url('/static/mapbox-icon.png');
+                background-size: cover;
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                cursor: pointer;
+            }
+
+        </style>
 
     </head>
 
@@ -65,8 +86,66 @@
         </main>
 
         <footer>
-            © The Crazy Plant Crew 2020
+            <div>
+                <div>
+                    Follow us
+                </div>
+                <div>
+                    Instagram
+                    Facebook
+                    Youtube
+                </div>
+                <div>
+                    © The Crazy Plant Crew 2020
+                </div>
+            </div>
+            <div>               
+                <div id='map'></div>
+            </div>
         </footer>
     </body>
+
+    <script>
+
+        mapboxgl.accessToken = 'pk.eyJ1IjoiYmVub2l0aGFnZSIsImEiOiJja2psYTBnZTIxcHo0MnRxb21hcTAzZHNrIn0.BGBlD--dpeAVP8nG-bb1gw';
+        
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/outdoors-v11',
+            center: [13.363539, 52.486437],
+            zoom: 13
+        });
+
+        var geojson = {
+            type: 'FeatureCollection',
+            features: [{
+                type: 'Feature',
+                geometry: {
+                    type: 'Point',
+                    coordinates: [13.363539, 52.486437]
+                },
+                properties: {
+                title: 'Mapbox',
+                description: 'Crazy Plant Crew'
+                }
+            }]
+        };
+
+        // add markers to map
+        geojson.features.forEach(function(marker) {
+
+            // create a HTML element for each feature
+            var el = document.createElement('div');
+            el.className = 'marker';
+
+            // make a marker for each feature and add to the map
+            new mapboxgl.Marker(el)
+            .setLngLat(marker.geometry.coordinates)
+            .addTo(map);
+        });
+       
+        // code from the next step will go here!
+        
+        </script>
 
 </html>

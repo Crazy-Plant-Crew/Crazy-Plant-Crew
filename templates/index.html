@@ -13,5 +13,7 @@
 {% endblock %}
 
 {% block main %}
-    Index page
+    {% for plant in plants %}
+        <img src="{{ plant[4] }}" alt="plant picture of {{ plant[1] }}" height="500">
+    {% endfor %}
 {% endblock %}
