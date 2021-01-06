@@ -34,14 +34,13 @@
                 width: 250px;
             }
             .marker {
-                background-image: url('/static/mapbox-icon.png');
+                background-image: url('/static/marker.png');
                 background-size: cover;
                 width: 50px;
                 height: 50px;
                 border-radius: 50%;
                 cursor: pointer;
             }
-
         </style>
 
     </head>
@@ -56,12 +55,12 @@
                         <li><a href="/basket">Basket</a></li>
                         <li><a href="/article">Articles</a></li>
                         <li><a href="/about">About Us</a></li>
-                        <li><a href="/message">Message Us</a></li>
+                        <li><a href="/message">Messages</a></li>
                         <li><a href="/profile">{{ name }}</a></li>
                         {% block navigation %}{% endblock %}
                         <li><a href="/logout">Log Out</a></li>
                     </ul>
-                    <img src="{{ picture }}" alt="Profile picture of {{ name }}" height="500"> 
+                    <img src="{{ picture }}" alt="Profile picture of {{ name }}" height="100"> 
                 {% else %}
                     <ul>
                         <li><a href="/signup">Sign Up</a></li>
@@ -93,9 +92,8 @@
                     Follow us
                 </div>
                 <div>
-                    Instagram
-                    Facebook
-                    Youtube
+                    <a href="www.instagram.com/crazyplantcrew">Instagram</a>
+                    <a href="https://youtube.com/channel/UCcpvtx2PUXIBgLY_tIPX9Sw">Youtube</a>
                 </div>
                 <div>
                     © The Crazy Plant Crew 2020

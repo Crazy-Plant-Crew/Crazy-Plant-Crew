@@ -13,9 +13,17 @@
 {% endblock %}
 
 {% block main %}
-    Message page
-    <br>
-    <div>
-        <a href="/">Back</a>
-    </div>
+    <form action="/message" method="post">
+        <div>
+            <textarea id="body" autocomplete="off" autofocus class="form-control" name="body" placeholder=" Body" type="text" cols="100" rows="25"></textarea>
+        </div>
+        <br>
+        <div>
+            <button id="submit" type="submit" name="submit" value="submit">Send.</button>
+        </div>
+        <br>
+        <div>
+            <a href="/">Back</a>
+        </div>
+    </form>
 {% endblock %}
