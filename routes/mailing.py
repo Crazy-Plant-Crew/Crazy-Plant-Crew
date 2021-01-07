@@ -26,7 +26,7 @@ def mailingFunction():
                 sqliteConnection = sqlite3.connect("database.db")
                 cursor = sqliteConnection.cursor()
                 user_id = session["user_id"]
-                newsletter = "yes"
+                newsletter = "True"
                 
                 # Update database with newsletter
                 cursor.execute("UPDATE users SET newsletter=:newsletter WHERE id=:user_id;", {"newsletter": newsletter, "user_id": user_id})
@@ -57,7 +57,7 @@ def mailingFunction():
                 sqliteConnection = sqlite3.connect("database.db")
                 cursor = sqliteConnection.cursor()
                 user_id = session["user_id"]
-                newsletter = "no"
+                newsletter = "False"
                 
                 # Update database with newsletter
                 cursor.execute("UPDATE users SET newsletter=:newsletter WHERE id=:user_id;", {"newsletter": newsletter, "user_id": user_id})
