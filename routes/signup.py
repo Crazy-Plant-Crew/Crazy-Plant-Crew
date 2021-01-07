@@ -8,7 +8,7 @@ from flask import Blueprint, render_template, redirect, session, request, flash,
 from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
 from werkzeug.security import check_password_hash, generate_password_hash
 from werkzeug.utils import secure_filename
-from application import uploadPicture, is_human, sendPin
+from application import uploadPicture, is_human, sendPin, allowed_file
 from time import time
 
 
@@ -202,7 +202,7 @@ def signupFunction():
         # Save, upload and delete picture file
         file = request.files["picture"]
 
-        if file and file.filename:
+        if file and allowed_file(file.filename):
 
             filename = secure_filename(file.filename)
             file.save(os.path.join("./static", filename))

@@ -5,7 +5,7 @@ import re
 import os
 
 from flask import Blueprint, render_template, redirect, session, request, flash, get_flashed_messages
-from application import getUserName, getUserPicture, login_required, confirmed_required, getUserRole, role_required, uploadPicture
+from application import getUserName, getUserPicture, login_required, confirmed_required, getUserRole, role_required, uploadPicture, allowed_file
 from werkzeug.utils import secure_filename
 
 # Set Blueprints
@@ -106,7 +106,7 @@ def editFunction():
         # Save, upload and delete picture file
         file = request.files["picture"]
 
-        if file and file.filename:
+        if file and allowed_file(file.filename):
 
             filename = secure_filename(file.filename)
             file.save(os.path.join("./static", filename))

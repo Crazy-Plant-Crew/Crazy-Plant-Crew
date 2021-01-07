@@ -4,7 +4,7 @@ import sys
 import os
 
 from flask import Blueprint, render_template, redirect, session, request, flash
-from application import getUserName, uploadPicture, getUserPicture, login_required, confirmed_required, getUserRole
+from application import getUserName, uploadPicture, getUserPicture, login_required, confirmed_required, getUserRole, allowed_file
 from werkzeug.utils import secure_filename
 
 # Set Blueprints
@@ -30,7 +30,7 @@ def pictureFunction():
             return redirect("/picture")
 
         # Check if all conditions are satisfied
-        if file and file.filename:
+        if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join("./static", filename))
             upload = uploadPicture("./static/" + filename)

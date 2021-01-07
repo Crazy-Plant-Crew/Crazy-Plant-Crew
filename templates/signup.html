@@ -9,7 +9,7 @@
     <script src="https://www.google.com/recaptcha/api.js"></script>
     <form action="/signup" method="post" enctype="multipart/form-data">
         <div>
-            <p>Username (between 2 & 20 characters).</p>
+            <p>Username (2 - 20 characters).</p>
             <input id="username" autocomplete="off" autofocus class="form-control" name="username" placeholder="Username" type="text">
         </div>
         <br>
@@ -21,7 +21,7 @@
         <br>
 
         <div>
-            <p>Password (7 to 15 characters, 1 numeric, 1 special).</p>
+            <p>Password (7 to 15 characters, min 1 numeric, min 1 special).</p>
             <input id="password" name="password" placeholder="Password" type="password">
         </div>
         <div>
@@ -30,7 +30,7 @@
         <br>
 
         <div>
-            <p>Profile picture (32mb max).</p>
+            <p>Profile picture (32mb max - *.jpg, *.png, *.bmp, *.gif, *.tif, *.webp, *.heic, *.pdf).</p>
             <input type="file" id="picture" name="picture">
         </div>
         <br>
