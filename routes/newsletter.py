@@ -1,10 +1,12 @@
 import sqlite3
 import traceback
 import sys
+import html2text
 
 from flask import Blueprint, render_template, redirect, session, request, flash, get_flashed_messages
 from application import getUserName, getUserPicture, login_required, confirmed_required, getUserRole, role_required, sendMail
 from flask_mail import Message, Mail
+from flask_ckeditor import CKEditor
 
 # Set Blueprints
 newsletter = Blueprint('newsletter', __name__,)
@@ -21,9 +23,18 @@ def newsletterFunction():
 
     if request.method == "POST":
 
+        """
+        subject = "Message from " + getUserName()
+        html = request.form.get("ckeditor")
+        text = html2text.html2text(html)
+        body = "Username: " + getUserName() + "\nEmail: " + getUserEmail() + "\n\nMessage: " + text
+        email = os.environ["EMAIL_SEND"]
+        """
+
         # Get variables
         subject = request.form.get("subject")
-        body = request.form.get("body")
+        html = request.form.get("ckeditor")
+        text = html2text.html2text(html)
         address = request.form.get("address")
         newsletter = request.form.get("newsletter")
 
@@ -59,7 +70,7 @@ def newsletterFunction():
         if address != "" and newsletter == None:
 
             # Send email (subject, email, body)
-            sendMail(subject, address, body)
+            sendMail(subject, address, text)
             flash("Single email sent")
 
         elif address == "" and newsletter == newsletter:
@@ -67,7 +78,7 @@ def newsletterFunction():
             # Loop through email list and send 
             index  = 0
             while index < len(email):
-                sendMail(subject, email[index][0], body)
+                sendMail(subject, email[index][0], text)
                 index += 1
             flash("Group email sent")
 

@@ -2,10 +2,12 @@ import sqlite3
 import traceback
 import sys
 import os
+import html2text
 
 from flask import Blueprint, render_template, redirect, session, request, flash, get_flashed_messages
 from application import getUserName, getUserPicture, login_required, confirmed_required, getUserRole, getUserEmail, sendMail
 from flask_mail import Message, Mail
+from flask_ckeditor import CKEditor
 
 # Set Blueprints
 message = Blueprint('message', __name__,)
@@ -18,8 +20,10 @@ def messageFunction():
     if request.method == "POST":
 
         subject = "Message from " + getUserName()
-        body = "Username: " + getUserName() + "\nEmail: " + getUserEmail() + "\n\nMessage: " + request.form.get("body")
-        email = os.environ["EMAIL_SEND"] 
+        html = request.form.get("ckeditor")
+        text = html2text.html2text(html)
+        body = "Username: " + getUserName() + "\nEmail: " + getUserEmail() + "\n\nMessage: " + text
+        email = os.environ["EMAIL_SEND"]
 
         sendMail(subject, email, body)
 

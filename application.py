@@ -19,6 +19,7 @@ from functools import wraps
 from itsdangerous import URLSafeTimedSerializer
 from flask_mail import Message, Mail
 from time import time
+from flask_ckeditor import CKEditor
 
 # Configure application
 app = Flask(__name__)
@@ -30,6 +31,10 @@ app.config["TEMPLATES_AUTO_RELOAD"] = True
 
 # Set secret key for site
 app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY") 
+
+
+# Set CKEditor
+ckeditor = CKEditor(app)
 
 
 # Email configuration

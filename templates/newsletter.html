@@ -21,11 +21,12 @@
         </div>
         <br>
         <div>
-            <textarea id="subject" autocomplete="off" autofocus class="form-control" name="subject" placeholder=" Subject" type="text" cols="75" rows="1"></textarea>
+            <input id="subject" autocomplete="off" autofocus class="form-control" name="subject" placeholder=" Subject" type="text" size="50">
         </div>
         <br>
-        <div>
-            <textarea id="body" autocomplete="off" autofocus class="form-control" name="body" placeholder=" Body" type="text" cols="100" rows="50"></textarea>
+        <div></div>
+            {{ ckeditor.create() }}
+            {{ ckeditor.load(pkg_type="standard") }}
         </div>
         <br>
         <div>

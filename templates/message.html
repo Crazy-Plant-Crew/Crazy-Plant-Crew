@@ -15,7 +15,8 @@
 {% block main %}
     <form action="/message" method="post">
         <div>
-            <textarea id="body" autocomplete="off" autofocus class="form-control" name="body" placeholder=" Body" type="text" cols="100" rows="25"></textarea>
+            {{ ckeditor.create() }}
+            {{ ckeditor.load(pkg_type="standard") }}
         </div>
         <br>
         <div>
