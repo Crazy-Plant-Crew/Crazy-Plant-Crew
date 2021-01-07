@@ -19,13 +19,25 @@ def messageFunction():
 
     if request.method == "POST":
 
-        subject = "Message from " + getUserName()
+        # Get variables for email to send to Glenn
+        subject1 = "Message from " + getUserName()
         html = request.form.get("ckeditor")
         text = html2text.html2text(html)
-        body = "Username: " + getUserName() + "\nEmail: " + getUserEmail() + "\n\nMessage: " + text
-        email = os.environ["EMAIL_SEND"]
+        body1 = "Username: " + getUserName() + "\nEmail: " + getUserEmail() + "\n\nMessage: " + text
+        email1 = os.environ["EMAIL_SEND"]
 
-        sendMail(subject, email, body)
+        # Send email to Glenn
+        sendMail(subject1, email1, body1)
+
+
+        # Get variables for email to send to user
+        subject2 = "Copy of your message"
+        body2 = "You wrote: " + text
+        email2 = getUserEmail()
+
+        # Send copy to user
+        sendMail(subject2, email2, body2)
+
 
         flash("Message sent")
         return redirect("/")

@@ -2,6 +2,7 @@ import sqlite3
 import traceback
 import sys
 import html2text
+import os
 
 from flask import Blueprint, render_template, redirect, session, request, flash, get_flashed_messages
 from application import getUserName, getUserPicture, login_required, confirmed_required, getUserRole, role_required, sendMail
@@ -80,6 +81,9 @@ def newsletterFunction():
             while index < len(email):
                 sendMail(subject, email[index][0], text)
                 index += 1
+                
+            # Send a copy to Glenn
+            sendMail(subject, os.environ["EMAIL_SEND"], text)
             flash("Group email sent")
 
         else:
