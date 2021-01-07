@@ -70,7 +70,7 @@ def signupFunction():
             return redirect("/signup")
 
         # Ensure email fits server-side
-        if not re.search(r"^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$", email):
+        if not re.search(r"[^@]+@[^@]+\.[^@]+", email):
             flash("Invalid email")
             return redirect("/signup")
 
