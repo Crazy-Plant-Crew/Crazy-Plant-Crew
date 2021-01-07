@@ -8,7 +8,7 @@
         
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="author" content="Benoit Hage - hage.benoit@gmail.com" />
+        <meta name="author" content="Benoit Hage - hage.benoit@gmail.com, Rachel De La Torre - rachel.delatorre1@gmail.com" />
         <meta name="description" content="The Crazy Plant Crew website" />
         <meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' />
 
@@ -51,14 +51,18 @@
             <div>
                 {% if session.user_id %}
                     <ul>
-                        <li><a href="/">Plants</a></li>
-                        <li><a href="/basket">Basket</a></li>
-                        <li><a href="/article">News</a></li>
-                        <li><a href="/about">About</a></li>
-                        <li><a href="/message">Contact</a></li>
-                        <li><a href="/profile">{{ name }}</a></li>
-                        {% block navigation %}{% endblock %}
-                        <li><a href="/logout">Log Out</a></li>
+                        <div>
+                            <li><a href="/">Plants</a></li>
+                            <li><a href="/basket">Basket</a></li>
+                            <li><a href="/article">News</a></li>
+                            <li><a href="/about">About</a></li>
+                            <li><a href="/message">Contact</a></li>
+                        </div>
+                        <div>
+                            <li><a href="/profile">{{ name }}</a></li>
+                            {% block navigation %}{% endblock %}
+                            <li><a href="/logout">Log Out</a></li>
+                        </div>
                     </ul>
                     <img src="{{ picture }}" alt="Profile picture of {{ name }}" height="100"> 
                 {% else %}
