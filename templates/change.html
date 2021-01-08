@@ -15,11 +15,14 @@
 {% block main %}
     <form action="/change" method="post">
         <div>
-            <input id="title" autocomplete="off" autofocus class="form-control" name="title" placeholder=" Title" type="text" size="50">
+            <input type='hidden' name='news_id' value='{{ news[0]}}'>
+        </div>
+        <div>
+            <input id="title" autocomplete="off" autofocus class="form-control" name="title" placeholder=" Title" type="text" size="50" value="{{ news[1] }}">
         </div>
         <br>
         <div>
-            {{ ckeditor.create() }}
+            {{ ckeditor.create(value= news[2]) }}
             {{ ckeditor.load(pkg_type="standard") }}
         </div>
         <br>

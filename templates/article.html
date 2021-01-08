@@ -14,6 +14,16 @@
 
 {% block main %}
     Article page
+    <form action="/article" method="post">
+        <div>
+            {% for communication in communications %}
+                <div>
+                    {{ communication[1] }}
+                    {{ communication[2] | safe }}
+                </div>
+            {% endfor %}
+        </div>      
+    </form>
     <br>
     <div>
         <a href="/">Back</a>

@@ -13,22 +13,32 @@
 {% endblock %}
 
 {% block main %}
-    Communication page
     <form action="/communication" method="post">
         <table>
             <thead>
                 <tr>
-                    <th scope="col"></th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Body</th>
                 </tr>
             </thead>
 
             <tbody>
                 {% for communication in communications %}
                     <tr>
-                        <td></td>
+                        <td>{{ communication[1] }}</td>
+                        <td>{{ communication[2] | safe }}</td>
+                        <td><button name="erase" value="{{ communication[0] }}" type="submit">Delete</button></td>
+                        <td><button name="change" value="{{ communication[0] }}" type="submit">Edit</button></td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
+        <div>
+            <a href="/create">Add news</a>
+        </div>
     </form>
+    <br>
+    <div>
+        <a href="/">Back</a>
+    </div>
 {% endblock %}
