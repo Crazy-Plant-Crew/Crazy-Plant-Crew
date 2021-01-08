@@ -13,7 +13,7 @@
 {% endblock %}
 
 {% block main %}
-    <form action="/baskets" method="post">
+    <form action="/basket" method="post">
         <table>
             <thead>
                 <tr>
@@ -33,6 +33,7 @@
                         <td>{{ basket[3] }}</td>
                         <td>{{ basket[6] }}</td>
                         <td>SUB</td>
+                        <td><button name="delete" value="{{ basket[0] }}" type="submit">Delete</button></td>
                     </tr>
                 {% endfor %}
             </tbody>
