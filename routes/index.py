@@ -16,32 +16,213 @@ def indexFunction():
     # Force flash() to get the messages on the same page as the redirect.
     get_flashed_messages()
 
-    # Query database for plants
-    try:
 
-        sqliteConnection = sqlite3.connect("database.db")
-        cursor = sqliteConnection.cursor()
-        status = "Yes"
+    if request.method == "POST":
+
+
+        # Get variables
+        plant_id = request.form.get("plant_id")
+        user_id = session["user_id"]
+        quantity = request.form.get("quantity")
+
+
+        # Query database for plants name, picture, price
+        try:
+
+            sqliteConnection = sqlite3.connect("database.db")
+            cursor = sqliteConnection.cursor()
+            
+            # Query database
+            cursor.execute("SELECT * FROM plants WHERE id=:id;", {"id": plant_id})
+            plants = cursor.fetchall()
+            name = plants[0][1]
+            picture = plants[0][4]
+            price = plants[0][3]
+
+            cursor.close()
+
+        except sqlite3.Error as error:
         
-        # Query database
-        cursor.execute("SELECT * FROM plants WHERE show=:show;", {"show": status})
-        record = cursor.fetchall()
+            print("Failed to read data from sqlite table", error)
+            print("Exception class is: ", error.__class__)
+            print("Exception is", error.args)
 
-        cursor.close()
+            print('Printing detailed SQLite exception traceback: ')
+            exc_type, exc_value, exc_tb = sys.exc_info()
+            print(traceback.format_exception(exc_type, exc_value, exc_tb))
 
-    except sqlite3.Error as error:
-    
-        print("Failed to read data from sqlite table", error)
-        print("Exception class is: ", error.__class__)
-        print("Exception is", error.args)
+        finally:
 
-        print('Printing detailed SQLite exception traceback: ')
-        exc_type, exc_value, exc_tb = sys.exc_info()
-        print(traceback.format_exception(exc_type, exc_value, exc_tb))
+            if (sqliteConnection):
+                sqliteConnection.close()
+       
 
-    finally:
+        # Get current plant stock
+        try:
 
-        if (sqliteConnection):
-            sqliteConnection.close()
+            sqliteConnection = sqlite3.connect("database.db")
+            cursor = sqliteConnection.cursor()
+            
+            # Query database
+            cursor.execute("SELECT stock FROM plants WHERE id=:id;", {"id": plant_id})
+            existingStock = cursor.fetchall()
 
-    return render_template("index.html", name=getUserName(), picture=getUserPicture(), role=getUserRole(), plants=record)
+            cursor.close()
+
+        except sqlite3.Error as error:
+        
+            print("Failed to read data from sqlite table", error)
+            print("Exception class is: ", error.__class__)
+            print("Exception is", error.args)
+
+            print('Printing detailed SQLite exception traceback: ')
+            exc_type, exc_value, exc_tb = sys.exc_info()
+            print(traceback.format_exception(exc_type, exc_value, exc_tb))
+
+        finally:
+
+            if (sqliteConnection):
+                sqliteConnection.close()
+
+
+        # Avoid going to negative stocks
+        if len(existingStock) != 0:
+            if int(existingStock[0][0]) - int(quantity) < 0:
+
+                flash("Not enough in stock")
+                return redirect("/")
+
+        
+        # Check for existing stock in the basket
+        try:
+
+            sqliteConnection = sqlite3.connect("database.db")
+            cursor = sqliteConnection.cursor()
+            
+            # Query database
+            cursor.execute("SELECT quantity FROM baskets WHERE plant_id=:plant_id AND user_id=:user_id;", {"plant_id": plant_id, "user_id": user_id})
+            existingQuantity = cursor.fetchall()
+
+            cursor.close()
+
+        except sqlite3.Error as error:
+        
+            print("Failed to read data from sqlite table", error)
+            print("Exception class is: ", error.__class__)
+            print("Exception is", error.args)
+
+            print('Printing detailed SQLite exception traceback: ')
+            exc_type, exc_value, exc_tb = sys.exc_info()
+            print(traceback.format_exception(exc_type, exc_value, exc_tb))
+
+        finally:
+
+            if (sqliteConnection):
+                sqliteConnection.close()
+
+
+        # If there is already some plant in the basket
+        if len(existingQuantity) > 0:
+
+
+            # Sum the quantities
+            newQuantity = int(existingQuantity[0][0]) + int(quantity)
+
+
+            # Update table with new quantity
+            try:
+
+                sqliteConnection = sqlite3.connect("database.db")
+                cursor = sqliteConnection.cursor()
+                user_id = session["user_id"]
+                
+                # Update database with quantity
+                cursor.execute("UPDATE baskets SET quantity=:quantity WHERE plant_id=:plant_id AND user_id=:user_id", {"plant_id": plant_id, "user_id": user_id, "quantity": newQuantity})
+                sqliteConnection.commit()
+
+                cursor.close()
+
+            except sqlite3.Error as error:
+            
+                print("Failed to read data from sqlite table", error)
+                print("Exception class is: ", error.__class__)
+                print("Exception is", error.args)
+
+                print('Printing detailed SQLite exception traceback: ')
+                exc_type, exc_value, exc_tb = sys.exc_info()
+                print(traceback.format_exception(exc_type, exc_value, exc_tb))
+
+            finally:
+
+                if (sqliteConnection):
+                    sqliteConnection.close()
+
+
+        # First time the user has put this plant in the basket
+        else:
+
+            try:
+
+                sqliteConnection = sqlite3.connect("database.db")
+                cursor = sqliteConnection.cursor()
+                user_id = session["user_id"]
+                
+                # Update database with quantity
+                cursor.execute("INSERT INTO baskets(plant_id, user_id, quantity, name, picture, price) VALUES (:plant_id, :user_id, :quantity, :name, :picture, :price)", {"plant_id": plant_id, "user_id": user_id, "quantity": quantity, "name": name, "picture": picture, "price": price})
+                sqliteConnection.commit()
+
+                cursor.close()
+
+            except sqlite3.Error as error:
+            
+                print("Failed to read data from sqlite table", error)
+                print("Exception class is: ", error.__class__)
+                print("Exception is", error.args)
+
+                print('Printing detailed SQLite exception traceback: ')
+                exc_type, exc_value, exc_tb = sys.exc_info()
+                print(traceback.format_exception(exc_type, exc_value, exc_tb))
+
+            finally:
+
+                if (sqliteConnection):
+                    sqliteConnection.close()
+
+
+        flash("Added to basket")
+        return redirect("/")
+
+
+    else:
+
+        # Query database for plants to display them
+        try:
+
+            sqliteConnection = sqlite3.connect("database.db")
+            cursor = sqliteConnection.cursor()
+
+            # Set correct status for query
+            status = "Yes"
+            
+            # Query database
+            cursor.execute("SELECT * FROM plants WHERE show=:show;", {"show": status})
+            plants = cursor.fetchall()
+
+            cursor.close()
+
+        except sqlite3.Error as error:
+        
+            print("Failed to read data from sqlite table", error)
+            print("Exception class is: ", error.__class__)
+            print("Exception is", error.args)
+
+            print('Printing detailed SQLite exception traceback: ')
+            exc_type, exc_value, exc_tb = sys.exc_info()
+            print(traceback.format_exception(exc_type, exc_value, exc_tb))
+
+        finally:
+
+            if (sqliteConnection):
+                sqliteConnection.close()
+
+        return render_template("index.html", name=getUserName(), picture=getUserPicture(), role=getUserRole(), plants=plants)

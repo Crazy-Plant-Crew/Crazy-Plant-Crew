@@ -13,7 +13,31 @@
 {% endblock %}
 
 {% block main %}
-    Basket page
+    <form action="/baskets" method="post">
+        <table>
+            <thead>
+                <tr>
+                    <th scope="col">Thumbnail</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Subtotal</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for basket in baskets %}
+                    <tr>
+                        <td><img src="{{ basket[5] }}" alt="plant picture of {{ basket[4] }}" height="50"></td>
+                        <td>{{ basket[4] }}</td>
+                        <td>{{ basket[3] }}</td>
+                        <td>{{ basket[6] }}</td>
+                        <td>SUB</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </form>
     <br>
     <div>
         <a href="/">Back</a>

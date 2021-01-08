@@ -37,17 +37,17 @@
                 <input type="file" id="picture" name="picture">
             </div>
             <br>
-            {% if plants[6] == "Yes" %}
-            <div>
-                <input type="checkbox" id="show" name="show" value="show" checked>
-                <label for="show"> Show?</label>
-            </div>
-            {% else %}
-            <div>
-                <input type="checkbox" id="show" name="show" value="show">
-                <label for="show"> Show?</label>
-            </div>
-            {% endif %}
+                {% if plants[6] == "Yes" %}
+                <div>
+                    <input type="checkbox" id="show" name="show" value="show" checked>
+                    <label for="show"> Show?</label>
+                </div>
+                {% else %}
+                <div>
+                    <input type="checkbox" id="show" name="show" value="show">
+                    <label for="show"> Show?</label>
+                </div>
+                {% endif %}
             <br>
             <div>
                 <button id="submit" type="submit" name="submit" value="submit">Save.</button>
