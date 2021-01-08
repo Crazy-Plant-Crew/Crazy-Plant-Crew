@@ -134,10 +134,12 @@ def indexFunction():
 
                 sqliteConnection = sqlite3.connect("database.db")
                 cursor = sqliteConnection.cursor()
+
                 user_id = session["user_id"]
+                subtotal = int(newQuantity) * int(price)
                 
                 # Update database with quantity
-                cursor.execute("UPDATE baskets SET quantity=:quantity WHERE plant_id=:plant_id AND user_id=:user_id", {"plant_id": plant_id, "user_id": user_id, "quantity": newQuantity})
+                cursor.execute("UPDATE baskets SET quantity=:quantity, subtotal=:subtotal WHERE plant_id=:plant_id AND user_id=:user_id", {"plant_id": plant_id, "user_id": user_id, "quantity": newQuantity, "subtotal": int(subtotal)})
                 sqliteConnection.commit()
 
                 cursor.close()
@@ -166,9 +168,10 @@ def indexFunction():
                 sqliteConnection = sqlite3.connect("database.db")
                 cursor = sqliteConnection.cursor()
                 user_id = session["user_id"]
+                subtotal = int(quantity) * int(price)
                 
                 # Update database with quantity
-                cursor.execute("INSERT INTO baskets(plant_id, user_id, quantity, name, picture, price) VALUES (:plant_id, :user_id, :quantity, :name, :picture, :price)", {"plant_id": plant_id, "user_id": user_id, "quantity": quantity, "name": name, "picture": picture, "price": price})
+                cursor.execute("INSERT INTO baskets(plant_id, user_id, quantity, name, picture, price, subtotal) VALUES (:plant_id, :user_id, :quantity, :name, :picture, :price, :subtotal)", {"plant_id": plant_id, "user_id": user_id, "quantity": quantity, "name": name, "picture": picture, "price": price, "subtotal": int(subtotal)})
                 sqliteConnection.commit()
 
                 cursor.close()

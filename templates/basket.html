@@ -32,10 +32,18 @@
                         <td>{{ basket[4] }}</td>
                         <td>{{ basket[3] }}</td>
                         <td>{{ basket[6] }}</td>
-                        <td>SUB</td>
+                        <td>{{ basket[7] }}</td>
                         <td><button name="delete" value="{{ basket[0] }}" type="submit">Delete</button></td>
                     </tr>
                 {% endfor %}
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>Total: {{ total }},00€</td>
+                    <td></td>
+                </tr>
             </tbody>
         </table>
     </form>

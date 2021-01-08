@@ -91,5 +91,12 @@ def basketFunction():
 
 
     else:
+
+        index = 0
+        total = 0
+        while index < len(baskets):
+
+            total += baskets[index][7]
+            index += 1
     
-        return render_template("basket.html", name=getUserName(), picture=getUserPicture(), role=getUserRole(), baskets=baskets)
+        return render_template("basket.html", name=getUserName(), picture=getUserPicture(), role=getUserRole(), baskets=baskets, total=int(total))
