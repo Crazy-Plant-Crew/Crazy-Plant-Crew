@@ -1,14 +1,14 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Newsletter
+    Send
 {% endblock %}
 
 {% block navigation %}
     {% if role == "admin" %}
-        <li><a href="/administration">Administration</a></li>
-        <li><a href="/communication">Add News</a></li>
-        <li><a href="/newsletter">Newsletter</a></li>
+        <li><a href="/administration">Manage</a></li>
+        <li><a href="/communication">Inform</a></li>
+        <li><a href="/newsletter">Compose</a></li>
     {% endif %}
 {% endblock %}
 
@@ -17,14 +17,14 @@
         <div>
             <input id="address" autocomplete="off" autofocus class="form-control" name="address" placeholder="Address" type="text">
             <input type="checkbox" id="newsletter" name="newsletter" value="newsletter">
-            <label for="newsletter"> Newsletter?</label>
+            <label for="newsletter"> Send?</label>
         </div>
         <br>
         <div>
             <input id="subject" autocomplete="off" autofocus class="form-control" name="subject" placeholder=" Subject" type="text" size="50">
         </div>
         <br>
-        <div></div>
+        <div>
             {{ ckeditor.create() }}
             {{ ckeditor.load(pkg_type="standard") }}
         </div>

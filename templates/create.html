@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Message
+    Create
 {% endblock %}
 
 {% block navigation %}
@@ -13,8 +13,12 @@
 {% endblock %}
 
 {% block main %}
-    <form action="/message" method="post">
+    <form action="/create" method="post">
         <div>
+            <input id="title" autocomplete="off" autofocus class="form-control" name="title" placeholder=" Title" type="text" size="50">
+        </div>
+        <br>
+        <div></div>
             {{ ckeditor.create() }}
             {{ ckeditor.load(pkg_type="standard") }}
         </div>
@@ -27,4 +31,9 @@
             <a href="/">Back</a>
         </div>
     </form>
+    <br>
+    <div>
+        <a href="/communication">Back</a>
+    </div>
+    <br>
 {% endblock %}

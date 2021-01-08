@@ -1,14 +1,14 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Administration
+    Manage
 {% endblock %}
 
 {% block navigation %}
     {% if role == "admin" %}
-        <li><a href="/administration">Administration</a></li>
-        <li><a href="/communication">Add News</a></li>
-        <li><a href="/newsletter">Newsletter</a></li>
+        <li><a href="/administration">Manage</a></li>
+        <li><a href="/communication">Inform</a></li>
+        <li><a href="/newsletter">Compose</a></li>
     {% endif %}
 {% endblock %}
 
@@ -20,7 +20,7 @@
                     <th scope="col">Name</th>
                     <th scope="col">Stock</th>
                     <th scope="col">Price</th>
-                    <th scope="col">Thumbnail</th>
+                    <th scope="col">Picture</th>
                     <th scope="col">Description</th>
                     <th scope="col">Show</th>
                 </tr>
