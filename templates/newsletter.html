@@ -26,7 +26,7 @@
         <br>
         <div>
             {{ ckeditor.create() }}
-            {{ ckeditor.load(pkg_type="standard") }}
+            {{ ckeditor.load(custom_url=url_for('static', filename='ckeditor/ckeditor.js')) }}
         </div>
         <br>
         <div>

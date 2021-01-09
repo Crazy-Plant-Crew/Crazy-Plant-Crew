@@ -30,7 +30,8 @@
             </div>
             <br>
             <div>
-                <textarea id="description" autocomplete="off" autofocus class="form-control" name="description" placeholder=" Description" type="text" cols="100" rows="10">{{ plants[5] }}</textarea>
+                {{ ckeditor.create(value= plants[5]) }}
+                {{ ckeditor.load(custom_url=url_for('static', filename='ckeditor/ckeditor.js')) }}
             </div>
             <br>
             <div>

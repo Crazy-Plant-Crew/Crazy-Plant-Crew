@@ -27,7 +27,7 @@ def editFunction():
         name = request.form.get("name")
         stock = request.form.get("stock")
         price = request.form.get("price")
-        description = request.form.get("description")
+        description = request.form.get("ckeditor")
         show = request.form.get("show")
 
         # Convert show value to string
