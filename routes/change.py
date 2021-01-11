@@ -1,6 +1,7 @@
 import sqlite3
 import traceback
 import sys
+import html2text
 
 from flask import Blueprint, render_template, redirect, session, request, flash, get_flashed_messages
 from application import getUserName, getUserPicture, login_required, confirmed_required, getUserRole, role_required
@@ -22,7 +23,8 @@ def changeFunction():
         # Get variable
         news_id = request.form.get("news_id")
         title = request.form.get("title")
-        body = request.form.get("ckeditor")
+        html = request.form.get("ckeditor")
+        body = html2text.html2text(html)
 
         # Update plant name, stock, price, description and show status into the table
         try:

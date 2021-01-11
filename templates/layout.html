@@ -50,9 +50,11 @@
                         </div>
                     </ul> 
                 {% else %}
-                    <ul>
-                        <li class="NavBarLi"><a href="/signup">Sign Up</a></li>
-                        <li class="NavBarLi"><a href="/signin">Log In</a></li>
+                    <ul class="NavBarRow">
+                        <div class="NavBarLeft">
+                            <li class="NavBarLi"><a href="/signup">Sign Up</a></li>
+                            <li class="NavBarLi"><a href="/signin">Log In</a></li>
+                        </div>
                     </ul>
                 {% endif %}
             </div>
@@ -60,8 +62,8 @@
 
         {% with messages = get_flashed_messages() %}
             {% if messages %}
-            <header>
-                <ul class=flashes>
+            <header class="FlashMain">
+                <ul class="FlashList">
                     {% for message in messages %}
                         <li>{{ message }}</li>
                     {% endfor %}
@@ -78,7 +80,7 @@
             <div class="FooterRow">
                 <div class="FooterLeft">
                     <div>
-                        Follow us
+                        Follow us: 
                     </div>
                     <div>
                         <a href="https://www.instagram.com/crazyplantcrew">Instagram</a><br>

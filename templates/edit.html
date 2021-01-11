@@ -30,8 +30,10 @@
             </div>
             <br>
             <div>
-                {{ ckeditor.create(value= plants[5]) }}
-                {{ ckeditor.load(custom_url=url_for('static', filename='ckeditor/ckeditor.js')) }}
+                {% with description = plants[5] | safe %}
+                    {{ ckeditor.create(value=description) }}
+                    {{ ckeditor.load(custom_url=url_for('static', filename='ckeditor/ckeditor.js')) }}
+                {% endwith %}
             </div>
             <br>
             <div>

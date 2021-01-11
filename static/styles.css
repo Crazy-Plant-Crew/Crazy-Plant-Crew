@@ -37,6 +37,7 @@ main {
 	list-style: none;
 
 	background-color: #E8E8E8;
+	height: 100px;
 }
 
 .NavBarMain a {
@@ -114,6 +115,7 @@ main {
 	justify-content: space-around;
 	align-items: center;
 	align-content: center;
+	width: 1000px;
 }
 
 .FooterLeft {
@@ -153,6 +155,8 @@ main {
 	justify-content: space-around;
 	align-items: center;
 	align-content: center;
+
+	height: 900px;
 }
 
 .IndexRow {
@@ -210,3 +214,34 @@ main {
 	text-align: left;
 	width: 75%;
 }
+
+
+/*  MAIN */
+
+
+main {
+	height: 900px;
+}
+
+
+/*  FLASH */
+
+
+
+.FlashMain {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: center;
+	align-content: center;
+	
+	background-color: #ffd8d8;
+	height: 75px;
+}
+
+.FlashList {
+	list-style: none;
+}
+
+

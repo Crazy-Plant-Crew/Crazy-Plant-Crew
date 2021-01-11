@@ -3,6 +3,7 @@ import traceback
 import sys
 import re
 import os
+import html2text
 
 from flask import Blueprint, render_template, redirect, session, request, flash, get_flashed_messages
 from application import getUserName, getUserPicture, login_required, confirmed_required, getUserRole, role_required, uploadPicture, allowed_file
@@ -27,7 +28,8 @@ def editFunction():
         name = request.form.get("name")
         stock = request.form.get("stock")
         price = request.form.get("price")
-        description = request.form.get("ckeditor")
+        html = request.form.get("ckeditor")
+        description = html2text.html2text(html)
         show = request.form.get("show")
 
         # Convert show value to string
