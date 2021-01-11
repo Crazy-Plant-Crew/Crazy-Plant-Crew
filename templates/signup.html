@@ -4,6 +4,14 @@
     Sign Up
 {% endblock %}
 
+{% block navigation %}
+    {% if role == "admin" %}
+        <li class="NavBarLi"><a href="/administration">Manage</a></li>
+        <li class="NavBarLi"><a href="/communication">Inform</a></li>
+        <li class="NavBarLi"><a href="/newsletter">Compose</a></li>
+    {% endif %}
+{% endblock %}
+
 {% block main %}
     <p>Register or <a href='/signin'>login</a></p><br>
     <script src="https://www.google.com/recaptcha/api.js"></script>

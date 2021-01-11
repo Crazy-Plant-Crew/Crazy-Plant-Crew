@@ -24,14 +24,6 @@ def newsletterFunction():
 
     if request.method == "POST":
 
-        """
-        subject = "Message from " + getUserName()
-        html = request.form.get("ckeditor")
-        text = html2text.html2text(html)
-        body = "Username: " + getUserName() + "\nEmail: " + getUserEmail() + "\n\nMessage: " + text
-        email = os.environ["EMAIL_SEND"]
-        """
-
         # Get variables
         subject = request.form.get("subject")
         html = request.form.get("ckeditor")

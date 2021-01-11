@@ -6,9 +6,9 @@
 
 {% block navigation %}
     {% if role == "admin" %}
-        <li><a href="/administration">Manage</a></li>
-        <li><a href="/communication">Inform</a></li>
-        <li><a href="/newsletter">Compose</a></li>
+        <li class="NavBarLi"><a href="/administration">Manage</a></li>
+        <li class="NavBarLi"><a href="/communication">Inform</a></li>
+        <li class="NavBarLi"><a href="/newsletter">Compose</a></li>
     {% endif %}
 {% endblock %}
 
@@ -21,7 +21,6 @@
                     <th scope="col">Stock</th>
                     <th scope="col">Price</th>
                     <th scope="col">Picture</th>
-                    <th scope="col">Description</th>
                     <th scope="col">Show</th>
                 </tr>
             </thead>
@@ -33,7 +32,6 @@
                         <td>{{ plant[2] | safe }}</td>
                         <td>{{ plant[3] | safe }}</td>
                         <td><img src="{{ plant[4] | safe }}" alt="plant picture of {{ plant[1] }}" height="50"></td>
-                        <td>{{ plant[5] | safe }}</td>
                         <td>{{ plant[6] | safe }}</td>
                         <td><button name="delete" value="{{ plant[0] }}" type="submit">Delete</button></td>
                         <td><button name="edit" value="{{ plant[0] }}" type="submit">Edit</button></td>

@@ -4,6 +4,14 @@
     Unconfirmed
 {% endblock %}
 
+{% block navigation %}
+    {% if role == "admin" %}
+        <li class="NavBarLi"><a href="/administration">Manage</a></li>
+        <li class="NavBarLi"><a href="/communication">Inform</a></li>
+        <li class="NavBarLi"><a href="/newsletter">Compose</a></li>
+    {% endif %}
+{% endblock %}
+
 {% block main %}
     <form action="/unconfirmed" method="post">
         <div>
