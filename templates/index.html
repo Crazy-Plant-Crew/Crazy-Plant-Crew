@@ -13,22 +13,91 @@
 {% endblock %}
 
 {% block main %}
-    {% for plant in plants %}
-    <form action="/" method="post">
-        <div class="IndexMain">
-            <div class="IndexLeft">
-                <img name="{{ plant[4] }}" src="{{ plant[4] }}" alt="plant picture of {{ plant[1] }}" width="500px">
-            </div>
-            <div class="IndexRight">
-                <div name="{{ plant[1] }}">Name: {{ plant[1] }}</div>
-                <div name="{{ plant[2] }}">Stock: {{ plant[2] }}</div>
-                <div name="{{ plant[3] }}">Price: {{ plant[3] }},00€</div>
-                <div name="{{ plant[5] }}">Description: {{ plant[5] }}</div>
-                <input type='hidden' name='plant_id' value='{{ plant[0]}}'>
-                <input type="number" name="quantity" value="1" min="1" max="{{ plant[2] }}">
-                <button name="submit" value="submit" type="submit">Add</button>
-            </div>
+
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            {% for plant in plants[1:] %}
+            <li data-target="#carouselExampleIndicators" data-slide-to="{{loop.index}}"></li>
+            {% endfor %}
+        </ol>
+
+        <div class="carousel-inner">
+
+            {% for plant in plants[0:1] %}
+                
+                <div class="carousel-item active">
+                    <form action="/" method="post">
+                        <div class="IndexMain">
+                            <div class="IndexRow">
+                                <div class="IndexLeft">
+                                    <img name="{{ plant[4] }}" src="{{ plant[4] }}" alt="plant picture of {{ plant[1] }}" width="500px">
+                                </div>
+                                <div class="IndexRight">
+                                    <div class="IndexInfo1">
+                                        <div name="{{ plant[1] }}">Name: {{ plant[1] }}</div>
+                                        <div name="{{ plant[2] }}">Stock: {{ plant[2] }}</div>
+                                        <div name="{{ plant[3] }}">Price: {{ plant[3] }},00€</div>
+                                    </div>
+                                    <div class="IndexInfo2">
+                                        <input type='hidden' name='plant_id' value='{{ plant[0]}}'>
+                                        <input type="number" name="quantity" value="1" min="1" max="{{ plant[2] }}">
+                                        <button name="submit" value="submit" type="submit">Add</button>
+                                    </div>
+                                    <div class="IndexInfo3">
+                                        <div name="{{ plant[5] }}">Description: {{ plant[5] }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+
+            {% endfor %}
+            {% for plant in plants[1:] %}
+
+                <div class="carousel-item">
+                    <form action="/" method="post">
+                        <div class="IndexMain">
+                            <div class="IndexRow">
+                                <div class="IndexLeft">
+                                    <img name="{{ plant[4] }}" src="{{ plant[4] }}" alt="plant picture of {{ plant[1] }}" width="500px">
+                                </div>
+                                <div class="IndexRight">
+                                    <div class="IndexInfo1">
+                                        <div name="{{ plant[1] }}">Name: {{ plant[1] }}</div>
+                                        <div name="{{ plant[2] }}">Stock: {{ plant[2] }}</div>
+                                        <div name="{{ plant[3] }}">Price: {{ plant[3] }},00€</div>
+                                    </div>
+                                    <div class="IndexInfo2">
+                                        <input type='hidden' name='plant_id' value='{{ plant[0]}}'>
+                                        <input type="number" name="quantity" value="1" min="1" max="{{ plant[2] }}">
+                                        <button name="submit" value="submit" type="submit">Add</button>
+                                    </div>
+                                    <div class="IndexInfo3">
+                                        <div name="{{ plant[5] }}">Description: {{ plant[5] }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            {% endfor %}
+            
         </div>
-    </form>
-    {% endfor %}
+
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+
+    </div>
+
 {% endblock %}

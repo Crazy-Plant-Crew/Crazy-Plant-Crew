@@ -21,8 +21,6 @@ main {
 	align-content: center;
 
 	text-align: center;
-	margin: auto;
-	width: 50%;
 }
 
 
@@ -116,7 +114,6 @@ main {
 	justify-content: space-around;
 	align-items: center;
 	align-content: center;
-	width: 75%;
 }
 
 .FooterLeft {
@@ -151,11 +148,20 @@ main {
 
 .IndexMain {
 	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: space-around;
+	align-items: center;
+	align-content: center;
+}
+
+.IndexRow {
+	display: flex;
 	flex-direction: row;
 	flex-wrap: nowrap;
 	justify-content: space-around;
 	align-items: center;
-	align-content: center;	
+	align-content: center;
 }
 
 .IndexLeft {
@@ -165,6 +171,7 @@ main {
 	justify-content: space-around;
 	align-items: center;
 	align-content: center;
+
 }
 
 .IndexRight {
@@ -172,9 +179,34 @@ main {
 	flex-direction: column;
 	flex-wrap: nowrap;
 	justify-content: space-around;
+	align-items: baseline;
+	align-content: center;
+
+	width: 500px;
+	height: 750px;
+	padding-left: 50px;
+	background-color:  	#F5F5F5;
+}
+
+.IndexInfo1 {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: space-around;
+	align-items: flex-start;
+	align-content: center;
+}
+
+.IndexInfo2 {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
 	align-items: center;
 	align-content: center;	
 }
 
-
-
+.IndexInfo3 {
+	text-align: left;
+	width: 75%;
+}
