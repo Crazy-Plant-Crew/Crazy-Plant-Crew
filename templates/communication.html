@@ -18,7 +18,6 @@
             <thead>
                 <tr>
                     <th scope="col">Title</th>
-                    <th scope="col">Body</th>
                 </tr>
             </thead>
 
@@ -26,7 +25,6 @@
                 {% for communication in communications %}
                     <tr>
                         <td>{{ communication[1] | safe }}</td>
-                        <td>{{ communication[2] | safe }}</td>
                         <td><button name="erase" value="{{ communication[0] }}" type="submit">Delete</button></td>
                         <td><button name="change" value="{{ communication[0] }}" type="submit">Edit</button></td>
                     </tr>

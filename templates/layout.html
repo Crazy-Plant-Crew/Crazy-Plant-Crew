@@ -37,16 +37,45 @@
                 {% if session.user_id %}
                     <ul class="NavBarRow">
                         <div class="NavBarLeft">
-                            <li class="NavBarLi"><a href="/">Plants</a></li>
-                            <li class="NavBarLi"><a href="/basket">Basket</a></li>
-                            <li class="NavBarLi"><a href="/article">News</a></li>
-                            <li class="NavBarLi"><a href="/about">About</a></li>
-                            <li class="NavBarLi"><a href="/message">Contact</a></li>
+
+                            <div class="click-to-top">
+                                <li class="NavBarLi"><a href="/">Plants</a></li>
+                                    <span>Plants</span>
+                            </div>
+
+                            <div class="click-to-top">
+                                <li class="NavBarLi"><a href="/basket"><img src="/static/basket.svg" alt="basket" height="50"></a></li>
+                                    <span>Basket</span>
+                            </div>
+
+                            <div class="click-to-top">
+                                <li class="NavBarLi"><a href="/article"><img src="/static/newsletter.svg" alt="newsletter" height="50"></a></li>
+                                    <span>News</span>
+                            </div>
+
+                            <div class="click-to-top">
+                                <li class="NavBarLi"><a href="/about">About</a></li>
+                                    <span>About</span>
+                            </div>
+
+                            <div class="click-to-top">
+                                <li class="NavBarLi"><a href="/message"><img src="/static/contact.svg" alt="contact" height="50"></a></li>
+                                    <span>Contact</span>
+                            </div>
+
                         </div>
                         <div class="NavBarRight">
                             {% block navigation %}{% endblock %}
-                            <li class="NavBarLi"><a href="/profile"><img src="{{ picture }}" alt="Profile picture of {{ name }}" height="50"></li></a>
-                            <li class="NavBarLi"><a href="/logout">Log Out</a></li>
+                            <div class="click-to-top">
+                                <li class="NavBarLi"><a href="/profile"><img src="{{ picture }}" alt="Profile picture of {{ name }}" height="50"></li></a>
+                                    <span>{{ name }}</span>
+                            </div>
+
+                            <div class="click-to-top">
+                                <li class="NavBarLi"><a href="/logout"><img src="/static/logout.svg" alt="logout" height="50"></a></li>
+                                    <span>Log out</span>
+                            </div>
+
                         </div>
                     </ul> 
                 {% else %}
@@ -83,8 +112,8 @@
                         Follow us: 
                     </div>
                     <div>
-                        <a href="https://www.instagram.com/crazyplantcrew">Instagram</a><br>
-                        <a href="https://youtube.com/channel/UCcpvtx2PUXIBgLY_tIPX9Sw">Youtube</a>
+                        <a href="https://www.instagram.com/crazyplantcrew"><img src="/static/insta.svg" alt="instagram" height="50"></a><br>
+                        <a href="https://youtube.com/channel/UCcpvtx2PUXIBgLY_tIPX9Sw"><img src="/static/youtube.svg" alt="youtube" height="50"></a>
                     </div>
                 </div>
                 <div>               
