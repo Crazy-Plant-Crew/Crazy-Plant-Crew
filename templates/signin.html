@@ -14,14 +14,16 @@
 
 {% block main %}
     <form action="/signin" method="post">
-        <div>
-            <input autocomplete="off" autofocus class="form-control" name="username" placeholder="Username" type="text">
+        <div class="SigninMain">
+            <div>
+                <input autocomplete="off" autofocus class="form-control" name="username" placeholder="Username" type="text">
+            </div>
+            <div>
+                <input name="password" placeholder="Password" type="password">
+            </div>
+            <button type="submit">Log In</button>
+            <br>
+            <a href="/forget">forgot password?</a>
         </div>
-        <div>
-            <input name="password" placeholder="Password" type="password">
-        </div>
-        <button type="submit">Log In</button>
-        <br>
-        <a href="/forget">forgot password?</a>
     </form>
 {% endblock %}
