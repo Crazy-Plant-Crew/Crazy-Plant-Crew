@@ -14,13 +14,16 @@
 
 {% block main %}
     <form action="/message" method="post">
-        <div>
-            {{ ckeditor.create() }}
-            {{ ckeditor.load(custom_url=url_for('static', filename='ckeditor/ckeditor.js')) }}
-        </div>
-        <br>
-        <div>
-            <button id="submit" type="submit" name="submit" value="submit">Send.</button>
+        <div class="MessageMain">
+            <p>Send us a message</p>
+            <div>
+                {{ ckeditor.create() }}
+                {{ ckeditor.load(custom_url=url_for('static', filename='ckeditor/ckeditor.js')) }}
+            </div>
+            <br>
+            <div>
+                <button id="submit" type="submit" name="submit" value="submit">Send.</button>
+            </div>
         </div>
         <br>
         <div>

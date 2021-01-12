@@ -13,14 +13,14 @@
 {% endblock %}
 
 {% block main %}
-    Article page
     <form action="/article" method="post">
         <div>
             {% for communication in communications %}
-                <div>
+                <div class="TableBorder">
                     {{ communication[1] }}
                     {{ communication[2] | safe }}
                 </div>
+                <br>
             {% endfor %}
         </div>      
     </form>

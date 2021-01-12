@@ -14,23 +14,28 @@
 
 {% block main %}
     <form action="/newsletter" method="post" enctype="multipart/form-data">
-        <div>
-            <input id="address" autocomplete="off" autofocus class="form-control" name="address" placeholder="Address" type="text">
-            <input type="checkbox" id="newsletter" name="newsletter" value="newsletter">
-            <label for="newsletter"> Send?</label>
-        </div>
-        <br>
-        <div>
-            <input id="subject" autocomplete="off" autofocus class="form-control" name="subject" placeholder=" Subject" type="text" size="50">
-        </div>
-        <br>
-        <div>
-            {{ ckeditor.create() }}
-            {{ ckeditor.load(custom_url=url_for('static', filename='ckeditor/ckeditor.js')) }}
-        </div>
-        <br>
-        <div>
-            <button id="submit" type="submit" name="submit" value="submit">Send.</button>
+        <div class="NewsletterMain">
+            <div class="NewsletterAddress">
+                <input id="address" autocomplete="off" autofocus class="form-control" name="address" placeholder="Address" type="text">
+            </div>
+            <br>
+            <div>
+                <input type="checkbox" id="newsletter" name="newsletter" value="newsletter">
+                <label for="newsletter"> Send to all users?</label>
+            </div>
+            <br>
+            <div>
+                <input id="subject" autocomplete="off" autofocus class="form-control" name="subject" placeholder=" Subject" type="text">
+            </div>
+            <br>
+            <div class="NewsletterEditor">
+                {{ ckeditor.create() }}
+                {{ ckeditor.load(custom_url=url_for('static', filename='ckeditor/ckeditor.js')) }}
+            </div>
+            <br>
+            <div>
+                <button id="submit" type="submit" name="submit" value="submit">Send.</button>
+            </div>
         </div>
         <br>
         <div>

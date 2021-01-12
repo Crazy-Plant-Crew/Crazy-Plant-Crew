@@ -13,28 +13,31 @@
 {% endblock %}
 
 {% block main %}
-    <form action="/communication" method="post">
-        <table class="TableMain">
-            <thead>
-                <tr>
-                    <th scope="col">Title</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                {% for communication in communications %}
+    <div class="TableBorder">
+        <form action="/communication" method="post">
+            <table class="TableMain">
+                <thead>
                     <tr>
-                        <td>{{ communication[1] | safe }}</td>
-                        <td><button name="erase" value="{{ communication[0] }}" type="submit">Delete</button></td>
-                        <td><button name="change" value="{{ communication[0] }}" type="submit">Edit</button></td>
+                        <th scope="col">Title</th>
                     </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        <div>
-            <a href="/create">Add news</a>
-        </div>
-    </form>
+                </thead>
+
+                <tbody>
+                    {% for communication in communications %}
+                        <tr>
+                            <td>{{ communication[1] | safe }}</td>
+                            <td><button name="erase" value="{{ communication[0] }}" type="submit"><img src="/static/trash.svg" alt="delete" height="25"></button></td>
+                            <td><button name="change" value="{{ communication[0] }}" type="submit"><img src="/static/updateB.svg" alt="edit" height="25"></button></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <br>
+            <div>
+                <a href="/create"><img src="/static/add.svg" alt="add" height="50"></a>
+            </div>
+        </form>
+    </div>
     <br>
     <div>
         <a href="/">Back</a>

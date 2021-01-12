@@ -13,40 +13,42 @@
 {% endblock %}
 
 {% block main %}
-    <form action="/basket" method="post">
-        <table class="TableMain">
-            <thead>
-                <tr>
-                    <th scope="col">Picture</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Quantity</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Subtotal</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                {% for basket in baskets %}
+    <div class="TableBorder">
+        <form action="/basket" method="post">
+            <table class="TableMain">
+                <thead>
                     <tr>
-                        <td><img src="{{ basket[5] }}" alt="plant picture of {{ basket[4] }}" height="50"></td>
-                        <td>{{ basket[4] }}</td>
-                        <td>{{ basket[3] }}</td>
-                        <td>{{ basket[6] }}</td>
-                        <td>{{ basket[7] }},00€</td>
-                        <td><button name="delete" value="{{ basket[0] }}" type="submit">Delete</button></td>
+                        <th scope="col">Picture</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Subtotal</th>
                     </tr>
-                {% endfor %}
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>Total: {{ total }},00€</td>
-                    <td></td>
-                </tr>
-            </tbody>
-        </table>
-    </form>
+                </thead>
+
+                <tbody>
+                    {% for basket in baskets %}
+                        <tr>
+                            <td><img src="{{ basket[5] }}" alt="plant picture of {{ basket[4] }}" height="50"></td>
+                            <td>{{ basket[4] }}</td>
+                            <td>{{ basket[3] }}</td>
+                            <td>{{ basket[6] }}</td>
+                            <td>{{ basket[7] }},00€</td>
+                            <td><button name="delete" value="{{ basket[0] }}" type="submit"><img src="/static/trash.svg" alt="delete" height="25"></button></td>
+                        </tr>
+                    {% endfor %}
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>Total: {{ total }},00€</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
     <br>
     <div>
         <a href="/">Back</a>
