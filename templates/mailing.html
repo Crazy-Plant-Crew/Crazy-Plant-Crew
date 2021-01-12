@@ -14,22 +14,25 @@
 
 {% block main %}
     <form action="/mailing" method="post">
-        <div>
-            <input type="checkbox" id="activate" name="activate" value="activate">
-            <label for="activate"> Activate Newsletter.</label><br>
-        </div>
-        <div>
-            <input type="checkbox" id="deactivate" name="deactivate" value="deactivate">
-            <label for="deactivate"> Deactivate Newsletter.</label><br>
-        </div>
-        <div>
-            <button id="updateNewsletter" type="submit">Update</button>
-        </div>
-        <br>
-        <div>
-            <a href="/profile">Back</a>
+        <div class="MailingMain">
+            <div>
+                <input type="checkbox" id="activate" name="activate" value="activate">
+                <label for="activate"> Activate Newsletter.</label><br>
+            </div>
+            <div>
+                <input type="checkbox" id="deactivate" name="deactivate" value="deactivate">
+                <label for="deactivate"> Deactivate Newsletter.</label><br>
+            </div>
+            <br>
+            <div>
+                <button id="updateNewsletter" type="submit">Update</button>
+            </div>
         </div>
     </form>
+    <br>
+    <div>
+        <a href="/profile">Back</a>
+    </div>
 
     <script>
 

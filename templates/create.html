@@ -14,17 +14,19 @@
 
 {% block main %}
     <form action="/create" method="post">
-        <div>
-            <input id="title" autocomplete="off" autofocus class="form-control" name="title" placeholder=" Title" type="text" size="50">
-        </div>
-        <br>
-        <div>
-            {{ ckeditor.create() }}
-            {{ ckeditor.load(custom_url=url_for('static', filename='ckeditor/ckeditor.js')) }}
-        </div>
-        <br>
-        <div>
-            <button id="submit" type="submit" name="submit" value="submit">Send.</button>
+        <div class="CreateMain"> 
+            <div>
+                <input id="title" autocomplete="off" autofocus class="form-control" name="title" placeholder=" Title" type="text" size="50">
+            </div>
+            <br>
+            <div>
+                {{ ckeditor.create() }}
+                {{ ckeditor.load(custom_url=url_for('static', filename='ckeditor/ckeditor.js')) }}
+            </div>
+            <br>
+            <div>
+                <button id="submit" type="submit" name="submit" value="submit">Send.</button>
+            </div>
         </div>
     </form>
     <br>

@@ -14,10 +14,15 @@
 
 {% block main %}
     <form action="/picture" method="post" enctype="multipart/form-data">
-        <div>
-            <p>Profile picture (32mb max).</p>
-            <input type="file" id="picture" name="picture">
-            <input type="submit" value="Upload">
+        <div class="PictureMain">
+            <div>
+                <div>Profile picture (32mb max - *.jpg, *.png, *.bmp).</div>
+                <input type="file" id="picture" name="picture">
+            </div>
+            <br>
+            <div>
+                <button id="uploadPicture" type="submit">Upload</button>
+            </div>
         </div>
     </form>
     <br>

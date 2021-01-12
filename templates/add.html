@@ -14,38 +14,41 @@
 
 {% block main %}
     <form action="/add" method="post" enctype="multipart/form-data">
-        <div>
-            <input id="name" autocomplete="off" autofocus class="form-control" name="name" placeholder="Name" type="text">
-        </div>
-        <br>
-        <div>
-            <input id="stock" autocomplete="off" autofocus class="form-control" name="stock" placeholder="Stock" type="number" min="0">
-        </div>
-        <br>
-        <div>
-            <input id="price" autocomplete="off" autofocus class="form-control" name="price" placeholder="Price" type="number" min="0">
-        </div>
-        <br>
-        <div>
-            {{ ckeditor.create() }}
-            {{ ckeditor.load(custom_url=url_for('static', filename='ckeditor/ckeditor.js')) }}
-        </div>
-        <br>
-        <div>
-            <input type="file" id="picture" name="picture">
-        </div>
-        <br>
-        <div>
-            <input type="checkbox" id="show" name="show" value="show">
-            <label for="show"> Show?</label>
-        </div>
-        <br>
-        <div>
-            <button id="submit" type="submit" name="submit" value="submit">Save.</button>
-        </div>
-        <br>
-        <div>
-            <a href="/administration">Back</a>
+        <div class="AddMain">
+            <div>
+                <input id="name" autocomplete="off" autofocus class="form-control" name="name" placeholder="Name" type="text">
+            </div>
+            <br>
+            <div>
+                <input id="stock" autocomplete="off" autofocus class="form-control" name="stock" placeholder="Stock" type="number" min="0">
+            </div>
+            <br>
+            <div>
+                <input id="price" autocomplete="off" autofocus class="form-control" name="price" placeholder="Price" type="number" min="0">
+            </div>
+            <br>
+            <div>
+                {{ ckeditor.create() }}
+                {{ ckeditor.load(custom_url=url_for('static', filename='ckeditor/ckeditor.js')) }}
+            </div>
+            <br>
+            <div>
+                <input type="file" id="picture" name="picture">
+            </div>
+            <br>
+            <div>
+                <input type="checkbox" id="show" name="show" value="show">
+                <label for="show"> Show?</label>
+            </div>
+            <br>
+            <div>
+                <button id="submit" type="submit" name="submit" value="submit">Save.</button>
+            </div>
         </div>
     </form>
+    <br>
+    <div>
+        <a href="/administration">Back</a>
+    </div>
+    
 {% endblock %}

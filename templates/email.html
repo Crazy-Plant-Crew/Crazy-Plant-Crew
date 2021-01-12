@@ -14,16 +14,20 @@
 
 {% block main %}
     <form action="/email" method="post">
-        <div>
-            <p>Email.</p>
-            <input id="email" autocomplete="off" autofocus class="form-control" name="email" placeholder="Email" type="text">
-            <button id="updateEmail" type="submit">Update</button>
-        </div>
-        <br>
-        <div>
-            <a href="/profile">Back</a>
+        <div class="PasswordMain">
+            <div>
+                <input id="email" autocomplete="off" autofocus class="form-control" name="email" placeholder="Email" type="text">
+            </div>
+            <br>
+            <div>
+                <button id="updateEmail" type="submit">Update</button>
+            </div>
         </div>
     </form>
+    <br>
+    <div>
+        <a href="/profile">Back</a>
+    </div>
 
     <script>
 

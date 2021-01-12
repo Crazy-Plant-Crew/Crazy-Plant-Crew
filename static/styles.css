@@ -1,6 +1,6 @@
 
 
-/*  BODY */
+/*  BODY  */
 
 
 body {
@@ -9,7 +9,7 @@ body {
 }
 
 
-/*  MAIN */
+/*  MAIN  */
 
 
 main {
@@ -24,7 +24,7 @@ main {
 }
 
 
-/*  NAVIGATION BAR */
+/*  NAVIGATION BAR  */
 
 
 .NavBarMain {
@@ -94,7 +94,7 @@ main {
 }
 
 
-/*  FOOTER */
+/*  FOOTER  */
 
 
 .FooterMain {
@@ -138,7 +138,7 @@ main {
 }
 
 
-/*  MAP */
+/*  MAP  */
 
 
 #map {
@@ -155,7 +155,7 @@ main {
 }
 
 
-/*  INDEX */
+/*  INDEX  */
 
 
 .IndexMain {
@@ -226,7 +226,7 @@ main {
 }
 
 
-/*  MAIN */
+/*  MAIN  */
 
 
 main {
@@ -234,7 +234,7 @@ main {
 }
 
 
-/*  FLASH */
+/*  FLASH  */
 
 
 .FlashMain {
@@ -254,7 +254,7 @@ main {
 }
 
 
-/*  CAROUSEL */
+/*  CAROUSEL  */
 
 
 .carousel-control-prev-icon {
@@ -274,7 +274,7 @@ main {
 }
 
 
-/*  TABLES */
+/*  TABLES  */
 
 
 .TableMain {
@@ -288,7 +288,7 @@ main {
 }
 
 
-/*  SIGNUP & SIGNIN */
+/*  SIGNUP & SIGNIN  */
 
 
 .SignupMain {
@@ -322,7 +322,7 @@ main {
 }
 
 
-/*  TOOLTIP */
+/*  TOOLTIP  */
 
 
 div.click-to-top span {
@@ -341,7 +341,7 @@ div.click-to-top:hover span {
 }
 
 
-/*  BUTTON */
+/*  BUTTON  */
 
 
 button {
@@ -350,7 +350,7 @@ button {
 }
 
 
-/*  NEWSLETTER */
+/*  NEWSLETTER  */
 
 
 .NewsletterMain {
@@ -361,7 +361,7 @@ button {
 }
 
 
-/*  MESSAGE */
+/*  MESSAGE  */
 
 
 .MessageMain {
@@ -372,7 +372,7 @@ button {
 }
 
 
-/*  PROFILE */
+/*  PROFILE  */
 
 
 .ProfileMain {
@@ -386,4 +386,92 @@ button {
 	border-radius: 25px;
 	border: 2px solid #E8E8E8;
 	padding: 20px; 
+}
+
+
+/*  CREATE  */
+
+
+.CreateMain {
+	height: 450px;
+	border-radius: 25px;
+	border: 2px solid #E8E8E8;
+	padding: 20px; 	
+}
+
+
+/*  ADD  */
+
+
+.AddMain {
+	height: 700px;
+	border-radius: 25px;
+	border: 2px solid #E8E8E8;
+	padding: 20px; 	
+}
+
+
+/*  USERNAME  */
+
+
+.UsernameMain {
+	height: 150px;
+	border-radius: 25px;
+	border: 2px solid #E8E8E8;
+	padding: 20px; 	
+}
+
+
+/*  PASSWORD  */
+
+
+.PasswordMain {
+	height: 200px;
+	border-radius: 25px;
+	border: 2px solid #E8E8E8;
+	padding: 20px; 		
+}
+
+
+/*  EMAIL  */
+
+
+.PasswordMain {
+	height: 150px;
+	border-radius: 25px;
+	border: 2px solid #E8E8E8;
+	padding: 20px; 		
+}
+
+
+/*  PICTURE  */
+
+
+.PictureMain {
+	height: 150px;
+	border-radius: 25px;
+	border: 2px solid #E8E8E8;
+	padding: 20px; 		
+}
+
+
+/*  MAILING  */
+
+
+.MailingMain {
+	height: 150px;
+	border-radius: 25px;
+	border: 2px solid #E8E8E8;
+	padding: 20px; 		
+}
+
+
+/*  DELETE  */
+
+
+.DeleteMain {
+	height: 100px;
+	border-radius: 25px;
+	border: 2px solid #E8E8E8;
+	padding: 20px; 		
 }
