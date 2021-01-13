@@ -6,9 +6,18 @@
 
 {% block navigation %}
     {% if role == "admin" %}
-        <li class="NavBarLi"><a href="/administration">Manage</a></li>
-        <li class="NavBarLi"><a href="/communication">Inform</a></li>
-        <li class="NavBarLi"><a href="/newsletter">Compose</a></li>
+        <div class="click-to-top">
+            <li class="NavBarLi"><a href="/administration"><img src="/static/admin.svg" alt="admin" height="50"></a></li>
+                <span>Manage</span>
+        </div>
+        <div class="click-to-top">
+            <li class="NavBarLi"><a href="/communication"><img src="/static/addnewsletter.svg" alt="addnewsletter" height="50"></a></li>
+                <span>Communication</span>
+        </div>
+        <div class="click-to-top">
+            <li class="NavBarLi"><a href="/newsletter"><img src="/static/sendmail.svg" alt="sendmail" height="50"></a></li>
+                <span>Newsletter</span>
+        </div>
     {% endif %}
 {% endblock %}
     

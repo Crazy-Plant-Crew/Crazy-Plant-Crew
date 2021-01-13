@@ -21,6 +21,7 @@ from flask_mail import Message, Mail
 from time import time
 from flask_ckeditor import CKEditor
 
+
 # Configure application
 app = Flask(__name__)
 
