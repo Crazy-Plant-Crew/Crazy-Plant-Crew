@@ -81,8 +81,14 @@
                 {% else %}
                     <ul class="NavBarRow">
                         <div class="NavBarLeft">
-                            <li class="NavBarLi"><a href="/signup">Sign Up</a></li>
-                            <li class="NavBarLi"><a href="/signin">Log In</a></li>
+                            <div class="click-to-top">
+                                <li class="NavBarLi"><a href="/signup"><img src="/static/updateA.svg" alt="updateA" height="50"></a></li>
+                                    <span>Sign Up</span>
+                            </div>
+                            <div class="click-to-top">
+                                <li class="NavBarLi"><a href="/signin"><img src="/static/login.svg" alt="login" height="50"></a></li>
+                                    <span>Sign In</span>
+                            </div>
                         </div>
                     </ul>
                 {% endif %}
