@@ -512,6 +512,7 @@ from routes.basket import basket
 from routes.about import about
 from routes.change import change
 from routes.create import create
+from routes.pay import pay
 
 
 # Configure Blueprints
@@ -540,3 +541,4 @@ app.register_blueprint(basket)
 app.register_blueprint(about)
 app.register_blueprint(change)
 app.register_blueprint(create)
+app.register_blueprint(pay)
