@@ -14,28 +14,26 @@
 
 {% block main %}
     <form action="/change" method="post">
-        <div>
-            <input type='hidden' name='news_id' value='{{ news[0]}}'>
-        </div>
-        <div>
-            <input id="title" autocomplete="off" autofocus class="form-control" name="title" placeholder=" Title" type="text" size="50" value="{{ news[1] }}">
-        </div>
-        <br>
-        <div>
-            {{ ckeditor.create(value= news[2]) }}
-            {{ ckeditor.load(pkg_type="standard") }}
-        </div>
-        <br>
-        <div>
-            <button id="submit" type="submit" name="submit" value="submit">Send.</button>
-        </div>
-        <br>
-        <div>
-            <a href="/">Back</a>
+        <div class="ChangeMain">
+            <div>
+                <input type='hidden' name='news_id' value='{{ news[0]}}'>
+            </div>
+            <div>
+                <input id="title" autocomplete="off" autofocus class="form-control" name="title" placeholder=" Title" type="text" size="50" value="{{ news[1] }}">
+            </div>
+            <br>
+            <div>
+                {{ ckeditor.create(value= news[2]) }}
+                {{ ckeditor.load(pkg_type="standard") }}
+            </div>
+            <br>
+            <div>
+                <button id="submit" type="submit" name="submit" value="submit"><img src="/static/sendmail.svg" alt="sendmail" height="50"></button>
+            </div>
         </div>
     </form>
     <br>
     <div>
-        <a href="/communication">Back</a>
+        <a href="/communication"><img src="/static/back.svg" alt="back" height="50"></a>
     </div>
 {% endblock %}

@@ -14,50 +14,53 @@
 
 {% block main %}
         <form action="/edit" method="post" enctype="multipart/form-data">
-            <div>
-                <input type='hidden' name='plant_id' value='{{ plants[0]}}'>
-            </div>
-            <div>
-                <input id="name" autocomplete="off" autofocus class="form-control" name="name" placeholder="Name" type="text" value="{{ plants[1] }}">
-            </div>
-            <br>
-            <div>
-                <input id="stock" autocomplete="off" autofocus class="form-control" name="stock" placeholder="Stock" type="number" min="0" value="{{ plants[2] }}">
-            </div>
-            <br>
-            <div>
-                <input id="price" autocomplete="off" autofocus class="form-control" name="price" placeholder="Price" type="number" min="0" value="{{ plants[3] }}">
-            </div>
-            <br>
-            <div>
-                {% with description = plants[5] | safe %}
-                    {{ ckeditor.create(value=description) }}
-                    {{ ckeditor.load(custom_url=url_for('static', filename='ckeditor/ckeditor.js')) }}
-                {% endwith %}
-            </div>
-            <br>
-            <div>
-                <input type="file" id="picture" name="picture">
-            </div>
-            <br>
-                {% if plants[6] == "Yes" %}
+            <div class="EditMain">
                 <div>
-                    <input type="checkbox" id="show" name="show" value="show" checked>
-                    <label for="show"> Show?</label>
+                    <input type='hidden' name='plant_id' value='{{ plants[0]}}'>
                 </div>
-                {% else %}
                 <div>
-                    <input type="checkbox" id="show" name="show" value="show">
-                    <label for="show"> Show?</label>
+                    <input id="name" autocomplete="off" autofocus class="form-control" name="name" placeholder="Name" type="text" value="{{ plants[1] }}">
                 </div>
-                {% endif %}
-            <br>
-            <div>
-                <button id="submit" type="submit" name="submit" value="submit">Save.</button>
+                <br>
+                <div>
+                    <input id="stock" autocomplete="off" autofocus class="form-control" name="stock" placeholder="Stock" type="number" min="0" value="{{ plants[2] }}">
+                </div>
+                <br>
+                <div>
+                    <input id="price" autocomplete="off" autofocus class="form-control" name="price" placeholder="Price" type="number" min="0" value="{{ plants[3] }}">
+                </div>
+                <br>
+                <div>
+                    {% with description = plants[5] | safe %}
+                        {{ ckeditor.create(value=description) }}
+                        {{ ckeditor.load(custom_url=url_for('static', filename='ckeditor/ckeditor.js')) }}
+                    {% endwith %}
+                </div>
+                <br>
+                <div>
+                    <input type="file" id="picture" name="picture">
+                </div>
+                <br>
+                    {% if plants[6] == "Yes" %}
+                    <div>
+                        <input type="checkbox" id="show" name="show" value="show" checked>
+                        <label for="show"> Show?</label>
+                    </div>
+                    {% else %}
+                    <div>
+                        <input type="checkbox" id="show" name="show" value="show">
+                        <label for="show"> Show?</label>
+                    </div>
+                    {% endif %}
+                <br>
+                <div>
+                    <button id="submit" type="submit" name="submit" value="submit"><img src="/static/save.svg" alt="save" height="50"></button>
+                </div>
             </div>
-            <br>
-            <div>
-                <a href="/administration">Back</a>
-            </div>
+            </form>
         </form>
+        <br>
+        <div>
+            <a href="/administration"><img src="/static/back.svg" alt="back" height="50"></a>
+        </div>
 {% endblock %}
