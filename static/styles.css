@@ -185,7 +185,11 @@ main {
 	justify-content: space-around;
 	align-items: center;
 	align-content: center;
+}
 
+.IndexLeft img {
+	border-radius: 25px;
+	border: 1px solid #C0C0C0;
 }
 
 .IndexRight {
@@ -193,13 +197,14 @@ main {
 	flex-direction: column;
 	flex-wrap: nowrap;
 	justify-content: space-around;
-	align-items: baseline;
+	align-items: flex-start;
 	align-content: center;
 
 	width: 500px;
 	height: 750px;
 	padding-left: 50px;
-	background-color:  	#F5F5F5;
+	border-radius: 25px;
+	border: 1px solid #C0C0C0;
 }
 
 .IndexInfo1 {
@@ -217,7 +222,7 @@ main {
 	flex-wrap: nowrap;
 	justify-content: flex-start;
 	align-items: center;
-	align-content: center;	
+	align-content: center;
 }
 
 .IndexInfo3 {
