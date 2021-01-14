@@ -514,6 +514,7 @@ from routes.about import about
 from routes.change import change
 from routes.create import create
 from routes.pay import pay
+from routes.transaction import transaction
 
 
 # Configure Blueprints
@@ -543,3 +544,4 @@ app.register_blueprint(about)
 app.register_blueprint(change)
 app.register_blueprint(create)
 app.register_blueprint(pay)
+app.register_blueprint(transaction)

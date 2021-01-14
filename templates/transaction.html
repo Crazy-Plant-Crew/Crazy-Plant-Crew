@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Message
+    Transaction
 {% endblock %}
 
 {% block navigation %}
@@ -26,21 +26,9 @@
 {% endblock %}
 
 {% block main %}
-    <form action="/message" method="post">
-        <div class="MessageMain">
-            <p>Send us a message</p>
-            <div>
-                {{ ckeditor.create() }}
-                {{ ckeditor.load(custom_url=url_for('static', filename='ckeditor/ckeditor.js')) }}
-            </div>
-            <br>
-            <div>
-                <button id="submit" type="submit" name="submit" value="submit"><img src="/static/sendmail.svg" alt="sendmail" height="50"></button>
-            </div>
-        </div>
-        <br>
-        <div>
-            <a href="/"><img src="/static/back.svg" alt="back" height="50"></a>
-        </div>
-    </form>
+    Transaction page
+    <br>
+    <div>
+        <a href="/"><img src="/static/back.svg" alt="back" height="50"></a>
+    </div>
 {% endblock %}
