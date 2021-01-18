@@ -1,5 +1,4 @@
 cachelib==0.1.1
-CrazyPlantCrew==1.0
 Flask==1.1.2
 Flask-CKEditor==0.4.4.1
 Flask-Mail==0.9.1
