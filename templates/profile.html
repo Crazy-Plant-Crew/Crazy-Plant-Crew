@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Profile
+{% endblock %}
+
+{% block navigation %}
+    {% if role == "admin" %}
+        <div class="click-to-top">
+            <li class="NavBarLi"><a href="/transaction"><img src="/static/pay.svg" alt="pay" height="50"></a></li>
+                <span>Transaction</span>
+        </div>
+        <div class="click-to-top">
+            <li class="NavBarLi"><a href="/administration"><img src="/static/addplant.svg" alt="addplant" height="50"></a></li>
+                <span>Manage</span>
+        </div>
+        <div class="click-to-top">
+            <li class="NavBarLi"><a href="/communication"><img src="/static/addnewsletter.svg" alt="addnewsletter" height="50"></a></li>
+                <span>Communication</span>
+        </div>
+        <div class="click-to-top">
+            <li class="NavBarLi"><a href="/newsletter"><img src="/static/sendmail.svg" alt="sendmail" height="50"></a></li>
+                <span>Newsletter</span>
+        </div>
+    {% endif %}
+{% endblock %}
+    
+{% block main %}
+    <div class="ProfileMain">
+        <div>
+            <a href="/username"><img src="/static/profile.svg" alt="username" height="50">   Change Username</a>
+        </div>
+        <div>
+            <a href="/password"><img src="/static/password.svg" alt="password" height="50">   Change Password</a>
+        </div>
+        <div>
+            <a href="/email"><img src="/static/contact.svg" alt="contact" height="50">   Change Email</a>
+        </div>
+        <div>
+            <a href="/picture"><img src="/static/photo.svg" alt="photo" height="50">   Change Picture</a>
+        </div>
+        <div>
+            <a href="/mailing"><img src="/static/updateA.svg" alt="mailing" height="50">   Mailing option</a>
+        </div>
+        <div>
+            <a href="/delete"><img src="/static/trash.svg" alt="trash" height="50">   Delete Account</a>
+        </div>
+    </div>
+    <br>
+    <div>
+        <a href="/"><img src="/static/back.svg" alt="back" height="50"></a>
+    </div>
+{% endblock %}

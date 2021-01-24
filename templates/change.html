@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Change
+{% endblock %}
+
+{% block navigation %}
+    {% if role == "admin" %}
+        <div class="click-to-top">
+            <li class="NavBarLi"><a href="/transaction"><img src="/static/pay.svg" alt="pay" height="50"></a></li>
+                <span>Transaction</span>
+        </div>
+        <div class="click-to-top">
+            <li class="NavBarLi"><a href="/administration"><img src="/static/addplant.svg" alt="addplant" height="50"></a></li>
+                <span>Manage</span>
+        </div>
+        <div class="click-to-top">
+            <li class="NavBarLi"><a href="/communication"><img src="/static/addnewsletter.svg" alt="addnewsletter" height="50"></a></li>
+                <span>Communication</span>
+        </div>
+        <div class="click-to-top">
+            <li class="NavBarLi"><a href="/newsletter"><img src="/static/sendmail.svg" alt="sendmail" height="50"></a></li>
+                <span>Newsletter</span>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block main %}
+    <form action="/change" method="post">
+        <div class="ChangeMain">
+            <div>
+                <input type='hidden' name='news_id' value='{{ news[0]}}'>
+            </div>
+            <div>
+                <input id="title" autocomplete="off" autofocus class="form-control" name="title" placeholder=" Title" type="text" size="50" value="{{ news[1] }}">
+            </div>
+            <br>
+            <div>
+                {{ ckeditor.create(value= news[2]) }}
+                {{ ckeditor.load(pkg_type="standard") }}
+            </div>
+            <br>
+            <div>
+                <button id="submit" type="submit" name="submit" value="submit"><img src="/static/sendmail.svg" alt="sendmail" height="50"></button>
+            </div>
+        </div>
+    </form>
+    <br>
+    <div>
+        <a href="/communication"><img src="/static/back.svg" alt="back" height="50"></a>
+    </div>
+{% endblock %}

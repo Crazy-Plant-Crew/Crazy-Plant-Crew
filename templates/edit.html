@@ -1,0 +1,79 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Edit
+{% endblock %}
+
+{% block navigation %}
+    {% if role == "admin" %}
+        <div class="click-to-top">
+            <li class="NavBarLi"><a href="/transaction"><img src="/static/pay.svg" alt="pay" height="50"></a></li>
+                <span>Transaction</span>
+        </div>
+        <div class="click-to-top">
+            <li class="NavBarLi"><a href="/administration"><img src="/static/addplant.svg" alt="addplant" height="50"></a></li>
+                <span>Manage</span>
+        </div>
+        <div class="click-to-top">
+            <li class="NavBarLi"><a href="/communication"><img src="/static/addnewsletter.svg" alt="addnewsletter" height="50"></a></li>
+                <span>Communication</span>
+        </div>
+        <div class="click-to-top">
+            <li class="NavBarLi"><a href="/newsletter"><img src="/static/sendmail.svg" alt="sendmail" height="50"></a></li>
+                <span>Newsletter</span>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block main %}
+        <form action="/edit" method="post" enctype="multipart/form-data">
+            <div class="EditMain">
+                <div>
+                    <input type='hidden' name='plant_id' value='{{ plants[0]}}'>
+                </div>
+                <div>
+                    <input id="name" autocomplete="off" autofocus class="form-control" name="name" placeholder="Name" type="text" value="{{ plants[1] }}">
+                </div>
+                <br>
+                <div>
+                    <input id="stock" autocomplete="off" autofocus class="form-control" name="stock" placeholder="Stock" type="number" min="0" value="{{ plants[2] }}">
+                </div>
+                <br>
+                <div>
+                    <input id="price" autocomplete="off" autofocus class="form-control" name="price" placeholder="Price" type="number" min="0" value="{{ plants[3] }}">
+                </div>
+                <br>
+                <div>
+                    {% with description = plants[5] | safe %}
+                        {{ ckeditor.create(value=description) }}
+                        {{ ckeditor.load(custom_url=url_for('static', filename='ckeditor/ckeditor.js')) }}
+                    {% endwith %}
+                </div>
+                <br>
+                <div>
+                    <input type="file" id="picture" name="picture">
+                </div>
+                <br>
+                    {% if plants[6] == "Yes" %}
+                    <div>
+                        <input type="checkbox" id="show" name="show" value="show" checked>
+                        <label for="show"> Show?</label>
+                    </div>
+                    {% else %}
+                    <div>
+                        <input type="checkbox" id="show" name="show" value="show">
+                        <label for="show"> Show?</label>
+                    </div>
+                    {% endif %}
+                <br>
+                <div>
+                    <button id="submit" type="submit" name="submit" value="submit"><img src="/static/save.svg" alt="save" height="50"></button>
+                </div>
+            </div>
+            </form>
+        </form>
+        <br>
+        <div>
+            <a href="/administration"><img src="/static/back.svg" alt="back" height="50"></a>
+        </div>
+{% endblock %}

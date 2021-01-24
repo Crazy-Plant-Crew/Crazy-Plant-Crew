@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+        
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="author" content="Benoit Hage - hage.benoit@gmail.com, Rachel De La Torre - rachel.delatorre1@gmail.com" />
+        <meta name="description" content="The Crazy Plant Crew website" />
+        <meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' />
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <link href="/static/favicon.ico" rel="icon">
+        <link href="/static/styles.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+        <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.css' rel='stylesheet' />
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet"> 
+
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+        <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.js'></script>
+
+        <title>Crazy Plant Crew: {% block title %}{% endblock %}</title>
+
+    </head>
+
+    <body>
+        <nav class="NavBarMain">
+            <a href="/"><span>Crazy Plant Crew</span></a>
+            <div>
+                {% if session.user_id %}
+                    <ul class="NavBarRow">
+                        <div class="NavBarLeft">
+
+                            <div class="click-to-top">
+                                <li class="NavBarLi"><a href="/"><img src="/static/plant.svg" alt="plant" height="50"></a></li>
+                                    <span>Plants</span>
+                            </div>
+
+                            <div class="click-to-top">
+                                <li class="NavBarLi"><a href="/basket"><img src="/static/basket.svg" alt="basket" height="50"></a></li>
+                                    <span>Basket</span>
+                            </div>
+
+                            <div class="click-to-top">
+                                <li class="NavBarLi"><a href="/article"><img src="/static/newsletter.svg" alt="newsletter" height="50"></a></li>
+                                    <span>News</span>
+                            </div>
+
+                            <div class="click-to-top">
+                                <li class="NavBarLi"><a href="/about"><img src="/static/about.svg" alt="about" height="50"></a></li>
+                                    <span>About</span>
+                            </div>
+
+                            <div class="click-to-top">
+                                <li class="NavBarLi"><a href="/message"><img src="/static/contact.svg" alt="contact" height="50"></a></li>
+                                    <span>Contact</span>
+                            </div>
+
+                            <div class="click-to-top">
+                                <li class="NavBarLi"><a href="/history"><img src="/static/pay.svg" alt="pay" height="50"></a></li>
+                                    <span>History</span>
+                            </div>
+
+                        </div>
+                        <div class="NavBarRight">
+                            {% block navigation %}{% endblock %}
+                            <div class="click-to-top">
+                                <li class="NavBarLi"><a href="/profile"><img src="{{ picture }}" alt="Profile picture of {{ name }}" height="50"></li></a>
+                                    <span>{{ name }}</span>
+                            </div>
+
+                            <div class="click-to-top">
+                                <li class="NavBarLi"><a href="/logout"><img src="/static/logout.svg" alt="logout" height="50"></a></li>
+                                    <span>Log out</span>
+                            </div>
+
+                        </div>
+                    </ul> 
+                {% else %}
+                    <ul class="NavBarRow">
+                        <div class="NavBarLeft">
+                            <div class="click-to-top">
+                                <li class="NavBarLi"><a href="/signup"><img src="/static/updateA.svg" alt="updateA" height="50"></a></li>
+                                    <span>Sign Up</span>
+                            </div>
+                            <div class="click-to-top">
+                                <li class="NavBarLi"><a href="/signin"><img src="/static/login.svg" alt="login" height="50"></a></li>
+                                    <span>Sign In</span>
+                            </div>
+                        </div>
+                    </ul>
+                {% endif %}
+            </div>
+        </nav>
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <header class="FlashMain">
+                <ul class="FlashList">
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </header>
+            {% endif %}
+        {% endwith %}
+
+        <main>
+            {% block main %}{% endblock %}
+        </main>
+
+        <footer class="FooterMain">
+            <div class="FooterRow">
+                <div class="FooterLeft">
+                    <div>
+                        Follow us: 
+                    </div>
+                    <div class="FooterSocial">
+                        <a href="https://www.instagram.com/crazyplantcrew"><img src="/static/insta.svg" alt="instagram" height="50"></a><br>
+                        <a href="https://youtube.com/channel/UCcpvtx2PUXIBgLY_tIPX9Sw"><img src="/static/youtube.svg" alt="youtube" height="50"></a>
+                    </div>
+                </div>
+                <div>               
+                    <div id='map'></div>
+                </div>
+            </div>
+            <div>
+                © The Crazy Plant Crew 2020
+            </div>
+        </footer>
+    </body>
+
+    <script>
+
+        mapboxgl.accessToken = 'pk.eyJ1IjoiYmVub2l0aGFnZSIsImEiOiJja2psYTBnZTIxcHo0MnRxb21hcTAzZHNrIn0.BGBlD--dpeAVP8nG-bb1gw';
+        
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/outdoors-v11',
+            center: [13.363539, 52.486437],
+            zoom: 13
+        });
+
+        var geojson = {
+            type: 'FeatureCollection',
+            features: [{
+                type: 'Feature',
+                geometry: {
+                    type: 'Point',
+                    coordinates: [13.363539, 52.486437]
+                },
+                properties: {
+                title: 'Mapbox',
+                description: 'Crazy Plant Crew'
+                }
+            }]
+        };
+
+        // add markers to map
+        geojson.features.forEach(function(marker) {
+
+            // create a HTML element for each feature
+            var el = document.createElement('div');
+            el.className = 'marker';
+
+            // make a marker for each feature and add to the map
+            new mapboxgl.Marker(el)
+            .setLngLat(marker.geometry.coordinates)
+            .addTo(map);
+        });
+       
+        // code from the next step will go here!
+        
+        </script>
+
+</html>

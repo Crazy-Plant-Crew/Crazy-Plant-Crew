@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Communication
+{% endblock %}
+
+{% block navigation %}
+    {% if role == "admin" %}
+        <div class="click-to-top">
+            <li class="NavBarLi"><a href="/transaction"><img src="/static/pay.svg" alt="pay" height="50"></a></li>
+                <span>Transaction</span>
+        </div>
+        <div class="click-to-top">
+            <li class="NavBarLi"><a href="/administration"><img src="/static/addplant.svg" alt="addplant" height="50"></a></li>
+                <span>Manage</span>
+        </div>
+        <div class="click-to-top">
+            <li class="NavBarLi"><a href="/communication"><img src="/static/addnewsletter.svg" alt="addnewsletter" height="50"></a></li>
+                <span>Communication</span>
+        </div>
+        <div class="click-to-top">
+            <li class="NavBarLi"><a href="/newsletter"><img src="/static/sendmail.svg" alt="sendmail" height="50"></a></li>
+                <span>Newsletter</span>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block main %}
+    <div class="TableBorder">
+        <form action="/communication" method="post">
+            <table class="TableMain">
+                <thead>
+                    <tr>
+                        <th scope="col">Title</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for communication in communications %}
+                        <tr>
+                            <td>{{ communication[1] | safe }}</td>
+                            <td><button name="erase" value="{{ communication[0] }}" type="submit"><img src="/static/trash.svg" alt="delete" height="25"></button></td>
+                            <td><button name="change" value="{{ communication[0] }}" type="submit"><img src="/static/updateB.svg" alt="edit" height="25"></button></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <br>
+            <div>
+                <a href="/create"><img src="/static/add.svg" alt="add" height="50"></a>
+            </div>
+        </form>
+    </div>
+    <br>
+    <div>
+        <a href="/"><img src="/static/back.svg" alt="back" height="50"></a>
+    </div>
+{% endblock %}

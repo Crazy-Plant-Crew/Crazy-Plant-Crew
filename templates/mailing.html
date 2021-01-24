@@ -1,0 +1,89 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Mailing
+{% endblock %}
+
+{% block navigation %}
+    {% if role == "admin" %}
+        <div class="click-to-top">
+            <li class="NavBarLi"><a href="/transaction"><img src="/static/pay.svg" alt="pay" height="50"></a></li>
+                <span>Transaction</span>
+        </div>
+        <div class="click-to-top">
+            <li class="NavBarLi"><a href="/administration"><img src="/static/addplant.svg" alt="addplant" height="50"></a></li>
+                <span>Manage</span>
+        </div>
+        <div class="click-to-top">
+            <li class="NavBarLi"><a href="/communication"><img src="/static/addnewsletter.svg" alt="addnewsletter" height="50"></a></li>
+                <span>Communication</span>
+        </div>
+        <div class="click-to-top">
+            <li class="NavBarLi"><a href="/newsletter"><img src="/static/sendmail.svg" alt="sendmail" height="50"></a></li>
+                <span>Newsletter</span>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block main %}
+    <form action="/mailing" method="post">
+        <div class="MailingMain">
+            <div>
+                <input type="checkbox" id="activate" name="activate" value="activate">
+                <label for="activate"> Activate Newsletter.</label><br>
+            </div>
+            <div>
+                <input type="checkbox" id="deactivate" name="deactivate" value="deactivate">
+                <label for="deactivate"> Deactivate Newsletter.</label><br>
+            </div>
+            <br>
+            <div>
+                <button id="updateNewsletter" type="submit"><img src="/static/save.svg" alt="save" height="50"></button>
+            </div>
+        </div>
+    </form>
+    <br>
+    <div>
+        <a href="/profile"><img src="/static/back.svg" alt="back" height="50"></a>
+    </div>
+
+    <script>
+
+        let activate = document.getElementById("activate");
+        let deactivate = document.getElementById("deactivate");
+
+        document.querySelector("#updateNewsletter").disabled = true;
+
+        document.querySelector("#activate").onclick = function() {
+
+            if (activate.checked === true) {
+                deactivate.checked = false
+                document.querySelector("#updateNewsletter").disabled = false
+            }
+            else if (deactivate.checked === true) {
+                activate.checked = false
+                document.querySelector("#updateNewsletter").disabled = false
+            }
+            else {
+                document.querySelector("#updateNewsletter").disabled = true
+            }
+        }
+
+        document.querySelector("#deactivate").onclick = function() {
+
+            if (deactivate.checked === true) {
+                activate.checked = false
+                document.querySelector("#updateNewsletter").disabled = false
+            }
+            else if (activate.checked === true) {
+                deactivate.checked = false
+                document.querySelector("#updateNewsletter").disabled = false
+            }
+            else {
+                document.querySelector("#updateNewsletter").disabled = true
+            }
+        }
+
+
+    </script>
+{% endblock %}

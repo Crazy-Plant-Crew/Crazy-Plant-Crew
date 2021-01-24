@@ -1,0 +1,504 @@
+
+
+/*  BODY  */
+
+
+body {
+	font-family: 'Montserrat', sans-serif;
+	width: 100%
+}
+
+
+/*  MAIN  */
+
+
+main {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: center;
+	align-content: center;
+
+	text-align: center;
+}
+
+
+/*  NAVIGATION BAR  */
+
+
+.NavBarMain {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: space-around;
+	align-items: stretch;
+	align-content: stretch;
+	list-style: none;
+
+	background: rgb(255,255,255);
+	background: linear-gradient(90deg, rgba(255,255,255,0.2) 0%, rgba(55,161,125,0.1) 33%, rgba(9,115,58,0.2) 66%, rgba(14,61,45,0.3) 100%);
+	height: 100px;
+}
+
+.NavBarMain a {
+	text-decoration: none;
+	color: black;
+}
+
+.NavBarRow {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	align-items: flex-end;
+	align-content: stretch;
+}
+
+.NavBarLeft {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: flex-end;
+    align-content: stretch;
+}
+
+.NavBarRight {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: flex-end;
+	align-items: stretch;
+    align-content: stretch;
+}
+
+.NavBarLi {
+    display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	align-items: center;
+    align-content: center;
+    margin: 0px 10px 0px 10px
+}
+
+.NavBarRight {
+    display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: center;
+    align-content: center;
+    margin: 0px 10px 0px 10px
+}
+
+
+/*  FOOTER  */
+
+
+.FooterMain {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: space-around;
+	align-items: center;
+	align-content: stretch;
+	height: 400px;
+
+	background-color: #E8E8E8;
+}
+
+.FooterRow {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-around;
+	align-items: center;
+	align-content: center;
+	width: 1000px;
+}
+
+.FooterLeft {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: space-around;
+	align-items: center;
+	align-content: center;
+}
+
+.FooterSocial {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-around;
+	align-items: center;
+	align-content: center;
+}
+
+
+/*  MAP  */
+
+
+#map {
+	height: 250px;
+	width: 500px;
+}
+.marker {
+	background-image: url('/static/marker.png');
+	background-size: cover;
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	cursor: pointer;
+}
+
+
+/*  INDEX  */
+
+
+.IndexMain {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: space-around;
+	align-items: center;
+	align-content: center;
+
+	height: 900px;
+}
+
+.IndexRow {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-around;
+	align-items: center;
+	align-content: center;
+}
+
+.IndexLeft {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: space-around;
+	align-items: center;
+	align-content: center;
+}
+
+.IndexLeft img {
+	border-radius: 25px;
+	border: 1px solid #C0C0C0;
+}
+
+.IndexRight {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: space-around;
+	align-items: flex-start;
+	align-content: center;
+
+	width: 500px;
+	height: 750px;
+	padding-left: 50px;
+	border-radius: 25px;
+	border: 1px solid #C0C0C0;
+}
+
+.IndexInfo1 {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: space-around;
+	align-items: flex-start;
+	align-content: center;
+}
+
+.IndexInfo2 {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: center;
+	align-content: center;
+}
+
+.IndexInfo3 {
+	text-align: left;
+	width: 75%;
+}
+
+
+/*  MAIN  */
+
+
+main {
+	height: 900px;
+}
+
+
+/*  FLASH  */
+
+
+.FlashMain {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: center;
+	align-content: center;
+	
+	background-color: #ffd8d8;
+	height: 75px;
+}
+
+.FlashList {
+	list-style: none;
+}
+
+
+/*  CAROUSEL  */
+
+
+.carousel-control-prev-icon {
+	background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E");
+}
+
+.carousel-control-next-icon {
+	background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E");
+}
+
+.carousel-control-prev {
+	margin-left: -200px;
+}
+
+.carousel-control-next {
+	margin-right: -200px;
+}
+
+
+/*  TABLES  */
+
+
+.TableMain {
+	width: 1000px;
+}
+
+.TableBorder {
+	border-radius: 25px;
+	border: 2px solid #E8E8E8;
+	padding: 20px; 
+}
+
+
+/*  SIGNUP & SIGNIN  */
+
+
+.SignupMain {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: space-around;
+	align-items: center;
+	align-content: center;
+
+	width: 500px;
+	height: 500px;
+	border-radius: 25px;
+	border: 2px solid #E8E8E8;
+	padding: 20px; 
+}
+
+.SigninMain {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: space-around;
+	align-items: center;
+	align-content: center;
+
+	width: 500px;
+	height: 250px;
+	border-radius: 25px;
+	border: 2px solid #E8E8E8;
+	padding: 20px; 
+}
+
+
+/*  TOOLTIP  */
+
+
+div.click-to-top span {
+	display: none; 
+	position: absolute; 
+	background: transparent;
+	color: #09733A;
+	font-size: 0.8em;
+	font-weight: bold;
+	margin-left: 12.5px;
+}
+
+div.click-to-top:hover span {
+	display: block;
+	width: auto;
+}
+
+
+/*  BUTTON  */
+
+
+button {
+	background-color: transparent;
+	border: none;	
+}
+
+
+/*  NEWSLETTER  */
+
+
+.NewsletterMain {
+	height: 600px;
+	border-radius: 25px;
+	border: 2px solid #E8E8E8;
+	padding: 20px; 
+}
+
+
+/*  MESSAGE  */
+
+
+.MessageMain {
+	height: 450px;
+	border-radius: 25px;
+	border: 2px solid #E8E8E8;
+	padding: 20px; 
+}
+
+
+/*  PROFILE  */
+
+
+.ProfileMain {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: space-around;
+	align-items: flex-start;
+	align-content: center;
+
+	border-radius: 25px;
+	border: 2px solid #E8E8E8;
+	padding: 20px; 
+}
+
+
+/*  CREATE  */
+
+
+.CreateMain {
+	height: 500px;
+	border-radius: 25px;
+	border: 2px solid #E8E8E8;
+	padding: 20px; 	
+}
+
+
+/*  ADD  */
+
+
+.AddMain {
+	height: 750px;
+	border-radius: 25px;
+	border: 2px solid #E8E8E8;
+	padding: 20px; 	
+}
+
+
+/*  EDIT  */
+
+
+.EditMain {
+	height: 750px;
+	border-radius: 25px;
+	border: 2px solid #E8E8E8;
+	padding: 20px; 	
+}
+
+
+/*  USERNAME  */
+
+
+.UsernameMain {
+	height: 150px;
+	border-radius: 25px;
+	border: 2px solid #E8E8E8;
+	padding: 20px; 	
+}
+
+
+/*  PASSWORD  */
+
+
+.PasswordMain {
+	height: 200px;
+	border-radius: 25px;
+	border: 2px solid #E8E8E8;
+	padding: 20px; 		
+}
+
+
+/*  EMAIL  */
+
+
+.EmailMain {
+	height: 150px;
+	border-radius: 25px;
+	border: 2px solid #E8E8E8;
+	padding: 20px; 		
+}
+
+
+/*  PICTURE  */
+
+
+.PictureMain {
+	height: 150px;
+	border-radius: 25px;
+	border: 2px solid #E8E8E8;
+	padding: 20px; 		
+}
+
+
+/*  MAILING  */
+
+
+.MailingMain {
+	height: 150px;
+	border-radius: 25px;
+	border: 2px solid #E8E8E8;
+	padding: 20px; 		
+}
+
+
+/*  DELETE  */
+
+
+.DeleteMain {
+	height: 100px;
+	border-radius: 25px;
+	border: 2px solid #E8E8E8;
+	padding: 20px; 		
+}
+
+
+/*  CHANGE  */
+
+
+.ChangeMain {
+	height: 500px;
+	border-radius: 25px;
+	border: 2px solid #E8E8E8;
+	padding: 20px; 	
+}

@@ -1,0 +1,66 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Manage
+{% endblock %}
+
+{% block navigation %}
+    {% if role == "admin" %}
+        <div class="click-to-top">
+            <li class="NavBarLi"><a href="/transaction"><img src="/static/pay.svg" alt="pay" height="50"></a></li>
+                <span>Transaction</span>
+        </div>
+        <div class="click-to-top">
+            <li class="NavBarLi"><a href="/administration"><img src="/static/addplant.svg" alt="addplant" height="50"></a></li>
+                <span>Manage</span>
+        </div>
+        <div class="click-to-top">
+            <li class="NavBarLi"><a href="/communication"><img src="/static/addnewsletter.svg" alt="addnewsletter" height="50"></a></li>
+                <span>Communication</span>
+        </div>
+        <div class="click-to-top">
+            <li class="NavBarLi"><a href="/newsletter"><img src="/static/sendmail.svg" alt="sendmail" height="50"></a></li>
+                <span>Newsletter</span>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block main %}
+    <div class="TableBorder">
+        <form action="/administration" method="post">
+            <table class="TableMain">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Stock</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Picture</th>
+                        <th scope="col">Show</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for plant in plants %}
+                        <tr>
+                            <td>{{ plant[1] | safe }}</td>
+                            <td>{{ plant[2] | safe }}</td>
+                            <td>{{ plant[3] | safe }}</td>
+                            <td><img src="{{ plant[4] | safe }}" alt="plant picture of {{ plant[1] }}" height="50"></td>
+                            <td>{{ plant[6] | safe }}</td>
+                            <td><button name="delete" value="{{ plant[0] }}" type="submit"><img src="/static/trash.svg" alt="delete" height="25"></button></td>
+                            <td><button name="edit" value="{{ plant[0] }}" type="submit"><img src="/static/updateB.svg" alt="edit" height="25"></button></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <br>
+            <div>
+                <a href="/add"><img src="/static/add.svg" alt="add" height="50"></a>
+            </div>
+        </form>
+    </div>
+    <br>
+    <div>
+        <a href="/"><img src="/static/back.svg" alt="back" height="50"></a>
+    </div>
+{% endblock %}
