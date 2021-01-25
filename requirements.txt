@@ -1,6 +1,6 @@
 cachelib==0.1.1
 Flask==1.1.2
-Flask-SQLAlchem==2.4.4 
+Flask-SQLAlchemy==2.4.4 
 Flask-CKEditor==0.4.4.1
 Flask-Mail==0.9.1
 Flask-Session==0.3.2
