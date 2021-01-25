@@ -1,5 +1,4 @@
 import os
-import sqlite3
 import urllib.parse
 import sys
 import traceback

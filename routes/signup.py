@@ -77,7 +77,7 @@ def signupFunction():
 
         # Query database for username if already exists
         record = db.engine.execute("SELECT * FROM Users WHERE username=:username;", {"username": username})
-        query = cursor.fetchall()
+        query = record.fetchall()
 
         # Check if username is free
         if len(query) != 0:
