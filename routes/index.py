@@ -1,9 +1,9 @@
-import sqlite3
 import traceback
 import sys
 
 from flask import Blueprint, render_template, redirect, session, request, flash, get_flashed_messages
-from application import getUserName, getUserPicture, getUserRole, login_required, confirmed_required
+from application import getUserName, getUserPicture, getUserRole, login_required, confirmed_required, db
+from flask_sqlalchemy import SQLAlchemy
 
 # Set Blueprints
 index = Blueprint('index', __name__,)
@@ -19,7 +19,6 @@ def indexFunction():
 
     if request.method == "POST":
 
-
         # Get variables
         plant_id = request.form.get("plant_id")
         user_id = session["user_id"]
@@ -27,62 +26,16 @@ def indexFunction():
 
 
         # Query database for plants name, picture, price
-        try:
-
-            sqliteConnection = sqlite3.connect("database.db")
-            cursor = sqliteConnection.cursor()
-            
-            # Query database
-            cursor.execute("SELECT * FROM plants WHERE id=:id;", {"id": plant_id})
-            plants = cursor.fetchall()
-            name = plants[0][1]
-            picture = plants[0][4]
-            price = plants[0][3]
-
-            cursor.close()
-
-        except sqlite3.Error as error:
-        
-            print("Failed to read data from sqlite table", error)
-            print("Exception class is: ", error.__class__)
-            print("Exception is", error.args)
-
-            print('Printing detailed SQLite exception traceback: ')
-            exc_type, exc_value, exc_tb = sys.exc_info()
-            print(traceback.format_exception(exc_type, exc_value, exc_tb))
-
-        finally:
-
-            if (sqliteConnection):
-                sqliteConnection.close()
+        record = db.engine.execute("SELECT * FROM Plants WHERE id=:id;", {"id": plant_id})
+        plants = record.fetchall()
+        name = plants[0][1]
+        picture = plants[0][4]
+        price = plants[0][3]
        
 
         # Get current plant stock
-        try:
-
-            sqliteConnection = sqlite3.connect("database.db")
-            cursor = sqliteConnection.cursor()
-            
-            # Query database
-            cursor.execute("SELECT stock FROM plants WHERE id=:id;", {"id": plant_id})
-            existingStock = cursor.fetchall()
-
-            cursor.close()
-
-        except sqlite3.Error as error:
-        
-            print("Failed to read data from sqlite table", error)
-            print("Exception class is: ", error.__class__)
-            print("Exception is", error.args)
-
-            print('Printing detailed SQLite exception traceback: ')
-            exc_type, exc_value, exc_tb = sys.exc_info()
-            print(traceback.format_exception(exc_type, exc_value, exc_tb))
-
-        finally:
-
-            if (sqliteConnection):
-                sqliteConnection.close()
+        record = db.engine.execute("SELECT stock FROM Plants WHERE id=:id;", {"id": plant_id})
+        existingStock = record.fetchall()
 
 
         # Avoid going to negative stocks
@@ -94,31 +47,8 @@ def indexFunction():
 
         
         # Check for existing stock in the basket
-        try:
-
-            sqliteConnection = sqlite3.connect("database.db")
-            cursor = sqliteConnection.cursor()
-            
-            # Query database
-            cursor.execute("SELECT quantity FROM baskets WHERE plant_id=:plant_id AND user_id=:user_id;", {"plant_id": plant_id, "user_id": user_id})
-            existingQuantity = cursor.fetchall()
-
-            cursor.close()
-
-        except sqlite3.Error as error:
-        
-            print("Failed to read data from sqlite table", error)
-            print("Exception class is: ", error.__class__)
-            print("Exception is", error.args)
-
-            print('Printing detailed SQLite exception traceback: ')
-            exc_type, exc_value, exc_tb = sys.exc_info()
-            print(traceback.format_exception(exc_type, exc_value, exc_tb))
-
-        finally:
-
-            if (sqliteConnection):
-                sqliteConnection.close()
+        record = db.engine.execute("SELECT quantity FROM Baskets WHERE plant_id=:plant_id AND user_id=:user_id;", {"plant_id": plant_id, "user_id": user_id})
+        existingQuantity = record.fetchall()
 
 
         # If there is already some plant in the basket
@@ -128,68 +58,21 @@ def indexFunction():
             # Sum the quantities
             newQuantity = int(existingQuantity[0][0]) + int(quantity)
 
-
-            # Update table with new quantity
-            try:
-
-                sqliteConnection = sqlite3.connect("database.db")
-                cursor = sqliteConnection.cursor()
-
-                user_id = session["user_id"]
-                subtotal = int(newQuantity) * int(price)
-                
-                # Update database with quantity
-                cursor.execute("UPDATE baskets SET quantity=:quantity, subtotal=:subtotal WHERE plant_id=:plant_id AND user_id=:user_id", {"plant_id": plant_id, "user_id": user_id, "quantity": newQuantity, "subtotal": int(subtotal)})
-                sqliteConnection.commit()
-
-                cursor.close()
-
-            except sqlite3.Error as error:
+            user_id = session["user_id"]
+            subtotal = int(newQuantity) * int(price)
             
-                print("Failed to read data from sqlite table", error)
-                print("Exception class is: ", error.__class__)
-                print("Exception is", error.args)
-
-                print('Printing detailed SQLite exception traceback: ')
-                exc_type, exc_value, exc_tb = sys.exc_info()
-                print(traceback.format_exception(exc_type, exc_value, exc_tb))
-
-            finally:
-
-                if (sqliteConnection):
-                    sqliteConnection.close()
+            # Update database with quantity
+            db.engine.execute("UPDATE Baskets SET quantity=:quantity, subtotal=:subtotal WHERE plant_id=:plant_id AND user_id=:user_id", {"plant_id": plant_id, "user_id": user_id, "quantity": newQuantity, "subtotal": int(subtotal)})
 
 
         # First time the user has put this plant in the basket
         else:
 
-            try:
-
-                sqliteConnection = sqlite3.connect("database.db")
-                cursor = sqliteConnection.cursor()
-                user_id = session["user_id"]
-                subtotal = int(quantity) * int(price)
-                
-                # Update database with quantity
-                cursor.execute("INSERT INTO baskets(plant_id, user_id, quantity, name, picture, price, subtotal) VALUES (:plant_id, :user_id, :quantity, :name, :picture, :price, :subtotal)", {"plant_id": plant_id, "user_id": user_id, "quantity": quantity, "name": name, "picture": picture, "price": price, "subtotal": int(subtotal)})
-                sqliteConnection.commit()
-
-                cursor.close()
-
-            except sqlite3.Error as error:
+            user_id = session["user_id"]
+            subtotal = int(quantity) * int(price)
             
-                print("Failed to read data from sqlite table", error)
-                print("Exception class is: ", error.__class__)
-                print("Exception is", error.args)
-
-                print('Printing detailed SQLite exception traceback: ')
-                exc_type, exc_value, exc_tb = sys.exc_info()
-                print(traceback.format_exception(exc_type, exc_value, exc_tb))
-
-            finally:
-
-                if (sqliteConnection):
-                    sqliteConnection.close()
+            # Update database with quantity
+            db.engine.execute("INSERT INTO Baskets(plant_id, user_id, quantity, name, picture, price, subtotal) VALUES (:plant_id, :user_id, :quantity, :name, :picture, :price, :subtotal)", {"plant_id": plant_id, "user_id": user_id, "quantity": quantity, "name": name, "picture": picture, "price": price, "subtotal": int(subtotal)})
 
 
         flash("Added to basket")
@@ -199,33 +82,9 @@ def indexFunction():
     else:
 
         # Query database for plants to display them
-        try:
+        status = "Yes"
 
-            sqliteConnection = sqlite3.connect("database.db")
-            cursor = sqliteConnection.cursor()
-
-            # Set correct status for query
-            status = "Yes"
-            
-            # Query database
-            cursor.execute("SELECT * FROM plants WHERE show=:show;", {"show": status})
-            plants = cursor.fetchall()
-
-            cursor.close()
-
-        except sqlite3.Error as error:
-        
-            print("Failed to read data from sqlite table", error)
-            print("Exception class is: ", error.__class__)
-            print("Exception is", error.args)
-
-            print('Printing detailed SQLite exception traceback: ')
-            exc_type, exc_value, exc_tb = sys.exc_info()
-            print(traceback.format_exception(exc_type, exc_value, exc_tb))
-
-        finally:
-
-            if (sqliteConnection):
-                sqliteConnection.close()
+        record = db.engine.execute("SELECT * FROM Plants WHERE show=:show;", {"show": status})
+        plants = record.fetchall()
 
         return render_template("index.html", name=getUserName(), picture=getUserPicture(), role=getUserRole(), plants=plants)

@@ -1,10 +1,10 @@
-import sqlite3
 import traceback
 import sys
 import re
 
 from flask import Blueprint, render_template, redirect, session, request, flash, get_flashed_messages
-from application import getUserName, getUserPicture, login_required, confirmed_required, getUserRole
+from application import getUserName, getUserPicture, login_required, confirmed_required, getUserRole, db
+from flask_sqlalchemy import SQLAlchemy
 
 # Set Blueprints
 email = Blueprint('email', __name__,)
@@ -32,69 +32,25 @@ def emailFunction():
             flash("Invalid email")
             return redirect("/email")
 
-
         # Query database for email if already exists
-        try:
+        record = db.engine.execute("SELECT * FROM Users WHERE email=:email;", {"email": email})
+        query = record.fetchall()
 
-            sqliteConnection = sqlite3.connect("database.db")
-            cursor = sqliteConnection.cursor()
-            
-            # Query database for email
-            cursor.execute("SELECT * FROM users WHERE email=:email;", {"email": email})
-            record = cursor.fetchall()
-
-            # Check if email is free
-            if len(record) != 1:
-                flash("Email already taken")
-                return redirect("/email")
-
-            cursor.close()
-
-        except sqlite3.Error as error:
-        
-            print("Failed to read data from sqlite table", error)
-            print("Exception class is: ", error.__class__)
-            print("Exception is", error.args)
-
-            print('Printing detailed SQLite exception traceback: ')
-            exc_type, exc_value, exc_tb = sys.exc_info()
-            print(traceback.format_exception(exc_type, exc_value, exc_tb))
-
-        finally:
-
-            if (sqliteConnection):
-                sqliteConnection.close()
-
+        # Check if email is free
+        if len(query) != 1:
+            flash("Email already taken")
+            return redirect("/email")
 
         # Update database with email
-        try:
+        user_id = session["user_id"]
 
-            sqliteConnection = sqlite3.connect("database.db")
-            cursor = sqliteConnection.cursor()
-            user_id = session["user_id"]
-            
-            # Update database with email
-            cursor.execute("UPDATE users SET email=:email WHERE id=:user_id;", {"email": email, "user_id": user_id})
-            sqliteConnection.commit()
-
-            cursor.close()
-
-        except sqlite3.Error as error:
-        
-            print("Failed to read data from sqlite table", error)
-            print("Exception class is: ", error.__class__)
-            print("Exception is", error.args)
-
-            print('Printing detailed SQLite exception traceback: ')
-            exc_type, exc_value, exc_tb = sys.exc_info()
-            print(traceback.format_exception(exc_type, exc_value, exc_tb))
-
-        finally:
-
-            if (sqliteConnection):
-                sqliteConnection.close()
+        # Update database with email
+        db.engine.execute("UPDATE Users SET email=:email WHERE id=:user_id;", {"email": email, "user_id": user_id})
 
         flash("Email address updated")
         return redirect("/profile")
 
-    return render_template("email.html", name=getUserName(), picture=getUserPicture(), role=getUserRole())
+
+    else:
+
+        return render_template("email.html", name=getUserName(), picture=getUserPicture(), role=getUserRole())

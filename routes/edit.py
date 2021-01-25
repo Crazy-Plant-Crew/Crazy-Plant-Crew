@@ -1,4 +1,3 @@
-import sqlite3
 import traceback
 import sys
 import re
@@ -6,8 +5,9 @@ import os
 import html2text
 
 from flask import Blueprint, render_template, redirect, session, request, flash, get_flashed_messages
-from application import getUserName, getUserPicture, login_required, confirmed_required, getUserRole, role_required, uploadPicture, allowed_file
+from application import getUserName, getUserPicture, login_required, confirmed_required, getUserRole, role_required, uploadPicture, allowed_file, db
 from werkzeug.utils import secure_filename
+from flask_sqlalchemy import SQLAlchemy
 
 # Set Blueprints
 edit = Blueprint('edit', __name__,)
@@ -80,30 +80,8 @@ def editFunction():
 
 
         # Update plant name, stock, price, description and show status into the table
-        try:
+        db.engine.execute("UPDATE Plants SET name=:name, stock=:stock, price=:price, description=:description, show=:show WHERE id=:plant_id;", {"name": name, "stock": stock, "price": price, "description": description, "show": show, "plant_id": plant_id})
 
-            sqliteConnection = sqlite3.connect("database.db")
-            cursor = sqliteConnection.cursor()
-
-            cursor.execute("UPDATE plants SET name=:name, stock=:stock, price=:price, description=:description, show=:show WHERE id=:plant_id;", {"name": name, "stock": stock, "price": price, "description": description, "show": show, "plant_id": plant_id})
-            sqliteConnection.commit()
-
-            cursor.close()
-
-        except sqlite3.Error as error:
-        
-            print("Failed to read data from sqlite table", error)
-            print("Exception class is: ", error.__class__)
-            print("Exception is", error.args)
-
-            print('Printing detailed SQLite exception traceback: ')
-            exc_type, exc_value, exc_tb = sys.exc_info()
-            print(traceback.format_exception(exc_type, exc_value, exc_tb))
-
-        finally:
-
-            if (sqliteConnection):
-                sqliteConnection.close()
 
         # Save, upload and delete picture file
         file = request.files["picture"]
@@ -115,31 +93,9 @@ def editFunction():
             upload = uploadPicture("./static/" + filename)
             os.remove("./static/" + filename)
 
-            # Update database with new image url 
-            try:
+            # Update database with new image url                
+            db.engine.execute("UPDATE Plants SET picture=:picture WHERE name=:name;", {"picture": upload, "name": name})
 
-                sqliteConnection = sqlite3.connect("database.db")
-                cursor = sqliteConnection.cursor()
-                
-                cursor.execute("UPDATE plants SET picture=:picture WHERE name=:name;", {"picture": upload, "name": name})
-                sqliteConnection.commit()
-
-                cursor.close()
-
-            except sqlite3.Error as error:
-            
-                print("Failed to read data from sqlite table", error)
-                print("Exception class is: ", error.__class__)
-                print("Exception is", error.args)
-
-                print('Printing detailed SQLite exception traceback: ')
-                exc_type, exc_value, exc_tb = sys.exc_info()
-                print(traceback.format_exception(exc_type, exc_value, exc_tb))
-
-            finally:
-
-                if (sqliteConnection):
-                    sqliteConnection.close()
 
         flash("Plant edited")
         return redirect("/administration")

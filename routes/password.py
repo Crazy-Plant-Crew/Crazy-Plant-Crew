@@ -1,10 +1,10 @@
-import sqlite3
 import traceback
 import sys
 
 from flask import Blueprint, render_template, redirect, session, request, flash, get_flashed_messages
 from werkzeug.security import check_password_hash, generate_password_hash
-from application import getUserName, getUserPicture, login_required, confirmed_required, getUserRole
+from application import getUserName, getUserPicture, login_required, confirmed_required, getUserRole, db
+from flask_sqlalchemy import SQLAlchemy
 
 # Set Blueprints
 password = Blueprint('password', __name__,)
@@ -28,32 +28,10 @@ def passwordFunction():
             return redirect("/password")
 
         # Update database with password hash
-        try:
-
-            sqliteConnection = sqlite3.connect("database.db")
-            cursor = sqliteConnection.cursor()
-            user_id = session["user_id"]
-            
-            # Update database with password hash
-            cursor.execute("UPDATE users SET hash=:hash WHERE id=:user_id;", {"hash": generate_password_hash(password), "user_id": user_id})
-            sqliteConnection.commit()
-
-            cursor.close()
-
-        except sqlite3.Error as error:
+        user_id = session["user_id"]
         
-            print("Failed to read data from sqlite table", error)
-            print("Exception class is: ", error.__class__)
-            print("Exception is", error.args)
-
-            print('Printing detailed SQLite exception traceback: ')
-            exc_type, exc_value, exc_tb = sys.exc_info()
-            print(traceback.format_exception(exc_type, exc_value, exc_tb))
-
-        finally:
-
-            if (sqliteConnection):
-                sqliteConnection.close()
+        # Update database with password hash
+        db.engine.execute("UPDATE Users SET hash=:hash WHERE id=:user_id;", {"hash": generate_password_hash(password), "user_id": user_id})
 
         flash("Password updated")
         return redirect("/profile")

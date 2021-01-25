@@ -1,12 +1,12 @@
-import sqlite3
 import traceback
 import sys
 import re
 import os
 
 from flask import Blueprint, render_template, redirect, session, request, flash, get_flashed_messages
-from application import getUserName, getUserPicture, login_required, confirmed_required, getUserRole, role_required, uploadPicture, allowed_file
+from application import getUserName, getUserPicture, login_required, confirmed_required, getUserRole, role_required, uploadPicture, allowed_file, db
 from werkzeug.utils import secure_filename
+from flask_sqlalchemy import SQLAlchemy
 
 # Set Blueprints
 add = Blueprint('add', __name__,)
@@ -77,64 +77,17 @@ def addFunction():
 
 
         # Insert plant name, stock, description and show status into the table
-        try:
-
-            sqliteConnection = sqlite3.connect("database.db")
-            cursor = sqliteConnection.cursor()
-            
-            cursor.execute("INSERT INTO plants(name, stock, price, description, show) VALUES (:name, :stock, :price, :description, :show)", {"name": name, "stock": stock, "price": price, "description": description, "show": show})
-            sqliteConnection.commit()
-
-            cursor.close()
-
-        except sqlite3.Error as error:
-        
-            print("Failed to read data from sqlite table", error)
-            print("Exception class is: ", error.__class__)
-            print("Exception is", error.args)
-
-            print('Printing detailed SQLite exception traceback: ')
-            exc_type, exc_value, exc_tb = sys.exc_info()
-            print(traceback.format_exception(exc_type, exc_value, exc_tb))
-
-        finally:
-
-            if (sqliteConnection):
-                sqliteConnection.close()
+        db.engine.execute("INSERT INTO Plants(name, stock, price, description, show) VALUES (:name, :stock, :price, :description, :show)", {"name": name, "stock": stock, "price": price, "description": description, "show": show})
 
 
-        # Query database for plant if already exists so the last is selected
-        try:
+        # Query database for plant if already exists so the last is selected as the last plant is the one just added
+        record = db.engine.execute("SELECT * FROM Plants WHERE name=:name;", {"name": name})
 
-            sqliteConnection = sqlite3.connect("database.db")
-            cursor = sqliteConnection.cursor()
-            
-            # Query database for plant name
-            cursor.execute("SELECT * FROM plants WHERE name=:name;", {"name": name})
-            record = cursor.fetchall()
+        if len(record.fetchall()) != 1:
+            plant_id = record[-1][0]
 
-            # Check if plant name is free
-            if len(record) != 1:
-                plant_id = record[-1][0]
-            else:
-                plant_id = record[0][0]
-
-            cursor.close()
-
-        except sqlite3.Error as error:
-        
-            print("Failed to read data from sqlite table", error)
-            print("Exception class is: ", error.__class__)
-            print("Exception is", error.args)
-
-            print('Printing detailed SQLite exception traceback: ')
-            exc_type, exc_value, exc_tb = sys.exc_info()
-            print(traceback.format_exception(exc_type, exc_value, exc_tb))
-
-        finally:
-
-            if (sqliteConnection):
-                sqliteConnection.close()
+        else:
+            plant_id = record[0][0]
 
 
         # Save, upload and delete picture file
@@ -148,30 +101,8 @@ def addFunction():
             os.remove("./static/" + filename)
 
             # Update database with new image url 
-            try:
+            db.engine.execute("UPDATE Plants SET picture=:picture WHERE id=:id;", {"picture": upload, "id": plant_id})
 
-                sqliteConnection = sqlite3.connect("database.db")
-                cursor = sqliteConnection.cursor()
-                
-                cursor.execute("UPDATE plants SET picture=:picture WHERE id=:id;", {"picture": upload, "id": plant_id})
-                sqliteConnection.commit()
-
-                cursor.close()
-
-            except sqlite3.Error as error:
-            
-                print("Failed to read data from sqlite table", error)
-                print("Exception class is: ", error.__class__)
-                print("Exception is", error.args)
-
-                print('Printing detailed SQLite exception traceback: ')
-                exc_type, exc_value, exc_tb = sys.exc_info()
-                print(traceback.format_exception(exc_type, exc_value, exc_tb))
-
-            finally:
-
-                if (sqliteConnection):
-                    sqliteConnection.close()
 
         flash("Plant added")
         return redirect("/administration")

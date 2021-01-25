@@ -1,9 +1,9 @@
-import sqlite3
 import traceback
 import sys
 
 from flask import Blueprint, render_template, redirect, session, request, flash, get_flashed_messages, url_for
-from application import getUserName, getUserPicture, login_required, confirmed_required, role_required, getUserRole
+from application import getUserName, getUserPicture, login_required, confirmed_required, role_required, getUserRole, db
+from flask_sqlalchemy import SQLAlchemy
 
 # Set Blueprints
 administration = Blueprint('administration', __name__,)
@@ -18,31 +18,8 @@ def administrationFunction():
     get_flashed_messages()
 
     # Query database for plants
-    try:
-
-        sqliteConnection = sqlite3.connect("database.db")
-        cursor = sqliteConnection.cursor()
-        
-        # Query database
-        cursor.execute("SELECT * FROM plants;")
-        record = cursor.fetchall()
-
-        cursor.close()
-
-    except sqlite3.Error as error:
-    
-        print("Failed to read data from sqlite table", error)
-        print("Exception class is: ", error.__class__)
-        print("Exception is", error.args)
-
-        print('Printing detailed SQLite exception traceback: ')
-        exc_type, exc_value, exc_tb = sys.exc_info()
-        print(traceback.format_exception(exc_type, exc_value, exc_tb))
-
-    finally:
-
-        if (sqliteConnection):
-            sqliteConnection.close()
+    record = db.engine.execute("SELECT * FROM Plants;")
+    plants = record.fetchall()
 
 
     if request.method == "POST":
@@ -51,36 +28,14 @@ def administrationFunction():
         
             # Loop through the record list to match plant ID when delete button is pressed
             index = 0
-            while index < len(record):
+            while index < len(plants):
 
-                if int(request.form["delete"]) == int(record[index][0]):
+                if int(request.form["delete"]) == int(plants[index][0]):
 
                     # Query database for plant id to delete row
-                    try:
-
-                        sqliteConnection = sqlite3.connect("database.db")
-                        cursor = sqliteConnection.cursor()
-                        plant_id = record[index][0]
+                    plant_id = plants[index][0]
                         
-                        cursor.execute("DELETE FROM plants WHERE id=:id;", {"id": plant_id})
-                        sqliteConnection.commit()
-
-                        cursor.close()
-
-                    except sqlite3.Error as error:
-                    
-                        print("Failed to read data from sqlite table", error)
-                        print("Exception class is: ", error.__class__)
-                        print("Exception is", error.args)
-
-                        print('Printing detailed SQLite exception traceback: ')
-                        exc_type, exc_value, exc_tb = sys.exc_info()
-                        print(traceback.format_exception(exc_type, exc_value, exc_tb))
-
-                    finally:
-
-                        if (sqliteConnection):
-                            sqliteConnection.close()
+                    db.engine.execute("DELETE FROM Plants WHERE id=:id;", {"id": plant_id})
 
                     flash("Plant deleted")
                     return redirect("/administration")
@@ -94,11 +49,11 @@ def administrationFunction():
 
             # Loop through the record list to match plant ID when edit button is pressed
             index = 0
-            while index < len(record):
+            while index < len(plants):
 
-                if int(request.form["edit"]) == int(record[index][0]):
+                if int(request.form["edit"]) == int(plants[index][0]):
 
-                    thisPlant = record[index]
+                    thisPlant = plants[index]
 
                     return redirect(url_for("edit.editFunction", plants=thisPlant))
 
@@ -108,4 +63,4 @@ def administrationFunction():
 
     else:
    
-        return render_template("administration.html", name=getUserName(), picture=getUserPicture(), role=getUserRole(), plants=record)
+        return render_template("administration.html", name=getUserName(), picture=getUserPicture(), role=getUserRole(), plants=plants)

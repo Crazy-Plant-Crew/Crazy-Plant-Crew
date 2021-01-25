@@ -1,9 +1,9 @@
-import sqlite3
 import traceback
 import sys
 
 from flask import Blueprint, render_template, redirect, session, request, flash, get_flashed_messages
-from application import getUserName, getUserPicture, login_required, confirmed_required, getUserRole
+from application import getUserName, getUserPicture, login_required, confirmed_required, getUserRole, db
+from flask_sqlalchemy import SQLAlchemy
 
 # Set Blueprints
 mailing = Blueprint('mailing', __name__,)
@@ -21,64 +21,19 @@ def mailingFunction():
         if request.form.get('activate'):
 
             # Update database with newsletter preference
-            try:
-
-                sqliteConnection = sqlite3.connect("database.db")
-                cursor = sqliteConnection.cursor()
-                user_id = session["user_id"]
-                newsletter = "True"
-                
-                # Update database with newsletter
-                cursor.execute("UPDATE users SET newsletter=:newsletter WHERE id=:user_id;", {"newsletter": newsletter, "user_id": user_id})
-                sqliteConnection.commit()
-
-                cursor.close()
-
-            except sqlite3.Error as error:
+            user_id = session["user_id"]
+            newsletter = "True"
             
-                print("Failed to read data from sqlite table", error)
-                print("Exception class is: ", error.__class__)
-                print("Exception is", error.args)
-
-                print('Printing detailed SQLite exception traceback: ')
-                exc_type, exc_value, exc_tb = sys.exc_info()
-                print(traceback.format_exception(exc_type, exc_value, exc_tb))
-
-            finally:
-
-                if (sqliteConnection):
-                    sqliteConnection.close()
+            # Update database with newsletter
+            db.engine.execute("UPDATE Users SET newsletter=:newsletter WHERE id=:user_id;", {"newsletter": newsletter, "user_id": user_id})
 
         if request.form.get('deactivate'):
 
             # Update database with newsletter preference
-            try:
+            user_id = session["user_id"]
+            newsletter = "False"
 
-                sqliteConnection = sqlite3.connect("database.db")
-                cursor = sqliteConnection.cursor()
-                user_id = session["user_id"]
-                newsletter = "False"
-                
-                # Update database with newsletter
-                cursor.execute("UPDATE users SET newsletter=:newsletter WHERE id=:user_id;", {"newsletter": newsletter, "user_id": user_id})
-                sqliteConnection.commit()
-
-                cursor.close()
-
-            except sqlite3.Error as error:
-            
-                print("Failed to read data from sqlite table", error)
-                print("Exception class is: ", error.__class__)
-                print("Exception is", error.args)
-
-                print('Printing detailed SQLite exception traceback: ')
-                exc_type, exc_value, exc_tb = sys.exc_info()
-                print(traceback.format_exception(exc_type, exc_value, exc_tb))
-
-            finally:
-
-                if (sqliteConnection):
-                    sqliteConnection.close()
+            db.engine.execute("UPDATE Users SET newsletter=:newsletter WHERE id=:user_id;", {"newsletter": newsletter, "user_id": user_id})
             
         flash("Newsletter updated")
         return redirect("/profile")

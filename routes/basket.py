@@ -1,9 +1,9 @@
-import sqlite3
 import traceback
 import sys
 
 from flask import Blueprint, render_template, redirect, session, request, flash, get_flashed_messages
-from application import getUserName, getUserPicture, login_required, confirmed_required, getUserRole, role_required
+from application import getUserName, getUserPicture, login_required, confirmed_required, getUserRole, role_required, db
+from flask_sqlalchemy import SQLAlchemy
 
 # Set Blueprints
 basket = Blueprint('basket', __name__,)
@@ -16,34 +16,9 @@ def basketFunction():
     # Force flash() to get the messages on the same page as the redirect.
     get_flashed_messages()
 
-
     # Query database for baskets item
-    try:
-
-        sqliteConnection = sqlite3.connect("database.db")
-        cursor = sqliteConnection.cursor()
-        
-        # Query database
-        cursor.execute("SELECT * FROM baskets;")
-        baskets = cursor.fetchall()
-
-        cursor.close()
-
-    except sqlite3.Error as error:
-    
-        print("Failed to read data from sqlite table", error)
-        print("Exception class is: ", error.__class__)
-        print("Exception is", error.args)
-
-        print('Printing detailed SQLite exception traceback: ')
-        exc_type, exc_value, exc_tb = sys.exc_info()
-        print(traceback.format_exception(exc_type, exc_value, exc_tb))
-
-    finally:
-
-        if (sqliteConnection):
-            sqliteConnection.close()
-
+    record = db.engine.execute("SELECT * FROM Baskets;")
+    baskets = record.fetchall()
 
     if request.method == "POST":
 
@@ -56,31 +31,9 @@ def basketFunction():
                 if int(request.form["delete"]) == int(baskets[index][0]):
 
                     # Query database for plant id to delete row
-                    try:
-
-                        sqliteConnection = sqlite3.connect("database.db")
-                        cursor = sqliteConnection.cursor()
-                        basket_id = baskets[index][0]
+                    basket_id = baskets[index][0]
                         
-                        cursor.execute("DELETE FROM baskets WHERE id=:id;", {"id": basket_id})
-                        sqliteConnection.commit()
-
-                        cursor.close()
-
-                    except sqlite3.Error as error:
-                    
-                        print("Failed to read data from sqlite table", error)
-                        print("Exception class is: ", error.__class__)
-                        print("Exception is", error.args)
-
-                        print('Printing detailed SQLite exception traceback: ')
-                        exc_type, exc_value, exc_tb = sys.exc_info()
-                        print(traceback.format_exception(exc_type, exc_value, exc_tb))
-
-                    finally:
-
-                        if (sqliteConnection):
-                            sqliteConnection.close()
+                    db.engine.execute("DELETE FROM Baskets WHERE id=:id;", {"id": basket_id})
 
                     flash("Item deleted")
                     return redirect("/basket")

@@ -1,10 +1,10 @@
-import sqlite3
 import traceback
 import sys
 import re
 
 from flask import Blueprint, render_template, redirect, session, request, flash, get_flashed_messages
-from application import getUserName, getUserPicture, login_required, confirmed_required, getUserRole
+from application import getUserName, getUserPicture, login_required, confirmed_required, getUserRole, db
+from flask_sqlalchemy import SQLAlchemy
 
 # Set Blueprints
 username = Blueprint('username', __name__,)
@@ -34,65 +34,19 @@ def usernameFunction():
 
 
         # Query database for username if already exists
-        try:
+        record = db.engine.execute("SELECT * FROM Users WHERE username=:username;", {"username": username})
+        query = record.fetchall()
 
-            sqliteConnection = sqlite3.connect("database.db")
-            cursor = sqliteConnection.cursor()
-            
-            # Query database for username
-            cursor.execute("SELECT * FROM users WHERE username=:username;", {"username": username})
-            record = cursor.fetchall()
-
-            # Check if username is free
-            if len(record) != 1:
-                flash("Username already taken")
-                return redirect("/username")
-
-            cursor.close()
-
-        except sqlite3.Error as error:
-        
-            print("Failed to read data from sqlite table", error)
-            print("Exception class is: ", error.__class__)
-            print("Exception is", error.args)
-
-            print('Printing detailed SQLite exception traceback: ')
-            exc_type, exc_value, exc_tb = sys.exc_info()
-            print(traceback.format_exception(exc_type, exc_value, exc_tb))
-
-        finally:
-
-            if (sqliteConnection):
-                sqliteConnection.close()
+        # Check if username is free
+        if len(query) != 1:
+            flash("Username already taken")
+            return redirect("/username")
 
 
         # Update database with username
-        try:
 
-            sqliteConnection = sqlite3.connect("database.db")
-            cursor = sqliteConnection.cursor()
-            user_id = session["user_id"]
-            
-            # Update database for username
-            cursor.execute("UPDATE users SET username=:username WHERE id=:user_id;", {"username": username, "user_id": user_id})
-            sqliteConnection.commit()
-
-            cursor.close()
-
-        except sqlite3.Error as error:
-        
-            print("Failed to read data from sqlite table", error)
-            print("Exception class is: ", error.__class__)
-            print("Exception is", error.args)
-
-            print('Printing detailed SQLite exception traceback: ')
-            exc_type, exc_value, exc_tb = sys.exc_info()
-            print(traceback.format_exception(exc_type, exc_value, exc_tb))
-
-        finally:
-
-            if (sqliteConnection):
-                sqliteConnection.close()
+        user_id = session["user_id"]
+        db.engine.execute("UPDATE Users SET username=:username WHERE id=:user_id;", {"username": username, "user_id": user_id})
 
         flash("Username updated")
         return redirect("/profile")

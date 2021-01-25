@@ -1,9 +1,9 @@
-import sqlite3
 import traceback
 import sys
 
 from flask import Blueprint, render_template, redirect, session, request
-from application import getUserName, getUserPicture, login_required, confirmed_required, getUserRole, role_required
+from application import getUserName, getUserPicture, login_required, confirmed_required, getUserRole, role_required, db
+from flask_sqlalchemy import SQLAlchemy
 
 # Set Blueprints
 remove = Blueprint('remove', __name__,)

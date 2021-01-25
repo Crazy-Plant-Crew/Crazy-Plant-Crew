@@ -1,11 +1,11 @@
-import sqlite3
 import traceback
 import sys
 import os
 
 from flask import Blueprint, render_template, redirect, session, request, flash
-from application import getUserName, uploadPicture, getUserPicture, login_required, confirmed_required, getUserRole, allowed_file
+from application import getUserName, uploadPicture, getUserPicture, login_required, confirmed_required, getUserRole, allowed_file, db
 from werkzeug.utils import secure_filename
+from flask_sqlalchemy import SQLAlchemy
 
 # Set Blueprints
 picture = Blueprint('picture', __name__,)
@@ -37,31 +37,8 @@ def pictureFunction():
             os.remove("./static/" + filename)         
 
         # Update database with new image url 
-        try:
-
-            sqliteConnection = sqlite3.connect("database.db")
-            cursor = sqliteConnection.cursor()
-            user_id = session["user_id"]
-            
-            cursor.execute("UPDATE users SET picture=:picture WHERE id=:user_id;", {"picture": upload, "user_id": user_id})
-            sqliteConnection.commit()
-
-            cursor.close()
-
-        except sqlite3.Error as error:
-        
-            print("Failed to read data from sqlite table", error)
-            print("Exception class is: ", error.__class__)
-            print("Exception is", error.args)
-
-            print('Printing detailed SQLite exception traceback: ')
-            exc_type, exc_value, exc_tb = sys.exc_info()
-            print(traceback.format_exception(exc_type, exc_value, exc_tb))
-
-        finally:
-
-            if (sqliteConnection):
-                sqliteConnection.close()
+        user_id = session["user_id"]
+        cursor.execute("UPDATE Users SET picture=:picture WHERE id=:user_id;", {"picture": upload, "user_id": user_id})
 
         flash("Profile picture updated")
         return redirect("/")

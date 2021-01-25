@@ -1,4 +1,3 @@
-import sqlite3
 import traceback
 import sys
 import random
@@ -6,8 +5,9 @@ import string
 
 from flask import Blueprint, render_template, redirect, session, request, flash, get_flashed_messages
 from werkzeug.security import check_password_hash, generate_password_hash
-from application import randomPassword, getUserName, mail
+from application import randomPassword, getUserName, mail, db
 from flask_mail import Message, Mail
+from flask_sqlalchemy import SQLAlchemy
 
 # Set Blueprints
 forget = Blueprint('forget', __name__,)
@@ -25,93 +25,19 @@ def forgetFunction():
         password = randomPassword()
         
         # Check if username exists
-        try:
+        record = db.engine.execute("SELECT username FROM Users WHERE username=:username;", {"username": username})
+        query = record.fetchall()
 
-            sqliteConnection = sqlite3.connect("database.db")
-            cursor = sqliteConnection.cursor()
-
-            # Query database for username
-            cursor.execute("SELECT username FROM users WHERE username=:username;", {"username": username})
-            record = cursor.fetchall()
-
-            # Check if username exists
-            if len(record) == 0:
-                flash("Username does not exist")
-                return redirect("/forget")
-
-            cursor.close()
-
-        except sqlite3.Error as error:
-        
-            print("Failed to read data from sqlite table", error)
-            print("Exception class is: ", error.__class__)
-            print("Exception is", error.args)
-
-            print('Printing detailed SQLite exception traceback: ')
-            exc_type, exc_value, exc_tb = sys.exc_info()
-            print(traceback.format_exception(exc_type, exc_value, exc_tb))
-
-        finally:
-        
-            if (sqliteConnection):
-                sqliteConnection.close()   
-            
+        if len(query) == 0:
+            flash("Username does not exist")
+            return redirect("/forget")
 
         # Update database with new password
-        try:
-
-            sqliteConnection = sqlite3.connect("database.db")
-            cursor = sqliteConnection.cursor()
-            
-            # Update database with new password
-            cursor.execute("UPDATE users SET hash=:hash WHERE username=:username;", {"hash": generate_password_hash(password), "username": username})
-            sqliteConnection.commit()
-
-            cursor.close()
-
-        except sqlite3.Error as error:
-        
-            print("Failed to read data from sqlite table", error)
-            print("Exception class is: ", error.__class__)
-            print("Exception is", error.args)
-
-            print('Printing detailed SQLite exception traceback: ')
-            exc_type, exc_value, exc_tb = sys.exc_info()
-            print(traceback.format_exception(exc_type, exc_value, exc_tb))
-
-        finally:
-
-            if (sqliteConnection):
-                sqliteConnection.close()
-
+        db.engine.execute("UPDATE Users SET hash=:hash WHERE username=:username;", {"hash": generate_password_hash(password), "username": username})
 
         # Get the user email address
-        try:
-
-            sqliteConnection = sqlite3.connect("database.db")
-            cursor = sqliteConnection.cursor()
-            
-            # Query database for username
-            cursor.execute("SELECT email FROM users WHERE username=:username;", {"username": username})
-            email = cursor.fetchall()[0][0]
-
-            cursor.close()
-
-        except sqlite3.Error as error:
-        
-            print("Failed to read data from sqlite table", error)
-            print("Exception class is: ", error.__class__)
-            print("Exception is", error.args)
-
-            print('Printing detailed SQLite exception traceback: ')
-            exc_type, exc_value, exc_tb = sys.exc_info()
-            print(traceback.format_exception(exc_type, exc_value, exc_tb))
-
-        finally:
-        
-            if (sqliteConnection):
-                sqliteConnection.close()   
-
+        record = db.engine.execute("SELECT email FROM Users WHERE username=:username;", {"username": username})
+        email = record.fetchall()[0][0]
 
         # Send new password to user
         subject = "New password!"

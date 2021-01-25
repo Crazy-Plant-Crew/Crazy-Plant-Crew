@@ -1,13 +1,14 @@
-import sqlite3
 import traceback
 import sys
 import os
 import html2text
 
 from flask import Blueprint, render_template, redirect, session, request, flash, get_flashed_messages
-from application import getUserName, getUserPicture, login_required, confirmed_required, getUserRole, getUserEmail, sendMail
+from application import getUserName, getUserPicture, login_required, confirmed_required, getUserRole, getUserEmail, sendMail, db
 from flask_mail import Message, Mail
 from flask_ckeditor import CKEditor
+from flask_sqlalchemy import SQLAlchemy
+
 
 # Set Blueprints
 message = Blueprint('message', __name__,)

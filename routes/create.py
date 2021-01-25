@@ -1,11 +1,11 @@
-import sqlite3
 import traceback
 import sys
 import html2text
 
 from flask import Blueprint, render_template, redirect, session, request, flash, get_flashed_messages
-from application import getUserName, getUserPicture, login_required, confirmed_required, getUserRole, role_required
+from application import getUserName, getUserPicture, login_required, confirmed_required, getUserRole, role_required, db
 from flask_ckeditor import CKEditor
+from flask_sqlalchemy import SQLAlchemy
 
 # Set Blueprints
 create = Blueprint('create', __name__,)
@@ -25,31 +25,8 @@ def createFunction():
         title = request.form.get("title")
         body = request.form.get("ckeditor")
 
-        # Insert title and body into the table
-        try:
-
-            sqliteConnection = sqlite3.connect("database.db")
-            cursor = sqliteConnection.cursor()
-            
-            cursor.execute("INSERT INTO news(title, body) VALUES (:title, :body)", {"title": title, "body": body})
-            sqliteConnection.commit()
-
-            cursor.close()
-
-        except sqlite3.Error as error:
-        
-            print("Failed to read data from sqlite table", error)
-            print("Exception class is: ", error.__class__)
-            print("Exception is", error.args)
-
-            print('Printing detailed SQLite exception traceback: ')
-            exc_type, exc_value, exc_tb = sys.exc_info()
-            print(traceback.format_exception(exc_type, exc_value, exc_tb))
-
-        finally:
-
-            if (sqliteConnection):
-                sqliteConnection.close()
+        # Insert title and body into the table            
+        db.engine.execute("INSERT INTO News(title, body) VALUES (:title, :body)", {"title": title, "body": body})
 
         flash("News created")
         return redirect("/communication")

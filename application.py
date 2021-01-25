@@ -21,7 +21,6 @@ from flask_mail import Message, Mail
 from time import time
 from flask_ckeditor import CKEditor
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import text
 
 
 # Configure application
@@ -85,10 +84,13 @@ db.create_all()
 
 
 # Seed DB for admin
-result = db.session.execute("SELECT * FROM Users WHERE username=:username;", {"username": os.environ.get("USERNAME")})
-if result.fetchall()[0][1] != os.environ.get("USERNAME"):
-    db.session.add(Users(username=os.environ.get("USERNAME"), email=os.environ.get("EMAIL"), hash=generate_password_hash(os.environ.get("USERNAME")), role=os.environ.get("ROLE"), confirmed=os.environ.get("CONFIRMED")))
+result = db.engine.execute("SELECT * FROM Users WHERE username=:username;", {"username": os.environ.get("USERNAME")})
+query = result.fetchall()
+
+if len(query) == 0:
+    db.session.add(Users(username=os.environ.get("USERNAME"), email=os.environ.get("EMAIL"), hash=generate_password_hash(os.environ.get("PASSWORD")), role=os.environ.get("ROLE"), confirmed=os.environ.get("CONFIRMED")))
     db.session.commit()
+
 
 
 # Set CKEditor
@@ -267,30 +269,7 @@ def sendPin(email):
     messsage = Message(subject=subject, recipients=[email], body=body)
     mail.send(messsage)    
 
-    try:
-
-        sqliteConnection = sqlite3.connect("database.db")
-        cursor = sqliteConnection.cursor()
-        
-        cursor.execute("UPDATE users SET time=:date, pin=:pin WHERE id=:id;", {"date": date, "pin": pin, "id": user_id})
-        sqliteConnection.commit()
-
-        cursor.close()
-
-    except sqlite3.Error as error:
-    
-        print("Failed to read data from sqlite table", error)
-        print("Exception class is: ", error.__class__)
-        print("Exception is", error.args)
-
-        print('Printing detailed SQLite exception traceback: ')
-        exc_type, exc_value, exc_tb = sys.exc_info()
-        print(traceback.format_exception(exc_type, exc_value, exc_tb))
-
-    finally:
-
-        if (sqliteConnection):
-            sqliteConnection.close()
+    db.engine.execute("UPDATE Users SET time=:date, pin=:pin WHERE id=:id;", {"date": date, "pin": pin, "id": user_id})
 
 
 # Send email
@@ -301,34 +280,13 @@ def sendMail(subject, email, body):
 
 # Check if user is confirmed via email
 def getUserConfirmed():
-    try:
 
-        sqliteConnection = sqlite3.connect("database.db")
-        cursor = sqliteConnection.cursor()
-
-        # Check who's id is logged in
-        loggedId = session["user_id"]
+    # Check who's id is logged in
+    loggedId = session["user_id"]
         
-        # Query database for unconfirmed user
-        cursor.execute("SELECT confirmed FROM users WHERE id=:id;", {"id": loggedId})
-        confirmed = cursor.fetchall()[0][0]
-
-        cursor.close()
-
-    except sqlite3.Error as error:
-    
-        print("Failed to read data from sqlite table", error)
-        print("Exception class is: ", error.__class__)
-        print("Exception is", error.args)
-
-        print('Printing detailed SQLite exception traceback: ')
-        exc_type, exc_value, exc_tb = sys.exc_info()
-        print(traceback.format_exception(exc_type, exc_value, exc_tb))
-
-    finally:
-    
-        if (sqliteConnection):
-            sqliteConnection.close()
+    # Query database for unconfirmed user
+    record = db.engine.execute("SELECT confirmed FROM Users WHERE id=:id;", {"id": loggedId})
+    confirmed = record.fetchall()[0][0]
 
     return confirmed
 
@@ -336,211 +294,78 @@ def getUserConfirmed():
 # Get username to be displayed 
 def getUserName():
 
-    try:
-
-        sqliteConnection = sqlite3.connect("database.db")
-        cursor = sqliteConnection.cursor()
-
-        # Check who's id is logged in
-        loggedId = session["user_id"]
-        
-        # Query database for username
-        cursor.execute("SELECT username FROM users WHERE id=:id;", {"id": loggedId})
-        name = cursor.fetchall()[0][0]
-
-        cursor.close()
-
-    except sqlite3.Error as error:
+    # Check who's id is logged in
+    loggedId = session["user_id"]
     
-        print("Failed to read data from sqlite table", error)
-        print("Exception class is: ", error.__class__)
-        print("Exception is", error.args)
+    # Query database for username
+    record = db.engine.execute("SELECT username FROM Users WHERE id=:id;", {"id": loggedId})
+    name = record.fetchall()[0][0]
 
-        print('Printing detailed SQLite exception traceback: ')
-        exc_type, exc_value, exc_tb = sys.exc_info()
-        print(traceback.format_exception(exc_type, exc_value, exc_tb))
-
-    finally:
-    
-        if (sqliteConnection):
-            sqliteConnection.close()   
-        
-        return name
+    return name
 
 
 # Get the user email address
 def getUserEmail():
 
-    try:
-
-        sqliteConnection = sqlite3.connect("database.db")
-        cursor = sqliteConnection.cursor()
-
-        # Check who's id is logged in
-        loggedId = session["user_id"]
-        
-        # Query database for email
-        cursor.execute("SELECT email FROM users WHERE id=:id;", {"id": loggedId})
-        email = cursor.fetchall()[0][0]
-
-        cursor.close()
-
-    except sqlite3.Error as error:
+    # Check who's id is logged in
+    loggedId = session["user_id"]
     
-        print("Failed to read data from sqlite table", error)
-        print("Exception class is: ", error.__class__)
-        print("Exception is", error.args)
-
-        print('Printing detailed SQLite exception traceback: ')
-        exc_type, exc_value, exc_tb = sys.exc_info()
-        print(traceback.format_exception(exc_type, exc_value, exc_tb))
-
-    finally:
-    
-        if (sqliteConnection):
-            sqliteConnection.close()   
+    # Query database for email
+    record = db.engine.execute("SELECT email FROM Users WHERE id=:id;", {"id": loggedId})
+    email = record.fetchall()[0][0]
         
-        return email
+    return email
 
 
 # Get the user role
 def getUserRole():
 
-    try:
-
-        sqliteConnection = sqlite3.connect("database.db")
-        cursor = sqliteConnection.cursor()
-
-        # Check who's id is logged in
-        loggedId = session["user_id"]
-        
-        # Query database for role
-        cursor.execute("SELECT role FROM users WHERE id=:id;", {"id": loggedId})
-        role = cursor.fetchall()[0][0]
-
-        cursor.close()
-
-    except sqlite3.Error as error:
+    loggedId = session["user_id"]
     
-        print("Failed to read data from sqlite table", error)
-        print("Exception class is: ", error.__class__)
-        print("Exception is", error.args)
-
-        print('Printing detailed SQLite exception traceback: ')
-        exc_type, exc_value, exc_tb = sys.exc_info()
-        print(traceback.format_exception(exc_type, exc_value, exc_tb))
-
-    finally:
-    
-        if (sqliteConnection):
-            sqliteConnection.close()   
+    # Query database for role
+    record = db.engine.execute("SELECT role FROM Users WHERE id=:id;", {"id": loggedId})
+    role = record.fetchall()[0][0]
         
-        return role
+    return role
 
 
 # Get the user current PIN
 def getUserPin():
 
-    try:
-
-        sqliteConnection = sqlite3.connect("database.db")
-        cursor = sqliteConnection.cursor()
-
-        # Check who's id is logged in
-        loggedId = session["user_id"]
-        
-        # Query database for PIN
-        cursor.execute("SELECT pin FROM users WHERE id=:id", {"id": loggedId})
-        pin = cursor.fetchall()[0][0]
-
-        cursor.close()
-
-    except sqlite3.Error as error:
+    # Check who's id is logged in
+    loggedId = session["user_id"]
     
-        print("Failed to read data from sqlite table", error)
-        print("Exception class is: ", error.__class__)
-        print("Exception is", error.args)
-
-        print('Printing detailed SQLite exception traceback: ')
-        exc_type, exc_value, exc_tb = sys.exc_info()
-        print(traceback.format_exception(exc_type, exc_value, exc_tb))
-
-    finally:
-    
-        if (sqliteConnection):
-            sqliteConnection.close()   
+    # Query database for PIN
+    record = db.engine.execute("SELECT pin FROM Users WHERE id=:id", {"id": loggedId})
+    pin = record.fetchall()[0][0]
         
-        return pin
+    return pin
 
 
 # Get the user registration time
 def getUserTime():
 
-    try:
-
-        sqliteConnection = sqlite3.connect("database.db")
-        cursor = sqliteConnection.cursor()
-
-        # Check who's id is logged in
-        loggedId = session["user_id"]
-        
-        # Query database for time
-        cursor.execute("SELECT time FROM users WHERE id=:id;", {"id": loggedId})
-        time = cursor.fetchall()[0][0]
-
-        cursor.close()
-
-    except sqlite3.Error as error:
+    # Check who's id is logged in
+    loggedId = session["user_id"]
     
-        print("Failed to read data from sqlite table", error)
-        print("Exception class is: ", error.__class__)
-        print("Exception is", error.args)
-
-        print('Printing detailed SQLite exception traceback: ')
-        exc_type, exc_value, exc_tb = sys.exc_info()
-        print(traceback.format_exception(exc_type, exc_value, exc_tb))
-
-    finally:
-    
-        if (sqliteConnection):
-            sqliteConnection.close()   
+    # Query database for time
+    record = db.engine.execute("SELECT time FROM Users WHERE id=:id;", {"id": loggedId})
+    time = record.fetchall()[0][0]
         
-        return time
+    return time
 
 
 # Get profile picture to be displayed 
 def getUserPicture():
 
-    try:
-
-        sqliteConnection = sqlite3.connect("database.db")
-        cursor = sqliteConnection.cursor()
-
-        # Check who's id is logged in
-        loggedId = session["user_id"]
-        
-        # Query database for picture
-        cursor.execute("SELECT picture FROM users WHERE id=:id;", {"id": loggedId})
-        picture = cursor.fetchall()[0][0]
-
-        cursor.close()
-
-    except sqlite3.Error as error:
+    # Check who's id is logged in
+    loggedId = session["user_id"]
     
-        print("Failed to read data from sqlite table", error)
-        print("Exception class is: ", error.__class__)
-        print("Exception is", error.args)
-
-        print('Printing detailed SQLite exception traceback: ')
-        exc_type, exc_value, exc_tb = sys.exc_info()
-        print(traceback.format_exception(exc_type, exc_value, exc_tb))
-
-    finally:
-    
-        if (sqliteConnection):
-            sqliteConnection.close()   
+    # Query database for picture
+    record = db.engine.execute("SELECT picture FROM Users WHERE id=:id;", {"id": loggedId})
+    picture = record.fetchall()[0][0]
         
-        return picture
+    return picture
 
 
 # Import routes after to avoid circular import

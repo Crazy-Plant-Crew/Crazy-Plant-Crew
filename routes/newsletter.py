@@ -1,13 +1,13 @@
-import sqlite3
 import traceback
 import sys
 import html2text
 import os
 
 from flask import Blueprint, render_template, redirect, session, request, flash, get_flashed_messages
-from application import getUserName, getUserPicture, login_required, confirmed_required, getUserRole, role_required, sendMail
+from application import getUserName, getUserPicture, login_required, confirmed_required, getUserRole, role_required, sendMail, db
 from flask_mail import Message, Mail
 from flask_ckeditor import CKEditor
+from flask_sqlalchemy import SQLAlchemy
 
 # Set Blueprints
 newsletter = Blueprint('newsletter', __name__,)
@@ -32,32 +32,10 @@ def newsletterFunction():
         newsletter = request.form.get("newsletter")
 
         # Query database for user emails for newsletter 
-        try:
+        status = "True"
 
-            sqliteConnection = sqlite3.connect("database.db")
-            cursor = sqliteConnection.cursor()
-            status = "True"
-            
-            # Query database
-            cursor.execute("SELECT email FROM users WHERE newsletter=:newsletter;", {"newsletter": status})
-            email = cursor.fetchall()
-
-            cursor.close()
-
-        except sqlite3.Error as error:
-        
-            print("Failed to read data from sqlite table", error)
-            print("Exception class is: ", error.__class__)
-            print("Exception is", error.args)
-
-            print('Printing detailed SQLite exception traceback: ')
-            exc_type, exc_value, exc_tb = sys.exc_info()
-            print(traceback.format_exception(exc_type, exc_value, exc_tb))
-
-        finally:
-
-            if (sqliteConnection):
-                sqliteConnection.close()
+        record = db.engine.execute("SELECT email FROM Users WHERE newsletter=:newsletter;", {"newsletter": status})
+        email = record.fetchall()
 
 
         if address != "" and newsletter == None:

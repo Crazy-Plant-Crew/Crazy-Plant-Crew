@@ -1,4 +1,3 @@
-import sqlite3
 import traceback
 import sys
 import os
@@ -8,8 +7,9 @@ from flask import Blueprint, render_template, redirect, session, request, flash,
 from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
 from werkzeug.security import check_password_hash, generate_password_hash
 from werkzeug.utils import secure_filename
-from application import uploadPicture, is_human, sendPin, allowed_file
+from application import uploadPicture, is_human, sendPin, allowed_file, db
 from time import time
+from flask_sqlalchemy import SQLAlchemy
 
 
 # Set Blueprints
@@ -76,127 +76,34 @@ def signupFunction():
 
 
         # Query database for username if already exists
-        try:
+        record = db.engine.execute("SELECT * FROM Users WHERE username=:username;", {"username": username})
+        query = cursor.fetchall()
 
-            sqliteConnection = sqlite3.connect("database.db")
-            cursor = sqliteConnection.cursor()
-            
-            # Query database for username
-            cursor.execute("SELECT * FROM users WHERE username=:username;", {"username": username})
-            record = cursor.fetchall()
-
-            # Check if username is free
-            if len(record) != 0:
-                flash("Username already taken")
-                return redirect("/signup")
-
-            cursor.close()
-
-        except sqlite3.Error as error:
-        
-            print("Failed to read data from sqlite table", error)
-            print("Exception class is: ", error.__class__)
-            print("Exception is", error.args)
-
-            print('Printing detailed SQLite exception traceback: ')
-            exc_type, exc_value, exc_tb = sys.exc_info()
-            print(traceback.format_exception(exc_type, exc_value, exc_tb))
-
-        finally:
-
-            if (sqliteConnection):
-                sqliteConnection.close()
+        # Check if username is free
+        if len(query) != 0:
+            flash("Username already taken")
+            return redirect("/signup")
 
 
         # Query database for email if already exists
-        try:
+        record = db.engine.execute("SELECT * FROM Users WHERE email=:email;", {"email": email})
+        query = record.fetchall()
 
-            sqliteConnection = sqlite3.connect("database.db")
-            cursor = sqliteConnection.cursor()
+        # Check if email is free
+        if len(query) != 0:
+            flash("Email already taken")
+            return redirect("/signup")
             
-            # Query database for email
-            cursor.execute("SELECT * FROM users WHERE email=:email;", {"email": email})
-            record = cursor.fetchall()
-
-            # Check if email is free
-            if len(record) != 0:
-                flash("Email already taken")
-                return redirect("/signup")
-            
-            cursor.close()
-
-        except sqlite3.Error as error:
-        
-            print("Failed to read data from sqlite table", error)
-            print("Exception class is: ", error.__class__)
-            print("Exception is", error.args)
-
-            print('Printing detailed SQLite exception traceback: ')
-            exc_type, exc_value, exc_tb = sys.exc_info()
-            print(traceback.format_exception(exc_type, exc_value, exc_tb))
-
-        finally:
-
-            if (sqliteConnection):
-                sqliteConnection.close()
-        
 
         # Insert username, email and hash of the password into the table
-        try:
-
-            sqliteConnection = sqlite3.connect("database.db")
-            cursor = sqliteConnection.cursor()
-            
-            cursor.execute("INSERT INTO users(username, hash, email) VALUES (:username, :hash, :email)", {"username": username, "hash": generate_password_hash(password), "email": email})
-            record = sqliteConnection.commit()
-
-            cursor.close()
-
-        except sqlite3.Error as error:
-        
-            print("Failed to read data from sqlite table", error)
-            print("Exception class is: ", error.__class__)
-            print("Exception is", error.args)
-
-            print('Printing detailed SQLite exception traceback: ')
-            exc_type, exc_value, exc_tb = sys.exc_info()
-            print(traceback.format_exception(exc_type, exc_value, exc_tb))
-
-        finally:
-
-            if (sqliteConnection):
-                sqliteConnection.close()
-            
+        db.engine.execute("INSERT INTO Users(username, hash, email) VALUES (:username, :hash, :email)", {"username": username, "hash": generate_password_hash(password), "email": email})
 
         # Query database for username & remember which user has logged in
-        try:
-
-            sqliteConnection = sqlite3.connect("database.db")
-            cursor = sqliteConnection.cursor()
-            
-            # Query database for username
-            cursor.execute("SELECT * FROM users WHERE username=:username;", {"username": username})
-            record = cursor.fetchall()
-            
-            # Remember which user has logged in
-            session["user_id"] = record[0][0]
-
-            cursor.close()
-
-        except sqlite3.Error as error:
+        record = db.engine.execute("SELECT * FROM Users WHERE username=:username;", {"username": username})
+        query = record.fetchall()
         
-            print("Failed to read data from sqlite table", error)
-            print("Exception class is: ", error.__class__)
-            print("Exception is", error.args)
-
-            print('Printing detailed SQLite exception traceback: ')
-            exc_type, exc_value, exc_tb = sys.exc_info()
-            print(traceback.format_exception(exc_type, exc_value, exc_tb))
-
-        finally:
-
-            if (sqliteConnection):
-                sqliteConnection.close()
+        # Remember which user has logged in
+        session["user_id"] = query[0][0]
 
         
         # Save, upload and delete picture file
@@ -210,31 +117,8 @@ def signupFunction():
             os.remove("./static/" + filename)
 
             # Update database with new image url 
-            try:
-
-                sqliteConnection = sqlite3.connect("database.db")
-                cursor = sqliteConnection.cursor()
-                user_id = session["user_id"]
-                
-                cursor.execute("UPDATE users SET picture=:picture WHERE id=:id;", {"picture": upload, "id": user_id})
-                sqliteConnection.commit()
-
-                cursor.close()
-
-            except sqlite3.Error as error:
-            
-                print("Failed to read data from sqlite table", error)
-                print("Exception class is: ", error.__class__)
-                print("Exception is", error.args)
-
-                print('Printing detailed SQLite exception traceback: ')
-                exc_type, exc_value, exc_tb = sys.exc_info()
-                print(traceback.format_exception(exc_type, exc_value, exc_tb))
-
-            finally:
-
-                if (sqliteConnection):
-                    sqliteConnection.close()
+            user_id = session["user_id"]  
+            db.engine.execute("UPDATE Users SET picture=:picture WHERE id=:id;", {"picture": upload, "id": user_id})
 
         
         sendPin(email)
