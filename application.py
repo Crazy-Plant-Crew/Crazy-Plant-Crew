@@ -27,10 +27,6 @@ from flask_sqlalchemy import SQLAlchemy
 app = Flask(__name__)
 
 
-# Configure application
-server = app.server
-
-
 # Ensure templates are auto-reloaded
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 
