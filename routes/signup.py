@@ -96,7 +96,7 @@ def signupFunction():
             
 
         # Insert username, email and hash of the password into the table
-        db.engine.execute("INSERT INTO Users(username, hash, email) VALUES (:username, :hash, :email)", {"username": username, "hash": generate_password_hash(password), "email": email})
+        db.engine.execute("INSERT INTO Users(username, hash, email) VALUES (:username, :hash, :email)", {"username": username, "hash": generate_password_hash(password), "email": email}).execution_options(autocommit=True)
 
         # Query database for username & remember which user has logged in
         record = db.engine.execute("SELECT * FROM Users WHERE username=:username;", {"username": username})
