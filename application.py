@@ -20,6 +20,8 @@ from itsdangerous import URLSafeTimedSerializer
 from flask_mail import Message, Mail
 from time import time
 from flask_ckeditor import CKEditor
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import text
 
 
 # Configure application
@@ -32,6 +34,61 @@ app.config["TEMPLATES_AUTO_RELOAD"] = True
 
 # Set secret key for site
 app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY") 
+
+
+# Configure DB
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app)
+
+
+# DB Schemas
+class Users(db.Model):
+    id = db.Column(db.Integer, primary_key=True, nullable=False, autoincrement=True, unique=True)
+    username = db.Column(db.String(255), nullable=False, unique=True)
+    email = db.Column(db.String(255), nullable=False, unique=True)
+    hash = db.Column(db.String(255), nullable=False, unique=True)
+    role = db.Column(db.String(255), nullable=False, default="user")
+    picture = db.Column(db.String(255), nullable=False, default="/static/profile.svg")
+    confirmed = db.Column(db.String(255), nullable=False, default="False")
+    time = db.Column(db.Integer, nullable=False, default=0)
+    pin = db.Column(db.Integer, nullable=False, default=0)
+    newsletter = db.Column(db.String(255), nullable=False, default="True")
+
+class Plants(db.Model):
+    id = db.Column(db.Integer, primary_key=True, nullable=False, autoincrement=True, unique=True)
+    name = db.Column(db.String(255), nullable=False, default="No name")
+    stock = db.Column(db.Integer, nullable=False, default=0)
+    price = db.Column(db.Integer, nullable=False, default=0)
+    picture = db.Column(db.String(255), nullable=False, default="https://i.ibb.co/QNJnLR8/empty.png")
+    description = db.Column(db.String(255), nullable=False, default="No description")
+    show = db.Column(db.String(255), nullable=False, default="False")
+
+class News(db.Model):
+    id = db.Column(db.Integer, primary_key=True, nullable=False, autoincrement=True, unique=True)
+    title = db.Column(db.String(255), nullable=False, default="No title")
+    body = db.Column(db.String(255), nullable=False, default="No body")
+
+class Baskets(db.Model):
+    id = db.Column(db.Integer, primary_key=True, nullable=False, autoincrement=True, unique=True)
+    user_id = db.Column(db.Integer, nullable=False)
+    plant_id = db.Column(db.Integer, nullable=False)
+    quantity = db.Column(db.Integer, nullable=False, default=0)
+    name = db.Column(db.String(255), nullable=False, default="No name")
+    picture = db.Column(db.String(255), nullable=False, default="https://i.ibb.co/QNJnLR8/empty.png")
+    price = db.Column(db.Integer, nullable=False)
+    subtotal = db.Column(db.Integer, nullable=False, default=0)
+
+
+# Create DB
+db.create_all()
+
+
+# Seed DB for admin
+result = db.session.execute("SELECT * FROM Users WHERE username=:username;", {"username": os.environ.get("USERNAME")})
+if result.fetchall()[0][1] != os.environ.get("USERNAME"):
+    db.session.add(Users(username=os.environ.get("USERNAME"), email=os.environ.get("EMAIL"), hash=generate_password_hash(os.environ.get("USERNAME")), role=os.environ.get("ROLE"), confirmed=os.environ.get("CONFIRMED")))
+    db.session.commit()
 
 
 # Set CKEditor
@@ -77,7 +134,7 @@ Session(app)
 ALLOWED_EXTENSIONS = {'jpg', 'png', 'bmp', 'gif', 'tif', 'webp', 'heic', 'pdf'}
 
 
-# Handle eorrs
+# Handle errors
 def errorhandler(e):
 
     """Handle error"""
