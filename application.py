@@ -27,6 +27,10 @@ from flask_sqlalchemy import SQLAlchemy
 app = Flask(__name__)
 
 
+# Configure application
+server = app.server
+
+
 # Ensure templates are auto-reloaded
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 
@@ -90,7 +94,6 @@ query = result.fetchall()
 if len(query) == 0:
     db.session.add(Users(username=os.environ.get("USERNAME"), email=os.environ.get("EMAIL"), hash=generate_password_hash(os.environ.get("PASSWORD")), role=os.environ.get("ROLE"), confirmed=os.environ.get("CONFIRMED")))
     db.session.commit()
-
 
 
 # Set CKEditor
