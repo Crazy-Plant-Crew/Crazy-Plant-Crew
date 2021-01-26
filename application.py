@@ -88,9 +88,10 @@ result = db.engine.execute(text("SELECT * FROM Users WHERE username='\:username'
 query = result.fetchall()
 
 if len(query) == 0:
-    db.engine.execute(text("INSERT INTO Users(username, email, hash, role, picture, confirmed, time, pin, newsletter) VALUES (\:username', '\:email', '\:hash', '\:role', '\:picture', '\:confirmed', '\:time', '\:pin', '\:newsletter')", {"username": os.environ.get("USERNAME"), "email": os.environ.get("EMAIL"), "hash": generate_password_hash(os.environ.get("PASSWORD")), "role": os.environ.get("ROLE"), "picture": "/static/profile.svg", "confirmed": os.environ.get("CONFIRMED"), "time": 0, "pin": 0, "newsletter": "True"}))
-    
+        
     """
+    db.engine.execute(text("INSERT INTO Users(username, email, hash, role, picture, confirmed, time, pin, newsletter) VALUES (\:username', '\:email', '\:hash', '\:role', '\:picture', '\:confirmed', '\:time', '\:pin', '\:newsletter')", {"username": os.environ.get("USERNAME"), "email": os.environ.get("EMAIL"), "hash": generate_password_hash(os.environ.get("PASSWORD")), "role": os.environ.get("ROLE"), "picture": "/static/profile.svg", "confirmed": os.environ.get("CONFIRMED"), "time": 0, "pin": 0, "newsletter": "True"}))
+
     db.session.add(Users(username=os.environ.get("USERNAME"), email=os.environ.get("EMAIL"), hash=generate_password_hash(os.environ.get("PASSWORD")), role=os.environ.get("ROLE"), confirmed=os.environ.get("CONFIRMED")))
     db.session.commit()
     """
