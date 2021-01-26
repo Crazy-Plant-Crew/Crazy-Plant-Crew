@@ -82,11 +82,7 @@ class Baskets(db.Model):
 # Create DB
 db.create_all()
 
-# Clean DB for dev
-db.drop_all()
-db.session.commit()
 
-"""
 # Seed DB for admin
 result = db.engine.execute(text("SELECT * FROM Users WHERE username='\:username';", {"username": os.environ.get("USERNAME")}))
 query = result.fetchall()
@@ -94,7 +90,7 @@ query = result.fetchall()
 if len(query) == 0:
     db.session.add(Users(username=os.environ.get("USERNAME"), email=os.environ.get("EMAIL"), hash=generate_password_hash(os.environ.get("PASSWORD")), role=os.environ.get("ROLE"), confirmed=os.environ.get("CONFIRMED")))
     db.session.commit()
-"""
+
 
 # Set CKEditor
 ckeditor = CKEditor(app)
