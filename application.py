@@ -20,6 +20,7 @@ from flask_mail import Message, Mail
 from time import time
 from flask_ckeditor import CKEditor
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import text
 
 
 # Configure application
