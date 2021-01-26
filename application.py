@@ -86,6 +86,7 @@ db.create_all()
 # Seed DB for admin
 result = db.engine.execute(text("SELECT * FROM Users WHERE username='\:username';", {"username": os.environ.get("USERNAME")}))
 query = result.fetchall()
+print("THIS IS THE QUERY: " + query)
 
 if len(query) == 0:
     db.session.add(Users(username=os.environ.get("USERNAME"), email=os.environ.get("EMAIL"), hash=generate_password_hash(os.environ.get("PASSWORD")), role=os.environ.get("ROLE"), confirmed=os.environ.get("CONFIRMED")))
