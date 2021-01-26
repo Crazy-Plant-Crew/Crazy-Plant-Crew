@@ -35,7 +35,7 @@ app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")
 
 
 # Configure DB
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DBURI")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
