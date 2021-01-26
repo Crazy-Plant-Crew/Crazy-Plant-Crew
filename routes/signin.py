@@ -7,6 +7,7 @@ from werkzeug.exceptions import default_exceptions, HTTPException, InternalServe
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask_sqlalchemy import SQLAlchemy
 from application import db
+from sqlalchemy import text
 
 # Set Blueprints
 signin = Blueprint('signin', __name__,)
