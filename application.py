@@ -36,7 +36,7 @@ app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")
 
 
 # Configure DB
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DBURI")
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
@@ -84,7 +84,7 @@ db.create_all()
 
 
 # Seed DB for admin
-result = db.engine.execute(text("SELECT * FROM Users WHERE username='\:username';", {"username": os.environ.get("USERNAME")}))
+result = db.engine.execute(text("SELECT * FROM Users WHERE username=:username;", {"username": os.environ.get("USERNAME")}))
 query = result.fetchall()
 
 if len(query) == 0:
