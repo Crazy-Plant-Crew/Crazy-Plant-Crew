@@ -7,7 +7,7 @@ from flask import Blueprint, render_template, redirect, session, request, flash,
 from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
 from werkzeug.security import check_password_hash, generate_password_hash
 from werkzeug.utils import secure_filename
-from application import uploadPicture, is_human, sendPin, allowed_file, db
+from application import uploadPicture, is_human, sendPin, allowed_file, db, Users
 from time import time
 from flask_sqlalchemy import SQLAlchemy
 
@@ -49,25 +49,30 @@ def signupFunction():
             flash("must provide email")
             return redirect("/signup")
 
+
         # Ensure username was submitted
         if not username:
             flash("must provide username")
             return redirect("/signup")
+
 
         # Ensure password was submitted
         if not password:
             flash("must provide password")
             return redirect("/signup")
 
+
         # Ensure confirm password is correct
         if password != confirmPassword:
             flash("The passwords don't match")
             return redirect("/signup")
 
+
         # Ensure username fits server-side
         if not re.search("^[a-zA-Z0-9]{2,20}$", username):
             flash("Invalid username")
             return redirect("/signup")
+
 
         # Ensure email fits server-side
         if not re.search(r"[^@]+@[^@]+\.[^@]+", email):
@@ -96,7 +101,9 @@ def signupFunction():
             
 
         # Insert username, email and hash of the password into the table
-        db.engine.execute("INSERT INTO Users(username, hash, email) VALUES (:username, :hash, :email)", {"username": username, "hash": generate_password_hash(password), "email": email}).execution_options(autocommit=True)
+        # db.engine.execute("INSERT INTO Users(username, hash, email) VALUES (:username, :hash, :email)", {"username": username, "hash": generate_password_hash(password), "email": email})
+        db.session.add(Users(username=username, hash=generate_password_hash(password), email=email))
+        db.session.commit()
 
         # Query database for username & remember which user has logged in
         record = db.engine.execute("SELECT * FROM Users WHERE username=:username;", {"username": username})
