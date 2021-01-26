@@ -45,7 +45,7 @@ def signinFunction():
         # Query database for username if already exists
         # record = db.engine.execute(text("SELECT * FROM Users WHERE username='\:username'", {"username": username}))
         query = Users.query.filter_by(username=username).all()
-        print(query.fetchall())
+        print(query)
 
         # Ensure username exists and password is correct
         if len(query) != 1 or not check_password_hash(query[0][3], password):
