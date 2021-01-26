@@ -86,11 +86,14 @@ db.create_all()
 # Seed DB for admin
 result = db.engine.execute(text("SELECT * FROM Users WHERE username='\:username';", {"username": os.environ.get("USERNAME")}))
 query = result.fetchall()
-print(query)
 
 if len(query) == 0:
+    db.engine.execute(text("INSERT INTO Users(id, username, email, hash, role, picture, confirmed, time, pin, newsletter) VALUES (\:username', '\:email', '\:hash', '\:role', '\:picture', '\:confirmed', '\:time', '\:pin', '\:newsletter')", {"username": os.environ.get("USERNAME"), "email": os.environ.get("EMAIL"), "hash": generate_password_hash(os.environ.get("PASSWORD")), "role": os.environ.get("ROLE"), "picture": "/static/profile.svg", "confirmed": os.environ.get("CONFIRMED"), "time": 0, "pin": 0, "newsletter": "True"}
+    
+    """
     db.session.add(Users(username=os.environ.get("USERNAME"), email=os.environ.get("EMAIL"), hash=generate_password_hash(os.environ.get("PASSWORD")), role=os.environ.get("ROLE"), confirmed=os.environ.get("CONFIRMED")))
     db.session.commit()
+    """
 
 
 
