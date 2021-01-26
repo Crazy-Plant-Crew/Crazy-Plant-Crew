@@ -6,7 +6,7 @@ from flask import Blueprint, render_template, redirect, session, request, flash,
 from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask_sqlalchemy import SQLAlchemy
-from application import db
+from application import db, Users
 from sqlalchemy import text
 
 # Set Blueprints
