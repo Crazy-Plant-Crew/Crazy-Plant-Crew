@@ -43,7 +43,7 @@ def signinFunction():
             return redirect("/signin")
 
         # Query database for username if already exists
-        record = db.engine.execute(text("SELECT * FROM Users WHERE username=:username", {"username": username}))
+        record = db.engine.execute(text("SELECT * FROM Users WHERE username='\:username'", {"username": username}))
         query = record.fetchall()
 
         # Ensure username exists and password is correct
