@@ -83,6 +83,11 @@ class Baskets(db.Model):
 db.create_all()
 
 
+# Clean DB for dev
+db.drop_all()
+db.session.commit()
+
+
 # Seed DB for admin
 result = db.engine.execute(text("SELECT * FROM Users WHERE username='\:username';", {"username": os.environ.get("USERNAME")}))
 query = result.fetchall()
