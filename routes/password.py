@@ -36,7 +36,7 @@ def passwordFunction():
 
         # Query database for hash if already exists
         query = Users.query.filter_by(id=user_id).first()
-        if query.hash == generate_password_hash(password):
+        if check_password_hash(query.hash, password):
             flash("Password must be new")
             return redirect("/password")
 
