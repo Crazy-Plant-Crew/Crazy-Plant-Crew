@@ -5,8 +5,10 @@ from flask import Blueprint, render_template, redirect, session, request, flash,
 from application import getUserName, getUserPicture, getUserRole, login_required, confirmed_required, db, Users, Baskets, Plants, News
 from flask_sqlalchemy import SQLAlchemy
 
+
 # Set Blueprints
 index = Blueprint('index', __name__,)
+
 
 @index.route("/", methods=["GET", "POST"])
 @login_required
@@ -17,6 +19,7 @@ def indexFunction():
     get_flashed_messages()
 
 
+    # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
 
         # Get variables
@@ -74,6 +77,7 @@ def indexFunction():
             db.session.commit()
             
 
+        # Flash result & redirect
         flash("Added to basket")
         return redirect("/")
 

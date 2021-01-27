@@ -44,25 +44,25 @@ def signupFunction():
 
         # Ensure captcha was correct
         if is_human(captcha_response) != True:
-            flash("must completed captcha")
+            flash("Must completed captcha")
             return redirect("/signup")
 
             
         # Ensure email was submitted
         if not email:
-            flash("must provide email")
+            flash("Must provide email")
             return redirect("/signup")
 
 
         # Ensure username was submitted
         if not username:
-            flash("must provide username")
+            flash("Must provide username")
             return redirect("/signup")
 
 
         # Ensure password was submitted
         if not password:
-            flash("must provide password")
+            flash("Must provide password")
             return redirect("/signup")
 
 
@@ -116,6 +116,7 @@ def signupFunction():
             file.save(os.path.join("./static", filename))
             upload = uploadPicture("./static/" + filename)
             os.remove("./static/" + filename)
+            
 
             # Update database with new image url 
             user_id = session["user_id"]

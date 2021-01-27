@@ -2,11 +2,13 @@ import traceback
 import sys
 
 from flask import Blueprint, render_template, redirect, session, request, flash, get_flashed_messages
-from application import getUserName, getUserPicture, login_required, confirmed_required, getUserRole, db
+from application import getUserName, getUserPicture, login_required, confirmed_required, getUserRole, db, Users
 from flask_sqlalchemy import SQLAlchemy
+
 
 # Set Blueprints
 mailing = Blueprint('mailing', __name__,)
+
 
 @mailing.route("/mailing", methods=["GET", "POST"])
 @login_required
@@ -16,27 +18,36 @@ def mailingFunction():
     # Force flash() to get the messages on the same page as the redirect.
     get_flashed_messages() 
 
+
+    # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
 
+        # Get variable
+        user_id = session["user_id"]
+
+
+        # Activate newsletter and update DB
         if request.form.get('activate'):
 
-            # Update database with newsletter preference
-            user_id = session["user_id"]
             newsletter = "True"
-            
-            # Update database with newsletter
-            db.engine.execute("UPDATE Users SET newsletter=:newsletter WHERE id=:user_id;", {"newsletter": newsletter, "user_id": user_id})
+            query = Users.query.filter_by(id=user_id).first()
+            query.newsletter = newsletter
+            db.session.commit()
 
+
+        # Deactivate newsletter and update DB
         if request.form.get('deactivate'):
 
-            # Update database with newsletter preference
-            user_id = session["user_id"]
             newsletter = "False"
+            query = Users.query.filter_by(id=user_id).first()
+            query.newsletter = newsletter
+            db.session.commit()
 
-            db.engine.execute("UPDATE Users SET newsletter=:newsletter WHERE id=:user_id;", {"newsletter": newsletter, "user_id": user_id})
-            
+
+        # Flash result & redirect    
         flash("Newsletter updated")
         return redirect("/profile")
+
 
     else:
     
