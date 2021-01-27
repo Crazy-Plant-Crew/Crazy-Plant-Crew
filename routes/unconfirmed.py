@@ -3,63 +3,71 @@ import sys
 import re
 
 from flask import Blueprint, render_template, redirect, session, request, flash, get_flashed_messages
-from application import getUserName, getUserPicture, mail, login_required, getUserEmail, sendPin, getUserPin, getUserTime, db
+from application import getUserName, getUserPicture, mail, login_required, getUserEmail, sendPin, getUserPin, getUserTime, db, Users
 from flask_mail import Message, Mail
 from time import time
 from flask_sqlalchemy import SQLAlchemy
 
+
 # Set Blueprints
 unconfirmed = Blueprint('unconfirmed', __name__,)
+
 
 @unconfirmed.route("/unconfirmed", methods=["GET", "POST"])
 @login_required
 def unconfirmedFunction():
 
+
     # Force flash() to get the messages on the same page as the redirect.
     get_flashed_messages()
-    # Get user email
+
+
+    # Get variable
     email = getUserEmail()
-    # Get current time
     now = int(time())
-    # Get signup time
     date = getUserTime()
-    # Get user PIN
     pin = getUserPin()
-    # Get given PIN
     sample = request.form.get("pin")
+    user_id = session["user_id"]
 
 
     # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
 
+        # User is confirming
         if request.form.get("confirm"):
 
+            # Check if PIN has less than 10min
             if int(sample) == int(pin) and int(now - date) < 600:
 
                 # Update database with confirmation
-                user_id = session["user_id"]
-                status = "True"
-                
-                db.engine.execute("UPDATE Users SET confirmed=:status WHERE id=:id;", {"status": status, "id": user_id})
+                query = Users.query.filter_by(id=user_id).first()
+                query.confirmed = "True"
+                db.session.commit()
 
+
+                # Flash result & redirect
+                flash("You are now confirmed")
                 return redirect("/")
                 
             else:
 
-                flash("Wrong PIN entered and/or PIN timed out.")
+                # Flash result & redirect
+                flash("Wrong PIN entered and/or PIN timed out. (10min)")
                 return redirect("/unconfirmed")
 
-                
+
+        # User is requesting a new PIN     
         if request.form.get("send"):
 
+            # Send new PIN
             sendPin(email)
+
+
+            # Flash result & redirect
             flash("An new activation PIN has been sent to your email")
-
             return redirect("/unconfirmed")
 
-        else:
-
-            return redirect("/unconfirmed")
 
     else:
 
