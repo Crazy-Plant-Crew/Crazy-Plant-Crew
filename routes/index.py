@@ -82,9 +82,9 @@ def indexFunction():
     else:
 
         # Query database for plants to display them
-        status = "Yes"
+        show = "Yes"
 
-        record = db.engine.execute("SELECT * FROM Plants WHERE show=:show;", {"show": status})
-        plants = record.fetchall()
+        plants = Plants.query.filter_by(show=show).all()
+        print(plants)
 
         return render_template("index.html", name=getUserName(), picture=getUserPicture(), role=getUserRole(), plants=plants)
