@@ -22,6 +22,7 @@ def administrationFunction():
 
     # Query database for plants
     plants = Plants.query.all()
+    print(plants)
 
 
     # User reached route via POST (as by submitting a form via POST)
