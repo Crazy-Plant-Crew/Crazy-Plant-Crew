@@ -33,6 +33,9 @@ def administrationFunction():
             index = 0
             while index < len(plants):
 
+                print(request.form["delete"])
+                print(plants[index][0])
+
                 if int(request.form["delete"]) == int(plants[index][0]):
 
                     # Query database for plant id to delete row
