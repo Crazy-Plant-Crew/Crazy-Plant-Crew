@@ -47,8 +47,8 @@
                             <td>{{ plant[3] | safe }}</td>
                             <td><img src="{{ plant[4] | safe }}" alt="plant picture of {{ plant[1] }}" height="50"></td>
                             <td>{{ plant[6] | safe }}</td>
-                            <td><button name="delete" value="{{ plant[0].id }}" type="submit"><img src="/static/trash.svg" alt="delete" height="25"></button></td>
-                            <td><button name="edit" value="{{ plant[0].id }}" type="submit"><img src="/static/updateB.svg" alt="edit" height="25"></button></td>
+                            <td><button name="delete" value="{{ plant.id }}" type="submit"><img src="/static/trash.svg" alt="delete" height="25"></button></td>
+                            <td><button name="edit" value="{{ plant.id }}" type="submit"><img src="/static/updateB.svg" alt="edit" height="25"></button></td>
                         </tr>
                     {% endfor %}
                 </tbody>
