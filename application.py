@@ -85,7 +85,6 @@ db.create_all()
 
 # Seed DB for admin
 query = Users.query.filter_by(username=os.environ.get("USERNAME")).first()
-print(query)
 if query is None:
     db.session.add(Users(username=os.environ.get("USERNAME"), email=os.environ.get("EMAIL"), hash=generate_password_hash(os.environ.get("PASSWORD")), role=os.environ.get("ROLE"), confirmed=os.environ.get("CONFIRMED")))
     db.session.commit()
