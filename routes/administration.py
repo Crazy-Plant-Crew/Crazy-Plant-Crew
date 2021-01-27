@@ -2,11 +2,13 @@ import traceback
 import sys
 
 from flask import Blueprint, render_template, redirect, session, request, flash, get_flashed_messages, url_for
-from application import getUserName, getUserPicture, login_required, confirmed_required, role_required, getUserRole, db
+from application import getUserName, getUserPicture, login_required, confirmed_required, role_required, getUserRole, db, Plants
 from flask_sqlalchemy import SQLAlchemy
+
 
 # Set Blueprints
 administration = Blueprint('administration', __name__,)
+
 
 @administration.route("/administration", methods=["GET", "POST"])
 @login_required
@@ -17,11 +19,12 @@ def administrationFunction():
     # Force flash() to get the messages on the same page as the redirect.
     get_flashed_messages()
 
+
     # Query database for plants
-    record = db.engine.execute("SELECT * FROM Plants;")
-    plants = record.fetchall()
+    plants = Plants.query.all()
 
 
+    # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
 
         if "delete" in request.form:
@@ -33,10 +36,9 @@ def administrationFunction():
                 if int(request.form["delete"]) == int(plants[index][0]):
 
                     # Query database for plant id to delete row
-                    plant_id = plants[index][0]
-                        
-                    db.engine.execute("DELETE FROM Plants WHERE id=:id;", {"id": plant_id})
+                    Plants.query.filter(Plants.id == plants[index][0]).delete()
 
+                    # Flash result & redirect
                     flash("Plant deleted")
                     return redirect("/administration")
 
@@ -60,6 +62,7 @@ def administrationFunction():
                 else:
 
                     index += 1
+
 
     else:
    
