@@ -116,11 +116,11 @@ def signupFunction():
             file.save(os.path.join("./static", filename))
             upload = uploadPicture("./static/" + filename)
             os.remove("./static/" + filename)
-            
+
 
             # Update database with new image url 
             user_id = session["user_id"]
-            query = Users.query.filter_by(username=username).first()
+            query = Users.query.filter_by(id=user_id).first()
             query.picture = upload
             db.session.commit()
 

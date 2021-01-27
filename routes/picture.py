@@ -24,6 +24,10 @@ def pictureFunction():
     # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
 
+        # Get variable
+        user_id = session["user_id"]
+
+
         # Save, upload and delete picture file
         file = request.files["picture"]
         if file and allowed_file(file.filename):
@@ -35,8 +39,7 @@ def pictureFunction():
 
 
             # Update database with new image url 
-            user_id = session["user_id"]
-            query = Users.query.filter_by(username=username).first()
+            query = Users.query.filter_by(id=user_id).first()
             query.picture = upload
             db.session.commit()     
 
