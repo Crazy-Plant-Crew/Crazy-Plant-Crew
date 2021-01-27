@@ -22,7 +22,6 @@ def administrationFunction():
 
     # Query database for plants
     plants = Plants.query.all()
-    print(plants)
 
 
     # User reached route via POST (as by submitting a form via POST)
@@ -35,12 +34,12 @@ def administrationFunction():
             while index < len(plants):
 
                 print(request.form["delete"])
-                print(plants[index][0])
+                print(plants[index])
 
-                if int(request.form["delete"]) == int(plants[index][0]):
+                if int(request.form["delete"]) == int(plants[index].id):
 
                     # Query database for plant id to delete row
-                    Plants.query.filter(Plants.id == plants[index][0]).delete()
+                    Plants.query.filter(Plants.id == plants[index].id).delete()
 
                     # Flash result & redirect
                     flash("Plant deleted")
