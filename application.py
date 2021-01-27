@@ -86,7 +86,7 @@ db.create_all()
 # Seed DB for admin
 result = Users.query.filter_by(username=os.environ.get("USERNAME")).first()
 # result = db.engine.execute(text("SELECT * FROM Users WHERE username='\:username';", {"username": os.environ.get("USERNAME")}))
-query = result.fetchall()
+query = result.username
 print(query)
 """   
 if len(query) == 0:
