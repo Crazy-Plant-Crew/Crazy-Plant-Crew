@@ -42,11 +42,11 @@
                 <tbody>
                     {% for plant in plants %}
                         <tr>
-                            <td>{{ plant[1] | safe }}</td>
-                            <td>{{ plant[2] | safe }}</td>
-                            <td>{{ plant[3] | safe }}</td>
-                            <td><img src="{{ plant[4] | safe }}" alt="plant picture of {{ plant[1] }}" height="50"></td>
-                            <td>{{ plant[6] | safe }}</td>
+                            <td>{{ plant.name | safe }}</td>
+                            <td>{{ plant.stock | safe }}</td>
+                            <td>{{ plant.price | safe }}</td>
+                            <td><img src="{{ plant.picture | safe }}" alt="plant picture of {{ plant[1] }}" height="50"></td>
+                            <td>{{ plant.description | safe }}</td>
                             <td><button name="delete" value="{{ plant.id }}" type="submit"><img src="/static/trash.svg" alt="delete" height="25"></button></td>
                             <td><button name="edit" value="{{ plant.id }}" type="submit"><img src="/static/updateB.svg" alt="edit" height="25"></button></td>
                         </tr>
