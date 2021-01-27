@@ -359,7 +359,7 @@ def getUserPicture():
     loggedId = session["user_id"]
     
     # Query database for picture
-    query = Users.query.filter_by(id=loggedId).first()]
+    query = Users.query.filter_by(id=loggedId).first()
         
     return query.picture
 
