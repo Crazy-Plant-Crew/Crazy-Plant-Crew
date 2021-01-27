@@ -51,11 +51,12 @@ def signinFunction():
         query = Users.query.filter_by(username=username).all()
 
         print(len(query))
-        print(check_password_hash(query.hash, password))
+        print(query.hash)
+        # print(check_password_hash(query.hash, password))
 
 
         # Ensure username exists and password is correct
-        if query is not None or not check_password_hash(query.hash, password):
+        if len(query) !=  1 or not check_password_hash(query.hash, password):
             flash("invalid username and/or password")
             return redirect("/signin")
 
