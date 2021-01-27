@@ -49,15 +49,15 @@ def signinFunction():
 
         # Query database for username if already exists
         query = Users.query.filter_by(username=username).all()
-
-        print(len(query))
-        print(query)
-        # print(check_password_hash(query.hash, password))
+        if len(query) != 1:
+            flash("Username is taken")
+            return redirect("/signin")
 
 
         # Ensure username exists and password is correct
-        if len(query) !=  1 or not check_password_hash(query.hash, password):
-            flash("invalid username and/or password")
+        query = Users.query.filter_by(username=username).first()
+        if not check_password_hash(query.hash, password):
+            flash("invalid password")
             return redirect("/signin")
 
 
