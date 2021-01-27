@@ -34,7 +34,7 @@ def administrationFunction():
             while index < len(plants):
 
                 print(request.form["delete"])
-                print(plants[index])
+                print(plants[index].id)
 
                 if int(request.form["delete"]) == int(plants[index].id):
 
