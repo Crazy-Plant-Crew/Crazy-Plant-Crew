@@ -15,17 +15,22 @@ from flask_sqlalchemy import SQLAlchemy
 # Set Blueprints
 signup = Blueprint('signup', __name__,)
 
+
 # Assign public key
 pub_key = os.environ.get("SITE_KEY")
+
 
 @signup.route("/signup", methods=["GET", "POST"])
 def signupFunction():
 
+
     # Force flash() to get the messages on the same page as the redirect.
     get_flashed_messages()
 
+
     # Forget any user_id
     session.clear()
+
 
     # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
@@ -36,7 +41,6 @@ def signupFunction():
         confirmPassword  = request.form.get("confirm-password")
         captcha_response = request.form['g-recaptcha-response']
 
-        # token = generate_confirmation_token(email)
 
         # Ensure captcha was correct
         if is_human(captcha_response) != True:
@@ -81,41 +85,31 @@ def signupFunction():
 
 
         # Query database for username if already exists
-        record = db.engine.execute("SELECT * FROM Users WHERE username=:username;", {"username": username})
-        query = record.fetchall()
-
-        # Check if username is free
+        query = Users.query.filter_by(username=username).all()
         if len(query) != 0:
             flash("Username already taken")
             return redirect("/signup")
 
 
         # Query database for email if already exists
-        record = db.engine.execute("SELECT * FROM Users WHERE email=:email;", {"email": email})
-        query = record.fetchall()
-
-        # Check if email is free
+        query = Users.query.filter_by(username=username).all()
         if len(query) != 0:
             flash("Email already taken")
             return redirect("/signup")
             
 
         # Insert username, email and hash of the password into the table
-        # db.engine.execute("INSERT INTO Users(username, hash, email) VALUES (:username, :hash, :email)", {"username": username, "hash": generate_password_hash(password), "email": email})
         db.session.add(Users(username=username, hash=generate_password_hash(password), email=email))
         db.session.commit()
 
+
         # Query database for username & remember which user has logged in
-        record = db.engine.execute("SELECT * FROM Users WHERE username=:username;", {"username": username})
-        query = record.fetchall()
-        
-        # Remember which user has logged in
-        session["user_id"] = query[0][0]
+        query = Users.query.filter_by(username=username).first()
+        session["user_id"] = query.id
 
         
         # Save, upload and delete picture file
         file = request.files["picture"]
-
         if file and allowed_file(file.filename):
 
             filename = secure_filename(file.filename)
@@ -124,11 +118,15 @@ def signupFunction():
             os.remove("./static/" + filename)
 
             # Update database with new image url 
-            user_id = session["user_id"]  
-            db.engine.execute("UPDATE Users SET picture=:picture WHERE id=:id;", {"picture": upload, "id": user_id})
+            user_id = session["user_id"]
+            query = Users.query.filter_by(username=username).first()
+            query.picture = upload
+            db.session.commit()
 
         
+        # Send email with PIN
         sendPin(email)
+
 
         return redirect("/")
 

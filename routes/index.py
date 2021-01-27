@@ -26,43 +26,41 @@ def indexFunction():
 
 
         # Query database for plants name, picture, price
-        record = db.engine.execute("SELECT * FROM Plants WHERE id=:id;", {"id": plant_id})
-        plants = record.fetchall()
-        name = plants[0][1]
-        picture = plants[0][4]
-        price = plants[0][3]
+        query = Plants.query.filter_by(id=plant_id).first()
+        name = query.name
+        picture = query.picture
+        price = query.price
        
 
         # Get current plant stock
-        record = db.engine.execute("SELECT stock FROM Plants WHERE id=:id;", {"id": plant_id})
-        existingStock = record.fetchall()
+        query = Plants.query.filter_by(id=plant_id).first()
+        existingStock = query.stock
 
 
         # Avoid going to negative stocks
-        if len(existingStock) != 0:
-            if int(existingStock[0][0]) - int(quantity) < 0:
-
+        if int(existingStock) - int(quantity) < 0:
                 flash("Not enough in stock")
                 return redirect("/")
 
         
         # Check for existing stock in the basket
-        record = db.engine.execute("SELECT quantity FROM Baskets WHERE plant_id=:plant_id AND user_id=:user_id;", {"plant_id": plant_id, "user_id": user_id})
-        existingQuantity = record.fetchall()
+        query = Baskets.query.filter_by(plant_id=plant_id).filter_by(user_id=user_id).first()
+        existingQuantity = query.quantity
 
 
         # If there is already some plant in the basket
-        if len(existingQuantity) > 0:
+        if int(existingQuantity) > 0:
 
-
-            # Sum the quantities
-            newQuantity = int(existingQuantity[0][0]) + int(quantity)
-
+            # Sum up the quantities
+            newQuantity = int(existingQuantity) + int(quantity)
             user_id = session["user_id"]
             subtotal = int(newQuantity) * int(price)
             
             # Update database with quantity
-            db.engine.execute("UPDATE Baskets SET quantity=:quantity, subtotal=:subtotal WHERE plant_id=:plant_id AND user_id=:user_id", {"plant_id": plant_id, "user_id": user_id, "quantity": newQuantity, "subtotal": int(subtotal)})
+            query = Baskets.query.filter_by(plant_id=plant_id).filter_by(user_id=user_id).first()
+            query.quantity = newQuantity
+            query.subtotal = subtotal
+            db.session.commit()
 
 
         # First time the user has put this plant in the basket
@@ -71,9 +69,10 @@ def indexFunction():
             user_id = session["user_id"]
             subtotal = int(quantity) * int(price)
             
-            # Update database with quantity
-            db.engine.execute("INSERT INTO Baskets(plant_id, user_id, quantity, name, picture, price, subtotal) VALUES (:plant_id, :user_id, :quantity, :name, :picture, :price, :subtotal)", {"plant_id": plant_id, "user_id": user_id, "quantity": quantity, "name": name, "picture": picture, "price": price, "subtotal": int(subtotal)})
-
+            # Add quantity to database
+            db.session.add(Baskets(plant_id=plant_id, user_id=user_id, quantity=quantity, name=name, picture=picture, price=price, subtotal=subtotal))
+            db.session.commit()
+            
 
         flash("Added to basket")
         return redirect("/")
@@ -83,8 +82,7 @@ def indexFunction():
 
         # Query database for plants to display them
         show = "Yes"
-
         plants = Plants.query.filter_by(show=show).all()
-        print(plants)
+
 
         return render_template("index.html", name=getUserName(), picture=getUserPicture(), role=getUserRole(), plants=plants)

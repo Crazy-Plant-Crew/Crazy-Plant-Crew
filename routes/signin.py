@@ -9,11 +9,14 @@ from flask_sqlalchemy import SQLAlchemy
 from application import db, Users
 from sqlalchemy import text
 
+
 # Set Blueprints
 signin = Blueprint('signin', __name__,)
 
+
 @signin.route("/signin", methods=["GET", "POST"])
 def signinFunction():
+
 
     # Force flash() to get the messages on the same page as the redirect.
     get_flashed_messages()
@@ -28,6 +31,7 @@ def signinFunction():
 
         username = request.form.get("username")
         password = request.form.get("password")
+
 
         # Ensure username was submitted
         if not username:
@@ -62,6 +66,7 @@ def signinFunction():
 
 
         # Remember which user has logged in
+        query = Users.query.filter_by(username=username).first()
         session["user_id"] = query.id
 
 
