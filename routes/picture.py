@@ -2,7 +2,7 @@ import traceback
 import sys
 import os
 
-from flask import Blueprint, render_template, redirect, session, request, flash
+from flask import Blueprint, render_template, redirect, session, request, flash, get_flashed_messages
 from application import getUserName, uploadPicture, getUserPicture, login_required, confirmed_required, getUserRole, allowed_file, db, Users
 from werkzeug.utils import secure_filename
 from flask_sqlalchemy import SQLAlchemy
@@ -44,7 +44,7 @@ def pictureFunction():
         # Flash result & redirect
         flash("Profile picture updated")
         return redirect("/")
-        
+
 
     else:
 
