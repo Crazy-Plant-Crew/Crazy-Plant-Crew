@@ -267,7 +267,7 @@ def sendPin(email):
     mail.send(messsage)    
 
     # Update DB
-    query = Users.query.filter_by(id=loggedId).first()
+    query = Users.query.filter_by(id=user_id).first()
     query.time = date
     query.pin = pin
     db.session.commit()
