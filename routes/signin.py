@@ -43,10 +43,10 @@ def signinFunction():
             return redirect("/signin")
 
         # Query database for username if already exists
-        # record = db.engine.execute(text("SELECT * FROM Users WHERE username='\:username'", {"username": username}))
-        query = Users.query.all()
+        query = Users.query.filter_by(username=username).all()
         print(query)
 
+        """
         # Ensure username exists and password is correct
         if len(query) != 1 or not check_password_hash(query[0][3], password):
             flash("invalid username and/or password")
@@ -54,6 +54,7 @@ def signinFunction():
 
         # Remember which user has logged in
         session["user_id"] = query[0][0]
+        """
 
         return redirect("/")
 

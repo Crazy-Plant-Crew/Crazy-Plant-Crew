@@ -84,21 +84,10 @@ db.create_all()
 
 
 # Seed DB for admin
-result = Users.query.filter_by(username=os.environ.get("USERNAME")).first()
-
-if result is None:
-    print("NOTHING THERE")
-
-"""   
-if len(query) == 0:
-        
-
-    db.engine.execute(text("INSERT INTO Users(username, email, hash, role, picture, confirmed, time, pin, newsletter) VALUES (\:username', '\:email', '\:hash', '\:role', '\:picture', '\:confirmed', '\:time', '\:pin', '\:newsletter')", {"username": os.environ.get("USERNAME"), "email": os.environ.get("EMAIL"), "hash": generate_password_hash(os.environ.get("PASSWORD")), "role": os.environ.get("ROLE"), "picture": "/static/profile.svg", "confirmed": os.environ.get("CONFIRMED"), "time": 0, "pin": 0, "newsletter": "True"}))
-
+query = Users.query.filter_by(username=os.environ.get("USERNAME")).first()
+if query is None:
     db.session.add(Users(username=os.environ.get("USERNAME"), email=os.environ.get("EMAIL"), hash=generate_password_hash(os.environ.get("PASSWORD")), role=os.environ.get("ROLE"), confirmed=os.environ.get("CONFIRMED")))
     db.session.commit()
-"""
-
 
 
 # Set CKEditor
