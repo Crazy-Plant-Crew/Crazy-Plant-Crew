@@ -263,10 +263,15 @@ def sendPin(email):
     user_id = session["user_id"]
     date = int(time())
 
+    # Send email with new PIN
     messsage = Message(subject=subject, recipients=[email], body=body)
     mail.send(messsage)    
 
-    db.engine.execute("UPDATE Users SET time=:date, pin=:pin WHERE id=:id;", {"date": date, "pin": pin, "id": user_id})
+    # Update DB
+    query = Users.query.filter_by(id=loggedId).first()
+    query.time = date
+    query.pin = pin
+    db.session.commit()
 
 
 # Send email
@@ -282,10 +287,9 @@ def getUserConfirmed():
     loggedId = session["user_id"]
         
     # Query database for unconfirmed user
-    record = db.engine.execute("SELECT confirmed FROM Users WHERE id=:id;", {"id": loggedId})
-    confirmed = record.fetchall()[0][0]
+    query = Users.query.filter_by(id=loggedId).first()
 
-    return confirmed
+    return query.confirmed
 
 
 # Get username to be displayed 
@@ -295,10 +299,9 @@ def getUserName():
     loggedId = session["user_id"]
     
     # Query database for username
-    record = db.engine.execute("SELECT username FROM Users WHERE id=:id;", {"id": loggedId})
-    name = record.fetchall()[0][0]
+    query = Users.query.filter_by(id=loggedId).first()
 
-    return name
+    return query.username
 
 
 # Get the user email address
@@ -308,22 +311,21 @@ def getUserEmail():
     loggedId = session["user_id"]
     
     # Query database for email
-    record = db.engine.execute("SELECT email FROM Users WHERE id=:id;", {"id": loggedId})
-    email = record.fetchall()[0][0]
+    query = Users.query.filter_by(id=loggedId).first()
         
-    return email
+    return query.email
 
 
 # Get the user role
 def getUserRole():
 
+    # Check who's id is logged in
     loggedId = session["user_id"]
     
     # Query database for role
-    record = db.engine.execute("SELECT role FROM Users WHERE id=:id;", {"id": loggedId})
-    role = record.fetchall()[0][0]
+    query = Users.query.filter_by(id=loggedId).first()
         
-    return role
+    return query.role
 
 
 # Get the user current PIN
@@ -333,10 +335,9 @@ def getUserPin():
     loggedId = session["user_id"]
     
     # Query database for PIN
-    record = db.engine.execute("SELECT pin FROM Users WHERE id=:id", {"id": loggedId})
-    pin = record.fetchall()[0][0]
+    query = Users.query.filter_by(id=loggedId).first()
         
-    return pin
+    return query.pin
 
 
 # Get the user registration time
@@ -346,10 +347,9 @@ def getUserTime():
     loggedId = session["user_id"]
     
     # Query database for time
-    record = db.engine.execute("SELECT time FROM Users WHERE id=:id;", {"id": loggedId})
-    time = record.fetchall()[0][0]
+    query = Users.query.filter_by(id=loggedId).first()
         
-    return time
+    return query.time
 
 
 # Get profile picture to be displayed 
@@ -359,10 +359,9 @@ def getUserPicture():
     loggedId = session["user_id"]
     
     # Query database for picture
-    record = db.engine.execute("SELECT picture FROM Users WHERE id=:id;", {"id": loggedId})
-    picture = record.fetchall()[0][0]
+    query = Users.query.filter_by(id=loggedId).first()]
         
-    return picture
+    return query.picture
 
 
 # Import routes after to avoid circular import
