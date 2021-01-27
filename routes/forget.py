@@ -5,12 +5,14 @@ import string
 
 from flask import Blueprint, render_template, redirect, session, request, flash, get_flashed_messages
 from werkzeug.security import check_password_hash, generate_password_hash
-from application import randomPassword, getUserName, mail, db
+from application import randomPassword, getUserName, mail, db, Users
 from flask_mail import Message, Mail
 from flask_sqlalchemy import SQLAlchemy
 
+
 # Set Blueprints
 forget = Blueprint('forget', __name__,)
+
 
 @forget.route("/forget", methods=["GET", "POST"])
 def forgetFunction():
@@ -19,25 +21,32 @@ def forgetFunction():
     flash("Please enter your username, press reset and we will send you a new password")
     get_flashed_messages()
 
+
+    # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
 
+        # Get variable
         username = request.form.get("username")
         password = randomPassword()
-        
-        # Check if username exists
-        record = db.engine.execute("SELECT username FROM Users WHERE username=:username;", {"username": username})
-        query = record.fetchall()
 
+        
+        # Query database for existing username
+        query = Users.query.filter_by(username=username).all()
         if len(query) == 0:
             flash("Username does not exist")
             return redirect("/forget")
 
+
         # Update database with new password
-        db.engine.execute("UPDATE Users SET hash=:hash WHERE username=:username;", {"hash": generate_password_hash(password), "username": username})
+        query = Users.query.filter_by(username=username).first()
+        query.hash = generate_password_hash(password)
+        db.session.commit()
+
 
         # Get the user email address
-        record = db.engine.execute("SELECT email FROM Users WHERE username=:username;", {"username": username})
-        email = record.fetchall()[0][0]
+        query = Users.query.filter_by(username=username).first()
+        email = query.email
+
 
         # Send new password to user
         subject = "New password!"
@@ -46,6 +55,8 @@ def forgetFunction():
         mail.send(messsage)    
 
         
+        # Flash result & redirect
+        flash("New password sent")
         return redirect("/signin")
 
 
