@@ -5,8 +5,10 @@ from flask import Blueprint, render_template, redirect, session, request
 from application import getUserName, getUserPicture, login_required, confirmed_required, getUserRole, role_required, db
 from flask_sqlalchemy import SQLAlchemy
 
+
 # Set Blueprints
 history = Blueprint('history', __name__,)
+
 
 @history.route("/history", methods=["GET", "POST"])
 @login_required
