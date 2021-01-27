@@ -51,7 +51,7 @@ def signinFunction():
         query = Users.query.filter_by(username=username).all()
 
         print(len(query))
-        print(query.hash)
+        print(query)
         # print(check_password_hash(query.hash, password))
 
 
