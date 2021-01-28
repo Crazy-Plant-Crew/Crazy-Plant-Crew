@@ -54,7 +54,7 @@ def basketFunction():
         total = 0
         while index < len(baskets):
 
-            total += baskets[index].id
+            total += baskets[index].subtotal
             index += 1
     
         return render_template("basket.html", name=getUserName(), picture=getUserPicture(), role=getUserRole(), baskets=baskets, total=int(total))
