@@ -5,12 +5,14 @@ import os
 import html2text
 
 from flask import Blueprint, render_template, redirect, session, request, flash, get_flashed_messages
-from application import getUserName, getUserPicture, login_required, confirmed_required, getUserRole, role_required, uploadPicture, allowed_file, db
+from application import getUserName, getUserPicture, login_required, confirmed_required, getUserRole, role_required, uploadPicture, allowed_file, db, Plants
 from werkzeug.utils import secure_filename
 from flask_sqlalchemy import SQLAlchemy
 
+
 # Set Blueprints
 edit = Blueprint('edit', __name__,)
+
 
 @edit.route("/edit", methods=["GET", "POST"])
 @login_required
@@ -21,9 +23,11 @@ def editFunction():
     # Force flash() to get the messages on the same page as the redirect.
     get_flashed_messages()
 
+
+    # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
 
-        # Get variables
+        # Get variable
         plant_id = request.form.get("plant_id")
         name = request.form.get("name")
         stock = request.form.get("stock")
@@ -32,46 +36,55 @@ def editFunction():
         description = html2text.html2text(html)
         show = request.form.get("show")
 
+
         # Convert show value to string
         if show == None:
             show = "No"
         if show == "show":
             show = "Yes"
 
+
         # Ensure the plant name was submitted
         if not name:
             flash("must provide plant name")
             return redirect("/edit")
+
 
         # Ensure the plant name fits server-side
         if not re.search("^[a-zA-Z0-9]{1,50}$", name):
             flash("Invalid plant name")
             return redirect("/edit")
 
+
         # Ensure the plant stock was submitted
         if not stock:
             flash("must provide plant stock")
             return redirect("/edit")
+
 
         # Ensure the plant stock fits server-side
         if not re.search("^[0-9]+$", stock):
             flash("Invalid plant stock")
             return redirect("/edit")
 
+
         # Ensure the plant price was submitted
         if not stock:
             flash("must provide plant price")
             return redirect("/edit")
+
 
         # Ensure the plant price fits server-side
         if not re.search("^[0-9]+$", stock):
             flash("Invalid plant price")
             return redirect("/edit")
 
+
         # Ensure the plant description was submitted
         if not description:
             flash("must provide plant description")
             return redirect("/edit")
+
 
         # Ensure the plant description fits server-side
         if not re.search("^(?!;).+", description):
@@ -79,13 +92,18 @@ def editFunction():
             return redirect("/edit")
 
 
-        # Update plant name, stock, price, description and show status into the table
-        db.engine.execute("UPDATE Plants SET name=:name, stock=:stock, price=:price, description=:description, show=:show WHERE id=:plant_id;", {"name": name, "stock": stock, "price": price, "description": description, "show": show, "plant_id": plant_id})
+        # Update plant name, stock, price, description and show status into the table and commit
+        query = Plants.query.filter_by(id=plant_id).first()
+        query.name = name
+        query.stock = stock
+        query.price = price
+        query.description = description
+        query.show = show
+        db.session.commit()
 
 
         # Save, upload and delete picture file
         file = request.files["picture"]
-
         if file and allowed_file(file.filename):
 
             filename = secure_filename(file.filename)
@@ -94,9 +112,11 @@ def editFunction():
             os.remove("./static/" + filename)
 
             # Update database with new image url                
-            db.engine.execute("UPDATE Plants SET picture=:picture WHERE name=:name;", {"picture": upload, "name": name})
+            query = Plants.query.filter_by(id=plant_id).first()
+            query.picture = upload
 
 
+        # Flash result & redirect
         flash("Plant edited")
         return redirect("/administration")
 
@@ -105,5 +125,6 @@ def editFunction():
 
         # Get arguments from url_for in administration
         thisPlant = request.args.getlist("plants")
+
     
         return render_template("edit.html", name=getUserName(), picture=getUserPicture(), role=getUserRole(), plants=thisPlant)

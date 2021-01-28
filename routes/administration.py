@@ -56,9 +56,9 @@ def administrationFunction():
 
                 if int(request.form["edit"]) == int(plants[index].id):
 
+                    # Create a list with values of DB and append them
                     thisPlant = []
                     thisPlant.extend([plants[index].id, plants[index].name, plants[index].stock, plants[index].price, plants[index].picture, plants[index].description, plants[index].show])
-                    print(thisPlant)
 
                     return redirect(url_for("edit.editFunction", plants=thisPlant))
 
