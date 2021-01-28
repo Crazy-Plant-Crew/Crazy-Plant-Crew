@@ -34,7 +34,7 @@ def basketFunction():
                 if int(request.form["delete"]) == int(baskets[index].id):
 
                     # Query database for plant id to delete row                        
-                    Baskets.query.filter(baskets.id == baskets[index].id).delete()
+                    Baskets.query.filter(Baskets.id == baskets[index].id).delete()
                     db.session.commit()
 
 
