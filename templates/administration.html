@@ -46,7 +46,7 @@
                             <td>{{ plant.stock | safe }}</td>
                             <td>{{ plant.price | safe }}</td>
                             <td><img src="{{ plant.picture | safe }}" alt="plant picture of {{ plant.name | safe }}" height="50"></td>
-                            <td>{{ plant.description | safe }}</td>
+                            <td>{{ plant.show | safe }}</td>
                             <td><button name="delete" value="{{ plant.id }}" type="submit"><img src="/static/trash.svg" alt="delete" height="25"></button></td>
                             <td><button name="edit" value="{{ plant.id }}" type="submit"><img src="/static/updateB.svg" alt="edit" height="25"></button></td>
                         </tr>
