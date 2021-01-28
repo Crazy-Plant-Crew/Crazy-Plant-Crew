@@ -58,7 +58,7 @@ def administrationFunction():
 
                     thisPlant = plants[index]
                     for element in thisPlant:
-                        print(element)
+                        print(element_asdict())
 
                     return redirect(url_for("edit.editFunction", plants=thisPlant))
 
