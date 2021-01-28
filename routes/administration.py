@@ -56,7 +56,7 @@ def administrationFunction():
 
                 if int(request.form["edit"]) == int(plants[index].id):
 
-                    thisPlant = session.query(PLants[index]).all()
+                    thisPlant = session.query(Plants).all()
                     for element in thisPlant:
                         print(element_asdict())
 
