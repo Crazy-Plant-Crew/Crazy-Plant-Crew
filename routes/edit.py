@@ -114,6 +114,7 @@ def editFunction():
             # Update database with new image url                
             query = Plants.query.filter_by(id=plant_id).first()
             query.picture = upload
+            db.session.commit()
 
 
         # Flash result & redirect
