@@ -44,6 +44,7 @@ def indexFunction():
         
         # Check for existing stock in the basket
         query = Baskets.query.filter_by(plant_id=plant_id, user_id=user_id).first()
+        print(query)
         existingQuantity = query.quantity
 
 
