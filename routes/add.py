@@ -94,15 +94,9 @@ def addFunction():
         db.session.commit()
 
 
-        # Query database for plant if already exists so the last is selected as the last plant is the one just added
-        query = Plants.query.filter_by(name=name).all()
-        print(query)
-
-        if len(query) > 1:
-            plant_id = query[-1].id
-
-        elif len(query) == 1:
-            plant_id = query.id
+        # Query database for id of the last entered plant
+        query = Plants.query.all()
+        plant_id = query[-1].id
 
 
         # Save, upload and delete picture file
