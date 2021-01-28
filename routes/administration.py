@@ -56,9 +56,9 @@ def administrationFunction():
 
                 if int(request.form["edit"]) == int(plants[index].id):
 
-                    thisPlant = plants[index].all()
-                    print(thisPlant)
-                    print(type(thisPlant))
+                    thisPlant = plants[index]
+                    for element in thisPlant:
+                        print(element)
 
                     return redirect(url_for("edit.editFunction", plants=thisPlant))
 
