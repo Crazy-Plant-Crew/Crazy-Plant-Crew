@@ -5,8 +5,10 @@ from flask import Blueprint, render_template, redirect, session, request
 from application import getUserName, getUserPicture, login_required, confirmed_required, getUserRole, role_required, db
 from flask_sqlalchemy import SQLAlchemy
 
+
 # Set Blueprints
 remove = Blueprint('remove', __name__,)
+
 
 @remove.route("/remove", methods=["GET", "POST"])
 @login_required

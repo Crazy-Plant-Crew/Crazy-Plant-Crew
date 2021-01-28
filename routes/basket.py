@@ -5,6 +5,7 @@ from flask import Blueprint, render_template, redirect, session, request, flash,
 from application import getUserName, getUserPicture, login_required, confirmed_required, getUserRole, role_required, db
 from flask_sqlalchemy import SQLAlchemy
 
+
 # Set Blueprints
 basket = Blueprint('basket', __name__,)
 
@@ -16,9 +17,9 @@ def basketFunction():
     # Force flash() to get the messages on the same page as the redirect.
     get_flashed_messages()
 
-    # Query database for baskets item
-    record = db.engine.execute("SELECT * FROM Baskets;")
-    baskets = record.fetchall()
+
+    # Query database for plants
+    baskets = Baskets.query.all()
 
     if request.method == "POST":
 
@@ -28,13 +29,14 @@ def basketFunction():
             index = 0
             while index < len(baskets):
 
-                if int(request.form["delete"]) == int(baskets[index][0]):
+                if int(request.form["delete"]) == int(baskets[index].id):
 
-                    # Query database for plant id to delete row
-                    basket_id = baskets[index][0]
-                        
-                    db.engine.execute("DELETE FROM Baskets WHERE id=:id;", {"id": basket_id})
+                    # Query database for plant id to delete row                        
+                    Baskets.query.filter(baskets.id == baskets[index].id).delete()
+                    db.session.commit()
 
+
+                    # Flash result & redirect
                     flash("Item deleted")
                     return redirect("/basket")
 
@@ -45,11 +47,12 @@ def basketFunction():
 
     else:
 
+        # Get total price
         index = 0
         total = 0
         while index < len(baskets):
 
-            total += baskets[index][7]
+            total += baskets[index].id
             index += 1
     
         return render_template("basket.html", name=getUserName(), picture=getUserPicture(), role=getUserRole(), baskets=baskets, total=int(total))
