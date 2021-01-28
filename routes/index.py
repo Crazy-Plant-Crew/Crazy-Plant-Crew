@@ -44,15 +44,17 @@ def indexFunction():
         
         # Check for existing stock in the basket
         query = Baskets.query.filter_by(plant_id=plant_id, user_id=user_id).first()
-        print(query)
-        existingQuantity = query.quantity
+        if query != None:
+            existingQuantity = query.quantity
+        else:
+            existingQuantity = 0
 
 
         # If there is already some plant in the basket
-        if int(existingQuantity) > 0:
+        if existingQuantity > 0:
 
             # Sum up the quantities
-            newQuantity = int(existingQuantity) + int(quantity)
+            newQuantity = existingQuantity + int(quantity)
             user_id = session["user_id"]
             subtotal = int(newQuantity) * int(price)
             
