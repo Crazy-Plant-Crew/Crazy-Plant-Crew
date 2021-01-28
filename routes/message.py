@@ -13,6 +13,7 @@ from flask_sqlalchemy import SQLAlchemy
 # Set Blueprints
 message = Blueprint('message', __name__,)
 
+
 @message.route("/message", methods=["GET", "POST"])
 @login_required
 @confirmed_required
@@ -26,6 +27,7 @@ def messageFunction():
         text = html2text.html2text(html)
         body1 = "Username: " + getUserName() + "\nEmail: " + getUserEmail() + "\n\nMessage: " + text
         email1 = os.environ["EMAIL_SEND"]
+        
 
         # Send email to Glenn
         sendMail(subject1, email1, body1)
@@ -35,6 +37,7 @@ def messageFunction():
         subject2 = "Copy of your message"
         body2 = "You wrote: " + text
         email2 = getUserEmail()
+
 
         # Send copy to user
         sendMail(subject2, email2, body2)
