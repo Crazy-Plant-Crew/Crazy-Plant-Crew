@@ -22,21 +22,17 @@ def indexFunction():
     # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
 
-        # Get variables
+        # Get variable
         plant_id = request.form.get("plant_id")
         user_id = session["user_id"]
         quantity = request.form.get("quantity")
 
 
-        # Query database for plants name, picture, price
+        # Query database for plants name, picture, price and stock
         query = Plants.query.filter_by(id=plant_id).first()
         name = query.name
         picture = query.picture
         price = query.price
-       
-
-        # Get current plant stock
-        query = Plants.query.filter_by(id=plant_id).first()
         existingStock = query.stock
 
 
@@ -47,7 +43,7 @@ def indexFunction():
 
         
         # Check for existing stock in the basket
-        query = Baskets.query.filter_by(plant_id=plant_id).filter_by(user_id=user_id).first()
+        query = Baskets.query.filter_by(plant_id=plant_id, user_id=user_id).first()
         existingQuantity = query.quantity
 
 
