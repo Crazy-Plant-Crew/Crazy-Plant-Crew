@@ -37,7 +37,9 @@ def newsletterFunction():
 
         # Query database for user emails for newsletter 
         query = Users.query.filter_by(newsletter="True").all()
-        print(query)
+        if query == None:
+            flash("No email in DB")
+            return redirect("/newsletter")
 
 
         if address != "" and newsletter == None:
