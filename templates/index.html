@@ -45,21 +45,21 @@
                         <div class="IndexMain">
                             <div class="IndexRow">
                                 <div class="IndexLeft">
-                                    <img name="{{ plant[4] }}" src="{{ plant[4] }}" alt="plant picture of {{ plant[1] }}" width="500px">
+                                    <img name="{{ plant.picture | safe }}" src="{{ plant.picture | safe }}" alt="plant picture of {{ plant.name | safe }}" width="500px">
                                 </div>
                                 <div class="IndexRight">
                                     <div class="IndexInfo1">
-                                        <div name="{{ plant[1] }}">Name: {{ plant[1] }}</div>
-                                        <div name="{{ plant[2] }}">Stock: {{ plant[2] }}</div>
-                                        <div name="{{ plant[3] }}">Price: {{ plant[3] }},00€</div>
+                                        <div name="{{ plant.name | safe }}">Name: {{ plant.name | safe }}</div>
+                                        <div name="{{ plant.stock | safe }}">Stock: {{ plant.stock | safe }}</div>
+                                        <div name="{{ plant.price | safe }}">Price: {{ plant.price | safe }},00€</div>
                                     </div>
                                     <div class="IndexInfo2">
-                                        <input type='hidden' name='plant_id' value='{{ plant[0]}}'>
-                                        <input type="number" name="quantity" value="1" min="1" max="{{ plant[2] }}" style="width: 75px">
+                                        <input type='hidden' name='plant_id' value='{{ plant.id | safe }}'>
+                                        <input type="number" name="quantity" value="1" min="1" max="{{ plant.stock | safe }}" style="width: 75px">
                                         <button name="submit" value="submit" type="submit"><img src="/static/add.svg" alt="add" height="25"></button>
                                     </div>
                                     <div class="IndexInfo3">
-                                        <div name="{{ plant[5] }}">Description: {{ plant[5] }}</div>
+                                        <div name="{{ plant.description | safe }}">Description: {{ plant.description | safe }}</div>
                                     </div>
                                 </div>
                             </div>
@@ -76,21 +76,21 @@
                         <div class="IndexMain">
                             <div class="IndexRow">
                                 <div class="IndexLeft">
-                                    <img name="{{ plant[4] }}" src="{{ plant[4] }}" alt="plant picture of {{ plant[1] }}" width="500px">
+                                    <img name="{{ plant.picture | safe }}" src="{{ plant.picture | safe }}" alt="plant picture of {{ plant.name | safe }}" width="500px">
                                 </div>
                                 <div class="IndexRight">
                                     <div class="IndexInfo1">
-                                        <div name="{{ plant[1] }}">Name: {{ plant[1] }}</div>
-                                        <div name="{{ plant[2] }}">Stock: {{ plant[2] }}</div>
-                                        <div name="{{ plant[3] }}">Price: {{ plant[3] }},00€</div>
+                                        <div name="{{ plant.name | safe  }}">Name: {{ plant.name | safe }}</div>
+                                        <div name="{{ plant.stock | safe  }}">Stock: {{ plant.stock | safe }}</div>
+                                        <div name="{{ plant.price | safe  }}">Price: {{ plant.price | safe }},00€</div>
                                     </div>
                                     <div class="IndexInfo2">
-                                        <input type='hidden' name='plant_id' value='{{ plant[0]}}'>
-                                        <input type="number" name="quantity" value="1" min="1" max="{{ plant[2] }}" style="width: 75px">
+                                        <input type='hidden' name='plant_id' value='{{ plant.id | safe }}'>
+                                        <input type="number" name="quantity" value="1" min="1" max="{{ plant.quantity | safe }}" style="width: 75px">
                                         <button name="submit" value="submit" type="submit"><img src="/static/add.svg" alt="add" height="25"></button>
                                     </div>
                                     <div class="IndexInfo3">
-                                        <div name="{{ plant[5] }}">Description: {{ plant[5] }}</div>
+                                        <div name="{{ plant.description | safe }}">Description: {{ plant.description | safe }}</div>
                                     </div>
                                 </div>
                             </div>

@@ -37,6 +37,7 @@ def administrationFunction():
 
                     # Query database for plant id to delete row
                     Plants.query.filter(Plants.id == plants[index].id).delete()
+                    db.session.commit()
 
                     # Flash result & redirect
                     flash("Plant deleted")
