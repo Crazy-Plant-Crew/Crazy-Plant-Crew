@@ -45,7 +45,7 @@
                             <td><img src="{{ basket.picture | safe }}" alt="plant picture of {{ basket.name | safe }}" height="50"></td>
                             <td>{{ basket.name | safe }}</td>
                             <td>{{ basket.quantity | safe }}</td>
-                            <td>{{ basket.price | safe }}</td>
+                            <td>{{ basket.price | safe }},00€</td>
                             <td>{{ basket.subtotal | safe }},00€</td>
                             <td><button name="delete" value="{{ basket.id | safe }}" type="submit"><img src="/static/trash.svg" alt="delete" height="25"></button></td>
                         </tr>
