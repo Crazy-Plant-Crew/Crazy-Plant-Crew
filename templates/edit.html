@@ -29,18 +29,18 @@
         <form action="/edit" method="post" enctype="multipart/form-data">
             <div class="EditMain">
                 <div>
-                    <input type='hidden' name='plant_id' value='{{ plants[0]}}'>
+                    <input type='hidden' name='plant_id' value='{{ plants[0] | safe }}'>
                 </div>
                 <div>
-                    <input id="name" autocomplete="off" autofocus class="form-control" name="name" placeholder="Name" type="text" value="{{ plants[1] }}">
-                </div>
-                <br>
-                <div>
-                    <input id="stock" autocomplete="off" autofocus class="form-control" name="stock" placeholder="Stock" type="number" min="0" value="{{ plants[2] }}">
+                    <input id="name" autocomplete="off" autofocus class="form-control" name="name" placeholder="Name" type="text" value="{{ plants[1] | safe }}">
                 </div>
                 <br>
                 <div>
-                    <input id="price" autocomplete="off" autofocus class="form-control" name="price" placeholder="Price" type="number" min="0" value="{{ plants[3] }}">
+                    <input id="stock" autocomplete="off" autofocus class="form-control" name="stock" placeholder="Stock" type="number" min="0" value="{{ plants[2] | safe }}">
+                </div>
+                <br>
+                <div>
+                    <input id="price" autocomplete="off" autofocus class="form-control" name="price" placeholder="Price" type="number" min="0" value="{{ plants[3] | safe }}">
                 </div>
                 <br>
                 <div>

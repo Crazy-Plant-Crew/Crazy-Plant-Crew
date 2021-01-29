@@ -36,11 +36,11 @@
                 </thead>
 
                 <tbody>
-                    {% for communication in communications %}
+                    {% for new in news %}
                         <tr>
-                            <td>{{ communication[1] | safe }}</td>
-                            <td><button name="erase" value="{{ communication[0] }}" type="submit"><img src="/static/trash.svg" alt="delete" height="25"></button></td>
-                            <td><button name="change" value="{{ communication[0] }}" type="submit"><img src="/static/updateB.svg" alt="edit" height="25"></button></td>
+                            <td>{{ new.title | safe }}</td>
+                            <td><button name="erase" value="{{ new.id | safe }}" type="submit"><img src="/static/trash.svg" alt="delete" height="25"></button></td>
+                            <td><button name="change" value="{{ new.id | safe }}" type="submit"><img src="/static/updateB.svg" alt="edit" height="25"></button></td>
                         </tr>
                     {% endfor %}
                 </tbody>

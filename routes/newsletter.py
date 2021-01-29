@@ -62,6 +62,7 @@ def newsletterFunction():
 
         else:
 
+            # Flash result & redirect
             flash("Error: either to one address or select Send Newsletter and leave address blank")
             return redirect("/newsletter")
 
