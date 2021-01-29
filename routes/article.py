@@ -26,14 +26,6 @@ def articleFunction():
 
     else:
         
-        query = News.query.all()
-        index = 0
-
-        while index < len(query):
-
-            # Create a list with values of DB and append them
-            news = []
-            news.extend([query[index]])
-            print(news)
+        news = News.query.all()
     
         return render_template("article.html", name=getUserName(), picture=getUserPicture(), role=getUserRole(), news=news)

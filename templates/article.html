@@ -30,8 +30,8 @@
         <div>
             {% for new in news %}
                 <div class="TableBorder">
-                    {{ new[1] | safe }}
-                    {{ new[2] | safe }}
+                    {{ new.title | safe }}
+                    {{ new.body | safe }}
                 </div>
                 <br>
             {% endfor %}
