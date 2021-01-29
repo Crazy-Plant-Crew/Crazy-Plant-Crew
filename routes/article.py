@@ -25,8 +25,15 @@ def articleFunction():
         return redirect("/")
 
     else:
+        
+        query = News.query.all()
+        index = 0
 
-        # Update database with email
-        news = News.query.all()
+        while index < len(query):
+
+            # Create a list with values of DB and append them
+            news = []
+            news.extend([query[index]])
+            print(news)
     
         return render_template("article.html", name=getUserName(), picture=getUserPicture(), role=getUserRole(), news=news)
