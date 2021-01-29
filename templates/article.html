@@ -28,10 +28,10 @@
 {% block main %}
     <form action="/article" method="post">
         <div>
-            {% for communication in communications %}
+            {% for new in news %}
                 <div class="TableBorder">
-                    {{ communication[1] }}
-                    {{ communication[2] | safe }}
+                    {{ new[1] | safe }}
+                    {{ new[2] | safe }}
                 </div>
                 <br>
             {% endfor %}
