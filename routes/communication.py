@@ -33,7 +33,7 @@ def communicationFunction():
             index = 0
             while index < len(news):
 
-                if int(request.form["erase"]) == int(news[index]id):
+                if int(request.form["erase"]) == int(news[index].id):
 
                     # Query database for plant id to delete row
                     News.query.filter(News.id == news[index].id).delete()
