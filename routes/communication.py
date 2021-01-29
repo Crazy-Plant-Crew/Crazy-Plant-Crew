@@ -59,7 +59,7 @@ def communicationFunction():
 
                     # Create a list with values of DB and append them
                     thisNews = []
-                    thisNews.extend([news[index].id, news[index].title, news[index].body)
+                    thisNews.extend([news[index].id, news[index].title, news[index].body])
 
                     return redirect(url_for("change.changeFunction", news=thisNews))
 
