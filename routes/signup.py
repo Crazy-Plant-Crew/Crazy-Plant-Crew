@@ -4,7 +4,7 @@ import os
 import re
 
 from flask import Blueprint, render_template, redirect, session, request, flash, get_flashed_messages
-from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerdanger
+from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
 from werkzeug.security import check_password_hash, generate_password_hash
 from werkzeug.utils import secure_filename
 from application import uploadPicture, is_human, sendPin, allowed_file, db, Users
