@@ -28,14 +28,28 @@ def loggedFunction():
     
     else:
 
+        # Query database for users
         query = Users.query.all()
-        userList = []
+
+
+        # Set variable
+        users = []
+        admins = []
+        unconfirmeds = []
         index = 0
         
+        # Loop through the DB query
         while index < len(query):
 
-            userList.extend([query[index].username])
+            users.extend([query[index].username])
+
+            if query[index].role == "admin":
+                admins.extend([query[index].username])
+
+            if query[index].confirmed == "False":
+                unconfirmeds.extend([query[index].username])
+
             index += 1
 
 
-        return render_template("logged.html", name=getUserName(), picture=getUserPicture(), role=getUserRole(), users=userList)
+        return render_template("logged.html", name=getUserName(), picture=getUserPicture(), role=getUserRole(), users=users, admins=admins, unconfirmeds=unconfirmeds)

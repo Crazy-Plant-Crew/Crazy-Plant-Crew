@@ -30,11 +30,33 @@
 {% endblock %}
 
 {% block main %}
-    <ul>
-    {% for user in users %}
-        <li>{{ user }}</li>
-    {% endfor %}
-    </ul>
+    <div>
+        Total user list:
+        <ul>
+        {% for user in users %}
+            <li>{{ user }}</li>
+        {% endfor %}
+        </ul>
+    </div>
+    <br>
+    <div>
+        Total admin list:
+        <ul>
+        {% for admin in admins %}
+            <li>{{ admin }}</li>
+        {% endfor %}
+        </ul>
+    </div>
+    <br>
+    <div>
+        Total unconfirmed list:
+        <ul>
+        {% for unconfirmed in unconfirmeds %}
+            <li>{{ unconfirmed }}</li>
+        {% endfor %}
+        </ul>
+    </div>
+    <br>
     <br>
     <div>
         <a href="/"><img src="/static/back.svg" alt="back" height="50"></a>
