@@ -515,12 +515,10 @@ button {
 
 
 .loggedMain {
-	display: flex;
-	flex-direction: column;
-	flex-wrap: nowrap;
-	justify-content: center;
-	align-items: center;
-	align-content: center;
+	height: 500px;
+	border-radius: 25px;
+	border: 2px solid #E8E8E8;
+	padding: 20px; 	
 }
 
 .loggedDiv {
