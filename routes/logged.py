@@ -35,6 +35,7 @@ def loggedFunction():
         while index < len(query):
 
             userList.extend([query[index].username])
+            index += 1
 
 
         return render_template("logged.html", name=getUserName(), picture=getUserPicture(), role=getUserRole(), users=userList)
