@@ -382,7 +382,7 @@ from routes.forget import forget
 from routes.administration import administration
 from routes.add import add
 from routes.edit import edit
-from routes.remove import remove
+from routes.logged import logged
 from routes.communication import communication
 from routes.newsletter import newsletter
 from routes.basket import basket
@@ -413,7 +413,7 @@ app.register_blueprint(forget)
 app.register_blueprint(administration)
 app.register_blueprint(add)
 app.register_blueprint(edit)
-app.register_blueprint(remove)
+app.register_blueprint(logged)
 app.register_blueprint(newsletter)
 app.register_blueprint(communication)
 app.register_blueprint(basket)

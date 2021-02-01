@@ -7,6 +7,10 @@
 {% block navigation %}
     {% if role == "admin" %}
         <div class="click-to-top">
+            <li class="NavBarLi"><a href="/logged"><img src="/static/admin.svg" alt="admin" height="50"></a></li>
+                <span>Users</span>
+        </div>
+        <div class="click-to-top">
             <li class="NavBarLi"><a href="/transaction"><img src="/static/transactionhistory.svg" alt="pay" height="50"></a></li>
                 <span>Transaction</span>
         </div>

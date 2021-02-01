@@ -7,6 +7,10 @@
 {% block navigation %}
     {% if role == "admin" %}
         <div class="click-to-top">
+            <li class="NavBarLi"><a href="/logged"><img src="/static/admin.svg" alt="admin" height="50"></a></li>
+                <span>Users</span>
+        </div>
+        <div class="click-to-top">
             <li class="NavBarLi"><a href="/transaction"><img src="/static/transactionhistory.svg" alt="pay" height="50"></a></li>
                 <span>Transaction</span>
         </div>
@@ -26,7 +30,7 @@
 {% endblock %}
 
 {% block main %}
-    Remove page
+    Users page
     <br>
     <div>
         <a href="/administration"><img src="/static/back.svg" alt="back" height="50"></a>

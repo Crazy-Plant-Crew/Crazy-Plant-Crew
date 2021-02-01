@@ -7,17 +7,17 @@ from flask_sqlalchemy import SQLAlchemy
 
 
 # Set Blueprints
-remove = Blueprint('remove', __name__,)
+logged = Blueprint('logged', __name__,)
 
 
-@remove.route("/remove", methods=["GET", "POST"])
+@logged.route("/logged", methods=["GET", "POST"])
 @login_required
 @confirmed_required
 @role_required
-def removeFunction():    
+def loggedFunction():    
 
     if request.method == "POST":
 
-        print("remove")
+        print("logged")
     
-    return render_template("remove.html", name=getUserName(), picture=getUserPicture(), role=getUserRole())
+    return render_template("logged.html", name=getUserName(), picture=getUserPicture(), role=getUserRole())
