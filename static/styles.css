@@ -257,11 +257,11 @@ main {
 	justify-content: center;
 	align-items: center;
 	align-content: center;
-
-	top: 25px;
 }
 
 .alert {
+	position: relative;
+	top: 25px;
 	width: 500px;
 }
 
