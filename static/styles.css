@@ -256,11 +256,12 @@ main {
 	justify-content: center;
 	align-items: center;
 	align-content: center;
+
+	border-top: 25px;
 }
 
 .alert {
 	width: 500px;
-	border-top: 25px;
 }
 
 
