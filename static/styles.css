@@ -238,6 +238,10 @@ main {
 /*  FLASH  */
 
 
+.alert {
+	width: 500px;
+}
+
 
 /*  CAROUSEL  */
 
