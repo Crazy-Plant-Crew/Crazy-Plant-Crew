@@ -44,57 +44,57 @@ def signupFunction():
 
         # Ensure captcha was correct
         if is_human(captcha_response) != True:
-            flash("Must completed captcha")
+            flash("Must completed captcha", "Warning")
             return redirect("/signup")
 
             
         # Ensure email was submitted
         if not email:
-            flash("Must provide email")
+            flash("Must provide email", "Warning")
             return redirect("/signup")
 
 
         # Ensure username was submitted
         if not username:
-            flash("Must provide username")
+            flash("Must provide username", "Warning")
             return redirect("/signup")
 
 
         # Ensure password was submitted
         if not password:
-            flash("Must provide password")
+            flash("Must provide password", "Warning")
             return redirect("/signup")
 
 
         # Ensure confirm password is correct
         if password != confirmPassword:
-            flash("The passwords don't match")
+            flash("The passwords don't match", "Error")
             return redirect("/signup")
 
 
         # Ensure username fits server-side
         if not re.search("^[a-zA-Z0-9]{2,20}$", username):
-            flash("Invalid username")
+            flash("Invalid username", "Error")
             return redirect("/signup")
 
 
         # Ensure email fits server-side
         if not re.search(r"[^@]+@[^@]+\.[^@]+", email):
-            flash("Invalid email")
+            flash("Invalid email", "Error")
             return redirect("/signup")
 
 
         # Query database for username if already exists
         query = Users.query.filter_by(username=username).all()
         if len(query) != 0:
-            flash("Username already taken")
+            flash("Username already taken", "Error")
             return redirect("/signup")
 
 
         # Query database for email if already exists
         query = Users.query.filter_by(username=username).all()
         if len(query) != 0:
-            flash("Email already taken")
+            flash("Email already taken", "Error")
             return redirect("/signup")
             
 

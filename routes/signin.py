@@ -35,33 +35,33 @@ def signinFunction():
 
         # Ensure username was submitted
         if not username:
-            flash("must provide username")
+            flash("must provide username", "Warning")
             return redirect("/signin")
 
 
         # Ensure username fits server-side
         if not re.search("^[a-zA-Z0-9]{2,20}$", username):
-            flash("Invalid username")
+            flash("Invalid username", "Error")
             return redirect("/signin")
 
 
         # Ensure password was submitted
         if not password:
-            flash("must provide password")
+            flash("must provide password", "Warning")
             return redirect("/signin")
 
 
         # Query database for username
         query = Users.query.filter_by(username=username).all()
         if len(query) != 1:
-            flash("Invalid username")
+            flash("Invalid username", "Error")
             return redirect("/signin")
 
 
         # Ensure username exists and password is correct
         query = Users.query.filter_by(username=username).first()
         if not check_password_hash(query.hash, password):
-            flash("Invalid password")
+            flash("Invalid password", "Error")
             return redirect("/signin")
 
 

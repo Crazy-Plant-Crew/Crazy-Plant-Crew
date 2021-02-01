@@ -43,49 +43,49 @@ def addFunction():
 
         # Ensure the plant name was submitted
         if not name:
-            flash("must provide plant name")
+            flash("must provide plant name", "Warning")
             return redirect("/add")
 
 
         # Ensure the plant name fits server-side
         if not re.search("^[a-zA-Z0-9]{1,50}$", name):
-            flash("Invalid plant name")
+            flash("Invalid plant name", "Error")
             return redirect("/add")
 
 
         # Ensure the plant stock was submitted
         if not stock:
-            flash("must provide plant stock")
+            flash("must provide plant stock", "Warning")
             return redirect("/add")
 
 
         # Ensure the plant stock fits server-side
         if not re.search("^[0-9]+$", stock):
-            flash("Invalid plant stock")
+            flash("Invalid plant stock", "Error")
             return redirect("/add")
 
 
         # Ensure the plant price was submitted
         if not stock:
-            flash("must provide plant price")
+            flash("must provide plant price", "Warning")
             return redirect("/add")
 
 
         # Ensure the plant price fits server-side
         if not re.search("^[0-9]+$", stock):
-            flash("Invalid plant price")
+            flash("Invalid plant price", "Error")
             return redirect("/add")
 
 
         # Ensure the plant description was submitted
         if not description:
-            flash("must provide plant description")
+            flash("must provide plant description", "Warning")
             return redirect("/add")
 
 
         # Ensure the plant description fits server-side
         if not re.search("^(?!;).+", description):
-            flash("Invalid plant description")
+            flash("Invalid plant description", "Error")
             return redirect("/add")
 
 
@@ -115,7 +115,7 @@ def addFunction():
 
 
         # Flash result & redirect
-        flash("Plant added")
+        flash("Plant added", "Information")
         return redirect("/administration")
 
 

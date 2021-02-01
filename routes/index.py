@@ -38,7 +38,7 @@ def indexFunction():
 
         # Avoid going to negative stocks
         if int(existingStock) - int(quantity) < 0:
-                flash("Not enough in stock")
+                flash("Not enough in stock", "Warning")
                 return redirect("/")
 
         
@@ -77,7 +77,7 @@ def indexFunction():
             
 
         # Flash result & redirect
-        flash("Added to basket")
+        flash("Added to basket", "Information")
         return redirect("/")
 
 

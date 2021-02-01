@@ -249,9 +249,21 @@ main {
 	justify-content: center;
 	align-items: center;
 	align-content: center;
-	
-	background-color: #ffd8d8;
-	height: 75px;
+}
+
+.Error {	
+	background-color: #FFCCCC;
+	height: 50px;
+}
+
+.Warning {	
+	background-color: #FFFFCC;
+	height: 50px;
+}
+
+.Information {	
+	background-color: #CCFFCC;
+	height: 50px;
 }
 
 .FlashList {

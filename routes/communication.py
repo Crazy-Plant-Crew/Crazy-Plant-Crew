@@ -40,7 +40,7 @@ def communicationFunction():
                     db.session.commit()
 
                     # Flash result & redirect
-                    flash("News deleted")
+                    flash("News deleted", "Information")
                     return redirect("/communication")
 
 

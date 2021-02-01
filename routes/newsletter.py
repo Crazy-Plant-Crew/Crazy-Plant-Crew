@@ -38,7 +38,7 @@ def newsletterFunction():
         # Query database for user emails for newsletter 
         query = Users.query.filter_by(newsletter="True").all()
         if query == None:
-            flash("No email in DB")
+            flash("No email in DB", "Warning")
             return redirect("/newsletter")
 
 
@@ -46,7 +46,7 @@ def newsletterFunction():
 
             # Send email (subject, email, body)
             sendMail(subject, address, text)
-            flash("Single email sent")
+            flash("Single email sent", "Information")
 
         elif address == "" and newsletter == newsletter:
 
@@ -58,12 +58,12 @@ def newsletterFunction():
                 
             # Send a copy to Glenn
             sendMail(subject, os.environ["EMAIL_SEND"], text)
-            flash("Group email sent")
+            flash("Group email sent", "Information")
 
         else:
 
             # Flash result & redirect
-            flash("Error: either to one address or select Send Newsletter and leave address blank")
+            flash("Send to one address or select Send Newsletter and leave address blank", "Error")
             return redirect("/newsletter")
 
 

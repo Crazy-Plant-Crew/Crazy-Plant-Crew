@@ -30,14 +30,14 @@ def passwordFunction():
 
         # Ensure password was submitted
         if not password:
-            flash("Must provide password")
+            flash("Must provide password", "Warning")
             return redirect("/password")
 
 
         # Query database for hash if already exists
         query = Users.query.filter_by(id=user_id).first()
         if check_password_hash(query.hash, password):
-            flash("Password must be new")
+            flash("Password must be new", "Error")
             return redirect("/password")
 
 
@@ -48,7 +48,7 @@ def passwordFunction():
 
 
         # Flash result & redirect
-        flash("Password updated")
+        flash("Password updated", "Information")
         return redirect("/profile")
 
     

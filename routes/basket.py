@@ -39,7 +39,7 @@ def basketFunction():
 
 
                     # Flash result & redirect
-                    flash("Item deleted")
+                    flash("Item deleted", "Information")
                     return redirect("/basket")
 
                 else:

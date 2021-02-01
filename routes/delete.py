@@ -36,7 +36,7 @@ def emailFunction():
 
 
         # Flash result & redirect 
-        flash("Account deleted")
+        flash("Account deleted", "Warning")
         return redirect("/signin")
 
 

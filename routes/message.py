@@ -43,7 +43,7 @@ def messageFunction():
         sendMail(subject2, email2, body2)
 
 
-        flash("Message sent")
+        flash("Message sent", "Information")
         return redirect("/")
 
     else:
