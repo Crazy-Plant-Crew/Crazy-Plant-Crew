@@ -31,7 +31,7 @@
 
 {% block main %}
     <div>
-        Total user list:
+        Total user list: {{ users | length }}
         <ul>
         {% for user in users %}
             <li>{{ user }}</li>
@@ -40,7 +40,7 @@
     </div>
     <br>
     <div>
-        Total admin list:
+        Total admin list: {{ admins | length }}
         <ul>
         {% for admin in admins %}
             <li>{{ admin }}</li>
@@ -49,7 +49,7 @@
     </div>
     <br>
     <div>
-        Total unconfirmed list:
+        Total unconfirmed list: {{ unconfirmeds | length }}
         <ul>
         {% for unconfirmed in unconfirmeds %}
             <li>{{ unconfirmed }}</li>

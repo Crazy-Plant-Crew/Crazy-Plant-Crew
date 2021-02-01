@@ -167,7 +167,7 @@ def confirmed_required(f):
 
         if getUserConfirmed() == "False":
 
-            flash("Please enter the PIN code sent to the given email address", "Warning")
+            flash("Please enter the PIN code sent to the given email address", "success")
             return redirect("/unconfirmed")
 
         return f(*args, **kwargs)
@@ -182,7 +182,7 @@ def role_required(f):
 
         if getUserRole() == "user":
 
-            flash("You are not authorized to access this page", "Error")
+            flash("You are not authorized to access this page", "error")
             return redirect("/")
 
         return f(*args, **kwargs)
