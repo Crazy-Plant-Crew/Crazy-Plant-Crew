@@ -37,8 +37,7 @@ main {
 	list-style: none;
 
 	height: 100px;
-	border-radius: 25px;
-	border: 2px solid #37A17D;
+	border-bottom: 3px solid #37A17D;
 	padding: 20px; 
 }
 
