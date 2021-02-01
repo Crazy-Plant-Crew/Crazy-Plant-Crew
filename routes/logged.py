@@ -41,11 +41,16 @@ def loggedFunction():
         # Loop through the DB query
         while index < len(query):
 
+            # Users list
             users.extend([[query[index].username, query[index].email]])
 
+
+            # Admins list
             if query[index].role == "admin":
                 admins.extend([query[index].username])
 
+
+            # Unconfirmeds list
             if query[index].confirmed == "False":
                 unconfirmeds.extend([query[index].username])
 
