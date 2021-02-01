@@ -45,7 +45,7 @@ def pictureFunction():
 
 
         # Flash result & redirect
-        flash("Profile picture updated", "Information")
+        flash("Profile picture updated", "success")
         return redirect("/")
 
 

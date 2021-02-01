@@ -40,7 +40,7 @@ def changeFunction():
         
 
         # Flash result & redirect
-        flash("News edited", "Information")
+        flash("News edited", "success")
         return redirect("/communication")
 
 

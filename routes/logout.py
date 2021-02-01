@@ -17,5 +17,5 @@ def logoutFunction():
 
 
     # Flash result & redirect
-    flash("User logged out", "Warning")
+    flash("User logged out", "warning")
     return redirect("/signin")

@@ -43,49 +43,49 @@ def addFunction():
 
         # Ensure the plant name was submitted
         if not name:
-            flash("must provide plant name", "Warning")
+            flash("must provide plant name", "warning")
             return redirect("/add")
 
 
         # Ensure the plant name fits server-side
         if not re.search("^[a-zA-Z0-9]{1,50}$", name):
-            flash("Invalid plant name", "Error")
+            flash("Invalid plant name", "danger")
             return redirect("/add")
 
 
         # Ensure the plant stock was submitted
         if not stock:
-            flash("must provide plant stock", "Warning")
+            flash("must provide plant stock", "warning")
             return redirect("/add")
 
 
         # Ensure the plant stock fits server-side
         if not re.search("^[0-9]+$", stock):
-            flash("Invalid plant stock", "Error")
+            flash("Invalid plant stock", "danger")
             return redirect("/add")
 
 
         # Ensure the plant price was submitted
         if not stock:
-            flash("must provide plant price", "Warning")
+            flash("must provide plant price", "warning")
             return redirect("/add")
 
 
         # Ensure the plant price fits server-side
         if not re.search("^[0-9]+$", stock):
-            flash("Invalid plant price", "Error")
+            flash("Invalid plant price", "danger")
             return redirect("/add")
 
 
         # Ensure the plant description was submitted
         if not description:
-            flash("must provide plant description", "Warning")
+            flash("must provide plant description", "warning")
             return redirect("/add")
 
 
         # Ensure the plant description fits server-side
         if not re.search("^(?!;).+", description):
-            flash("Invalid plant description", "Error")
+            flash("Invalid plant description", "danger")
             return redirect("/add")
 
 
@@ -115,7 +115,7 @@ def addFunction():
 
 
         # Flash result & redirect
-        flash("Plant added", "Information")
+        flash("Plant added", "success")
         return redirect("/administration")
 
 

@@ -45,7 +45,7 @@ def mailingFunction():
 
 
         # Flash result & redirect    
-        flash("Newsletter updated", "Information")
+        flash("Newsletter updated", "success")
         return redirect("/profile")
 
 

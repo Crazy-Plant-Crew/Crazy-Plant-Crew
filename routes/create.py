@@ -35,7 +35,7 @@ def createFunction():
         db.session.commit()
 
         # Flash result & redirect
-        flash("News created", "Information")
+        flash("News created", "success")
         return redirect("/communication")
         
 

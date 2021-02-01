@@ -4,7 +4,7 @@ import os
 import re
 
 from flask import Blueprint, render_template, redirect, session, request, flash, get_flashed_messages
-from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
+from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerdanger
 from werkzeug.security import check_password_hash, generate_password_hash
 from werkzeug.utils import secure_filename
 from application import uploadPicture, is_human, sendPin, allowed_file, db, Users
@@ -44,57 +44,57 @@ def signupFunction():
 
         # Ensure captcha was correct
         if is_human(captcha_response) != True:
-            flash("Must completed captcha", "Warning")
+            flash("Must completed captcha", "warning")
             return redirect("/signup")
 
             
         # Ensure email was submitted
         if not email:
-            flash("Must provide email", "Warning")
+            flash("Must provide email", "warning")
             return redirect("/signup")
 
 
         # Ensure username was submitted
         if not username:
-            flash("Must provide username", "Warning")
+            flash("Must provide username", "warning")
             return redirect("/signup")
 
 
         # Ensure password was submitted
         if not password:
-            flash("Must provide password", "Warning")
+            flash("Must provide password", "warning")
             return redirect("/signup")
 
 
         # Ensure confirm password is correct
         if password != confirmPassword:
-            flash("The passwords don't match", "Error")
+            flash("The passwords don't match", "danger")
             return redirect("/signup")
 
 
         # Ensure username fits server-side
         if not re.search("^[a-zA-Z0-9]{2,20}$", username):
-            flash("Invalid username", "Error")
+            flash("Invalid username", "danger")
             return redirect("/signup")
 
 
         # Ensure email fits server-side
         if not re.search(r"[^@]+@[^@]+\.[^@]+", email):
-            flash("Invalid email", "Error")
+            flash("Invalid email", "danger")
             return redirect("/signup")
 
 
         # Query database for username if already exists
         query = Users.query.filter_by(username=username).all()
         if len(query) != 0:
-            flash("Username already taken", "Error")
+            flash("Username already taken", "danger")
             return redirect("/signup")
 
 
         # Query database for email if already exists
         query = Users.query.filter_by(username=username).all()
         if len(query) != 0:
-            flash("Email already taken", "Error")
+            flash("Email already taken", "danger")
             return redirect("/signup")
             
 

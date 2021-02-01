@@ -30,13 +30,13 @@ def emailFunction():
 
         # Ensure email was submitted
         if not email:
-            flash("Must provide email", "Warning")
+            flash("Must provide email", "warning")
             return redirect("/email")
 
 
         # Ensure email fits server-side
         if not re.search(r"[^@]+@[^@]+\.[^@]+", email):
-            flash("Invalid email", "Error")
+            flash("Invalid email", "danger")
             return redirect("/email")
 
 
@@ -44,7 +44,7 @@ def emailFunction():
         # Query database for email if already exists
         query = Users.query.filter_by(email=email).all()
         if len(query) != 0:
-            flash("Email already taken", "Warning")
+            flash("Email already taken", "warning")
             return redirect("/username")
 
 
@@ -55,7 +55,7 @@ def emailFunction():
 
 
         # Flash result & redirect
-        flash("Email address updated", "Information")
+        flash("Email address updated", "success")
         return redirect("/profile")
 
 

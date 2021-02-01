@@ -40,7 +40,7 @@ def administrationFunction():
                     db.session.commit()
 
                     # Flash result & redirect
-                    flash("Plant deleted", "Information")
+                    flash("Plant deleted", "success")
                     return redirect("/administration")
 
                 else:

@@ -242,34 +242,6 @@ main {
 /*  FLASH  */
 
 
-.FlashMain {
-	display: flex;
-	flex-direction: column;
-	flex-wrap: nowrap;
-	justify-content: center;
-	align-items: center;
-	align-content: center;
-}
-
-.Error {	
-	background-color: #FFCCCC;
-	height: 50px;
-}
-
-.Warning {	
-	background-color: #FFFFCC;
-	height: 50px;
-}
-
-.Information {	
-	background-color: #CCFFCC;
-	height: 50px;
-}
-
-.FlashList {
-	list-style: none;
-}
-
 
 /*  CAROUSEL  */
 

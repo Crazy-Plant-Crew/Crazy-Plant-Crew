@@ -47,13 +47,13 @@ def unconfirmedFunction():
 
 
                 # Flash result & redirect
-                flash("You are now confirmed", "Information")
+                flash("You are now confirmed", "success")
                 return redirect("/")
                 
             else:
 
                 # Flash result & redirect
-                flash("Wrong PIN entered and/or PIN timed out. (10min)", "Error")
+                flash("Wrong PIN entered and/or PIN timed out. (10min)", "danger")
                 return redirect("/unconfirmed")
 
 
@@ -65,7 +65,7 @@ def unconfirmedFunction():
 
 
             # Flash result & redirect
-            flash("An new activation PIN has been sent to your email", "Information")
+            flash("An new activation PIN has been sent to your email", "success")
             return redirect("/unconfirmed")
 
 

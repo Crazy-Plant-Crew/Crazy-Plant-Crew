@@ -18,7 +18,7 @@ forget = Blueprint('forget', __name__,)
 def forgetFunction():
 
     # Force flash() to get the messages on the same page as the redirect.
-    flash("Please enter your username, press reset and we will send you a new password", "Warning")
+    flash("Please enter your username, press reset and we will send you a new password", "warning")
     get_flashed_messages()
 
 
@@ -33,7 +33,7 @@ def forgetFunction():
         # Query database for existing username
         query = Users.query.filter_by(username=username).all()
         if len(query) == 0:
-            flash("Username does not exist", "Warning")
+            flash("Username does not exist", "warning")
             return redirect("/forget")
 
 
@@ -56,7 +56,7 @@ def forgetFunction():
 
         
         # Flash result & redirect
-        flash("New password sent", "Information")
+        flash("New password sent", "success")
         return redirect("/signin")
 
 

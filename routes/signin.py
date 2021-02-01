@@ -3,7 +3,7 @@ import sys
 import re
 
 from flask import Blueprint, render_template, redirect, session, request, flash, get_flashed_messages
-from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
+from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerdanger
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask_sqlalchemy import SQLAlchemy
 from application import db, Users
@@ -35,33 +35,33 @@ def signinFunction():
 
         # Ensure username was submitted
         if not username:
-            flash("must provide username", "Warning")
+            flash("must provide username", "warning")
             return redirect("/signin")
 
 
         # Ensure username fits server-side
         if not re.search("^[a-zA-Z0-9]{2,20}$", username):
-            flash("Invalid username", "Error")
+            flash("Invalid username", "danger")
             return redirect("/signin")
 
 
         # Ensure password was submitted
         if not password:
-            flash("must provide password", "Warning")
+            flash("must provide password", "warning")
             return redirect("/signin")
 
 
         # Query database for username
         query = Users.query.filter_by(username=username).all()
         if len(query) != 1:
-            flash("Invalid username", "Error")
+            flash("Invalid username", "danger")
             return redirect("/signin")
 
 
         # Ensure username exists and password is correct
         query = Users.query.filter_by(username=username).first()
         if not check_password_hash(query.hash, password):
-            flash("Invalid password", "Error")
+            flash("Invalid password", "danger")
             return redirect("/signin")
 
 

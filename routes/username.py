@@ -30,20 +30,20 @@ def usernameFunction():
 
         # Ensure username was submitted
         if not username:
-            flash("Must provide username", "Warning")
+            flash("Must provide username", "warning")
             return redirect("/username")
 
 
         # Ensure username fits server-side
         if not re.search("^[a-zA-Z0-9]{2,20}$", username):
-            flash("Invalid username", "Error")
+            flash("Invalid username", "danger")
             return redirect("/username")
 
 
         # Query database for username if already exists
         query = Users.query.filter_by(username=username).all()
         if len(query) != 0:
-            flash("Username already taken", "Error")
+            flash("Username already taken", "danger")
             return redirect("/username")
 
 
@@ -54,7 +54,7 @@ def usernameFunction():
 
 
         # Flash result & redirect
-        flash("Username updated", "Information")
+        flash("Username updated", "success")
         return redirect("/profile")
 
     
