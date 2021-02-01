@@ -102,7 +102,7 @@
 
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
-            <header class="FlashMain, {{ category }}">
+            <header class="FlashMain {{ category }}">
                 <ul class="FlashList">
                     {% for message in messages %}
                         <li>{{ message }}</li>
