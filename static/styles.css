@@ -515,7 +515,7 @@ button {
 
 
 .loggedMain {
-	height: 750px;
+	height: 900px;
 	border-radius: 25px;
 	border: 2px solid #E8E8E8;
 	padding: 20px; 	
@@ -531,5 +531,5 @@ button {
 
 	width: 500px;
 	height: 200px;
-	overflow: scroll;
+	overflow: auto;
 }
