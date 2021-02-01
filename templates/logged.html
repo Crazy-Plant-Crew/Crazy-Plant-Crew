@@ -30,7 +30,11 @@
 {% endblock %}
 
 {% block main %}
-    Users page
+    <ul>
+    {% for user in users %}
+        <li>{{ user }}</li>
+    {% endfor %}
+    </ul>
     <br>
     <div>
         <a href="/"><img src="/static/back.svg" alt="back" height="50"></a>

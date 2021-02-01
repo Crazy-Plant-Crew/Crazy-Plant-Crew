@@ -2,7 +2,7 @@ import traceback
 import sys
 
 from flask import Blueprint, render_template, redirect, session, request
-from application import getUserName, getUserPicture, login_required, confirmed_required, getUserRole, role_required, db
+from application import getUserName, getUserPicture, login_required, confirmed_required, getUserRole, role_required, db, Users
 from flask_sqlalchemy import SQLAlchemy
 
 
@@ -16,8 +16,25 @@ logged = Blueprint('logged', __name__,)
 @role_required
 def loggedFunction():    
 
+    # Force flash() to get the messages on the same page as the redirect.
+    get_flashed_messages()
+
+
+    # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
 
-        print("logged")
+        print("Test")
+
     
-    return render_template("logged.html", name=getUserName(), picture=getUserPicture(), role=getUserRole())
+    else:
+
+        query = Users.query.all()
+        userList = []
+        index = 0
+        
+        while index < len(query):
+
+            userList.extend([query[index].username])
+
+
+        return render_template("logged.html", name=getUserName(), picture=getUserPicture(), role=getUserRole(), users=userList)
