@@ -30,31 +30,33 @@
 {% endblock %}
 
 {% block main %}
-    <div>
-        Total user list: {{ users | length }}
-        <ul>
-        {% for user in users %}
-            <li>{{ user[0] }} - {{ user[1] }}</li>
-        {% endfor %}
-        </ul>
-    </div>
-    <br>
-    <div>
-        Total admin list: {{ admins | length }}
-        <ul>
-        {% for admin in admins %}
-            <li>{{ admin }}</li>
-        {% endfor %}
-        </ul>
-    </div>
-    <br>
-    <div>
-        Total unconfirmed list: {{ unconfirmeds | length }}
-        <ul>
-        {% for unconfirmed in unconfirmeds %}
-            <li>{{ unconfirmed }}</li>
-        {% endfor %}
-        </ul>
+    <div class="loggedMain">
+        <div>
+            Total user list: {{ users | length }}
+            <ul>
+            {% for user in users %}
+                <li>{{ user[0] }} - {{ user[1] }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+        <br>
+        <div>
+            Total admin list: {{ admins | length }}
+            <ul>
+            {% for admin in admins %}
+                <li>{{ admin }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+        <br>
+        <div>
+            Total unconfirmed list: {{ unconfirmeds | length }}
+            <ul>
+            {% for unconfirmed in unconfirmeds %}
+                <li>{{ unconfirmed }}</li>
+            {% endfor %}
+            </ul>
+        </div>
     </div>
     <br>
     <div>
