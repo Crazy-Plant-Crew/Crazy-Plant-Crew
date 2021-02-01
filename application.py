@@ -80,6 +80,8 @@ class Baskets(db.Model):
     subtotal = db.Column(db.Integer, nullable=False, default=0)
 
 class Request(db.Model):
+    __tablename__ = "request"
+    
     index = db.Column(db.Integer, primary_key=True, autoincrement=True)
     response_time = db.Column(db.Float)
     date = db.Column(db.DateTime)
