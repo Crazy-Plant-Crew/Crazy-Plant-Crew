@@ -21,6 +21,7 @@ from time import time
 from flask_ckeditor import CKEditor
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import text
+from flask_statistics import Statistics
 
 
 # Configure application
@@ -78,9 +79,29 @@ class Baskets(db.Model):
     price = db.Column(db.Integer, nullable=False)
     subtotal = db.Column(db.Integer, nullable=False, default=0)
 
+class Request(db.Model):
+    index = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    response_time = db.Column(db.Float)
+    date = db.Column(db.DateTime)
+    method = db.Column(db.String)
+    size = db.Column(db.Integer)
+    status_code = db.Column(db.Integer)
+    path = db.Column(db.String)
+    user_agent = db.Column(db.String)
+    remote_address = db.Column(db.String)
+    exception = db.Column(db.String)
+    referrer = db.Column(db.String)
+    browser = db.Column(db.String)
+    platform = db.Column(db.String)
+    mimetype = db.Column(db.String)
+
 
 # Create DB
 db.create_all()
+
+
+# Configure Flask-Statistics
+statistics = Statistics(app, db, Request)
 
 
 # Seed DB for admin
