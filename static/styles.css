@@ -46,6 +46,18 @@ main {
 	color: black;
 }
 
+.NavBarLogo {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: center;
+	align-content: center;
+
+	color: #37A17D;
+	font-weight: 900;
+}
+
 .NavBarRow {
 	display: flex;
 	flex-direction: row;
