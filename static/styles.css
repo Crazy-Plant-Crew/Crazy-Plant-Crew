@@ -53,6 +53,7 @@ main {
 	text-decoration: none;
 	color: #37A17D;
 	font-weight: 900;
+	font-size: 1.5em;
 }
 
 .NavBarRow {
@@ -257,7 +258,7 @@ main {
 	align-items: center;
 	align-content: center;
 
-	border-top: 25px;
+	top: 25px;
 }
 
 .alert {
