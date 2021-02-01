@@ -21,9 +21,6 @@ main {
 	align-content: center;
 
 	text-align: center;
-	border-radius: 25px;
-	border: 2px solid #09733A;
-	padding: 20px; 
 }
 
 
@@ -40,6 +37,9 @@ main {
 	list-style: none;
 
 	height: 100px;
+	border-radius: 25px;
+	border: 2px solid #37A17D;
+	padding: 20px; 
 }
 
 .NavBarMain a {
