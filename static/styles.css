@@ -525,7 +525,7 @@ button {
 	display: flex;
 	flex-direction: column;
 	flex-wrap: nowrap;
-	justify-content: center;
+	justify-content: flex-start;
 	align-items: flex-start;
-	align-content: stretch;
+	align-content: flex-start;
 }
