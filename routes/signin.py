@@ -41,7 +41,7 @@ def signinFunction():
 
         # Ensure username fits server-side
         if not re.search("^[a-zA-Z0-9]{2,20}$", username):
-            flash("Invalid username", "Error")
+            flash("Invalid username", category="Error")
             return redirect("/signin")
 
 
