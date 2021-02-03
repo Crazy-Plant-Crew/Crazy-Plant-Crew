@@ -42,6 +42,7 @@ def loggedFunction():
         while index < len(query):
 
             # Users list
+            if query[index].role == "user":
             users.extend([[query[index].username, query[index].email]])
 
 

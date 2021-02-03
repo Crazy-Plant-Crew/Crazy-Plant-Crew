@@ -32,30 +32,45 @@
 {% block main %}
     <div class="loggedMain">
         <div class="loggedDiv">
-            Total user list: {{ users | length }}
+            Total Admins: {{ admins | length }}
+            Total Users: {{ users | length }}
+            Total Unconfirmeds: {{ unconfirmeds | length }}
+        </div>
+        <br>
+        <div class="loggedDiv">
+            User list:
             <ul>
-            {% for user in users %}
-                <li>{{ user[0] }} - {{ user[1] }}</li>
-            {% endfor %}
+                {% for user in users %}
+                    <li>{{ user[0] }} - {{ user[1] }}</li>
+                {% endfor %}
             </ul>
         </div>
         <br>
         <div class="loggedDiv">
-            Total admin list: {{ admins | length }}
+            Admin list:
             <ul>
-            {% for admin in admins %}
-                <li>{{ admin }}</li>
-            {% endfor %}
+                {% for admin in admins %}
+                    <li>{{ admin }}</li>
+                {% endfor %}
             </ul>
         </div>
         <br>
         <div class="loggedDiv">
-            Total unconfirmed list: {{ unconfirmeds | length }}
-            <ul>
-            {% for unconfirmed in unconfirmeds %}
-                <li>{{ unconfirmed }}</li>
-            {% endfor %}
-            </ul>
+            Remove a user:
+            <input id="remove" autocomplete="off" autofocus class="form-control" name="remove" placeholder=" Remove user" type="text">
+            <button type="submit" name="remove" value="remove"></button>
+        </div>
+        <br>
+        <div class="loggedDiv">
+            Make a user an admin: 
+            <input id="remove" autocomplete="off" autofocus class="form-control" name="promote" placeholder=" Promote user" type="text">
+            <button type="submit" name="promote" value="promote"></button>
+        </div>
+        <br>
+        <div class="loggedDiv">
+            Make an admin a user:
+            <input id="remove" autocomplete="off" autofocus class="form-control" name="demote" placeholder=" Demote admin" type="text">
+            <button type="submit" name="demote" value="demote"></button>
         </div>
         <br>
     </div>

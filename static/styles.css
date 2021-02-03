@@ -521,6 +521,15 @@ button {
 	padding: 20px; 	
 }
 
+.loggedDiv {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: flex-start;
+	align-content: flex-start;
+}
+
 .loggedDiv ul {
 	display: flex;
 	flex-direction: column;
@@ -530,6 +539,6 @@ button {
 	align-content: flex-start;
 
 	width: 500px;
-	height: 200px;
+	height: 150px;
 	overflow: auto;
 }
