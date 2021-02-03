@@ -33,6 +33,7 @@ def loggedFunction():
         promote = request.form.get("promote")
         demote = request.form.get("demote")
 
+        print("remove" in request.form)
 
         if "remove" in request.form:
 
@@ -90,7 +91,7 @@ def loggedFunction():
 
                 # Check if field is not empty
                 if promote == "":
-                    flash("Must provide name PROMOTE", "warning")
+                    flash("Must provide name", "warning")
                     return redirect("/logged")
 
 
@@ -127,7 +128,7 @@ def loggedFunction():
 
                 # Check if field is not empty
                 if demote == "":
-                    flash("Must provide name DEMOTE", "warning")
+                    flash("Must provide name", "warning")
                     return redirect("/logged")
 
 
