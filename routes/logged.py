@@ -33,9 +33,8 @@ def loggedFunction():
         promote = request.form.get("promote")
         demote = request.form.get("demote")
 
-        print("remove" in request.form)
 
-        if "remove" in request.form:
+        if request.form['remove'] == "remove":
 
             # Loop through the DB query
             index = 0
@@ -83,7 +82,7 @@ def loggedFunction():
 
 
 
-        if "promote" in request.form:
+        if request.form['promote'] == "promote":
 
             # Loop through the DB query
             index = 0
@@ -120,7 +119,7 @@ def loggedFunction():
 
 
 
-        if "demote" in request.form:
+        if request.form['demote'] == "demote":
 
             # Loop through the DB query
             index = 0
