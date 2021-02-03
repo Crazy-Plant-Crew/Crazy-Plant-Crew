@@ -33,10 +33,10 @@ def loggedFunction():
         demote = request.form.get("demote")
 
 
-        # Loop through the DB query
-        while index < len(query):
+        if "remove" in request.form:
 
-            if "remove" in request.form:
+            # Loop through the DB query
+            while index < len(query):
 
                 # Check if it is root
                 if query[index].username == os.environ.get("USERNAME"):
@@ -76,8 +76,14 @@ def loggedFunction():
                     return redirect("/logged")
 
 
+            index += 1
 
-            if "promote" in request.form:
+
+
+        if "promote" in request.form:
+
+            # Loop through the DB query
+            while index < len(query):
 
                 # Check if it is the user is already an admin
                 if query[index].role == "admin":
@@ -106,8 +112,14 @@ def loggedFunction():
                     return redirect("/logged")
 
 
+            index += 1
 
-            if "demote" in request.form:
+
+
+        if "demote" in request.form:
+
+            # Loop through the DB query
+            while index < len(query):
 
                 # Check if it is root
                 if query[index].username == os.environ.get("USERNAME"):
