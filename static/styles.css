@@ -547,7 +547,7 @@ button {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: nowrap;
-	justify-content: center;
+	justify-content: space-around;
 	align-items: center;
 	align-content: center;
 }
@@ -560,4 +560,5 @@ button {
 	text-decoration: none;
 	display: inline-block;
 	cursor: pointer;
+	padding: 5px 10px;
 }
