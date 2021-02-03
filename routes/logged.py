@@ -40,6 +40,12 @@ def loggedFunction():
             index = 0
             while index < len(query):
 
+                # Check if field is not empty
+                elif remove == "":
+                    flash("Must provide name", "warning")
+                    return redirect("/logged")
+                    
+
                 # Check if it is root
                 if query[index].username == os.environ.get("USERNAME"):
                     flash("Can't remove this user", "warning")
@@ -55,12 +61,6 @@ def loggedFunction():
                 # Check if it is the user is an admin
                 elif query[index].role == "admin":
                     flash("Can't remove admin", "warning")
-                    return redirect("/logged")
-                
-
-                # Check if field is not empty
-                elif remove == "":
-                    flash("Must provide name", "warning")
                     return redirect("/logged")
 
 
@@ -88,15 +88,15 @@ def loggedFunction():
             index = 0
             while index < len(query):
 
-                # Check if it is the user is already an admin
-                if query[index].role == "admin":
-                    flash("Already admin", "warning")
-                    return redirect("/logged")
-
-
                 # Check if field is not empty
                 elif promote == "":
                     flash("Must provide name", "warning")
+                    return redirect("/logged")
+
+
+                # Check if it is the user is already an admin
+                if query[index].role == "admin":
+                    flash("Already admin", "warning")
                     return redirect("/logged")
 
 
@@ -125,6 +125,12 @@ def loggedFunction():
             index = 0
             while index < len(query):
 
+                # Check if field is not empty
+                elif demote == "":
+                    flash("Must provide name", "warning")
+                    return redirect("/logged")
+
+
                 # Check if it is root
                 if query[index].username == os.environ.get("USERNAME"):
                     flash("Can't demote this user", "warning")
@@ -134,12 +140,6 @@ def loggedFunction():
                 # Check if it is the user itself
                 elif query[index].id == session["user_id"]:
                     flash("Can't demote yourself", "warning")
-                    return redirect("/logged")
-
-
-                # Check if field is not empty
-                elif demote == "":
-                    flash("Must provide name", "warning")
                     return redirect("/logged")
 
 
