@@ -32,9 +32,9 @@
 {% block main %}
     <div class="loggedMain">
         <div class="loggedDiv">
-            Total Admins: {{ admins | length }}
-            Total Users: {{ users | length }}
-            Total Unconfirmeds: {{ unconfirmeds | length }}
+            Total Admins: {{ admins | length }}<br>
+            Total Users: {{ users | length }}<br>
+            Total Unconfirmeds: {{ unconfirmeds | length }}<br>
         </div>
         <br>
         <div class="loggedDiv">
@@ -58,19 +58,19 @@
         <div class="loggedDiv">
             Remove a user:
             <input id="remove" autocomplete="off" autofocus class="form-control" name="remove" placeholder=" Remove user" type="text">
-            <button type="submit" name="remove" value="remove"></button>
+            <button type="submit" name="remove" value="remove">Remove</button>
         </div>
         <br>
         <div class="loggedDiv">
             Make a user an admin: 
             <input id="remove" autocomplete="off" autofocus class="form-control" name="promote" placeholder=" Promote user" type="text">
-            <button type="submit" name="promote" value="promote"></button>
+            <button type="submit" name="promote" value="promote">Promote</button>
         </div>
         <br>
         <div class="loggedDiv">
             Make an admin a user:
             <input id="remove" autocomplete="off" autofocus class="form-control" name="demote" placeholder=" Demote admin" type="text">
-            <button type="submit" name="demote" value="demote"></button>
+            <button type="submit" name="demote" value="demote">Demote</button>
         </div>
         <br>
     </div>
