@@ -43,7 +43,7 @@ def loggedFunction():
 
             # Users list
             if query[index].role == "user":
-            users.extend([[query[index].username, query[index].email]])
+                users.extend([[query[index].username, query[index].email]])
 
 
             # Admins list
