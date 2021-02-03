@@ -42,7 +42,7 @@ def loggedFunction():
 
                 # Check if field is not empty
                 if remove == "":
-                    flash("Must provide name", "warning")
+                    flash("Must provide name REMOVE", "warning")
                     return redirect("/logged")
 
 
@@ -90,7 +90,7 @@ def loggedFunction():
 
                 # Check if field is not empty
                 if promote == "":
-                    flash("Must provide name", "warning")
+                    flash("Must provide name PROMOTE", "warning")
                     return redirect("/logged")
 
 
@@ -127,7 +127,7 @@ def loggedFunction():
 
                 # Check if field is not empty
                 if demote == "":
-                    flash("Must provide name", "warning")
+                    flash("Must provide name DEMOTE", "warning")
                     return redirect("/logged")
 
 
