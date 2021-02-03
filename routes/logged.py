@@ -20,17 +20,132 @@ def loggedFunction():
     get_flashed_messages()
 
 
+    # Query database for users
+    query = Users.query.all()
+
+
     # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
 
-        print("Test")
+        # Get variable
+        remove = request.form.get("remove")
+        promote = request.form.get("promote")
+        demote = request.form.get("demote")
 
+
+        # Loop through the DB query
+        while index < len(query):
+
+            if "remove" in request.form:
+
+                # Check if it is root
+                if query[index].username == os.environ.get("USERNAME"):
+                    flash("Can't remove this user", "warning")
+                    return redirect("/logged")
+
+
+                # Check if it is the user itself
+                elif query[index].id == session["user_id"]:
+                    flash("Can't remove yourself", "warning")
+                    return redirect("/logged")
+
+
+                # Check if it is the user is an admin
+                elif query[index].role == "admin":
+                    flash("Can't remove admin", "warning")
+                    return redirect("/logged")
+                
+
+                # Check if field is not empty
+                elif remove == "":
+                    flash("Must provide name", "warning")
+                    return redirect("/logged")
+
+
+                # Check if the name matches
+                elif Users.query.filter_by(username=remove).first() == None:
+                    flash("No matching name", "warning")
+                    return redirect("/logged")
+
+
+                # Update database by removing user
+                else:
+                    Users.query.filter(Users.username == remove).delete()
+                    db.session.commit()
+                    flash("User deleted", "success")
+                    return redirect("/logged")
+
+
+
+            if "promote" in request.form:
+
+                # Check if it is the user is already an admin
+                if query[index].role == "admin":
+                    flash("Already admin", "warning")
+                    return redirect("/logged")
+
+
+                # Check if field is not empty
+                elif promote == "":
+                    flash("Must provide name", "warning")
+                    return redirect("/logged")
+
+
+                # Check if the name matches
+                elif Users.query.filter_by(username=promote).first() == None:
+                    flash("No matching name", "warning")
+                    return redirect("/logged")
+
+
+                # Update database by promoting user
+                else:
+                    query = Users.query.filter_by(username=promote).first()
+                    query.role = "admin"
+                    db.session.commit()
+                    flash("User promoted", "success")
+                    return redirect("/logged")
+
+
+
+            if "demote" in request.form:
+
+                # Check if it is root
+                if query[index].username == os.environ.get("USERNAME"):
+                    flash("Can't demote this user", "warning")
+                    return redirect("/logged")
+
+
+                # Check if it is the user itself
+                elif query[index].id == session["user_id"]:
+                    flash("Can't demote yourself", "warning")
+                    return redirect("/logged")
+
+
+                # Check if field is not empty
+                elif demote == "":
+                    flash("Must provide name", "warning")
+                    return redirect("/logged")
+
+
+                # Check if the name matches
+                elif Users.query.filter_by(username=demote).first() == None:
+                    flash("No matching name", "warning")
+                    return redirect("/logged")
+
+
+                # Update database by demoting user
+                else:
+                    query = Users.query.filter_by(username=demote).first()
+                    query.role = "user"
+                    db.session.commit()
+                    flash("Admin demoted", "success")
+                    return redirect("/logged")
+
+
+            index += 1
+                
     
     else:
-
-        # Query database for users
-        query = Users.query.all()
-
 
         # Set variable
         users = []
