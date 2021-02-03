@@ -36,6 +36,7 @@ def loggedFunction():
         if "remove" in request.form:
 
             # Loop through the DB query
+            index = 0
             while index < len(query):
 
                 # Check if it is root
@@ -83,6 +84,7 @@ def loggedFunction():
         if "promote" in request.form:
 
             # Loop through the DB query
+            index = 0
             while index < len(query):
 
                 # Check if it is the user is already an admin
@@ -119,6 +121,7 @@ def loggedFunction():
         if "demote" in request.form:
 
             # Loop through the DB query
+            index = 0
             while index < len(query):
 
                 # Check if it is root
