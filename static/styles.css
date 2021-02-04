@@ -437,17 +437,9 @@ button {
 	flex-wrap: nowrap;
 	justify-content: center;
 	align-items: center;
-	align-content: center;;	
+	align-content: center;
 }
 
-.AddSecond {
-	display: flex;
-	flex-direction: column;
-	flex-wrap: nowrap;
-	justify-content: center;
-	align-items: flex-start;
-	align-content: center;	
-}
 
 /*  EDIT  */
 
@@ -457,6 +449,15 @@ button {
 	border-radius: 25px;
 	border: 2px solid #E8E8E8;
 	padding: 20px; 	
+}
+
+.EditFirst {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: center;
+	align-content: center;
 }
 
 

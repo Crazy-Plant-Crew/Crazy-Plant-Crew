@@ -32,19 +32,21 @@
 {% block main %}
         <form action="/edit" method="post" enctype="multipart/form-data">
             <div class="EditMain">
-                <div>
-                    <input type='hidden' name='plant_id' value='{{ plants[0] | safe }}'>
-                </div>
-                <div>
-                    <input id="name" autocomplete="off" autofocus class="form-control" name="name" placeholder="Name" type="text" value="{{ plants[1] | safe }}">
-                </div>
-                <br>
-                <div>
-                    <input id="stock" autocomplete="off" autofocus class="form-control" name="stock" placeholder="Stock" type="number" min="0" value="{{ plants[2] | safe }}">
-                </div>
-                <br>
-                <div>
-                    <input id="price" autocomplete="off" autofocus class="form-control" name="price" placeholder="Price" type="number" min="0" value="{{ plants[3] | safe }}">
+                <div class="EditFirst">
+                    <div>
+                        <input type='hidden' name='plant_id' value='{{ plants[0] | safe }}'>
+                    </div>
+                    <div>
+                        <input id="name" autocomplete="off" autofocus class="form-control" name="name" placeholder="Name" type="text" value="{{ plants[1] | safe }}">
+                    </div>
+                    <br>
+                    <div>
+                        <input id="stock" autocomplete="off" autofocus class="form-control" name="stock" placeholder="Stock" type="number" min="0" value="{{ plants[2] | safe }}">
+                    </div>
+                    <br>
+                    <div>
+                        <input id="price" autocomplete="off" autofocus class="form-control" name="price" placeholder="Price" type="number" min="0" value="{{ plants[3] | safe }}">
+                    </div>
                 </div>
                 <br>
                 <div>
@@ -55,14 +57,17 @@
                 </div>
                 <br>
                 <div>
+                    Main picture:
                     <input type="file" id="picture" name="picture">
                 </div>
                 <br>
                 <div>
+                    First thumbnail:
                     <input type="file" id="thumbnail1" name="thumbnail1">
                 </div>
                 <br>
                 <div>
+                    Second thumbnail: 
                     <input type="file" id="thumbnail2" name="thumbnail2">
                 </div>
                 <br>
