@@ -425,7 +425,7 @@ button {
 
 
 .AddMain {
-	height: 750px;
+	height: 700px;
 	border-radius: 25px;
 	border: 2px solid #E8E8E8;
 	padding: 20px; 	
@@ -438,15 +438,6 @@ button {
 	justify-content: center;
 	align-items: center;
 	align-content: center;;	
-}
-
-.AddSecond {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: nowrap;
-	justify-content: center;
-	align-items: center;
-	align-content: center;
 }
 
 
