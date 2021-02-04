@@ -51,7 +51,7 @@ def loggedFunction():
 
 
             # Check if it is the user itself
-            if Users.query.filter_by(username=remove).first() == getUserName()
+            if Users.query.filter_by(username=remove).first() == getUserName():
                 flash("Can't remove yourself", "warning")
                 return redirect("/logged")
 
@@ -124,7 +124,7 @@ def loggedFunction():
 
 
             # Check if it is the user itself
-            if Users.query.filter_by(username=demote).first() == getUserName()
+            if Users.query.filter_by(username=demote).first() == getUserName():
                 flash("Can't demote yourself", "warning")
                 return redirect("/logged")
 
