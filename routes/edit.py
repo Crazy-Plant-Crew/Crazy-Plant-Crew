@@ -117,6 +117,36 @@ def editFunction():
             db.session.commit()
 
 
+        # Save, upload and delete first thumbnail file
+        file = request.files["thumbnail1"]
+        if file and allowed_file(file.filename):
+
+            filename = secure_filename(file.filename)
+            file.save(os.path.join("./static", filename))
+            upload = uploadPicture("./static/" + filename)
+            os.remove("./static/" + filename)
+
+            # Update database with new image url 
+            query = Plants.query.filter_by(id=plant_id).first()
+            query.picture = upload
+            db.session.commit()
+
+
+        # Save, upload and delete second thumbnail file
+        file = request.files["thumbnail2"]
+        if file and allowed_file(file.filename):
+
+            filename = secure_filename(file.filename)
+            file.save(os.path.join("./static", filename))
+            upload = uploadPicture("./static/" + filename)
+            os.remove("./static/" + filename)
+
+            # Update database with new image url 
+            query = Plants.query.filter_by(id=plant_id).first()
+            query.picture = upload
+            db.session.commit()
+
+
         # Flash result & redirect
         flash("Plant edited", "success")
         return redirect("/administration")
