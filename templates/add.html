@@ -32,16 +32,20 @@
 {% block main %}
     <form action="/add" method="post" enctype="multipart/form-data">
         <div class="AddMain">
-            <div>
-                <input id="name" autocomplete="off" autofocus class="form-control" name="name" placeholder="Name" type="text">
-            </div>
-            <br>
-            <div>
-                <input id="stock" autocomplete="off" autofocus class="form-control" name="stock" placeholder="Stock" type="number" min="0">
-            </div>
-            <br>
-            <div>
-                <input id="price" autocomplete="off" autofocus class="form-control" name="price" placeholder="Price" type="number" min="0">
+            <div class="AddFirst">
+                <div>
+                    <input id="name" autocomplete="off" autofocus class="form-control" name="name" placeholder="Name" type="text">
+                </div>
+                <br>
+                <div class="AddSecond">
+                    <div>
+                        <input id="stock" autocomplete="off" autofocus class="form-control" name="stock" placeholder="Stock" type="number" min="0">
+                    </div>
+                    <br>
+                    <div>
+                        <input id="price" autocomplete="off" autofocus class="form-control" name="price" placeholder="Price" type="number" min="0">
+                    </div>
+                </div>
             </div>
             <br>
             <div>

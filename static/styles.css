@@ -431,6 +431,24 @@ button {
 	padding: 20px; 	
 }
 
+.AddFirst {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	align-items: center;
+	align-content: stretch;	
+}
+
+.AddSecond {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	align-items: center;
+	align-content: stretch;	
+}
+
 
 /*  EDIT  */
 
