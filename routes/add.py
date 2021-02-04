@@ -100,11 +100,11 @@ def addFunction():
 
 
         # Save, upload and delete picture file
-        file = request.files["picture"]
-        if file and allowed_file(file.filename):
+        file1 = request.files["picture"]
+        if file1 and allowed_file(file1.filename):
 
-            filename = secure_filename(file.filename)
-            file.save(os.path.join("./static", filename))
+            filename = secure_filename(file1.filename)
+            file1.save(os.path.join("./static", filename))
             upload = uploadPicture("./static/" + filename)
             os.remove("./static/" + filename)
 
@@ -115,34 +115,34 @@ def addFunction():
 
 
         # Save, upload and delete first thumbnail file
-        file = request.files["thumbnail1"]
-        if file and allowed_file(file.filename):
+        file2 = request.files["thumbnail1"]
+        if file2 and allowed_file(file2.filename):
 
-            filename = secure_filename(file.filename)
-            file.save(os.path.join("./static", filename))
+            filename = secure_filename(file2.filename)
+            file2.save(os.path.join("./static", filename))
             upload = uploadPicture("./static/" + filename)
             os.remove("./static/" + filename)
 
             # Update database with new image url 
             query = Plants.query.filter_by(id=plant_id).first()
-            query.picture = upload
+            query.thumbnail1 = upload
             db.session.commit()
 
 
         # Save, upload and delete second thumbnail file
-        file = request.files["thumbnail2"]
-        if file and allowed_file(file.filename):
+        file3 = request.files["thumbnail2"]
+        if file3 and allowed_file(file3.filename):
 
-            filename = secure_filename(file.filename)
-            file.save(os.path.join("./static", filename))
+            filename = secure_filename(file3.filename)
+            file3.save(os.path.join("./static", filename))
             upload = uploadPicture("./static/" + filename)
             os.remove("./static/" + filename)
 
             # Update database with new image url 
             query = Plants.query.filter_by(id=plant_id).first()
-            query.picture = upload
+            query.thumbnail2 = upload
             db.session.commit()
-            
+
 
         # Flash result & redirect
         flash("Plant added", "success")
