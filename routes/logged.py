@@ -147,6 +147,11 @@ def loggedFunction():
         unconfirmeds = []
         index = 0
         
+
+        # Query DB for all users
+        query = Users.query.all()
+
+
         # Loop through the DB query
         while index < len(query):
 
@@ -163,6 +168,7 @@ def loggedFunction():
             # Unconfirmeds list
             if query[index].confirmed == "False":
                 unconfirmeds.extend([query[index].username])
+                
 
             index += 1
 
