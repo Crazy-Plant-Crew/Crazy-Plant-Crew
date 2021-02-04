@@ -435,18 +435,18 @@ button {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: nowrap;
-	justify-content: space-around;
+	justify-content: center;
 	align-items: center;
-	align-content: stretch;	
+	align-content: center;;	
 }
 
 .AddSecond {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: nowrap;
-	justify-content: space-around;
+	justify-content: center;
 	align-items: center;
-	align-content: stretch;	
+	align-content: center;
 }
 
 
