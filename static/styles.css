@@ -238,6 +238,15 @@ main {
 	width: 75%;
 }
 
+.IndexInfo4 {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: center;
+	align-content: stretch;
+}
+
 
 /*  MAIN  */
 
