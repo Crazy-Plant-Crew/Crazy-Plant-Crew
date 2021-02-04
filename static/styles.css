@@ -247,6 +247,12 @@ main {
 	align-content: stretch;
 }
 
+.IndexInfo4 img {
+	border-radius: 25px;
+	border: 1px solid #C0C0C0;
+	padding: 10px;
+}
+
 
 /*  MAIN  */
 
