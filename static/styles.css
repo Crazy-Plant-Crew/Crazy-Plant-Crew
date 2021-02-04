@@ -444,9 +444,18 @@ button {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: nowrap;
-	justify-content: space-between;
+	justify-content: space-around;
 	align-items: center;
 	align-content: stretch;	
+}
+
+.AddThird {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-around;
+	align-items: center;
+	align-content: stretch;
 }
 
 

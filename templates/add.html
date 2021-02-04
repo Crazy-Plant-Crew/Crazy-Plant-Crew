@@ -32,16 +32,14 @@
 {% block main %}
     <form action="/add" method="post" enctype="multipart/form-data">
         <div class="AddMain">
-            <div>
-                <div class="AddFirst">
+            <div class="AddFirst">
+                <div>
                     <input id="name" autocomplete="off" autofocus class="form-control" name="name" placeholder="Name" type="text">
                 </div>
-                <br>
                 <div class="AddSecond">
                     <div>
                         <input id="stock" autocomplete="off" autofocus class="form-control" name="stock" placeholder="Stock" type="number" min="0">
                     </div>
-                    <br>
                     <div>
                         <input id="price" autocomplete="off" autofocus class="form-control" name="price" placeholder="Price" type="number" min="0">
                     </div>
@@ -53,18 +51,19 @@
                 {{ ckeditor.load(custom_url=url_for('static', filename='ckeditor/ckeditor.js')) }}
             </div>
             <br>
-            <div>
-                <input type="file" id="picture" name="picture">
+            <div class="AddThird">
+                <div>
+                    <input type="file" id="picture" name="picture">
+                </div>
+
+                <div>
+                    <input type="file" id="thumbnail1" name="thumbnail1">
+                </div>
+
+                <div>
+                    <input type="file" id="thumbnail2" name="thumbnail2">
+                </div>
             </div>
-            <br>
-            <div>
-                <input type="file" id="thumbnail1" name="thumbnail1">
-            </div>
-            <br>
-            <div>
-                <input type="file" id="thumbnail2" name="thumbnail2">
-            </div>
-            <br>
             <div>
                 <input type="checkbox" id="show" name="show" value="show">
                 <label for="show"> Show?</label>
