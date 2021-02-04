@@ -242,7 +242,7 @@ main {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: nowrap;
-	justify-content: center;
+	justify-content: space-around;
 	align-items: center;
 	align-content: stretch;
 }
@@ -250,7 +250,6 @@ main {
 .IndexInfo4 img {
 	border-radius: 25px;
 	border: 1px solid #C0C0C0;
-	padding: 10px;
 }
 
 
