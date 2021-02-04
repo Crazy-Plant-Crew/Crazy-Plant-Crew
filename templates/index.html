@@ -65,6 +65,10 @@
                                     <div class="IndexInfo3">
                                         <div name="{{ plant.description | safe }}">Description: {{ plant.description | safe }}</div>
                                     </div>
+                                    <div>
+                                        <img name="{{ plant.thumbnail1 | safe }}" src="{{ plant.thumbnail1 | safe }}" alt="plant picture of {{ plant.name | safe }}" width="200px">
+                                        <img name="{{ plant.thumbnail2 | safe }}" src="{{ plant.thumbnail2 | safe }}" alt="plant picture of {{ plant.name | safe }}" width="200px">
+                                    </div>
                                 </div>
                             </div>
                         </div>
