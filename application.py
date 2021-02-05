@@ -394,6 +394,7 @@ from routes.create import create
 from routes.pay import pay
 from routes.transaction import transaction
 from routes.history import history
+from routes.faq import faq
 
 
 # Configure Blueprints
@@ -425,3 +426,4 @@ app.register_blueprint(create)
 app.register_blueprint(pay)
 app.register_blueprint(transaction)
 app.register_blueprint(history)
+app.register_blueprint(faq)

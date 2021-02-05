@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    FAQ
+{% endblock %}
+
+{% block navigation %}
+    {% if role == "admin" %}
+        <div class="click-to-top">
+            <li class="NavBarLi"><a href="/logged"><img src="/static/admin.svg" alt="admin" height="50"></a></li>
+                <span>Users</span>
+        </div>
+        <div class="click-to-top">
+            <li class="NavBarLi"><a href="/transaction"><img src="/static/transactionhistory.svg" alt="pay" height="50"></a></li>
+                <span>Transaction</span>
+        </div>
+        <div class="click-to-top">
+            <li class="NavBarLi"><a href="/administration"><img src="/static/addplant.svg" alt="addplant" height="50"></a></li>
+                <span>Manage</span>
+        </div>
+        <div class="click-to-top">
+            <li class="NavBarLi"><a href="/communication"><img src="/static/addnewsletter.svg" alt="addnewsletter" height="50"></a></li>
+                <span>Communication</span>
+        </div>
+        <div class="click-to-top">
+            <li class="NavBarLi"><a href="/newsletter"><img src="/static/sendmail.svg" alt="sendmail" height="50"></a></li>
+                <span>Newsletter</span>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block main %}
+    History page
+    <br>
+    <div>
+        <a href="/"><img src="/static/back.svg" alt="back" height="50"></a>
+    </div>
+{% endblock %}
