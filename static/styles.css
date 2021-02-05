@@ -245,6 +245,8 @@ main {
 	justify-content: space-around;
 	align-items: center;
 	align-content: stretch;
+
+	width: 500px;
 }
 
 .IndexInfo4 img {
