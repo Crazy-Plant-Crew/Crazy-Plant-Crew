@@ -36,6 +36,11 @@ def addFunction():
         show = request.form.get("show")
 
 
+        # Convert offer value to integer
+        if offer == "":
+            offer = 0
+
+
         # Convert show value to string
         if show == None:
             show = "No"
@@ -87,7 +92,7 @@ def addFunction():
 
 
         # Ensure the plant offer fits server-side
-        if offer != "":
+        if offer != 0:
             if not re.search("^[0-9]+$", offer):
                 flash("Invalid plant offer", "danger")
                 return redirect("/add")
