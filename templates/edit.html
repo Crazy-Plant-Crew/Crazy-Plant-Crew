@@ -39,18 +39,21 @@
                     <div>
                         <input id="name" autocomplete="off" autofocus class="form-control" name="name" placeholder="Name" type="text" value="{{ plants[1] | safe }}">
                     </div>
-                    <br>
-                    <div>
-                        <input id="stock" autocomplete="off" autofocus class="form-control" name="stock" placeholder="Stock" type="number" min="0" value="{{ plants[2] | safe }}">
-                    </div>
-                    <br>
-                    <div>
-                        <input id="price" autocomplete="off" autofocus class="form-control" name="price" placeholder="Price" type="number" min="0" value="{{ plants[3] | safe }}">
+                    <div class="EditSecond">
+                        <div>
+                            <input id="stock" autocomplete="off" autofocus class="form-control" name="stock" placeholder="Stock" type="number" min="0" value="{{ plants[2] | safe }}">
+                        </div>
+                        <div>
+                            <input id="price" autocomplete="off" autofocus class="form-control" name="price" placeholder="Price" type="number" min="0" value="{{ plants[3] | safe }}">
+                        </div>
+                        <div>
+                            <input id="offer" autocomplete="off" autofocus class="form-control" name="offer" placeholder="Offer" type="number" min="0" value="{{ plants[4] | safe }}">
+                        </div>
                     </div>
                 </div>
                 <br>
                 <div>
-                    {% with description = plants[5] | safe %}
+                    {% with description = plants[6] | safe %}
                         {{ ckeditor.create(value=description) }}
                         {{ ckeditor.load(custom_url=url_for('static', filename='ckeditor/ckeditor.js')) }}
                     {% endwith %}
@@ -71,15 +74,28 @@
                     <input type="file" id="thumbnail2" name="thumbnail2">
                 </div>
                 <br>
-                    {% if plants[6] == "Yes" %}
+                    {% if plants[7] == "Yes" %}
                     <div>
                         <input type="checkbox" id="show" name="show" value="show" checked>
-                        <label for="show"> Show?</label>
+                        <label for="show"> Show reduced price?</label>
                     </div>
                     {% else %}
                     <div>
                         <input type="checkbox" id="show" name="show" value="show">
-                        <label for="show"> Show?</label>
+                        <label for="show"> Show reduced price?</label>
+                    </div>
+                    {% endif %}
+                <br>
+                <br>
+                    {% if plants[8] == "Yes" %}
+                    <div>
+                        <input type="checkbox" id="show" name="show" value="show" checked>
+                        <label for="show"> Show in app?</label>
+                    </div>
+                    {% else %}
+                    <div>
+                        <input type="checkbox" id="show" name="show" value="show">
+                        <label for="show"> Show in app?</label>
                     </div>
                     {% endif %}
                 <br>

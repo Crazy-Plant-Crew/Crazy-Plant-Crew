@@ -30,7 +30,9 @@ def addFunction():
         name = request.form.get("name")
         stock = request.form.get("stock")
         price = request.form.get("price")
+        offer = request.form.get("offer")
         description = request.form.get("ckeditor")
+        reduced = request.form.get("reduced")
         show = request.form.get("show")
 
 
@@ -66,15 +68,22 @@ def addFunction():
 
 
         # Ensure the plant price was submitted
-        if not stock:
+        if not price:
             flash("must provide plant price", "warning")
             return redirect("/add")
 
 
         # Ensure the plant price fits server-side
-        if not re.search("^[0-9]+$", stock):
+        if not re.search("^[0-9]+$", price):
             flash("Invalid plant price", "danger")
             return redirect("/add")
+
+
+        # Ensure the plant offer fits server-side
+        if offer not None:
+            if not re.search("^[0-9]+$", offer):
+                flash("Invalid plant offer", "danger")
+                return redirect("/add")
 
 
         # Ensure the plant description was submitted
@@ -90,7 +99,7 @@ def addFunction():
 
 
         # Insert plant name, stock, price, description and show status into the table
-        db.session.add(Plants(name=name, stock=stock, price=price, description=description, show=show))
+        db.session.add(Plants(name=name, stock=stock, price=price, offer=offer, description=description, reduced=reduced, show=show))
         db.session.commit()
 
 

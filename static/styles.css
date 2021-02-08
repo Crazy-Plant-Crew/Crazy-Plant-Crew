@@ -461,13 +461,22 @@ button {
 
 
 .EditMain {
-	height: 750px;
+	height: 800px;
 	border-radius: 25px;
 	border: 2px solid #E8E8E8;
 	padding: 20px; 	
 }
 
 .EditFirst {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: stretch;
+	align-content: stretch;
+}
+
+.EditSecond {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: nowrap;

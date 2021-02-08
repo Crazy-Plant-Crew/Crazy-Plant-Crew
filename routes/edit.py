@@ -32,8 +32,10 @@ def editFunction():
         name = request.form.get("name")
         stock = request.form.get("stock")
         price = request.form.get("price")
+        offer = request.form.get("offer")
         html = request.form.get("ckeditor")
         description = html2text.html2text(html)
+        reduced = request.form.get("reduced")
         show = request.form.get("show")
 
 
@@ -69,15 +71,22 @@ def editFunction():
 
 
         # Ensure the plant price was submitted
-        if not stock:
+        if not price:
             flash("must provide plant price", "warning")
             return redirect("/edit")
 
 
         # Ensure the plant price fits server-side
-        if not re.search("^[0-9]+$", stock):
+        if not re.search("^[0-9]+$", price):
             flash("Invalid plant price", "danger")
             return redirect("/edit")
+
+
+        # Ensure the plant offer fits server-side
+        if offer not None:
+            if not re.search("^[0-9]+$", offer):
+                flash("Invalid plant offer", "danger")
+                return redirect("/edit")
 
 
         # Ensure the plant description was submitted
@@ -97,7 +106,9 @@ def editFunction():
         query.name = name
         query.stock = stock
         query.price = price
+        query.offer = offer
         query.description = description
+        query.reduced = reduced
         query.show = show
         db.session.commit()
 
