@@ -59,13 +59,13 @@ class Plants(db.Model):
     name = db.Column(db.String(1024), nullable=False, default="No name")
     stock = db.Column(db.Integer, nullable=False, default=0)
     price = db.Column(db.Integer, nullable=False, default=0)
+    offer = db.Column(db.Integer, nullable=False, default=0)
     picture = db.Column(db.String(1024), nullable=False, default="https://i.ibb.co/QNJnLR8/empty.png")
     thumbnail1 = db.Column(db.String(1024), nullable=False, default="https://i.ibb.co/QNJnLR8/empty.png")
     thumbnail2 = db.Column(db.String(1024), nullable=False, default="https://i.ibb.co/QNJnLR8/empty.png")
     description = db.Column(db.Text, nullable=False, default="No description")
+    reduced = db.Column(db.String(1024), nullable=False, default="False")
     show = db.Column(db.String(1024), nullable=False, default="False")
-    offer = db.Column(db.String(1024), nullable=False, default="False")
-    reduced = db.Column(db.Integer, nullable=False, default=0)
 
 class News(db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=False, autoincrement=True, unique=True)
