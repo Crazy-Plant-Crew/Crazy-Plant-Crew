@@ -45,9 +45,9 @@ def addFunction():
         
         # Convert reduced value to string
         if reduced == None:
-            reduced = "False"
+            reduced = "No"
         if reduced == "reduced":
-            reduced = "True"
+            reduced = "Yes"
 
 
         # Ensure the plant name was submitted

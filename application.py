@@ -64,8 +64,8 @@ class Plants(db.Model):
     thumbnail1 = db.Column(db.String(1024), nullable=False, default="https://i.ibb.co/QNJnLR8/empty.png")
     thumbnail2 = db.Column(db.String(1024), nullable=False, default="https://i.ibb.co/QNJnLR8/empty.png")
     description = db.Column(db.Text, nullable=False, default="No description")
-    reduced = db.Column(db.String(1024), nullable=False, default="False")
-    show = db.Column(db.String(1024), nullable=False, default="False")
+    reduced = db.Column(db.String(1024), nullable=False, default="No")
+    show = db.Column(db.String(1024), nullable=False, default="No")
 
 class News(db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=False, autoincrement=True, unique=True)
