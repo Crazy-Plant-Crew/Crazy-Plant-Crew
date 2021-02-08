@@ -35,6 +35,8 @@ def addFunction():
         reduced = request.form.get("reduced")
         show = request.form.get("show")
 
+        print(offer)
+
 
         # Convert show value to string
         if show == None:
