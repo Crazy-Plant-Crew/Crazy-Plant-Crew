@@ -87,7 +87,7 @@ def addFunction():
 
 
         # Ensure the plant offer fits server-side
-        if offer is not "":
+        if offer != "":
             if not re.search("^[0-9]+$", offer):
                 flash("Invalid plant offer", "danger")
                 return redirect("/add")
