@@ -35,8 +35,6 @@ def addFunction():
         reduced = request.form.get("reduced")
         show = request.form.get("show")
 
-        print(offer)
-
 
         # Convert show value to string
         if show == None:
@@ -89,7 +87,7 @@ def addFunction():
 
 
         # Ensure the plant offer fits server-side
-        if offer is not None:
+        if offer is not "":
             if not re.search("^[0-9]+$", offer):
                 flash("Invalid plant offer", "danger")
                 return redirect("/add")
