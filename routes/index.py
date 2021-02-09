@@ -36,6 +36,11 @@ def indexFunction():
         existingStock = query.stock
 
 
+        # Check if the price is reduced
+        if query.reduced == "Yes":
+            price = query.offer
+
+
         # Avoid going to negative stocks
         if int(existingStock) - int(quantity) < 0:
                 flash("Not enough in stock", "warning")
