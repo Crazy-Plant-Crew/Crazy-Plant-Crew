@@ -224,6 +224,14 @@ main {
 	align-content: center;
 }
 
+.IndexInfo1Strike1 {
+	text-decoration: line-through;
+}
+
+.IndexInfo1Strike2 {
+	color: red;
+}
+
 .IndexInfo2 {
 	display: flex;
 	flex-direction: row;

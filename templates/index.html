@@ -55,7 +55,12 @@
                                     <div class="IndexInfo1">
                                         <div name="{{ plant.name | safe }}">Name: {{ plant.name | safe }}</div>
                                         <div name="{{ plant.stock | safe }}">Stock: {{ plant.stock | safe }}</div>
-                                        <div name="{{ plant.price | safe }}">Price: {{ plant.price | safe }},00€</div>
+                                        {% if plants.offer != 0 %}
+                                            <div name="{{ plant.price | safe }}" class="IndexInfo1Strike1">Price: {{ plant.price | safe }},00€</div>
+                                            <div name="{{ plant.offer | safe }}" class="IndexInfo1Strike2">Price: {{ plant.price | safe }},00€</div>
+                                        {% else %}
+                                            <div name="{{ plant.price | safe }}">Price: {{ plant.price | safe }},00€</div>
+                                        {% endif %}
                                     </div>
                                     <div class="IndexInfo2">
                                         <input type='hidden' name='plant_id' value='{{ plant.id | safe }}'>
@@ -90,7 +95,12 @@
                                     <div class="IndexInfo1">
                                         <div name="{{ plant.name | safe  }}">Name: {{ plant.name | safe }}</div>
                                         <div name="{{ plant.stock | safe  }}">Stock: {{ plant.stock | safe }}</div>
-                                        <div name="{{ plant.price | safe  }}">Price: {{ plant.price | safe }},00€</div>
+                                        {% if plants.offer != 0 %}
+                                            <div name="{{ plant.price | safe }}" class="IndexInfo1Strike1">Price: {{ plant.price | safe }},00€</div>
+                                            <div name="{{ plant.offer | safe }}" class="IndexInfo1Strike2">Price: {{ plant.price | safe }},00€</div>
+                                        {% else %}
+                                            <div name="{{ plant.price | safe }}">Price: {{ plant.price | safe }},00€</div>
+                                        {% endif %}
                                     </div>
                                     <div class="IndexInfo2">
                                         <input type='hidden' name='plant_id' value='{{ plant.id | safe }}'>
