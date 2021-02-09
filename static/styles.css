@@ -224,6 +224,15 @@ main {
 	align-content: center;
 }
 
+.IndexInfo1Price {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: center;
+	align-content: center;
+}
+
 .IndexInfo1Strike1 {
 	text-decoration: line-through;
 }
