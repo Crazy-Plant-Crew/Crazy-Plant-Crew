@@ -55,7 +55,7 @@
                                     <div class="IndexInfo1">
                                         <div name="{{ plant.name | safe }}">Name: {{ plant.name | safe }}</div>
                                         <div name="{{ plant.stock | safe }}">Stock: {{ plant.stock | safe }}</div>
-                                        {% if plants.offer != 0 %}
+                                        {% if plants.offer != 0 and plant.reduced == "Yes"%}
                                             <div class="IndexInfo1Price">
                                                 <div name="{{ plant.price | safe }}" class="IndexInfo1Strike1">Price: {{ plant.price | safe }},00€</div>
                                                 <div name="{{ plant.offer | safe }}" class="IndexInfo1Strike2">  {{ plant.offer | safe }},00€</div>
@@ -97,7 +97,7 @@
                                     <div class="IndexInfo1">
                                         <div name="{{ plant.name | safe  }}">Name: {{ plant.name | safe }}</div>
                                         <div name="{{ plant.stock | safe  }}">Stock: {{ plant.stock | safe }}</div>
-                                        {% if plants.offer != 0 %}
+                                        {% if plants.offer != 0 and plant.reduced == "Yes"%}
                                             <div class="IndexInfo1Price">
                                                 <div name="{{ plant.price | safe }}" class="IndexInfo1Strike1">Price: {{ plant.price | safe }},00€</div>
                                                 <div name="{{ plant.offer | safe }}" class="IndexInfo1Strike2">  {{ plant.offer | safe }},00€</div>
