@@ -4,7 +4,7 @@ import re
 import os
 
 from flask import Blueprint, render_template, redirect, session, request, flash, get_flashed_messages
-from application import getUserName, getUserPicture, login_required, confirmed_required, getUserRole, role_required, uploadPicture, allowed_file, db, Plants
+from application import getUserName, getUserPicture, login_required, confirmed_required, getUserRole, role_required, uploadPicture, allowed_file, db, Plants, getInputLength
 from werkzeug.utils import secure_filename
 from flask_sqlalchemy import SQLAlchemy
 
@@ -34,6 +34,14 @@ def addFunction():
         description = request.form.get("ckeditor")
         reduced = request.form.get("reduced")
         show = request.form.get("show")
+
+
+        # Check length
+        getInputLength(name, 100, "Name is too long (100)", "danger", "/add")
+        getInputLength(stock, 6, "Stock is too long (6)", "danger", "/add")
+        getInputLength(price, 6, "Price is too long (6)", "danger", "/add")
+        getInputLength(offer, 6, "Offer is too long (6)", "danger", "/add")
+        getInputLength(description, 300, "Description is too long (300)", "danger", "/add")
 
 
         # Convert offer value to integer

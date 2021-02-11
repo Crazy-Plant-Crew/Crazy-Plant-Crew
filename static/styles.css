@@ -21,6 +21,7 @@ main {
 	align-content: center;
 
 	text-align: center;
+	overflow: auto;
 }
 
 

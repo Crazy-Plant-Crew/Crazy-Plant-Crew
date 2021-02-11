@@ -367,6 +367,26 @@ def getUserPicture():
     return query.picture
 
 
+# Length checker for user input
+def getInputLength(input, limit, message, category, route):
+
+    # Check type of
+    if type(input) is str:
+
+        # Set limit, flash & redirect
+        if len(input) > limit:
+            flash(message, category)
+            return redirect(route)
+
+    # Check type of
+    if type(input) is int:
+
+        # Set limit, flash & redirect
+        if len(str(input)) > limit:
+            flash(message, category)
+            return redirect(route)
+
+
 # Import routes after to avoid circular import
 from routes.profile import profile
 from routes.message import message
