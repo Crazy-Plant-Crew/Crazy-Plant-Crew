@@ -70,7 +70,7 @@ def addFunction():
 
 
         # Ensure the plant name fits server-side
-        if not re.search("^[a-zA-Z0-9]{1,50}$", name):
+        if not re.search("^[a-zA-Z 0-9]{1,100}$", name):
             flash("Invalid plant name", "danger")
             return redirect("/add")
 

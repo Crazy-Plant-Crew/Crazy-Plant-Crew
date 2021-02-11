@@ -39,6 +39,14 @@ def editFunction():
         show = request.form.get("show")
 
 
+        # Check length
+        getInputLength(name, 100, "Name is too long (100)", "danger", "/edit")
+        getInputLength(stock, 6, "Stock is too long (6)", "danger", "/edit")
+        getInputLength(price, 6, "Price is too long (6)", "danger", "/edit")
+        getInputLength(offer, 6, "Offer is too long (6)", "danger", "/edit")
+        getInputLength(description, 300, "Description is too long (300)", "danger", "/edit")
+
+
         # Convert offer value to integer
         if offer == "":
             offer = 0
@@ -65,7 +73,7 @@ def editFunction():
 
 
         # Ensure the plant name fits server-side
-        if not re.search("^[a-zA-Z0-9]{1,50}$", name):
+        if not re.search("^[a-zA-Z 0-9]{1,100}$", name):
             flash("Invalid plant name", "danger")
             return redirect("/edit")
 
