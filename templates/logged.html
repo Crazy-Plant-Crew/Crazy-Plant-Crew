@@ -30,9 +30,9 @@
 {% endblock %}
 
 {% block main %}
-    <div class="loggedMain">
+    <div class="LoggedMain">
         <form action="/logged" method="post">
-            <div class="loggedDiv">
+            <div class="LoggedDiv">
                 Statistics:
                 <ul>
                     <li>Total Admin(s): {{ admins | length }}</li>
@@ -41,7 +41,7 @@
                 </ul>
             </div>
             <br>
-            <div class="loggedDiv">
+            <div class="LoggedDiv">
                 User list:
                 <ul>
                     {% for user in users %}
@@ -50,7 +50,7 @@
                 </ul>
             </div>
             <br>
-            <div class="loggedDiv">
+            <div class="LoggedDiv">
                 Admin list:
                 <ul>
                     {% for admin in admins %}
@@ -59,17 +59,17 @@
                 </ul>
             </div>
             <br>
-            <div class="loggedDivButton">
+            <div class="LoggedDivButton">
                 <input id="remove" autocomplete="off" autofocus class="form-control" name="remove" placeholder=" Remove user" type="text">
                 <button type="submit" name="remove" value="remove">Remove</button>
             </div>
             <br>
-            <div class="loggedDivButton">
+            <div class="LoggedDivButton">
                 <input id="promote" autocomplete="off" autofocus class="form-control" name="promote" placeholder=" Promote user" type="text">
                 <button type="submit" name="promote" value="promote">Promote</button>
             </div>
             <br>
-            <div class="loggedDivButton">
+            <div class="LoggedDivButton">
                 <input id="demote" autocomplete="off" autofocus class="form-control" name="demote" placeholder=" Demote admin" type="text">
                 <button type="submit" name="demote" value="demote">Demote</button>
             </div>

@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Articles
+    Article
 {% endblock %}
 
 {% block navigation %}
@@ -33,7 +33,7 @@
     <form action="/article" method="post">
         <div>
             {% for new in news %}
-                <div class="TableBorder">
+                <div class="ArticleMain">
                     {{ new.title | safe }}
                     {{ new.body | safe }}
                 </div>

@@ -22,7 +22,6 @@ main {
 
 	text-align: center;
 	overflow: auto;
-	height: 900px;
 }
 
 
@@ -272,14 +271,6 @@ main {
 .IndexInfo4 img {
 	border-radius: 25px;
 	border: 1px solid #C0C0C0;
-}
-
-
-/*  MAIN  */
-
-
-main {
-	height: 900px;
 }
 
 
@@ -586,14 +577,14 @@ button {
 /*  LOGGED  */
 
 
-.loggedMain {
+.LoggedMain {
 	height: 750px;
 	border-radius: 25px;
 	border: 2px solid #E8E8E8;
 	padding: 20px; 	
 }
 
-.loggedDiv {
+.LoggedDiv {
 	display: flex;
 	flex-direction: column;
 	flex-wrap: nowrap;
@@ -602,7 +593,7 @@ button {
 	align-content: flex-start;
 }
 
-.loggedDiv ul {
+.LoggedDiv ul {
 	display: flex;
 	flex-direction: column;
 	flex-wrap: nowrap;
@@ -615,7 +606,7 @@ button {
 	overflow: auto;
 }
 
-.loggedDivButton {
+.LoggedDivButton {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: nowrap;
@@ -624,7 +615,7 @@ button {
 	align-content: center;
 }
 
-.loggedDivButton button {
+.LoggedDivButton button {
 	background-color: #f44336;
 	border: none;
 	color: white;
@@ -634,4 +625,21 @@ button {
 	cursor: pointer;
 	padding: 6px 10px;
 	margin-left: 5px;
+}
+
+
+/*  ARCTILE  */
+
+
+.ArticleMain {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: stretch;
+	align-content: stretch;
+
+	border-radius: 25px;
+	border: 2px solid #E8E8E8;
+	padding: 20px; 	
 }
