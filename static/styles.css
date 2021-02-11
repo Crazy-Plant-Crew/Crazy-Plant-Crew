@@ -632,6 +632,11 @@ button {
 
 
 .ArticleMain {
+	height: 800px;
+
+}
+
+.ArticleSecond {
 	display: flex;
 	flex-direction: column;
 	flex-wrap: nowrap;
@@ -642,6 +647,6 @@ button {
 	border-radius: 25px;
 	border: 2px solid #E8E8E8;
 	padding: 20px;
-	
+
 	overflow: auto;
 }

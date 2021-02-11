@@ -31,9 +31,9 @@
 
 {% block main %}
     <form action="/article" method="post">
-        <div>
+        <div class="ArticleMain">
             {% for new in news %}
-                <div class="ArticleMain">
+                <div class="ArticleSecond">
                     {{ new.title | safe }}
                     {{ new.body | safe }}
                 </div>
