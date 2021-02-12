@@ -12,7 +12,7 @@ body {
 	align-content: stretch;
 
 	font-family: 'Montserrat', sans-serif;
-	font-size: 0.75em;
+	font-size: 0.90em;
 	width: 100%;
 	text-align: center;
 }
@@ -22,7 +22,15 @@ body {
 
 
 main {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: stretch;
+	align-content: stretch;
+
 	height: 1000px;
+	width: 1000px;
 }
 
 
