@@ -12,7 +12,7 @@ body {
 	align-content: stretch;
 
 	font-family: 'Montserrat', sans-serif;
-	width: 100%;
+	width: 1000px;
 	text-align: center;
 }
 
@@ -21,8 +21,14 @@ body {
 
 
 main {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: stretch;
+	align-content: stretch;
+
 	height: 1000px;
-	width: 1000px;
 }
 
 
