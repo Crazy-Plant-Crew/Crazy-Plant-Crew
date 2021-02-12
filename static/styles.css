@@ -4,13 +4,6 @@
 
 
 body {
-	display: flex;
-	flex-direction: column;
-	flex-wrap: nowrap;
-	justify-content: center;
-	align-items: stretch;
-	align-content: stretch;
-
 	font-family: 'Montserrat', sans-serif;
 	font-size: 0.90em;
 	width: 100%;
@@ -26,9 +19,9 @@ main {
 	flex-direction: column;
 	flex-wrap: nowrap;
 	justify-content: center;
-	align-items: stretch;
-	align-content: stretch;
-	
+	align-items: center;
+	align-content: center;
+
 	height: 1000px;
 }
 
