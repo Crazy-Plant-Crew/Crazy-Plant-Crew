@@ -22,6 +22,13 @@ body {
 
 
 main {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: stretch;
+	align-content: stretch;
+	
 	height: 1000px;
 }
 
