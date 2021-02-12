@@ -22,6 +22,7 @@ main {
 
 	text-align: center;
 	height: 1000px;
+	width: 1000px;
 }
 
 
@@ -634,7 +635,6 @@ button {
 .ArticleMain {
 	height: 800px;
 	overflow: auto;
-
 }
 
 .ArticleSecond {
