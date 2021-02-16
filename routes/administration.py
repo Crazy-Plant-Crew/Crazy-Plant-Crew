@@ -27,13 +27,13 @@ def administrationFunction():
     # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
 
-        if "delete" in request.form:
+        if "delete_plant" in request.form:
         
             # Loop through the record list to match plant ID when delete button is pressed
             index = 0
             while index < len(plants):
 
-                if int(request.form["delete"]) == int(plants[index].id):
+                if int(request.form["delete_plant"]) == int(plants[index].id):
 
                     # Query database for plant id to delete row
                     Plants.query.filter(Plants.id == plants[index].id).delete()
@@ -48,17 +48,17 @@ def administrationFunction():
                     index += 1
 
 
-        if "edit" in request.form:   
+        if "edit_plant" in request.form:   
 
             # Loop through the record list to match plant ID when edit button is pressed
             index = 0
             while index < len(plants):
 
-                if int(request.form["edit"]) == int(plants[index].id):
+                if int(request.form["edit_plant"]) == int(plants[index].id):
 
                     # Create a list with values of DB and append them
                     thisPlant = []
-                    thisPlant.extend([plants[index].id, plants[index].name, plants[index].stock, plants[index].price, plants[index].offer, plants[index].picture, plants[index].description, plants[index].reduced, plants[index].show])
+                    thisPlant.extend([plants[index].id, plants[index].name, plants[index].stock, plants[index].price, plants[index].offer, plants[index].length, plants[index].width, plants[index].height, plants[index].picture, plants[index].description, plants[index].reduced, plants[index].show])
 
                     return redirect(url_for("edit.editFunction", plants=thisPlant))
 

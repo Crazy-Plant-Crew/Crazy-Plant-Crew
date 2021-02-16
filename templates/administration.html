@@ -55,8 +55,8 @@
                             <td><img src="{{ plant.picture | safe }}" alt="plant picture of {{ plant.name | safe }}" height="50"></td>
                             <td>{{ plant.reduced | safe }}</td>
                             <td>{{ plant.show | safe }}</td>
-                            <td><button name="delete" value="{{ plant.id }}" type="submit"><img src="/static/trash.svg" alt="delete" height="25"></button></td>
-                            <td><button name="edit" value="{{ plant.id }}" type="submit"><img src="/static/updateB.svg" alt="edit" height="25"></button></td>
+                            <td><button name="delete_plant" value="{{ plant.id }}" type="submit"><img src="/static/trash.svg" alt="delete" height="25"></button></td>
+                            <td><button name="edit_plant" value="{{ plant.id }}" type="submit"><img src="/static/updateB.svg" alt="edit" height="25"></button></td>
                         </tr>
                     {% endfor %}
                 </tbody>

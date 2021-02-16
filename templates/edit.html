@@ -50,10 +50,21 @@
                             <input id="offer" autocomplete="off" autofocus class="form-control" name="offer" placeholder="Offer" type="number" min="0" value="{{ plants[4] | safe }}">
                         </div>
                     </div>
+                    <div class="EditSecond">
+                        <div>
+                            <input id="length" autocomplete="off" autofocus class="form-control" name="length" placeholder="Length" type="number" min="0" value="{{ plants[5] | safe }}">
+                        </div>
+                        <div>
+                            <input id="width" autocomplete="off" autofocus class="form-control" name="width" placeholder="Width" type="number" min="0" value="{{ plants[6] | safe }}">
+                        </div>
+                        <div>
+                            <input id="height" autocomplete="off" autofocus class="form-control" name="height" placeholder="Height" type="number" min="0" value="{{ plants[7] | safe }}">
+                        </div>
+                    </div>
                 </div>
                 <br>
                 <div>
-                    {% with description = plants[6] | safe %}
+                    {% with description = plants[9] | safe %}
                         {{ ckeditor.create(value=description) }}
                         {{ ckeditor.load(custom_url=url_for('static', filename='ckeditor/ckeditor.js')) }}
                     {% endwith %}
@@ -74,7 +85,7 @@
                     <input type="file" id="thumbnail2" name="thumbnail2">
                 </div>
                 <br>
-                    {% if plants[7] == "Yes" %}
+                    {% if plants[10] == "Yes" %}
                     <div>
                         <input type="checkbox" id="reduced" name="reduced" value="reduced" checked>
                         <label for="reduced"> Show reduced price?</label>
@@ -85,7 +96,7 @@
                         <label for="reduced"> Show reduced price?</label>
                     </div>
                     {% endif %}
-                    {% if plants[8] == "Yes" %}
+                    {% if plants[11] == "Yes" %}
                     <div>
                         <input type="checkbox" id="show" name="show" value="show" checked>
                         <label for="show"> Show in app?</label>

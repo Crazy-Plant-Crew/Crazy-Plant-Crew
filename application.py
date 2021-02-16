@@ -66,6 +66,10 @@ class Plants(db.Model):
     description = db.Column(db.Text, nullable=False, default="No description")
     reduced = db.Column(db.String(1024), nullable=False, default="No")
     show = db.Column(db.String(1024), nullable=False, default="No")
+    length = db.Column(db.Integer, nullable=False, default=0)
+    width = db.Column(db.Integer, nullable=False, default=0)
+    height = db.Column(db.Integer, nullable=False, default=0)
+    weight = db.Column(db.Integer, nullable=False, default=0)
 
 class News(db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=False, autoincrement=True, unique=True)
@@ -81,6 +85,15 @@ class Baskets(db.Model):
     picture = db.Column(db.String(1024), nullable=False, default="https://i.ibb.co/QNJnLR8/empty.png")
     price = db.Column(db.Integer, nullable=False)
     subtotal = db.Column(db.Integer, nullable=False, default=0)
+
+class Boxes(db.Model):
+    id = db.Column(db.Integer, primary_key=True, nullable=False, autoincrement=True, unique=True)
+    length = db.Column(db.Integer, nullable=False, default=0)
+    width = db.Column(db.Integer, nullable=False, default=0)
+    height = db.Column(db.Integer, nullable=False, default=0)
+    price_de = db.Column(db.Integer, nullable=False, default=0)
+    price_eu = db.Column(db.Integer, nullable=False, default=0)
+    price_ex = db.Column(db.Integer, nullable=False, default=0)
 
 
 # Create DB
