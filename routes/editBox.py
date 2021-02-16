@@ -13,6 +13,7 @@ editBox = Blueprint('editBox', __name__,)
 @editBox.route("/editBox", methods=["GET", "POST"])
 @login_required
 @confirmed_required
+@role_required
 def editBoxFunction():    
 
     if request.method == "POST":

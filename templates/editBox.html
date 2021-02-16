@@ -30,7 +30,41 @@
 {% endblock %}
 
 {% block main %}
-    Edit box page
+<form action="/editBox" method="post" enctype="multipart/form-data">
+    <div class="EditBoxMain">
+        <div>
+            <input id="name" autocomplete="off" autofocus class="form-control" name="name" placeholder="Name" type="text" value="{{ boxes[1] | safe }}">
+        </div>
+        <br>
+        <div>
+            <input id="length" autocomplete="off" autofocus class="form-control" name="length" placeholder="Length" type="number" min="0" value="{{ boxes[2] | safe }}">
+        </div>
+        <br>
+        <div>
+            <input id="width" autocomplete="off" autofocus class="form-control" name="width" placeholder="Width" type="number" min="0" value="{{ boxes[3] | safe }}">
+        </div>
+        <br>
+        <div>
+            <input id="height" autocomplete="off" autofocus class="form-control" name="height" placeholder="Height" type="number" min="0" value="{{ boxes[4] | safe }}">
+        </div>
+        <br>
+        <div>
+            <input id="price_de" autocomplete="off" autofocus class="form-control" name="price_de" placeholder=" Price DE" type="number" min="0" value="{{ boxes[5] | safe }}">
+        </div>
+        <br>
+        <div>
+            <input id="price_eu" autocomplete="off" autofocus class="form-control" name="price_eu" placeholder=" Price EU" type="number" min="0" value="{{ boxes[6] | safe }}">
+        </div>
+        <br>
+        <div>
+            <input id="price_ex" autocomplete="off" autofocus class="form-control" name="price_ex" placeholder=" Express" type="number" min="0" value="{{ boxes[7] | safe }}">
+        </div>
+        <br>
+        <div>
+            <button id="submit" type="submit" name="submit" value="submit"><img src="/static/save.svg" alt="save" height="50"></button>
+        </div>
+    </div>
+</form>
     <br>
     <div>
         <a href="/"><img src="/static/back.svg" alt="back" height="50"></a>
