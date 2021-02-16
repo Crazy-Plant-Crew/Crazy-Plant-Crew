@@ -96,6 +96,19 @@ class Boxes(db.Model):
     price_eu = db.Column(db.Integer, nullable=False, default=0)
     price_ex = db.Column(db.Integer, nullable=False, default=0)
 
+class Orders(db.Model):
+    id = db.Column(db.Integer, primary_key=True, nullable=False, autoincrement=True, unique=True)
+    user_id = db.Column(db.Integer, nullable=False)
+    plants = db.Column(db.String(1024), nullable=False)
+    boxes = db.Column(db.String(1024), nullable=False)
+    street = db.Column(db.String(1024), nullable=False)
+    house = db.Column(db.Integer, nullable=False)
+    zipcode = db.Column(db.Integer, nullable=False)
+    country = db.Column(db.String(1024), nullable=False)
+    additional = db.Column(db.String(1024), nullable=False)
+    status = db.Column(db.String(1024), nullable=False, default="No")
+    remark = db.Column(db.String(1024), nullable=False, default="No")  
+
 
 # Create DB
 db.create_all()

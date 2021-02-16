@@ -679,3 +679,14 @@ button {
 	padding: 20px; 	
 }
 
+
+/*  PAY  */
+
+
+.PayMain {
+	height: 500px;
+	border-radius: 25px;
+	border: 2px solid #E8E8E8;
+	padding: 20px; 	
+}
+

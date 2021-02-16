@@ -30,7 +30,33 @@
 {% endblock %}
 
 {% block main %}
-    Pay page
+    <form action="/pay" method="post" enctype="multipart/form-data">
+        <div class="PayMain">
+            <div>
+                <input id="street" autocomplete="off" autofocus class="form-control" name="street" placeholder=" Street name" type="text">
+            </div>
+            <br>
+            <div>
+                <input id="house" autocomplete="off" autofocus class="form-control" name="house" placeholder=" House number" type="text">
+            </div>
+            <br>
+            <div>
+                <input id="zipcode" autocomplete="off" autofocus class="form-control" name="zipcode" placeholder=" Zip code" type="text">
+            </div>
+            <br>
+            <div>
+                <input id="country" autocomplete="off" autofocus class="form-control" name="country" placeholder=" Country" type="text">
+            </div>
+            <br>
+            <div>
+                <input id="additional" autocomplete="off" autofocus class="form-control" name="additional" placeholder=" Additional information" type="text">
+            </div>
+            <br>
+            <div>
+                <button id="submit" type="submit" name="submit" value="submit"><img src="/static/save.svg" alt="save" height="50"></button>
+            </div>
+        </div>
+    </form>
     <br>
     <div>
         <a href="/basket"><img src="/static/back.svg" alt="back" height="50"></a>
