@@ -30,8 +30,8 @@
 {% endblock %}
 
 {% block main %}
-    <div class="TableBorder">
-        <form action="/administration" method="post">
+    <form action="/administration" method="post">
+        <div class="TableBorder">
             <table class="TableMain">
                 <thead>
                     <tr>
@@ -61,7 +61,9 @@
                     {% endfor %}
                 </tbody>
             </table>
-            <br>
+        </div>
+        <br>
+        <div class="TableBorder">
             <table class="TableMain">
                 <thead>
                     <tr>
@@ -93,8 +95,8 @@
             <div>
                 <a href="/add"><img src="/static/add.svg" alt="add" height="50"></a>
             </div>
-        </form>
-    </div>
+        </div>
+    </form>
     <br>
     <div>
         <a href="/"><img src="/static/back.svg" alt="back" height="50"></a>
