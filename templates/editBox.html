@@ -33,6 +33,9 @@
 <form action="/editBox" method="post" enctype="multipart/form-data">
     <div class="EditBoxMain">
         <div>
+            <input type='hidden' name='box_id' value='{{ boxes[0] | safe }}'>
+        </div>
+        <div>
             <input id="name" autocomplete="off" autofocus class="form-control" name="name" placeholder="Name" type="text" value="{{ boxes[1] | safe }}">
         </div>
         <br>
