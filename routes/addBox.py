@@ -129,7 +129,7 @@ def addBoxFunction():
 
 
         # Insert box name, length, width, height, price DE, price EU and price EX into the table
-        db.session.add(Plants(name=name, length=length, width=width, height=height, price_de=price_de, price_eu=price_eu, price_ex=price_ex))
+        db.session.add(Boxes(name=name, length=length, width=width, height=height, price_de=price_de, price_eu=price_eu, price_ex=price_ex))
         db.session.commit()
 
 
