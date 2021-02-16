@@ -447,7 +447,7 @@ button {
 }
 
 
-/*  ADD  */
+/*  ADD PLANT  */
 
 
 .AddPlantMain {
@@ -476,7 +476,7 @@ button {
 }
 
 
-/*  EDIT  */
+/*  EDIT PLANT  */
 
 
 .EditPlantMain {
@@ -571,7 +571,7 @@ button {
 }
 
 
-/*  CHANGE  */
+/*  EDIT NEWS  */
 
 
 .EditNewsMain {
@@ -655,4 +655,15 @@ button {
 	border-radius: 25px;
 	border: 2px solid #E8E8E8;
 	padding: 20px;
+}
+
+
+/*  ADD BOX  */
+
+
+.AddPlantMain {
+	height: 500px;
+	border-radius: 25px;
+	border: 2px solid #E8E8E8;
+	padding: 20px; 	
 }

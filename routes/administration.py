@@ -104,7 +104,7 @@ def administrationFunction():
 
                     # Create a list with values of DB and append them
                     thisBox = []
-                    thisBox.extend([boxes[index].id, boxes[index].length, boxes[index].width, boxes[index].height, boxes[index].price_de, boxes[index].price_eu, boxes[index].price_ex])
+                    thisBox.extend([boxes[index].id, boxes[index].name, boxes[index].length, boxes[index].width, boxes[index].height, boxes[index].price_de, boxes[index].price_eu, boxes[index].price_ex])
 
                     return redirect(url_for("editBox.editBoxFunction", boxes=thisBox))
 

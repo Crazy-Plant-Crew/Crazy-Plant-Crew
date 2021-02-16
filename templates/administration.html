@@ -71,6 +71,7 @@
             <table class="TableMain">
                 <thead>
                     <tr>
+                        <th scope="col">Name</th>
                         <th scope="col">Length</th>
                         <th scope="col">Width</th>
                         <th scope="col">Height</th>
@@ -83,6 +84,7 @@
                 <tbody>
                     {% for box in boxes %}
                         <tr>
+                            <td>{{ box.name | safe }}</td>
                             <td>{{ box.length | safe }}</td>
                             <td>{{ box.width | safe }}</td>
                             <td>{{ box.height | safe }}</td>

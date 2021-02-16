@@ -88,6 +88,7 @@ class Baskets(db.Model):
 
 class Boxes(db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=False, autoincrement=True, unique=True)
+    name = db.Column(db.String(1024), nullable=False, default="No name")
     length = db.Column(db.Integer, nullable=False, default=0)
     width = db.Column(db.Integer, nullable=False, default=0)
     height = db.Column(db.Integer, nullable=False, default=0)

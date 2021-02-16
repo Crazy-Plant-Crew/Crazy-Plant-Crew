@@ -30,7 +30,35 @@
 {% endblock %}
 
 {% block main %}
-    Add box page
+    <form action="/addBox" method="post" enctype="multipart/form-data">
+        <div class="AddBoxMain">
+            <div>
+                <input id="name" autocomplete="off" autofocus class="form-control" name="name" placeholder="Name" type="text">
+            </div>
+            <div>
+                <input id="length" autocomplete="off" autofocus class="form-control" name="length" placeholder="Length" type="number" min="0">
+            </div>
+            <div>
+                <input id="width" autocomplete="off" autofocus class="form-control" name="width" placeholder="Width" type="number" min="0">
+            </div>
+            <div>
+                <input id="height" autocomplete="off" autofocus class="form-control" name="height" placeholder="Height" type="number" min="0">
+            </div>
+            <div>
+                <input id="price_de" autocomplete="off" autofocus class="form-control" name="price_de" placeholder=" Price DE" type="number" min="0">
+            </div>
+            <div>
+                <input id="price_eu" autocomplete="off" autofocus class="form-control" name="price_eu" placeholder=" Price EU" type="number" min="0">
+            </div>
+            <div>
+                <input id="price_ex" autocomplete="off" autofocus class="form-control" name="price_ex" placeholder=" Express" type="number" min="0">
+            </div>
+            <br>
+            <div>
+                <button id="submit" type="submit" name="submit" value="submit"><img src="/static/save.svg" alt="save" height="50"></button>
+            </div>
+        </div>
+    </form>
     <br>
     <div>
         <a href="/"><img src="/static/back.svg" alt="back" height="50"></a>
