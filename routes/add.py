@@ -31,6 +31,9 @@ def addFunction():
         stock = request.form.get("stock")
         price = request.form.get("price")
         offer = request.form.get("offer")
+        length = request.form.get("length")
+        width = request.form.get("width")
+        height = request.form.get("height")
         description = request.form.get("ckeditor")
         reduced = request.form.get("reduced")
         show = request.form.get("show")
@@ -38,9 +41,12 @@ def addFunction():
 
         # Check length
         getInputLength(name, 100, "Name is too long (100)", "danger", "/add")
-        getInputLength(stock, 6, "Stock is too long (6)", "danger", "/add")
-        getInputLength(price, 6, "Price is too long (6)", "danger", "/add")
-        getInputLength(offer, 6, "Offer is too long (6)", "danger", "/add")
+        getInputLength(stock, 6, "Stock is too big (6)", "danger", "/add")
+        getInputLength(price, 6, "Price is too big (6)", "danger", "/add")
+        getInputLength(offer, 6, "Offer is too big (6)", "danger", "/add")
+        getInputLength(length, 6, "Length is too big (6)", "danger", "/add")
+        getInputLength(width, 6, "Width is too big (6)", "danger", "/add")
+        getInputLength(height, 6, "Height is too big (6)", "danger", "/add")
         getInputLength(description, 300, "Description is too long (300)", "danger", "/add")
 
 
@@ -106,6 +112,42 @@ def addFunction():
                 return redirect("/add")
 
 
+        # Ensure the plant length was submitted
+        if not length:
+            flash("must provide plant length", "warning")
+            return redirect("/add")
+
+
+        # Ensure the plant length fits server-side
+        if not re.search("^[0-9]+$", length):
+            flash("Invalid plant length", "danger")
+            return redirect("/add")
+
+
+        # Ensure the plant width was submitted
+        if not width:
+            flash("must provide plant width", "warning")
+            return redirect("/add")
+
+
+        # Ensure the plant width fits server-side
+        if not re.search("^[0-9]+$", length):
+            flash("Invalid plant width", "danger")
+            return redirect("/add")
+
+
+        # Ensure the plant height was submitted
+        if not height:
+            flash("must provide plant width", "warning")
+            return redirect("/add")
+
+
+        # Ensure the plant height fits server-side
+        if not re.search("^[0-9]+$", height):
+            flash("Invalid plant height", "danger")
+            return redirect("/add")
+
+
         # Ensure the plant description was submitted
         if not description:
             flash("must provide plant description", "warning")
@@ -119,7 +161,7 @@ def addFunction():
 
 
         # Insert plant name, stock, price, description and show status into the table
-        db.session.add(Plants(name=name, stock=stock, price=price, offer=offer, description=description, reduced=reduced, show=show))
+        db.session.add(Plants(name=name, stock=stock, price=price, offer=offer, length=length, width=width, height=height, description=description, reduced=reduced, show=show))
         db.session.commit()
 
 

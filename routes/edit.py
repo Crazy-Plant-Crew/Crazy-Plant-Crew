@@ -33,6 +33,9 @@ def editFunction():
         stock = request.form.get("stock")
         price = request.form.get("price")
         offer = request.form.get("offer")
+        length = request.form.get("length")
+        width = request.form.get("width")
+        height = request.form.get("height")
         html = request.form.get("ckeditor")
         description = html2text.html2text(html)
         reduced = request.form.get("reduced")
@@ -41,9 +44,12 @@ def editFunction():
 
         # Check length
         getInputLength(name, 100, "Name is too long (100)", "danger", "/edit")
-        getInputLength(stock, 6, "Stock is too long (6)", "danger", "/edit")
-        getInputLength(price, 6, "Price is too long (6)", "danger", "/edit")
-        getInputLength(offer, 6, "Offer is too long (6)", "danger", "/edit")
+        getInputLength(stock, 6, "Stock is too big (6)", "danger", "/edit")
+        getInputLength(price, 6, "Price is too big (6)", "danger", "/edit")
+        getInputLength(offer, 6, "Offer is too big (6)", "danger", "/edit")
+        getInputLength(length, 6, "Length is too big (6)", "danger", "/edit")
+        getInputLength(width, 6, "Width is too big (6)", "danger", "/edit")
+        getInputLength(height, 6, "Height is too big (6)", "danger", "/edit")
         getInputLength(description, 300, "Description is too long (300)", "danger", "/edit")
 
 
@@ -109,6 +115,42 @@ def editFunction():
                 return redirect("/edit")
 
 
+        # Ensure the plant length was submitted
+        if not length:
+            flash("must provide plant length", "warning")
+            return redirect("/add")
+
+
+        # Ensure the plant length fits server-side
+        if not re.search("^[0-9]+$", length):
+            flash("Invalid plant length", "danger")
+            return redirect("/add")
+
+
+        # Ensure the plant width was submitted
+        if not width:
+            flash("must provide plant width", "warning")
+            return redirect("/add")
+
+
+        # Ensure the plant width fits server-side
+        if not re.search("^[0-9]+$", length):
+            flash("Invalid plant width", "danger")
+            return redirect("/add")
+
+
+        # Ensure the plant height was submitted
+        if not height:
+            flash("must provide plant width", "warning")
+            return redirect("/add")
+
+
+        # Ensure the plant height fits server-side
+        if not re.search("^[0-9]+$", height):
+            flash("Invalid plant height", "danger")
+            return redirect("/add")
+
+
         # Ensure the plant description was submitted
         if not description:
             flash("must provide plant description", "warning")
@@ -127,6 +169,9 @@ def editFunction():
         query.stock = stock
         query.price = price
         query.offer = offer
+        query.length = length
+        query.width = width
+        query.height = height
         query.description = description
         query.reduced = reduced
         query.show = show
