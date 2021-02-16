@@ -1,8 +1,8 @@
 import traceback
 import sys
 
-from flask import Blueprint, render_template, redirect, session, request, get_flashed_messages, flash, getInputLength
-from application import getUserName, getUserPicture, login_required, confirmed_required, getUserRole, role_required, db, Boxes
+from flask import Blueprint, render_template, redirect, session, request, get_flashed_messages, flash
+from application import getUserName, getUserPicture, login_required, confirmed_required, getUserRole, role_required, db, Boxes, getInputLength
 from flask_sqlalchemy import SQLAlchemy
 
 
