@@ -1,5 +1,6 @@
 import traceback
 import sys
+import re
 
 from flask import Blueprint, render_template, redirect, session, request, get_flashed_messages, flash
 from application import getUserName, getUserPicture, login_required, confirmed_required, getUserRole, role_required, db, Boxes, getInputLength
