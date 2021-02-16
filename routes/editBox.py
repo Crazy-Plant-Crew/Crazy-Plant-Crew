@@ -147,5 +147,9 @@ def editBoxFunction():
 
 
     else:
+
+        # Get arguments from url_for in administration
+        thisBox = request.args.getlist("boxes")
+        
     
-        return render_template("editBox.html", name=getUserName(), picture=getUserPicture(), role=getUserRole())
+        return render_template("editBox.html", name=getUserName(), picture=getUserPicture(), role=getUserRole(), boxes=thisBox)
