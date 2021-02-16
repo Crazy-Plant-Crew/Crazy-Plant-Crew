@@ -24,9 +24,14 @@ def administrationFunction():
     plants = Plants.query.all()
 
 
+    # Query database for boxes
+    boxes = Boxes.query.all()
+
+
     # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
 
+        # Plants table section
         if "delete_plant" in request.form:
         
             # Loop through the record list to match plant ID when delete button is pressed
@@ -67,6 +72,47 @@ def administrationFunction():
                     index += 1
 
 
+        # Boxes table section
+        if "delete_box" in request.form:
+        
+            # Loop through the record list to match plant ID when delete button is pressed
+            index = 0
+            while index < len(boxes):
+
+                if int(request.form["delete_box"]) == int(boxes[index].id):
+
+                    # Query database for plant id to delete row
+                    Boxes.query.filter(Boxes.id == boxes[index].id).delete()
+                    db.session.commit()
+
+                    # Flash result & redirect
+                    flash("Box deleted", "success")
+                    return redirect("/administration")
+
+                else:
+
+                    index += 1
+
+
+        if "edit_box" in request.form:   
+
+            # Loop through the record list to match plant ID when edit button is pressed
+            index = 0
+            while index < len(boxes):
+
+                if int(request.form["edit_box"]) == int(boxes[index].id):
+
+                    # Create a list with values of DB and append them
+                    thisBox = []
+                    thisBox.extend([boxes[index].id, boxes[index].length, boxes[index].width, boxes[index].height, boxes[index].price_de, boxes[index].price_eu, boxes[index].price_ex)
+
+                    return redirect(url_for("edit.editFunction", boxes=thisBox))
+
+                else:
+
+                    index += 1
+
+
     else:
    
-        return render_template("administration.html", name=getUserName(), picture=getUserPicture(), role=getUserRole(), plants=plants)
+        return render_template("administration.html", name=getUserName(), picture=getUserPicture(), role=getUserRole(), plants=plants, boxes=boxes)
