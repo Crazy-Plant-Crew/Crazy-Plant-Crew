@@ -8,14 +8,14 @@ from flask_sqlalchemy import SQLAlchemy
 
 
 # Set Blueprints
-change = Blueprint('change', __name__,)
+editNews = Blueprint('editNews', __name__,)
 
 
-@change.route("/change", methods=["GET", "POST"])
+@editNews.route("/editNews", methods=["GET", "POST"])
 @login_required
 @confirmed_required
 @role_required
-def changeFunction():    
+def editNewsFunction():    
 
     # Force flash() to get the messages on the same page as the redirect.
     get_flashed_messages()  
@@ -49,4 +49,4 @@ def changeFunction():
         # Get arguments from url_for in administration
         thisNews = request.args.getlist("news")
     
-        return render_template("change.html", name=getUserName(), picture=getUserPicture(), role=getUserRole(), news=thisNews)
+        return render_template("editNews.html", name=getUserName(), picture=getUserPicture(), role=getUserRole(), news=thisNews)

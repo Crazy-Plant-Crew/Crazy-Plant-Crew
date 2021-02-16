@@ -417,19 +417,21 @@ from routes.article import article
 from routes.unconfirmed import unconfirmed
 from routes.forget import forget
 from routes.administration import administration
-from routes.add import add
-from routes.edit import edit
+from routes.addPlant import addPlant
+from routes.editPlant import editPlant
 from routes.logged import logged
 from routes.communication import communication
 from routes.newsletter import newsletter
 from routes.basket import basket
 from routes.about import about
-from routes.change import change
-from routes.create import create
+from routes.editNews import editNews
+from routes.addNews import addNews
 from routes.pay import pay
 from routes.transaction import transaction
 from routes.history import history
 from routes.faq import faq
+from routes.addBox import addBox
+from routes.editBox import editBox
 
 
 # Configure Blueprints
@@ -449,16 +451,18 @@ app.register_blueprint(article)
 app.register_blueprint(unconfirmed)
 app.register_blueprint(forget)
 app.register_blueprint(administration)
-app.register_blueprint(add)
-app.register_blueprint(edit)
+app.register_blueprint(addPlant)
+app.register_blueprint(editPlant)
 app.register_blueprint(logged)
 app.register_blueprint(newsletter)
 app.register_blueprint(communication)
 app.register_blueprint(basket)
 app.register_blueprint(about)
-app.register_blueprint(change)
-app.register_blueprint(create)
+app.register_blueprint(editNews)
+app.register_blueprint(addNews)
 app.register_blueprint(pay)
 app.register_blueprint(transaction)
 app.register_blueprint(history)
 app.register_blueprint(faq)
+app.register_blueprint(addBox)
+app.register_blueprint(editBox)

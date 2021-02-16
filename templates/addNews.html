@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Create
+    Add news
 {% endblock %}
 
 {% block navigation %}
@@ -30,8 +30,8 @@
 {% endblock %}
 
 {% block main %}
-    <form action="/create" method="post">
-        <div class="CreateMain"> 
+    <form action="/addNews" method="post">
+        <div class="AddNewsMain"> 
             <div>
                 <input id="title" autocomplete="off" autofocus class="form-control" name="title" placeholder=" Title" type="text" size="50">
             </div>

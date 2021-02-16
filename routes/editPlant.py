@@ -11,14 +11,14 @@ from flask_sqlalchemy import SQLAlchemy
 
 
 # Set Blueprints
-edit = Blueprint('edit', __name__,)
+editPlant = Blueprint('editPlant', __name__,)
 
 
-@edit.route("/edit", methods=["GET", "POST"])
+@editPlant.route("/editPlant", methods=["GET", "POST"])
 @login_required
 @confirmed_required
 @role_required
-def editFunction():    
+def editPlantFunction():    
 
     # Force flash() to get the messages on the same page as the redirect.
     get_flashed_messages()
@@ -43,14 +43,14 @@ def editFunction():
 
 
         # Check length
-        getInputLength(name, 100, "Name is too long (100)", "danger", "/edit")
-        getInputLength(stock, 6, "Stock is too big (6)", "danger", "/edit")
-        getInputLength(price, 6, "Price is too big (6)", "danger", "/edit")
-        getInputLength(offer, 6, "Offer is too big (6)", "danger", "/edit")
-        getInputLength(length, 6, "Length is too big (6)", "danger", "/edit")
-        getInputLength(width, 6, "Width is too big (6)", "danger", "/edit")
-        getInputLength(height, 6, "Height is too big (6)", "danger", "/edit")
-        getInputLength(description, 300, "Description is too long (300)", "danger", "/edit")
+        getInputLength(name, 100, "Name is too long (100)", "danger", "/editPlant")
+        getInputLength(stock, 6, "Stock is too big (6)", "danger", "/editPlant")
+        getInputLength(price, 6, "Price is too big (6)", "danger", "/editPlant")
+        getInputLength(offer, 6, "Offer is too big (6)", "danger", "/editPlant")
+        getInputLength(length, 6, "Length is too big (6)", "danger", "/editPlant")
+        getInputLength(width, 6, "Width is too big (6)", "danger", "/editPlant")
+        getInputLength(height, 6, "Height is too big (6)", "danger", "/editPlant")
+        getInputLength(description, 300, "Description is too long (300)", "danger", "/editPlant")
 
 
         # Convert offer value to integer
@@ -75,92 +75,92 @@ def editFunction():
         # Ensure the plant name was submitted
         if not name:
             flash("must provide plant name", "warning")
-            return redirect("/edit")
+            return redirect("/editPlant")
 
 
         # Ensure the plant name fits server-side
         if not re.search("^[a-zA-Z 0-9]{1,100}$", name):
             flash("Invalid plant name", "danger")
-            return redirect("/edit")
+            return redirect("/editPlant")
 
 
         # Ensure the plant stock was submitted
         if not stock:
             flash("must provide plant stock", "warning")
-            return redirect("/edit")
+            return redirect("/editPlant")
 
 
         # Ensure the plant stock fits server-side
         if not re.search("^[0-9]+$", stock):
             flash("Invalid plant stock", "danger")
-            return redirect("/edit")
+            return redirect("/editPlant")
 
 
         # Ensure the plant price was submitted
         if not price:
             flash("must provide plant price", "warning")
-            return redirect("/edit")
+            return redirect("/editPlant")
 
 
         # Ensure the plant price fits server-side
         if not re.search("^[0-9]+$", price):
             flash("Invalid plant price", "danger")
-            return redirect("/edit")
+            return redirect("/editPlant")
 
 
         # Ensure the plant offer fits server-side
         if offer != 0:
             if not re.search("^[0-9]+$", offer):
                 flash("Invalid plant offer", "danger")
-                return redirect("/edit")
+                return redirect("/editPlant")
 
 
         # Ensure the plant length was submitted
         if not length:
             flash("must provide plant length", "warning")
-            return redirect("/add")
+            return redirect("/editPlant")
 
 
         # Ensure the plant length fits server-side
         if not re.search("^[0-9]+$", length):
             flash("Invalid plant length", "danger")
-            return redirect("/add")
+            return redirect("/editPlant")
 
 
         # Ensure the plant width was submitted
         if not width:
             flash("must provide plant width", "warning")
-            return redirect("/add")
+            return redirect("/editPlant")
 
 
         # Ensure the plant width fits server-side
         if not re.search("^[0-9]+$", length):
             flash("Invalid plant width", "danger")
-            return redirect("/add")
+            return redirect("/editPlant")
 
 
         # Ensure the plant height was submitted
         if not height:
             flash("must provide plant width", "warning")
-            return redirect("/add")
+            return redirect("/editPlant")
 
 
         # Ensure the plant height fits server-side
         if not re.search("^[0-9]+$", height):
             flash("Invalid plant height", "danger")
-            return redirect("/add")
+            return redirect("/editPlant")
 
 
         # Ensure the plant description was submitted
         if not description:
             flash("must provide plant description", "warning")
-            return redirect("/edit")
+            return redirect("/editPlant")
 
 
         # Ensure the plant description fits server-side
         if not re.search("^(?!;).+", description):
             flash("Invalid plant description", "danger")
-            return redirect("/edit")
+            return redirect("/editPlant")
 
 
         # Update plant name, stock, price, description and show status into the table and commit
@@ -234,4 +234,4 @@ def editFunction():
         thisPlant = request.args.getlist("plants")
 
     
-        return render_template("edit.html", name=getUserName(), picture=getUserPicture(), role=getUserRole(), plants=thisPlant)
+        return render_template("editPlant.html", name=getUserName(), picture=getUserPicture(), role=getUserRole(), plants=thisPlant)

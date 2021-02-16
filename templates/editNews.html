@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Communication
+    Edit news
 {% endblock %}
 
 {% block navigation %}
@@ -30,33 +30,27 @@
 {% endblock %}
 
 {% block main %}
-    <div class="TableBorder">
-        <form action="/communication" method="post">
-            <table class="TableMain">
-                <thead>
-                    <tr>
-                        <th scope="col">Title</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    {% for new in news %}
-                        <tr>
-                            <td>{{ new.title | safe }}</td>
-                            <td><button name="erase" value="{{ new.id | safe }}" type="submit"><img src="/static/trash.svg" alt="delete" height="25"></button></td>
-                            <td><button name="change" value="{{ new.id | safe }}" type="submit"><img src="/static/updateB.svg" alt="edit" height="25"></button></td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+    <form action="/editNews" method="post">
+        <div class="EditNewsMain">
+            <div>
+                <input type='hidden' name='news_id' value='{{ news[0]}}'>
+            </div>
+            <div>
+                <input id="title" autocomplete="off" autofocus class="form-control" name="title" placeholder=" Title" type="text" size="50" value="{{ news[1] }}">
+            </div>
             <br>
             <div>
-                <a href="/addNews"><img src="/static/add.svg" alt="add" height="50"></a>
+                {{ ckeditor.create(value= news[2]) }}
+                {{ ckeditor.load(custom_url=url_for('static', filename='ckeditor/ckeditor.js')) }}
             </div>
-        </form>
-    </div>
+            <br>
+            <div>
+                <button id="submit" type="submit" name="submit" value="submit"><img src="/static/sendmail.svg" alt="sendmail" height="50"></button>
+            </div>
+        </div>
+    </form>
     <br>
     <div>
-        <a href="/"><img src="/static/back.svg" alt="back" height="50"></a>
+        <a href="/communication"><img src="/static/back.svg" alt="back" height="50"></a>
     </div>
 {% endblock %}

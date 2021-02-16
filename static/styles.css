@@ -436,10 +436,10 @@ button {
 }
 
 
-/*  CREATE  */
+/*  AddNews  */
 
 
-.CreateMain {
+.AddNewsMain {
 	height: 500px;
 	border-radius: 25px;
 	border: 2px solid #E8E8E8;
@@ -450,14 +450,14 @@ button {
 /*  ADD  */
 
 
-.AddMain {
+.AddPlantMain {
 	height: 800px;
 	border-radius: 25px;
 	border: 2px solid #E8E8E8;
 	padding: 20px; 	
 }
 
-.AddFirst {
+.AddPlantFirst {
 	display: flex;
 	flex-direction: column;
 	flex-wrap: nowrap;
@@ -466,7 +466,7 @@ button {
 	align-content: stretch;
 }
 
-.AddSecond {
+.AddPlantSecond {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: nowrap;
@@ -479,14 +479,14 @@ button {
 /*  EDIT  */
 
 
-.EditMain {
+.EditPlantMain {
 	height: 800px;
 	border-radius: 25px;
 	border: 2px solid #E8E8E8;
 	padding: 20px; 	
 }
 
-.EditFirst {
+.EditPlantFirst {
 	display: flex;
 	flex-direction: column;
 	flex-wrap: nowrap;
@@ -495,7 +495,7 @@ button {
 	align-content: stretch;
 }
 
-.EditSecond {
+.EditPlantSecond {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: nowrap;
@@ -574,7 +574,7 @@ button {
 /*  CHANGE  */
 
 
-.ChangeMain {
+.EditNewsMain {
 	height: 500px;
 	border-radius: 25px;
 	border: 2px solid #E8E8E8;

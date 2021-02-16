@@ -10,14 +10,14 @@ from flask_sqlalchemy import SQLAlchemy
 
 
 # Set Blueprints
-create = Blueprint('create', __name__,)
+addNews = Blueprint('addNews', __name__,)
 
 
-@create.route("/create", methods=["GET", "POST"])
+@addNews.route("/addNews", methods=["GET", "POST"])
 @role_required
 @login_required
 @confirmed_required
-def createFunction():
+def addNewsFunction():
 
     # Force flash() to get the messages on the same page as the redirect.
     get_flashed_messages()  
@@ -41,4 +41,4 @@ def createFunction():
 
     else:
     
-        return render_template("create.html", name=getUserName(), picture=getUserPicture(), role=getUserRole())
+        return render_template("addNews.html", name=getUserName(), picture=getUserPicture(), role=getUserRole())

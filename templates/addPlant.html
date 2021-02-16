@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Add
+    Add plant
 {% endblock %}
 
 {% block navigation %}
@@ -30,13 +30,13 @@
 {% endblock %}
 
 {% block main %}
-    <form action="/add" method="post" enctype="multipart/form-data">
-        <div class="AddMain">
-            <div class="AddFirst">
+    <form action="/addPlant" method="post" enctype="multipart/form-data">
+        <div class="AddPlantMain">
+            <div class="AddPlantFirst">
                 <div>
                     <input id="name" autocomplete="off" autofocus class="form-control" name="name" placeholder="Name" type="text">
                 </div>
-                <div class="AddSecond">
+                <div class="AddPlantSecond">
                     <div>
                         <input id="stock" autocomplete="off" autofocus class="form-control" name="stock" placeholder="Stock" type="number" min="0">
                     </div>
@@ -47,7 +47,7 @@
                         <input id="offer" autocomplete="off" autofocus class="form-control" name="offer" placeholder="Offer" type="number" min="0">
                     </div>
                 </div>
-                <div class="AddSecond">
+                <div class="AddPlantSecond">
                     <div>
                         <input id="length" autocomplete="off" autofocus class="form-control" name="length" placeholder="Length" type="number" min="0">
                     </div>

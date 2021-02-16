@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Edit
+    Edit plant
 {% endblock %}
 
 {% block navigation %}
@@ -30,16 +30,16 @@
 {% endblock %}
 
 {% block main %}
-        <form action="/edit" method="post" enctype="multipart/form-data">
-            <div class="EditMain">
-                <div class="EditFirst">
+        <form action="/editPlant" method="post" enctype="multipart/form-data">
+            <div class="EditPlantMain">
+                <div class="EditPlantFirst">
                     <div>
                         <input type='hidden' name='plant_id' value='{{ plants[0] | safe }}'>
                     </div>
                     <div>
                         <input id="name" autocomplete="off" autofocus class="form-control" name="name" placeholder="Name" type="text" value="{{ plants[1] | safe }}">
                     </div>
-                    <div class="EditSecond">
+                    <div class="EditPlantSecond">
                         <div>
                             <input id="stock" autocomplete="off" autofocus class="form-control" name="stock" placeholder="Stock" type="number" min="0" value="{{ plants[2] | safe }}">
                         </div>
@@ -50,7 +50,7 @@
                             <input id="offer" autocomplete="off" autofocus class="form-control" name="offer" placeholder="Offer" type="number" min="0" value="{{ plants[4] | safe }}">
                         </div>
                     </div>
-                    <div class="EditSecond">
+                    <div class="EditPlantSecond">
                         <div>
                             <input id="length" autocomplete="off" autofocus class="form-control" name="length" placeholder="Length" type="number" min="0" value="{{ plants[5] | safe }}">
                         </div>

@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Communication
+    Edit box
 {% endblock %}
 
 {% block navigation %}
@@ -30,31 +30,7 @@
 {% endblock %}
 
 {% block main %}
-    <div class="TableBorder">
-        <form action="/communication" method="post">
-            <table class="TableMain">
-                <thead>
-                    <tr>
-                        <th scope="col">Title</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    {% for new in news %}
-                        <tr>
-                            <td>{{ new.title | safe }}</td>
-                            <td><button name="erase" value="{{ new.id | safe }}" type="submit"><img src="/static/trash.svg" alt="delete" height="25"></button></td>
-                            <td><button name="change" value="{{ new.id | safe }}" type="submit"><img src="/static/updateB.svg" alt="edit" height="25"></button></td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-            <br>
-            <div>
-                <a href="/addNews"><img src="/static/add.svg" alt="add" height="50"></a>
-            </div>
-        </form>
-    </div>
+    Edit box page
     <br>
     <div>
         <a href="/"><img src="/static/back.svg" alt="back" height="50"></a>
