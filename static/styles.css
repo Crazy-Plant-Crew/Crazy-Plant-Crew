@@ -154,24 +154,6 @@ main {
 }
 
 
-/*  MAP  */
-
-
-#map {
-	height: 250px;
-	width: 500px;
-}
-
-.marker {
-	background-image: url('/static/marker.png');
-	background-size: cover;
-	width: 50px;
-	height: 50px;
-	border-radius: 50%;
-	cursor: pointer;
-}
-
-
 /*  INDEX  */
 
 
@@ -415,7 +397,8 @@ button {
 	height: 450px;
 	border-radius: 25px;
 	border: 2px solid #E8E8E8;
-	padding: 20px; 
+	padding: 20px;
+	width: 750px;
 }
 
 
@@ -432,7 +415,7 @@ button {
 
 	border-radius: 25px;
 	border: 2px solid #E8E8E8;
-	padding: 20px; 
+	padding: 20px;
 }
 
 
@@ -443,7 +426,8 @@ button {
 	height: 500px;
 	border-radius: 25px;
 	border: 2px solid #E8E8E8;
-	padding: 20px; 	
+	padding: 20px;
+	width: 750px;	
 }
 
 
@@ -454,7 +438,8 @@ button {
 	height: 800px;
 	border-radius: 25px;
 	border: 2px solid #E8E8E8;
-	padding: 20px; 	
+	padding: 20px;
+	width: 750px; 	
 }
 
 .AddPlantFirst {
@@ -483,7 +468,8 @@ button {
 	height: 800px;
 	border-radius: 25px;
 	border: 2px solid #E8E8E8;
-	padding: 20px; 	
+	padding: 20px;
+	width: 750px; 	
 }
 
 .EditPlantFirst {
@@ -512,7 +498,8 @@ button {
 	height: 150px;
 	border-radius: 25px;
 	border: 2px solid #E8E8E8;
-	padding: 20px; 	
+	padding: 20px;
+	width: 750px; 	
 }
 
 
@@ -523,7 +510,8 @@ button {
 	height: 200px;
 	border-radius: 25px;
 	border: 2px solid #E8E8E8;
-	padding: 20px; 		
+	padding: 20px;
+	width: 750px; 		
 }
 
 
@@ -534,7 +522,8 @@ button {
 	height: 150px;
 	border-radius: 25px;
 	border: 2px solid #E8E8E8;
-	padding: 20px; 		
+	padding: 20px; 
+	width: 750px;		
 }
 
 
@@ -545,7 +534,8 @@ button {
 	height: 150px;
 	border-radius: 25px;
 	border: 2px solid #E8E8E8;
-	padding: 20px; 		
+	padding: 20px;
+	width: 750px;		
 }
 
 
@@ -556,7 +546,8 @@ button {
 	height: 150px;
 	border-radius: 25px;
 	border: 2px solid #E8E8E8;
-	padding: 20px; 		
+	padding: 20px;
+	width: 750px;	
 }
 
 
@@ -567,7 +558,8 @@ button {
 	height: 100px;
 	border-radius: 25px;
 	border: 2px solid #E8E8E8;
-	padding: 20px; 		
+	padding: 20px;
+	width: 750px;	
 }
 
 
@@ -578,7 +570,8 @@ button {
 	height: 500px;
 	border-radius: 25px;
 	border: 2px solid #E8E8E8;
-	padding: 20px; 	
+	padding: 20px;
+	width: 750px;
 }
 
 
@@ -587,6 +580,7 @@ button {
 
 .LoggedMain {
 	height: 750px;
+	width: 750px;
 	border-radius: 25px;
 	border: 2px solid #E8E8E8;
 	padding: 20px; 	
@@ -641,6 +635,7 @@ button {
 
 .ArticleMain {
 	height: 800px;
+	width: 750px;
 	overflow: auto;
 }
 
@@ -665,7 +660,8 @@ button {
 	height: 500px;
 	border-radius: 25px;
 	border: 2px solid #E8E8E8;
-	padding: 20px; 	
+	padding: 20px;
+	width: 750px;	
 }
 
 
@@ -677,6 +673,7 @@ button {
 	border-radius: 25px;
 	border: 2px solid #E8E8E8;
 	padding: 20px; 	
+	width: 750px;
 }
 
 
