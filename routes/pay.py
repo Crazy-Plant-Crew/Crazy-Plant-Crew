@@ -37,12 +37,7 @@ def payFunction():
         plants = []
         for element in selection:
 
-            # Check if the price is reduced then append to array
-            if element.reduced == "Yes":
-                plants.append([element.name, element.quantity, element.offer])
-
-            else:
-                plants.append([element.name, element.quantity, element.price])
+            plants.append([element.name, element.quantity, element.price])
 
 
         print(plants)
