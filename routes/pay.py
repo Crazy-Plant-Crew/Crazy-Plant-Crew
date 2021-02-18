@@ -30,6 +30,16 @@ def payFunction():
         country = request.form.get("country")
         additional = request.form.get("additional")
         user_id = session["user_id"]
+        selection = Baskets.query.filter_by(user_id=user_id)
+
+
+        # Make plants array from selection
+        plants = []
+        for element in selection:
+
+            plants.append(element.name)
+        
+        print(plants)
 
 
         # Fake payement varibale
@@ -100,7 +110,7 @@ def payFunction():
 
 
         # Insert street name, house number, zipcode, country, additional information, pay and user_id into the table
-        db.session.add(Orders(street=street, house=house, zipcode=zipcode, country=country, additional=additional, pay=pay, user_id=user_id))
+        db.session.add(Orders(street=street, house=house, zipcode=zipcode, country=country, additional=additional, pay=pay, user_id=user_id, plants=plants))
         db.session.commit()
 
         
