@@ -31,6 +31,9 @@ def payFunction():
         additional = request.form.get("additional")
         user_id = session["user_id"]
         selection = Baskets.query.filter_by(user_id=user_id)
+
+
+        print(country)
         
 
         # Make plants array from selection
