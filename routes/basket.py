@@ -23,7 +23,7 @@ def basketFunction():
     
 
     # Query database for plants
-    thisBasket = Baskets.query.filter_by(id=user_id).first()
+    thisBasket = Baskets.query.filter_by(id=user_id)
 
 
     # Query database for plants
