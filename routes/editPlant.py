@@ -5,7 +5,7 @@ import os
 import html2text
 
 from flask import Blueprint, render_template, redirect, session, request, flash, get_flashed_messages
-from application import getUserName, getUserPicture, login_required, confirmed_required, getUserRole, role_required, uploadPicture, allowed_file, db, Plants
+from application import getUserName, getUserPicture, login_required, confirmed_required, getUserRole, role_required, uploadPicture, allowed_file, db, Plants, getInputLength
 from werkzeug.utils import secure_filename
 from flask_sqlalchemy import SQLAlchemy
 
