@@ -31,16 +31,13 @@ def payFunction():
         additional = request.form.get("additional")
         user_id = session["user_id"]
         selection = Baskets.query.filter_by(user_id=user_id)
-
-
-        print(country)
         
 
         # Make plants array from selection
         plants = []
         for element in selection:
 
-            plants.append([element.id, element.name, element.quantity, element.price])
+            plants.append([str(element.id), element.name, str(element.quantity), str(element.price)])
 
 
         # Check length
