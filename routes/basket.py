@@ -18,8 +18,12 @@ def basketFunction():
     get_flashed_messages()
 
 
+    # Get variable
+    user_id = session["user_id"]
+
+
     # Query database for plants
-    baskets = Baskets.query.all()
+    baskets = Baskets.query.filter_by(id=user_id).all()
 
 
     # User reached route via POST (as by submitting a form via POST)
