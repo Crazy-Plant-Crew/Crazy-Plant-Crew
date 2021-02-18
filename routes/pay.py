@@ -37,10 +37,7 @@ def payFunction():
         plants = []
         for element in selection:
 
-            plants.append([element.name, element.quantity, element.price])
-
-
-        print(plants)
+            plants.append([element.id, element.name, element.quantity, element.price])
 
 
         # Fake payement varibale
@@ -113,6 +110,11 @@ def payFunction():
         # Insert street name, house number, zipcode, country, additional information, pay and user_id into the table
         db.session.add(Orders(street=street, house=house, zipcode=zipcode, country=country, additional=additional, pay=pay, user_id=user_id, plants=plants))
         db.session.commit()
+
+
+        # Flash result & redirect
+        flash("Plant(s) ordered", "success")
+        return redirect("/")
 
         
 
