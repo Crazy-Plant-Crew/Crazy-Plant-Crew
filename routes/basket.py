@@ -20,10 +20,14 @@ def basketFunction():
 
     # Get variable
     user_id = session["user_id"]
+    
+
+    # Query database for plants
+    thisBasket = Baskets.query.filter_by(id=user_id).first()
 
 
     # Query database for plants
-    baskets = Baskets.query.filter_by(id=user_id).all()
+    baskets = Baskets.query.all()
 
 
     # User reached route via POST (as by submitting a form via POST)
@@ -61,4 +65,4 @@ def basketFunction():
             total += baskets[index].subtotal
             index += 1
     
-        return render_template("basket.html", name=getUserName(), picture=getUserPicture(), role=getUserRole(), baskets=baskets, total=int(total))
+        return render_template("basket.html", name=getUserName(), picture=getUserPicture(), role=getUserRole(), baskets=thisBasket, total=int(total))
