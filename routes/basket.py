@@ -60,9 +60,9 @@ def basketFunction():
         # Get total price
         index = 0
         total = 0
-        while index < len(baskets):
+        while index < len(thisBasket):
 
-            total += baskets[index].subtotal
+            total += thisBasket[index].subtotal
             index += 1
     
         return render_template("basket.html", name=getUserName(), picture=getUserPicture(), role=getUserRole(), baskets=thisBasket, total=int(total))
