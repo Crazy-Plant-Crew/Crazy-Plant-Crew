@@ -52,7 +52,7 @@ def addBoxFunction():
 
         # Ensure the box name fits server-side
         if not re.search("^[a-zA-Z 0-9]{1,100}$", name):
-            flash("Invalid plant name", "danger")
+            flash("Invalid box name", "danger")
             return redirect("/addBox")
 
 
