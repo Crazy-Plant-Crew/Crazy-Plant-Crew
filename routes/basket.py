@@ -57,17 +57,11 @@ def basketFunction():
 
     else:
 
-        print("HERE")
-        print(thisBasket)
-        print("THERE")
-        """
         # Get total price
-        index = 0
         total = 0
-        while index < len(thisBasket):
+        for element in thisBasket:
 
-            total += thisBasket[index].subtotal
-            index += 1
-        """
+            total += element.subtotal
+
     
-        return render_template("basket.html", name=getUserName(), picture=getUserPicture(), role=getUserRole(), baskets=thisBasket, total=int(total))
+        return render_template("basket.html", name=getUserName(), picture=getUserPicture(), role=getUserRole(), baskets=thisBasket, total=total)
