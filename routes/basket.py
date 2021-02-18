@@ -24,6 +24,7 @@ def basketFunction():
 
     # Query database for plants
     thisBasket = Baskets.query.filter_by(user_id=user_id)
+    print(thisBasket)
 
 
     # Query database for plants
