@@ -45,7 +45,12 @@
             </div>
             <br>
             <div>
-                <input id="country" autocomplete="off" autofocus class="form-control" name="country" placeholder=" Country" type="text">
+                <select id="country" name="country"> 
+                    <option value="None">Select country:</option>
+                    {% for country in countries %}
+                        <option value="{{ country }}">{{ country }}</option>
+                    {% endfor %}
+                </select>
             </div>
             <br>
             <div>

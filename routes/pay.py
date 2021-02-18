@@ -31,24 +31,13 @@ def payFunction():
         additional = request.form.get("additional")
         user_id = session["user_id"]
         selection = Baskets.query.filter_by(user_id=user_id)
-
+        
 
         # Make plants array from selection
         plants = []
         for element in selection:
 
             plants.append([element.id, element.name, element.quantity, element.price])
-
-
-        # Fake payement varibale
-        pay = request.form.get("pay")
-
-
-        # Convert pay value to string
-        if pay == None:
-            pay = "No"
-        if pay == "pay":
-            pay = "Yes"
 
 
         # Check length
@@ -108,16 +97,19 @@ def payFunction():
 
 
         # Insert street name, house number, zipcode, country, additional information, pay and user_id into the table
-        db.session.add(Orders(street=street, house=house, zipcode=zipcode, country=country, additional=additional, pay=pay, user_id=user_id, plants=plants))
+        db.session.add(Orders(street=street, house=house, zipcode=zipcode, country=country, additional=additional, user_id=user_id, plants=plants))
         db.session.commit()
 
 
         # Flash result & redirect
-        flash("Plant(s) ordered", "success")
-        return redirect("/")
+        flash("Parcel informations saved", "success")
+        return redirect("/confirmation")
 
         
 
     else:
+
+        eu_countries = [Austria, Belgium, Bulgaria, Croatia, Cyprus, Czechia, Denmark, Estonia, Finland, France, Germany, Greece, Hungary, Ireland, Italy, Latvia, Lithuania, Luxembourg, Malta, Netherlands, Poland, Portugal, Romania, Slovakia, Slovenia, Spain, Sweden]
+
     
-        return render_template("pay.html", name=getUserName(), picture=getUserPicture(), role=getUserRole())
+        return render_template("pay.html", name=getUserName(), picture=getUserPicture(), role=getUserRole(), countries=eu_countries)

@@ -99,6 +99,7 @@ class Boxes(db.Model):
 class Orders(db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=False, autoincrement=True, unique=True)
     user_id = db.Column(db.Integer, nullable=False)
+    date = db.Column(db.Integer, nullable=False, default=0)
     plants = db.Column(db.String(1024), nullable=False)
     boxes = db.Column(db.String(1024), nullable=False)
     street = db.Column(db.String(1024), nullable=False)
@@ -447,6 +448,7 @@ from routes.history import history
 from routes.faq import faq
 from routes.addBox import addBox
 from routes.editBox import editBox
+from routes.confirmation import confirmation
 
 
 # Configure Blueprints
@@ -481,3 +483,4 @@ app.register_blueprint(history)
 app.register_blueprint(faq)
 app.register_blueprint(addBox)
 app.register_blueprint(editBox)
+app.register_blueprint(confirmation)
