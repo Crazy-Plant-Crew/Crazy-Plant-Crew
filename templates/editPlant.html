@@ -52,19 +52,22 @@
                     </div>
                     <div class="EditPlantSecond">
                         <div>
-                            <input id="length" autocomplete="off" autofocus class="form-control" name="length" placeholder="Length" type="number" min="0" value="{{ plants[5] | safe }}">
+                            <input id="length" autocomplete="off" autofocus class="form-control" name="length" placeholder=" Length (cm)" type="number" min="0" value="{{ plants[5] | safe }}">
                         </div>
                         <div>
-                            <input id="width" autocomplete="off" autofocus class="form-control" name="width" placeholder="Width" type="number" min="0" value="{{ plants[6] | safe }}">
+                            <input id="width" autocomplete="off" autofocus class="form-control" name="width" placeholder=" Width (cm)" type="number" min="0" value="{{ plants[6] | safe }}">
                         </div>
                         <div>
-                            <input id="height" autocomplete="off" autofocus class="form-control" name="height" placeholder="Height" type="number" min="0" value="{{ plants[7] | safe }}">
+                            <input id="height" autocomplete="off" autofocus class="form-control" name="height" placeholder=" Height (cm)" type="number" min="0" value="{{ plants[7] | safe }}">
+                        </div>
+                        <div>
+                            <input id="weight" autocomplete="off" autofocus class="form-control" name="weight" placeholder=" Weight (g)" type="number" min="0" value="{{ plants[8] | safe }}">
                         </div>
                     </div>
                 </div>
                 <br>
                 <div>
-                    {% with description = plants[9] | safe %}
+                    {% with description = plants[10] | safe %}
                         {{ ckeditor.create(value=description) }}
                         {{ ckeditor.load(custom_url=url_for('static', filename='ckeditor/ckeditor.js')) }}
                     {% endwith %}
@@ -85,7 +88,7 @@
                     <input type="file" id="thumbnail2" name="thumbnail2">
                 </div>
                 <br>
-                    {% if plants[10] == "Yes" %}
+                    {% if plants[11] == "Yes" %}
                     <div>
                         <input type="checkbox" id="reduced" name="reduced" value="reduced" checked>
                         <label for="reduced"> Show reduced price?</label>
@@ -96,7 +99,7 @@
                         <label for="reduced"> Show reduced price?</label>
                     </div>
                     {% endif %}
-                    {% if plants[11] == "Yes" %}
+                    {% if plants[12] == "Yes" %}
                     <div>
                         <input type="checkbox" id="show" name="show" value="show" checked>
                         <label for="show"> Show in app?</label>

@@ -34,6 +34,7 @@ def addPlantFunction():
         length = request.form.get("length")
         width = request.form.get("width")
         height = request.form.get("height")
+        weight = request.form.get("weight")
         description = request.form.get("ckeditor")
         reduced = request.form.get("reduced")
         show = request.form.get("show")
@@ -47,6 +48,7 @@ def addPlantFunction():
         getInputLength(length, 6, "Length is too big (6)", "danger", "/addPlant")
         getInputLength(width, 6, "Width is too big (6)", "danger", "/addPlant")
         getInputLength(height, 6, "Height is too big (6)", "danger", "/addPlant")
+        getInputLength(weight, 6, "Weight is too big (6)", "danger", "/addPlant")
         getInputLength(description, 300, "Description is too long (300)", "danger", "/addPlant")
 
 
@@ -131,20 +133,32 @@ def addPlantFunction():
 
 
         # Ensure the plant width fits server-side
-        if not re.search("^[0-9]+$", length):
+        if not re.search("^[0-9]+$", width):
             flash("Invalid plant width", "danger")
             return redirect("/addPlant")
 
 
         # Ensure the plant height was submitted
         if not height:
-            flash("must provide plant width", "warning")
+            flash("must provide plant height", "warning")
             return redirect("/addPlant")
 
 
         # Ensure the plant height fits server-side
         if not re.search("^[0-9]+$", height):
             flash("Invalid plant height", "danger")
+            return redirect("/addPlant")
+
+
+        # Ensure the plant weight was submitted
+        if not weight:
+            flash("must provide plant weight", "warning")
+            return redirect("/addPlant")
+
+
+        # Ensure the plant weight fits server-side
+        if not re.search("^[0-9]+$", weight):
+            flash("Invalid plant weight", "danger")
             return redirect("/addPlant")
 
 
@@ -161,7 +175,7 @@ def addPlantFunction():
 
 
         # Insert plant name, stock, price, description and show status into the table
-        db.session.add(Plants(name=name, stock=stock, price=price, offer=offer, length=length, width=width, height=height, description=description, reduced=reduced, show=show))
+        db.session.add(Plants(name=name, stock=stock, price=price, offer=offer, length=length, width=width, height=height, weight=weight, description=description, reduced=reduced, show=show))
         db.session.commit()
 
 

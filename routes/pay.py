@@ -85,7 +85,7 @@ def payFunction():
 
 
         # Ensure the country was submitted
-        if not country:
+        if country == "None":
             flash("must provide a country", "warning")
             return redirect("/pay")
 

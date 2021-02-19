@@ -36,6 +36,7 @@ def editPlantFunction():
         length = request.form.get("length")
         width = request.form.get("width")
         height = request.form.get("height")
+        weight = request.form.get("weight")
         html = request.form.get("ckeditor")
         description = html2text.html2text(html)
         reduced = request.form.get("reduced")
@@ -50,6 +51,7 @@ def editPlantFunction():
         getInputLength(length, 6, "Length is too big (6)", "danger", "/editPlant")
         getInputLength(width, 6, "Width is too big (6)", "danger", "/editPlant")
         getInputLength(height, 6, "Height is too big (6)", "danger", "/editPlant")
+        getInputLength(weight, 6, "Weight is too big (6)", "danger", "/editPlant")
         getInputLength(description, 300, "Description is too long (300)", "danger", "/editPlant")
 
 
@@ -134,20 +136,32 @@ def editPlantFunction():
 
 
         # Ensure the plant width fits server-side
-        if not re.search("^[0-9]+$", length):
+        if not re.search("^[0-9]+$", width):
             flash("Invalid plant width", "danger")
             return redirect("/editPlant")
 
 
         # Ensure the plant height was submitted
         if not height:
-            flash("must provide plant width", "warning")
+            flash("must provide plant height", "warning")
             return redirect("/editPlant")
 
 
         # Ensure the plant height fits server-side
         if not re.search("^[0-9]+$", height):
             flash("Invalid plant height", "danger")
+            return redirect("/editPlant")
+
+
+        # Ensure the plant weight was submitted
+        if not weight:
+            flash("must provide plant weight", "warning")
+            return redirect("/editPlant")
+
+
+        # Ensure the plant weight fits server-side
+        if not re.search("^[0-9]+$", weight):
+            flash("Invalid plant weight", "danger")
             return redirect("/editPlant")
 
 
@@ -172,6 +186,7 @@ def editPlantFunction():
         query.length = length
         query.width = width
         query.height = height
+        query.weight = weight
         query.description = description
         query.reduced = reduced
         query.show = show
