@@ -29,9 +29,9 @@ def addBoxFunction():
         length = request.form.get("length")
         width = request.form.get("width")
         height = request.form.get("height")
-        price_de = request.form.get("length")
-        price_eu = request.form.get("width")
-        price_ex = request.form.get("height")
+        price_de = request.form.get("price_de")
+        price_eu = request.form.get("price_eu")
+        price_ex = request.form.get("price_ex")
 
 
         # Check length
