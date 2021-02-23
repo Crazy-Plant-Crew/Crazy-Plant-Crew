@@ -52,6 +52,7 @@ def confirmationFunction():
     else:
 
         # Make boxes array from packages
+        packages = Boxes.query.all()
         boxes = []
         for element in packages:
             print(element)
