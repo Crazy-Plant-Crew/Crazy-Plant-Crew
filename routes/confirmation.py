@@ -57,7 +57,7 @@ def confirmationFunction():
 
 
         # Make array with selected plants
-        query = Orders.query.filter_by(user_id=user_id)
+        query = Orders.query.filter_by(user_id=user_id).first()
         plants = query.plants
 
 
