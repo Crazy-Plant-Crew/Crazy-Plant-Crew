@@ -53,7 +53,7 @@
                 </select>
                 <div>
                     <input type="checkbox" id="express" name="express" value="express">
-                    <label for="express"> Express?</label>
+                    <label for="express"> Express? (Germany only)</label>
                 </div>
             </div>
             <br>
@@ -76,7 +76,7 @@
         document.getElementById("country").onclick = function() {
 
             let selection = document.getElementById("country").value;
-            let box =  document.getElementById("country");
+            let box =  document.getElementById("express");
 
             if (selection === "Germany") {
                 document.querySelector("#express").disabled = false;
