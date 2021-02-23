@@ -29,7 +29,8 @@ def addBoxFunction():
         length = request.form.get("length")
         width = request.form.get("width")
         height = request.form.get("height")
-        weight = request.form.get("weight")
+        weight_ne = request.form.get("weight_ne")
+        weight_ex = request.form.get("weight_ex")
         price_de = request.form.get("price_de")
         price_eu = request.form.get("price_eu")
         price_ex = request.form.get("price_ex")
@@ -40,7 +41,8 @@ def addBoxFunction():
         getInputLength(length, 6, "Length is too big (6)", "danger", "/addBox")
         getInputLength(width, 6, "Width is too big (6)", "danger", "/addBox")
         getInputLength(height, 6, "Height is too big (6)", "danger", "/addBox")
-        getInputLength(Weight, 6, "Weight is too big (6)", "danger", "/addBox")
+        getInputLength(weight_ne, 6, "Weight non-express is too big (6)", "danger", "/addBox")
+        getInputLength(weight_ex, 6, "Weight express is too big (6)", "danger", "/addBox")
         getInputLength(price_de, 6, "Price for DE is too big (6)", "danger", "/addBox")
         getInputLength(price_eu, 6, "Price for EU is too big (6)", "danger", "/addBox")
         getInputLength(price_ex, 6, "Price for Express is too big (6)", "danger", "/addBox")
@@ -88,21 +90,33 @@ def addBoxFunction():
             return redirect("/addBox")
 
 
-        # Ensure the box weight fits server-side
-        if not re.search("^[0-9]+$", weight):
-            flash("Invalid box weight", "danger")
-            return redirect("/addBox")
-
-
-        # Ensure the box weight was submitted
-        if not weight:
-            flash("must provide box weight", "warning")
-            return redirect("/addBox")
-
-
         # Ensure the box height fits server-side
         if not re.search("^[0-9]+$", height):
             flash("Invalid box height", "danger")
+            return redirect("/addBox")
+
+
+        # Ensure the box weight_ne was submitted
+        if not weight_ne:
+            flash("must provide box weight non-express", "warning")
+            return redirect("/addBox")
+
+
+        # Ensure the box weight_ne fits server-side
+        if not re.search("^[0-9]+$", weight_ne):
+            flash("Invalid box weight non-express", "danger")
+            return redirect("/addBox")
+
+
+        # Ensure the box weight_ex was submitted
+        if not weight_ex:
+            flash("must provide box weight express", "warning")
+            return redirect("/addBox")
+
+
+        # Ensure the box weight_ex fits server-side
+        if not re.search("^[0-9]+$", weight_ex):
+            flash("Invalid box weight express", "danger")
             return redirect("/addBox")
 
 
@@ -143,7 +157,7 @@ def addBoxFunction():
 
 
         # Insert box name, length, width, height, price DE, price EU and price EX into the table
-        db.session.add(Boxes(name=name, length=length, width=width, height=height, weight=weight, price_de=price_de, price_eu=price_eu, price_ex=price_ex))
+        db.session.add(Boxes(name=name, length=length, width=width, height=height, weight_ne=weight_ne, weight_ex=weight_ex, price_de=price_de, price_eu=price_eu, price_ex=price_ex))
         db.session.commit()
 
 

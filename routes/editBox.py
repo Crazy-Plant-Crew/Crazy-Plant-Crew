@@ -30,7 +30,8 @@ def editBoxFunction():
         length = request.form.get("length")
         width = request.form.get("width")
         height = request.form.get("height")
-        weight = request.form.get("weight")
+        weight_ne = request.form.get("weight_ne")
+        weight_ex = request.form.get("weight_ex")
         price_de = request.form.get("length")
         price_eu = request.form.get("width")
         price_ex = request.form.get("height")
@@ -41,7 +42,8 @@ def editBoxFunction():
         getInputLength(length, 6, "Length is too big (6)", "danger", "/editBox")
         getInputLength(width, 6, "Width is too big (6)", "danger", "/editBox")
         getInputLength(height, 6, "Height is too big (6)", "danger", "/editBox")
-        getInputLength(Weight, 6, "Weight is too big (6)", "danger", "/editBox")
+        getInputLength(weight_ne, 6, "Weight non-express is too big (6)", "danger", "/editBox")
+        getInputLength(weight_ex, 6, "Weight express is too big (6)", "danger", "/editBox")
         getInputLength(price_de, 6, "Price for DE is too big (6)", "danger", "/editBox")
         getInputLength(price_eu, 6, "Price for EU is too big (6)", "danger", "/editBox")
         getInputLength(price_ex, 6, "Price for Express is too big (6)", "danger", "/editBox")
@@ -95,15 +97,27 @@ def editBoxFunction():
             return redirect("/editBox")
 
 
-        # Ensure the box weight fits server-side
-        if not re.search("^[0-9]+$", weight):
-            flash("Invalid box weight", "danger")
+        # Ensure the box weight_ne was submitted
+        if not weight_ne:
+            flash("must provide box weight non-express", "warning")
             return redirect("/editBox")
 
 
-        # Ensure the box weight was submitted
-        if not weight:
-            flash("must provide box weight", "warning")
+        # Ensure the box weight_ne fits server-side
+        if not re.search("^[0-9]+$", weight_ne):
+            flash("Invalid box weight non-express", "danger")
+            return redirect("/editBox")
+
+
+        # Ensure the box weight_ex was submitted
+        if not weight_ex:
+            flash("must provide box weight express", "warning")
+            return redirect("/editBox")
+
+
+        # Ensure the box weight_ex fits server-side
+        if not re.search("^[0-9]+$", weight_ex):
+            flash("Invalid box weight express", "danger")
             return redirect("/editBox")
 
 
@@ -149,7 +163,8 @@ def editBoxFunction():
         query.length = length
         query.width = width
         query.height = height
-        query.weight = weight
+        query.weight_ne = weight_ne
+        query.weight_ex = weight_ex
         query.price_de = price_de
         query.price_eu = price_eu
         query.price_ex = price_ex
