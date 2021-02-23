@@ -42,20 +42,23 @@ def payFunction():
         getInputLength(additional, 800, "Additional information is too long (800)", "danger", "/pay")
 
 
-        # Make plants arrays from selections and availables
+        # Make plants array from selection
         plants = []
         for element in selection:
 
             plants.append([str(element.id), str(element.name), str(element.quantity), str(element.price)])
+ 
 
-        
-        # Add to arrays the plants features
+        # Add to plants array the plants features
         index = 0
         while index < len(plants):
 
             query = Plants.query.filter_by(id=int(plants[index][0]))
-            print(query)
-            plants[index].append(str(query.length), str(query.width), str(query.height), str(query.weight), str(query.express))
+
+            for element in query
+
+                plants[index].append(str(query.length), str(query.width), str(query.height), str(query.weight), str(query.express))
+            
             index += 1
 
 
