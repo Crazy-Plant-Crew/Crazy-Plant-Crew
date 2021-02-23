@@ -32,7 +32,6 @@ def editNewsFunction():
 
 
         # Update plant name, stock, price, description and show status into the table
-        db.engine.execute("UPDATE News SET title=:title, body=:body WHERE id=:id;", {"title": title, "body": body, "id": news_id})
         query = News.query.filter_by(id=news_id).first()
         query.title = title
         query.body = body

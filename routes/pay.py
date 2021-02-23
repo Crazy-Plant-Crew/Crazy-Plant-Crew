@@ -56,7 +56,7 @@ def payFunction():
             print("ID HERE")
             print(int(plants[index][0]))
 
-            query = Plants.query.filter_by(id=int(plants[index][0]))
+            query = Plants.query.filter_by(id=int(plants[index][0])).first()
 
             print("QUERY HERE")
             print(query)
