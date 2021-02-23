@@ -53,6 +53,8 @@ def payFunction():
         index = 0
         while index < len(plants):
 
+            print(int(plants[index][0]))
+
             query = Plants.query.filter_by(id=int(plants[index][0]))
 
             for element in query:
