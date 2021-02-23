@@ -2,7 +2,7 @@ import traceback
 import sys
 
 from flask import Blueprint, render_template, redirect, session, request, flash, get_flashed_messages
-from application import getUserName, getUserPicture, login_required, confirmed_required, getUserRole, role_required, db, Orders
+from application import getUserName, getUserPicture, login_required, confirmed_required, getUserRole, role_required, db, Orders, Boxes
 from flask_sqlalchemy import SQLAlchemy
 from time import time
 
@@ -25,8 +25,15 @@ def confirmationFunction():
 
         # Get variable
         date = int(time())
+        packages = Boxes.query.all()
 
 
+        # Make boxes array from packages
+        boxes = []
+        for element in packages:
+            print(element)
+
+            
         # Fake payement varibale
         pay = request.form.get("pay")
 
