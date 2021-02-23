@@ -100,7 +100,7 @@ def editBoxFunction():
 
 
         # Ensure the box price in DE fits server-side
-        if not re.search("^[0-9]+$", price_de):
+        if not re.search("^[0-9]+\.?[0-9]+$", price_de):
             flash("Invalid box price in DE", "danger")
             return redirect("/editBox")
 
@@ -112,7 +112,7 @@ def editBoxFunction():
 
 
         # Ensure the box price in EU fits server-side
-        if not re.search("^[0-9]+$", price_eu):
+        if not re.search("^[0-9]+\.?[0-9]+$", price_eu):
             flash("Invalid box price in EU", "danger")
             return redirect("/editBox")
 
@@ -124,7 +124,7 @@ def editBoxFunction():
 
 
         # Ensure the box express price fits server-side
-        if not re.search("^[0-9]+$", price_ex):
+        if not re.search("^[0-9]+\.?[0-9]+$", price_ex):
             flash("Invalid box express price", "danger")
             return redirect("/editBox")
 
