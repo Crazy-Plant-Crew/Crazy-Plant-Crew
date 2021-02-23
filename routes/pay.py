@@ -54,7 +54,7 @@ def payFunction():
         while index < len(plants):
 
             query = Plants.query.filter_by(id=int(plants[index][0])).first()
-            plants[index].append(str(query.length), str(query.width), str(query.height), str(query.weight), str(query.express))            
+            plants[index].extend(str(query.length), str(query.width), str(query.height), str(query.weight), str(query.express))            
             index += 1
 
 
