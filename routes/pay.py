@@ -31,7 +31,7 @@ def payFunction():
         express = request.form.get("express")
         additional = request.form.get("additional")
         user_id = session["user_id"]
-        elementselection = Baskets.query.filter_by(user_id=user_id)
+        selection = Baskets.query.filter_by(user_id=user_id)
 
 
         # Check length
@@ -46,7 +46,7 @@ def payFunction():
         plants = []
         for element in selection:
 
-            plants.append([str(element.id), element.name, str(element.quantity), str(selection.price)])
+            plants.append([str(element.id), str(element.name), str(element.quantity), str(element.price)])
 
         
         # Add to arrays the plants features
