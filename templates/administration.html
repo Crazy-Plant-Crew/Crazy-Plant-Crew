@@ -75,7 +75,8 @@
                         <th scope="col">Length</th>
                         <th scope="col">Width</th>
                         <th scope="col">Height</th>
-                        <th scope="col">Weight</th>
+                        <th scope="col">Weight NE</th>
+                        <th scope="col">Weight EX</th>
                         <th scope="col">Price DE</th>
                         <th scope="col">Price EU</th>
                         <th scope="col">Express</th>
@@ -89,7 +90,8 @@
                             <td>{{ box.length | safe }}</td>
                             <td>{{ box.width | safe }}</td>
                             <td>{{ box.height | safe }}</td>
-                            <td>{{ box.weight | safe }}</td>
+                            <td>{{ box.weight_ne | safe }}</td>
+                            <td>{{ box.weight_ex | safe }}</td>
                             <td>{{ '%0.2f'|format(box.price_de) }}€</td>
                             <td>{{ '%0.2f'|format(box.price_eu) }}€</td>
                             <td>{{ '%0.2f'|format(box.price_ex) }}€</td>
