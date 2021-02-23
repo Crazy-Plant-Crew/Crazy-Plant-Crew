@@ -58,8 +58,8 @@ class Plants(db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=False, autoincrement=True, unique=True)
     name = db.Column(db.String(1024), nullable=False, default="No name")
     stock = db.Column(db.Integer, nullable=False, default=0)
-    price = db.Column(db.Integer, nullable=False, default=0)
-    offer = db.Column(db.Integer, nullable=False, default=0)
+    price = db.Column(db.Float, nullable=False, default=0)
+    offer = db.Column(db.Float, nullable=False, default=0)
     picture = db.Column(db.String(1024), nullable=False, default="https://i.ibb.co/QNJnLR8/empty.png")
     thumbnail1 = db.Column(db.String(1024), nullable=False, default="https://i.ibb.co/QNJnLR8/empty.png")
     thumbnail2 = db.Column(db.String(1024), nullable=False, default="https://i.ibb.co/QNJnLR8/empty.png")
@@ -83,8 +83,8 @@ class Baskets(db.Model):
     quantity = db.Column(db.Integer, nullable=False, default=0)
     name = db.Column(db.String(1024), nullable=False, default="No name")
     picture = db.Column(db.String(1024), nullable=False, default="https://i.ibb.co/QNJnLR8/empty.png")
-    price = db.Column(db.Integer, nullable=False)
-    subtotal = db.Column(db.Integer, nullable=False, default=0)
+    price = db.Column(db.Float, nullable=False)
+    subtotal = db.Column(db.Float, nullable=False, default=0)
 
 class Boxes(db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=False, autoincrement=True, unique=True)
@@ -92,9 +92,9 @@ class Boxes(db.Model):
     length = db.Column(db.Integer, nullable=False, default=0)
     width = db.Column(db.Integer, nullable=False, default=0)
     height = db.Column(db.Integer, nullable=False, default=0)
-    price_de = db.Column(db.Integer, nullable=False, default=0)
-    price_eu = db.Column(db.Integer, nullable=False, default=0)
-    price_ex = db.Column(db.Integer, nullable=False, default=0)
+    price_de = db.Column(db.Float, nullable=False, default=0)
+    price_eu = db.Column(db.Float, nullable=False, default=0)
+    price_ex = db.Column(db.Float, nullable=False, default=0)
 
 class Orders(db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=False, autoincrement=True, unique=True)
