@@ -61,7 +61,7 @@ def addPlantFunction():
         # Convert express value to string
         if express == None:
             express = "No"
-        if express == "show":
+        if express == "express":
             express = "Yes"
 
 

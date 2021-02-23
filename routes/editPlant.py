@@ -64,7 +64,7 @@ def editPlantFunction():
         # Convert express value to string
         if express == None:
             express = "No"
-        if express == "show":
+        if express == "express":
             express = "Yes"
 
 
@@ -194,8 +194,7 @@ def editPlantFunction():
         query.length = length
         query.width = width
         query.height = height
-        query.weight_ne = weight_ne
-        query.weight_ex = weight_ex
+        query.weight = weight
         query.description = description
         query.express = express
         query.reduced = reduced
