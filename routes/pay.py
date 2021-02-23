@@ -31,7 +31,7 @@ def payFunction():
         express = request.form.get("express")
         additional = request.form.get("additional")
         user_id = session["user_id"]
-        selection = Baskets.query.filter_by(user_id=user_id)
+        selections = Baskets.query.filter_by(user_id=user_id)
 
 
         # Check length
@@ -42,11 +42,15 @@ def payFunction():
         getInputLength(additional, 800, "Additional information is too long (800)", "danger", "/pay")
 
 
-        # Make plants arrays from selection
+        # Make plants arrays from selections and availables
         plants = []
-        for element in selection:
+        for selection in selections:
 
-            plants.append([str(element.id), element.name, str(element.quantity), str(element.price), str(element.length), str(element.width), str(element.height), str(element.weight), str(str(element.express))])
+            availables = Plants.filter_by(id=selection.id)
+
+            for available in availables:
+
+                plants.append([str(selection.id), selection.name, str(selection.quantity), str(selection.price), str(available.length), str(available.width), str(available.height), str(available.weight), str(str(available.express))])
 
 
         # Convert pay value to string
