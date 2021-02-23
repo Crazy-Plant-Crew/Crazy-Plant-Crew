@@ -29,6 +29,7 @@ def addBoxFunction():
         length = request.form.get("length")
         width = request.form.get("width")
         height = request.form.get("height")
+        weight = request.form.get("weight")
         price_de = request.form.get("price_de")
         price_eu = request.form.get("price_eu")
         price_ex = request.form.get("price_ex")
@@ -37,11 +38,12 @@ def addBoxFunction():
         # Check length
         getInputLength(name, 100, "Name is too long (100)", "danger", "/addBox")
         getInputLength(length, 6, "Length is too big (6)", "danger", "/addBox")
-        getInputLength(width, 6, "Price is too big (6)", "danger", "/addBox")
-        getInputLength(height, 6, "Offer is too big (6)", "danger", "/addBox")
-        getInputLength(price_de, 6, "Length is too big (6)", "danger", "/addBox")
-        getInputLength(price_eu, 6, "Width is too big (6)", "danger", "/addBox")
-        getInputLength(price_ex, 6, "Height is too big (6)", "danger", "/addBox")
+        getInputLength(width, 6, "Width is too big (6)", "danger", "/addBox")
+        getInputLength(height, 6, "Height is too big (6)", "danger", "/addBox")
+        getInputLength(Weight, 6, "Weight is too big (6)", "danger", "/addBox")
+        getInputLength(price_de, 6, "Price for DE is too big (6)", "danger", "/addBox")
+        getInputLength(price_eu, 6, "Price for EU is too big (6)", "danger", "/addBox")
+        getInputLength(price_ex, 6, "Price for Express is too big (6)", "danger", "/addBox")
 
 
         # Ensure the box name was submitted
@@ -83,6 +85,18 @@ def addBoxFunction():
         # Ensure the box height was submitted
         if not height:
             flash("must provide box height", "warning")
+            return redirect("/addBox")
+
+
+        # Ensure the box weight fits server-side
+        if not re.search("^[0-9]+$", weight):
+            flash("Invalid box weight", "danger")
+            return redirect("/addBox")
+
+
+        # Ensure the box weight was submitted
+        if not weight:
+            flash("must provide box weight", "warning")
             return redirect("/addBox")
 
 
@@ -129,7 +143,7 @@ def addBoxFunction():
 
 
         # Insert box name, length, width, height, price DE, price EU and price EX into the table
-        db.session.add(Boxes(name=name, length=length, width=width, height=height, price_de=price_de, price_eu=price_eu, price_ex=price_ex))
+        db.session.add(Boxes(name=name, length=length, width=width, height=height, weight=weight, price_de=price_de, price_eu=price_eu, price_ex=price_ex))
         db.session.commit()
 
 

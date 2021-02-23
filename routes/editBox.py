@@ -30,6 +30,7 @@ def editBoxFunction():
         length = request.form.get("length")
         width = request.form.get("width")
         height = request.form.get("height")
+        weight = request.form.get("weight")
         price_de = request.form.get("length")
         price_eu = request.form.get("width")
         price_ex = request.form.get("height")
@@ -38,11 +39,12 @@ def editBoxFunction():
         # Check length
         getInputLength(name, 100, "Name is too long (100)", "danger", "/editBox")
         getInputLength(length, 6, "Length is too big (6)", "danger", "/editBox")
-        getInputLength(width, 6, "Price is too big (6)", "danger", "/editBox")
-        getInputLength(height, 6, "Offer is too big (6)", "danger", "/editBox")
-        getInputLength(price_de, 6, "Length is too big (6)", "danger", "/editBox")
-        getInputLength(price_eu, 6, "Width is too big (6)", "danger", "/editBox")
-        getInputLength(price_ex, 6, "Height is too big (6)", "danger", "/editBox")
+        getInputLength(width, 6, "Width is too big (6)", "danger", "/editBox")
+        getInputLength(height, 6, "Height is too big (6)", "danger", "/editBox")
+        getInputLength(Weight, 6, "Weight is too big (6)", "danger", "/editBox")
+        getInputLength(price_de, 6, "Price for DE is too big (6)", "danger", "/editBox")
+        getInputLength(price_eu, 6, "Price for EU is too big (6)", "danger", "/editBox")
+        getInputLength(price_ex, 6, "Price for Express is too big (6)", "danger", "/editBox")
 
 
         # Ensure the box name was submitted
@@ -93,6 +95,18 @@ def editBoxFunction():
             return redirect("/editBox")
 
 
+        # Ensure the box weight fits server-side
+        if not re.search("^[0-9]+$", weight):
+            flash("Invalid box weight", "danger")
+            return redirect("/editBox")
+
+
+        # Ensure the box weight was submitted
+        if not weight:
+            flash("must provide box weight", "warning")
+            return redirect("/editBox")
+
+
         # Ensure the box price in DE was submitted
         if not price_de:
             flash("must provide box price in DE", "warning")
@@ -135,6 +149,7 @@ def editBoxFunction():
         query.length = length
         query.width = width
         query.height = height
+        query.weight = weight
         query.price_de = price_de
         query.price_eu = price_eu
         query.price_ex = price_ex
