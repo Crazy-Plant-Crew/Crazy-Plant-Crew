@@ -60,10 +60,13 @@ def payFunction():
 
             print("QUERY HERE")
             print(query)
+            print(query.length)
 
+            """
             for element in query:
 
                 plants[index].append(str(query.length), str(query.width), str(query.height), str(query.weight), str(query.express))
+            """
             
             index += 1
 
