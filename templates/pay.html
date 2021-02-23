@@ -76,11 +76,14 @@
         document.getElementById("country").onclick = function() {
 
             let selection = document.getElementById("country").value;
+            let box =  document.getElementById("country");
+
             if (selection === "Germany") {
                 document.querySelector("#express").disabled = false;
             }
             else {
                 document.querySelector("#express").disabled = true;
+                box.checked = false;
             }
         }
     </script>
