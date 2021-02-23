@@ -34,8 +34,7 @@ def addPlantFunction():
         length = request.form.get("length")
         width = request.form.get("width")
         height = request.form.get("height")
-        weight_ne = request.form.get("weight_ne")
-        weight_ex = request.form.get("weight_ex")
+        weight = request.form.get("weight")
         description = request.form.get("ckeditor")
         express = request.form.get("express")
         reduced = request.form.get("reduced")
@@ -50,8 +49,7 @@ def addPlantFunction():
         getInputLength(length, 6, "Length is too big (6)", "danger", "/addPlant")
         getInputLength(width, 6, "Width is too big (6)", "danger", "/addPlant")
         getInputLength(height, 6, "Height is too big (6)", "danger", "/addPlant")
-        getInputLength(weight_ne, 6, "Weight non-express is too big (6)", "danger", "/addPlant")
-        getInputLength(weight_ex, 6, "Weight express only is too big (6)", "danger", "/addPlant")
+        getInputLength(weight, 6, "Weight is too big (6)", "danger", "/addPlant")
         getInputLength(description, 300, "Description is too long (300)", "danger", "/addPlant")
 
 
@@ -160,27 +158,15 @@ def addPlantFunction():
             return redirect("/addPlant")
 
 
-        # Ensure the plant weight_ne was submitted
-        if not weight_ne:
-            flash("must provide plant weight non-express", "warning")
+        # Ensure the plant weight was submitted
+        if not weight:
+            flash("must provide plant weight", "warning")
             return redirect("/addPlant")
 
 
-        # Ensure the plant weight_ne fits server-side
-        if not re.search("^[0-9]+$", weight_ne):
-            flash("Invalid plant weight non-express", "danger")
-            return redirect("/addPlant")
-
-
-        # Ensure the plant weight_ex was submitted
-        if not weight_ex:
-            flash("must provide plant weight express only", "warning")
-            return redirect("/addPlant")
-
-
-        # Ensure the plant weight_ex fits server-side
-        if not re.search("^[0-9]+$", weight_ex):
-            flash("Invalid plant weight express only", "danger")
+        # Ensure the plant weight fits server-side
+        if not re.search("^[0-9]+$", weight):
+            flash("Invalid plant weight", "danger")
             return redirect("/addPlant")
 
 
@@ -197,7 +183,7 @@ def addPlantFunction():
 
 
         # Insert plant name, stock, price, description and show status into the table
-        db.session.add(Plants(name=name, stock=stock, price=price, offer=offer, length=length, width=width, height=height, weight_ne=weight_ne, weight_ex=weight_ex, description=description, express=express, reduced=reduced, show=show))
+        db.session.add(Plants(name=name, stock=stock, price=price, offer=offer, length=length, width=width, height=height, weight=weight, description=description, express=express, reduced=reduced, show=show))
         db.session.commit()
 
 
