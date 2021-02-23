@@ -46,7 +46,7 @@ def payFunction():
         plants = []
         for selection in selections:
 
-            availables = Plants.filter_by(id=selection.id)
+            availables = Plants.query.filter_by(id=selection.id)
 
             for available in availables:
 
