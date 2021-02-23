@@ -44,13 +44,17 @@
                 <input id="zipcode" autocomplete="off" autofocus class="form-control" name="zipcode" placeholder=" Zip code" type="text">
             </div>
             <br>
-            <div>
+            <div class="PaySecond">
                 <select id="country" name="country"> 
                     <option value="None">Select country:</option>
                     {% for country in countries %}
                         <option value="{{ country }}">{{ country }}</option>
                     {% endfor %}
                 </select>
+                <div>
+                    <input type="checkbox" id="express" name="express" value="express">
+                    <label for="express"> Express?</label>
+                </div>
             </div>
             <br>
             <div>
