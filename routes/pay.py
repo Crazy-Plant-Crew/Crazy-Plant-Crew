@@ -3,7 +3,7 @@ import sys
 import re
 
 from flask import Blueprint, render_template, redirect, session, request, flash, get_flashed_messages
-from application import getUserName, getUserPicture, login_required, confirmed_required, getUserRole, role_required, db, Boxes, Users, Plants, Baskets, Orders, getInputLength
+from application import getUserName, getUserPicture, login_required, confirmed_required, getUserRole, role_required, db, Boxes, Plants, Baskets, Orders, getInputLength
 from flask_sqlalchemy import SQLAlchemy
 
 
@@ -42,11 +42,11 @@ def payFunction():
         getInputLength(additional, 800, "Additional information is too long (800)", "danger", "/pay")
 
 
-        # Make plants array from selection
+        # Make plants arrays from selection
         plants = []
         for element in selection:
 
-            plants.append([str(element.id), element.name, str(element.quantity), str(element.price)])
+            plants.append([str(element.id), element.name, str(element.quantity), str(element.price), str(element.length), str(element.width), str(element.height), str(element.weight), str(str(element.express))])
 
 
         # Convert pay value to string

@@ -25,7 +25,7 @@ def confirmationFunction():
 
         # Get variable
         date = int(time())
-        
+
            
         # Fake pay varibale
         pay = request.form.get("pay")
@@ -48,12 +48,37 @@ def confirmationFunction():
         return redirect("/history")
 
     
+
     else:
 
-        # Make boxes array from packages
-        boxes = []
-        packages = Boxes.query.all()
-        for element in packages:
-            print(element)
+        # Get variable
+        user_id = session["user_id"]
+        cost = 0
+
+
+        # Make array with selected plants
+        query = Orders.query.filter_by(user_id=user_id)
+        plants = query.plants
+
+
+        # Make array with available boxes
+        query = Boxes.query.all()
+        packaging = []
+        for element in query:
+
+            packaging.append([str(element.name), str(element.length), str(element.width), str(element.height), str(element.weight_ne), str(element.weight_ex), str(element.price_de), str(element.price_eu), str(element.price_ex)])
+        
+
+        # Make array with needed boxes
+        packages = []
+
+
+        print(plants)
+        print(packaging)
+        print(packages)
+
+
+
+
     
         return render_template("confirmation.html", name=getUserName(), picture=getUserPicture(), role=getUserRole())
