@@ -70,4 +70,14 @@
     <div>
         <a href="/basket"><img src="/static/back.svg" alt="back" height="50"></a>
     </div>
+
+    <script>
+        document.querySelector("#express").disabled = true;
+
+        document.getElementById("cookies").onclick = function() {
+
+            let selection = document.querySelector("#express").value;
+            console.log(selection);
+        }
+    </script>
 {% endblock %}
