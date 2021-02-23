@@ -28,16 +28,10 @@ def payFunction():
         house = request.form.get("house")
         zipcode = request.form.get("zipcode")
         country = request.form.get("country")
+        express = request.form.get("express")
         additional = request.form.get("additional")
         user_id = session["user_id"]
         selection = Baskets.query.filter_by(user_id=user_id)
-        
-
-        # Make plants array from selection
-        plants = []
-        for element in selection:
-
-            plants.append([str(element.id), element.name, str(element.quantity), str(element.price)])
 
 
         # Check length
@@ -46,6 +40,20 @@ def payFunction():
         getInputLength(zipcode, 10, "Zip code is too big (10)", "danger", "/pay")
         getInputLength(country, 100, "Country name is too long (100)", "danger", "/pay")
         getInputLength(additional, 800, "Additional information is too long (800)", "danger", "/pay")
+
+
+        # Make plants array from selection
+        plants = []
+        for element in selection:
+
+            plants.append([str(element.id), element.name, str(element.quantity), str(element.price)])
+
+
+        # Convert pay value to string
+        if express == None:
+            express = "No"
+        if express == "express":
+            express = "Yes"
 
 
         # Ensure the street name was submitted
@@ -97,7 +105,7 @@ def payFunction():
 
 
         # Insert street name, house number, zipcode, country, additional information, pay and user_id into the table
-        db.session.add(Orders(street=street, house=house, zipcode=zipcode, country=country, additional=additional, user_id=user_id, plants=plants))
+        db.session.add(Orders(street=street, house=house, zipcode=zipcode, country=country, express=express, additional=additional, user_id=user_id, plants=plants))
         db.session.commit()
 
 
@@ -109,7 +117,7 @@ def payFunction():
 
     else:
 
-        eu_countries = ["Austria", "Belgium", "Bulgaria", "Croatia", "Cyprus", "Czechia", "Denmark", "Estonia", "Finland", "France", "Germany", "Greece", "Hungary", "Ireland", "Italy", "Latvia", "Lithuania", "Luxembourg", "Malta", "Netherlands", "Poland", "Portugal", "Romania", "Slovakia", "Slovenia", "Spain", "Sweden"]
+        countries = ["Austria", "Belgium", "Bulgaria", "Croatia", "Cyprus", "Czechia", "Denmark", "Estonia", "Finland", "France", "Germany", "Greece", "Hungary", "Ireland", "Italy", "Latvia", "Lithuania", "Luxembourg", "Malta", "Netherlands", "Poland", "Portugal", "Romania", "Slovakia", "Slovenia", "Spain", "Sweden"]
 
     
-        return render_template("pay.html", name=getUserName(), picture=getUserPicture(), role=getUserRole(), countries=eu_countries)
+        return render_template("pay.html", name=getUserName(), picture=getUserPicture(), role=getUserRole(), countries=countries)

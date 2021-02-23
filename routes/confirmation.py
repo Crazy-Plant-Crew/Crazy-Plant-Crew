@@ -25,14 +25,7 @@ def confirmationFunction():
 
         # Get variable
         date = int(time())
-        packages = Boxes.query.all()
-
-
-        # Make boxes array from packages
-        boxes = []
-        for element in packages:
-            print(element)
-
+        
            
         # Fake pay varibale
         pay = request.form.get("pay")
@@ -59,6 +52,7 @@ def confirmationFunction():
 
         # Make boxes array from packages
         boxes = []
+        packages = Boxes.query.all()
         for element in packages:
             print(element)
     

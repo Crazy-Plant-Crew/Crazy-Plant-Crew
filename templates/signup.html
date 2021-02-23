@@ -58,42 +58,4 @@
             <button id="submit" type="submit"><img src="/static/login.svg" alt="login" height="50"></button>
         </div>
     </form>
-
-
-    <script>
-        // Password must be between 7 to 15 characters which contain at least one numeric digit and a special character
-        document.querySelector("#submit").disabled = true;
-
-        document.getElementById("cookies").onclick = function() {
-
-            function isCaptchaChecked() {
-            return grecaptcha && grecaptcha.getResponse().length !== 0;
-            }
-
-            let password = document.querySelector("#password").value;
-            let username = document.querySelector("#username").value;
-            let email = document.querySelector("#email").value;
-            let confirmation = document.querySelector("#confirm-pass").value;
-            let checkbox = document.getElementById("cookies")
-
-            if (username.length > 1 && username.length < 21 && username.match(/^[A-Za-z0-9 ]+$/)) {
-                document.querySelector("#submit").disabled = true;
-                if (email.match(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i)) {
-                    document.querySelector("#submit").disabled = true;
-                    if (password.match(/^^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/i)) {
-                        document.querySelector("#submit").disabled = true;
-                        if (confirmation === password) {
-                            document.querySelector("#submit").disabled = true;
-                            if (isCaptchaChecked()) {
-                                document.querySelector("#submit").disabled = true;
-                                if (checkbox.checked === true) {
-                                    document.querySelector("#submit").disabled = false;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    </script>
 {% endblock %}
