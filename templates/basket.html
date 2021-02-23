@@ -50,7 +50,7 @@
                             <td>{{ basket.name | safe }}</td>
                             <td>{{ basket.quantity | safe }}</td>
                             <td>{{ '%0.2f'|format(basket.price) }}€</td>
-                            <td>{{ '%0.2f'|format(basket.subtota) }}€</td>
+                            <td>{{ '%0.2f'|format(basket.subtotal) }}€</td>
                             <td><button name="delete" value="{{ basket.id | safe }}" type="submit"><img src="/static/trash.svg" alt="delete" height="25"></button></td>
                         </tr>
                     {% endfor %}
