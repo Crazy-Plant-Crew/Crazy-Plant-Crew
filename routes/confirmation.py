@@ -27,14 +27,8 @@ def confirmationFunction():
         date = int(time())
         packages = Boxes.query.all()
 
-
-        # Make boxes array from packages
-        boxes = []
-        for element in packages:
-            print(element)
-
-            
-        # Fake payement varibale
+           
+        # Fake pay varibale
         pay = request.form.get("pay")
 
 
@@ -56,5 +50,10 @@ def confirmationFunction():
 
     
     else:
+
+        # Make boxes array from packages
+        boxes = []
+        for element in packages:
+            print(element)
     
         return render_template("confirmation.html", name=getUserName(), picture=getUserPicture(), role=getUserRole())

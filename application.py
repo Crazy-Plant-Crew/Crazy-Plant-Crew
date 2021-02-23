@@ -110,6 +110,7 @@ class Orders(db.Model):
     zipcode = db.Column(db.String(1024), nullable=False)
     country = db.Column(db.String(1024), nullable=False)
     additional = db.Column(db.String(1024), nullable=False)
+    express = db.Column(db.String(1024), nullable=False, default="No")
     pay = db.Column(db.String(1024), nullable=False, default="No")
     status = db.Column(db.String(1024), nullable=False, default="No")
     remark = db.Column(db.String(1024), nullable=False, default="No")  
