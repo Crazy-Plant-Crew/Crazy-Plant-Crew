@@ -73,11 +73,12 @@
 
     <script>
         document.querySelector("#express").disabled = true;
-
         document.getElementById("country").onclick = function() {
 
             let selection = document.getElementById("country").value;
-            console.log(selection);
+            if (selection === "Germany") {
+                document.querySelector("#express").disabled = false;
+            }
         }
     </script>
 {% endblock %}
