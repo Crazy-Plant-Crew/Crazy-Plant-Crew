@@ -90,6 +90,17 @@
                 <br>
                     {% if plants[11] == "Yes" %}
                     <div>
+                        <input type="checkbox" id="express" name="express" value="express" checked>
+                        <label for="express"> Express only?</label>
+                    </div>
+                    {% else %}
+                    <div>
+                        <input type="checkbox" id="express" name="express" value="express">
+                        <label for="express"> Express only?</label>
+                    </div>
+                    {% endif %}
+                    {% if plants[12] == "Yes" %}
+                    <div>
                         <input type="checkbox" id="reduced" name="reduced" value="reduced" checked>
                         <label for="reduced"> Show reduced price?</label>
                     </div>
@@ -99,7 +110,7 @@
                         <label for="reduced"> Show reduced price?</label>
                     </div>
                     {% endif %}
-                    {% if plants[12] == "Yes" %}
+                    {% if plants[13] == "Yes" %}
                     <div>
                         <input type="checkbox" id="show" name="show" value="show" checked>
                         <label for="show"> Show in app?</label>

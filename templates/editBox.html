@@ -36,35 +36,39 @@
             <input type='hidden' name='box_id' value='{{ boxes[0] | safe }}'>
         </div>
         <div>
-            <input id="name" autocomplete="off" autofocus class="form-control" name="name" placeholder="Name" type="text" value="{{ boxes[1] | safe }}">
+            <input id="name" autocomplete="off" autofocus class="form-control" name="name" placeholder=" Name" type="text" value="{{ boxes[1] | safe }}">
         </div>
         <br>
         <div>
-            <input id="length" autocomplete="off" autofocus class="form-control" name="length" placeholder="Length" type="number" min="0" value="{{ boxes[2] | safe }}">
+            <input id="length" autocomplete="off" autofocus class="form-control" name="length" placeholder=" Length" type="number" min="0" value="{{ boxes[2] | safe }}">
         </div>
         <br>
         <div>
-            <input id="width" autocomplete="off" autofocus class="form-control" name="width" placeholder="Width" type="number" min="0" value="{{ boxes[3] | safe }}">
+            <input id="width" autocomplete="off" autofocus class="form-control" name="width" placeholder=" Width" type="number" min="0" value="{{ boxes[3] | safe }}">
         </div>
         <br>
         <div>
-            <input id="height" autocomplete="off" autofocus class="form-control" name="height" placeholder="Height" type="number" min="0" value="{{ boxes[4] | safe }}">
+            <input id="height" autocomplete="off" autofocus class="form-control" name="height" placeholder=" Height" type="number" min="0" value="{{ boxes[4] | safe }}">
         </div>
         <br>
         <div>
-            <input id="weight" autocomplete="off" autofocus class="form-control" name="weight" placeholder="Weight" type="number" min="0" value="{{ boxes[5] | safe }}">
+            <input id="weight_ne" autocomplete="off" autofocus class="form-control" name="weight_ne" placeholder=" Weight non-express" type="number" min="0" value="{{ boxes[5] | safe }}">
         </div>
         <br>
         <div>
-            <input id="price_de" autocomplete="off" autofocus class="form-control" name="price_de" placeholder=" Price DE" type="number" min="0" value="{{ boxes[6] | safe }}" step="0.01">
+            <input id="weight_ex" autocomplete="off" autofocus class="form-control" name="weight_ex" placeholder=" Weight express only" type="number" min="0" value="{{ boxes[6] | safe }}">
         </div>
         <br>
         <div>
-            <input id="price_eu" autocomplete="off" autofocus class="form-control" name="price_eu" placeholder=" Price EU" type="number" min="0" value="{{ boxes[7] | safe }}" step="0.01">
+            <input id="price_de" autocomplete="off" autofocus class="form-control" name="price_de" placeholder=" Price DE" type="number" min="0" value="{{ boxes[7] | safe }}" step="0.01">
         </div>
         <br>
         <div>
-            <input id="price_ex" autocomplete="off" autofocus class="form-control" name="price_ex" placeholder=" Express" type="number" min="0" value="{{ boxes[8] | safe }}" step="0.01">
+            <input id="price_eu" autocomplete="off" autofocus class="form-control" name="price_eu" placeholder=" Price EU" type="number" min="0" value="{{ boxes[8] | safe }}" step="0.01">
+        </div>
+        <br>
+        <div>
+            <input id="price_ex" autocomplete="off" autofocus class="form-control" name="price_ex" placeholder=" Express" type="number" min="0" value="{{ boxes[9] | safe }}" step="0.01">
         </div>
         <br>
         <div>
