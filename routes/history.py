@@ -29,7 +29,7 @@ def historyFunction():
 
     # Query database for plants in Orders
     for order in orders:
-        print(order.plants) 
+        print(list(order.plants)) 
         print(len(order.plants))    
 
 
