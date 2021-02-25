@@ -44,7 +44,7 @@
                     {% for order in orders %}
                         <tr>
                             <td>{{ order.date | safe }}</td>
-                            <td>{% for plant in order.plants %} {% for item in plant.split(',') %} {{ item }} {% endfor %} {% endfor %}</td>
+                            <td>{{ order.plants | safe }}</td>
                         </tr>
                     {% endfor %}
                 </tbody>
