@@ -31,8 +31,9 @@ def historyFunction():
     plants = []
     for order in orders:
         plants.extend(eval(order.plants))
-  
 
+    print(plants)
+  
 
     # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
