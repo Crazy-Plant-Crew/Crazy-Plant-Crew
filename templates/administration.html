@@ -39,6 +39,9 @@
                         <th scope="col">Stock</th>
                         <th scope="col">Price</th>
                         <th scope="col">Offer</th>
+                        <th scope="col">Length</th>
+                        <th scope="col">Width</th>
+                        <th scope="col">Height</th>
                         <th scope="col">Weight</th>
                         <th scope="col">Picture</th>
                         <th scope="col">Express</th>
@@ -54,7 +57,10 @@
                             <td>{{ plant.stock | safe }}</td>
                             <td>{{ '%0.2f'|format(plant.price) }}€</td>
                             <td>{{ '%0.2f'|format(plant.offer) }}€</td>
-                            <td>{{ plant.weight | safe }}</td>
+                            <td>{{ plant.length | safe }}cm</td>
+                            <td>{{ plant.width | safe }}cm</td>
+                            <td>{{ plant.height | safe }}cm</td>
+                            <td>{{ plant.weight | safe }}g</td>
                             <td><img src="{{ plant.picture | safe }}" alt="plant picture of {{ plant.name | safe }}" height="50"></td>
                             <td>{{ plant.express | safe }}</td>
                             <td>{{ plant.reduced | safe }}</td>
@@ -91,11 +97,11 @@
                     {% for box in boxes %}
                         <tr>
                             <td>{{ box.name | safe }}</td>
-                            <td>{{ box.length | safe }}</td>
-                            <td>{{ box.width | safe }}</td>
-                            <td>{{ box.height | safe }}</td>
-                            <td>{{ box.weight_ne | safe }}</td>
-                            <td>{{ box.weight_ex | safe }}</td>
+                            <td>{{ box.length | safe }}cm</td>
+                            <td>{{ box.width | safe }}cm</td>
+                            <td>{{ box.height | safe }}cm</td>
+                            <td>{{ box.weight_ne | safe }}g</td>
+                            <td>{{ box.weight_ex | safe }}g</td>
                             <td>{{ '%0.2f'|format(box.price_de) }}€</td>
                             <td>{{ '%0.2f'|format(box.price_eu) }}€</td>
                             <td>{{ '%0.2f'|format(box.price_ex) }}€</td>
