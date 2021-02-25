@@ -56,9 +56,9 @@ def confirmationFunction():
         cost = 0
 
 
-        # Make array with selected plants
-        query = Orders.query.filter_by(user_id=user_id).first()
-        plants = query.plants
+        # Make array with selected plants of last order
+        query = Orders.query.filter_by(user_id=user_id).all()
+        plants = query[-1].plants
 
 
         # Make array with available boxes
@@ -75,7 +75,7 @@ def confirmationFunction():
 
         print(plants)
         print(packaging)
-        print(packages)
+        # print(packages)
 
 
 
