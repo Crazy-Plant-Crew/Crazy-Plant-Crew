@@ -36,4 +36,4 @@ def historyFunction():
 
     else:
     
-        return render_template("history.html", name=getUserName(), picture=getUserPicture(), role=getUserRole(), orders=orders, plants=plants)
+        return render_template("history.html", name=getUserName(), picture=getUserPicture(), role=getUserRole(), orders=orders)
