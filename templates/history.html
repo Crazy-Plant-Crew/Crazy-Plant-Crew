@@ -44,7 +44,7 @@
                     {% for order, plant in zip %}
                         <tr>
                             <td>{{ order.date | safe }}</td>
-                            <td>{{ plant[1] | safe }}</td>
+                            <td>{{ plant[0] | safe }}</td>
                         </tr>
                     {% endfor %}
                 </tbody>
