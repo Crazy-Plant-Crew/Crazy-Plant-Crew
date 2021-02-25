@@ -25,7 +25,6 @@ def historyFunction():
 
     # Query database for plants
     orders = Orders.query.filter_by(user_id=user_id).all()
-    plants = orders.plants
 
 
     # User reached route via POST (as by submitting a form via POST)
@@ -37,4 +36,4 @@ def historyFunction():
 
     else:
     
-        return render_template("history.html", name=getUserName(), picture=getUserPicture(), role=getUserRole(), orders=orders, plants=plants)
+        return render_template("history.html", name=getUserName(), picture=getUserPicture(), role=getUserRole(), orders=orders)
