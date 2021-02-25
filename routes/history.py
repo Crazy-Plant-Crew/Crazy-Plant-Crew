@@ -30,7 +30,7 @@ def historyFunction():
     # Make array of plants in Orders
     plants = []
     for order in orders:
-        plants.extend(eval(order.plants))
+        plants.extend([eval(order.plants)])
         print(order.plants)
 
     print(plants)
