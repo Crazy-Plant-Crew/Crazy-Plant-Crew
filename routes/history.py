@@ -24,7 +24,7 @@ def historyFunction():
 
 
     # Query database for plants
-    orders = Orders.query.filter_by(user_id=user_id).all()
+    orders = Orders.query.filter_by(user_id=user_id).all()          
 
 
     # User reached route via POST (as by submitting a form via POST)
