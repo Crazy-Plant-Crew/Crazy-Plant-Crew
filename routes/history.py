@@ -29,8 +29,8 @@ def historyFunction():
 
     # Query database for plants in Orders
     for order in orders:
-        print(list(order.plants)) 
-        print(len(order.plants))    
+        print(eval(order.plants)) 
+        print(len(eval(order.plants)))    
 
 
     # User reached route via POST (as by submitting a form via POST)
