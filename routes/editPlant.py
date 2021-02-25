@@ -113,14 +113,14 @@ def editPlantFunction():
 
 
         # Ensure the plant price fits server-side
-        if not re.search("^[0-9]+\.?[0-9]+$", price):
+        if not re.search("^[0-9]+\.?[0-9]+$", format(price, ".2f")):
             flash("Invalid plant price", "danger")
             return redirect("/editPlant")
 
 
         # Ensure the plant offer fits server-side
         if offer != 0:
-            if not re.search("^[0-9]+\.?[0-9]+$", offer):
+            if not re.search("^[0-9]+\.?[0-9]+$", format(offer, ".2f")):
                 flash("Invalid plant offer", "danger")
                 return redirect("/editPlant")
 
