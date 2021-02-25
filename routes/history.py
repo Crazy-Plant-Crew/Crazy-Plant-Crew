@@ -27,10 +27,11 @@ def historyFunction():
     orders = Orders.query.filter_by(user_id=user_id).all()   
 
 
-    # Query database for plants in Orders
+    # Make array of plants in Orders
+    plants = []
     for order in orders:
-        print(eval(order.plants)) 
-        print(len(eval(order.plants)))    
+        plants.extend(eval(order.plants))
+  
 
 
     # User reached route via POST (as by submitting a form via POST)
@@ -42,4 +43,4 @@ def historyFunction():
 
     else:
     
-        return render_template("history.html", name=getUserName(), picture=getUserPicture(), role=getUserRole(), orders=orders)
+        return render_template("history.html", name=getUserName(), picture=getUserPicture(), role=getUserRole(), orders=orders, plants=plants)

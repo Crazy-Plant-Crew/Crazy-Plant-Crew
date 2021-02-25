@@ -42,10 +42,12 @@
 
                 <tbody>
                     {% for order in orders %}
+                        {% for plant in plants %}
                         <tr>
                             <td>{{ order.date | safe }}</td>
-                            <td></td>
+                            <td>{{ plant[1] | safe }}</td>
                         </tr>
+                        {% endfor %}
                     {% endfor %}
                 </tbody>
             </table>
