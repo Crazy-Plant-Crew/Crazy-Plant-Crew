@@ -63,7 +63,7 @@ def administrationFunction():
 
                     # Create a list with values of DB and append them
                     thisPlant = []
-                    thisPlant.extend([plants[index].id, plants[index].name, plants[index].stock, plants[index].price, plants[index].offer, plants[index].length, plants[index].width, plants[index].height, plants[index].weight, plants[index].picture, plants[index].description, plants[index].reduced, plants[index].show])
+                    thisPlant.extend([plants[index].id, plants[index].name, plants[index].stock, plants[index].price, plants[index].offer, plants[index].length, plants[index].width, plants[index].height, plants[index].weight, plants[index].picture, plants[index].description, plants[index].express, plants[index].reduced, plants[index].show])
 
                     return redirect(url_for("editPlant.editPlantFunction", plants=thisPlant))
 
