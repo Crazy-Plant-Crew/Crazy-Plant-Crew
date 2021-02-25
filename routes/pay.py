@@ -114,7 +114,7 @@ def payFunction():
 
 
         # Insert street name, house number, zipcode, country, additional information, pay and user_id into the table
-        db.session.add(Orders(street=street, house=house, zipcode=zipcode, country=country, express=express, additional=additional, user_id=user_id, plants=str(plants)))
+        db.session.add(Orders(street=street, house=house, zipcode=zipcode, country=country, express=express, additional=additional, user_id=user_id, plants=list(plants)))
         db.session.commit()
 
 
