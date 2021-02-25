@@ -39,7 +39,9 @@
                         <th scope="col">Stock</th>
                         <th scope="col">Price</th>
                         <th scope="col">Offer</th>
+                        <th scope="col">Weight</th>
                         <th scope="col">Picture</th>
+                        <th scope="col">Express</th>
                         <th scope="col">Reduced</th>
                         <th scope="col">Show</th>
                     </tr>
@@ -52,7 +54,9 @@
                             <td>{{ plant.stock | safe }}</td>
                             <td>{{ '%0.2f'|format(plant.price) }}€</td>
                             <td>{{ '%0.2f'|format(plant.offer) }}€</td>
+                            <td>{{ plant.weight | safe }}</td>
                             <td><img src="{{ plant.picture | safe }}" alt="plant picture of {{ plant.name | safe }}" height="50"></td>
+                            <td>{{ plant.express | safe }}</td>
                             <td>{{ plant.reduced | safe }}</td>
                             <td>{{ plant.show | safe }}</td>
                             <td><button name="delete_plant" value="{{ plant.id }}" type="submit"><img src="/static/trash.svg" alt="delete" height="25"></button></td>

@@ -182,11 +182,6 @@ def addPlantFunction():
             return redirect("/addPlant")
 
 
-        print(show)
-        print(reduced)
-        print(express)
-
-
         # Insert plant name, stock, price, description and show status into the table
         db.session.add(Plants(name=name, stock=stock, price=price, offer=offer, length=length, width=width, height=height, weight=weight, description=description, express=express, reduced=reduced, show=show))
         db.session.commit()
