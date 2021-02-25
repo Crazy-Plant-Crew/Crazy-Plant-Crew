@@ -23,8 +23,14 @@ def historyFunction():
     user_id = session["user_id"]
 
 
-    # Query database for plants
-    orders = Orders.query.filter_by(user_id=user_id).all()          
+    # Query database for orders
+    orders = Orders.query.filter_by(user_id=user_id).all()   
+
+
+    # Query database for plants in Orders
+    for order in orders:
+        print(order.plants) 
+        print(len(order.plants))    
 
 
     # User reached route via POST (as by submitting a form via POST)

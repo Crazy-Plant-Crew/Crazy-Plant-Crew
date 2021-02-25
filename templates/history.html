@@ -44,7 +44,7 @@
                     {% for order in orders %}
                         <tr>
                             <td>{{ order.date | safe }}</td>
-                            <td>{{ order.plants | safe }}</td>
+                            <td class="{{ order.plants | safe }}"></td>
                         </tr>
                     {% endfor %}
                 </tbody>
@@ -55,4 +55,8 @@
     <div>
         <a href="/"><img src="/static/back.svg" alt="back" height="50"></a>
     </div>
+
+    <script>
+
+    </script>
 {% endblock %}
