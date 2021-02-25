@@ -30,7 +30,27 @@
 {% endblock %}
 
 {% block main %}
-    History page
+    <form action="/history" method="post">
+        <div class="TableBorder">
+            <table class="TableMain">
+                <thead>
+                    <tr>
+                        <th scope="col">Date</th>
+                        <th scope="col">Plants</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for order in orders %}
+                        <tr>
+                            <td>{{ order.date | safe }}</td>
+                            <td>{{ order.plants | safe }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>      
+    </form>
     <br>
     <div>
         <a href="/"><img src="/static/back.svg" alt="back" height="50"></a>

@@ -1,8 +1,8 @@
 import traceback
 import sys
 
-from flask import Blueprint, render_template, redirect, session, request
-from application import getUserName, getUserPicture, login_required, confirmed_required, getUserRole, role_required, db
+from flask import Blueprint, render_template, redirect, session, request, flash, get_flashed_messages
+from application import getUserName, getUserPicture, login_required, confirmed_required, getUserRole, role_required, db, Orders
 from flask_sqlalchemy import SQLAlchemy
 
 
@@ -15,8 +15,25 @@ history = Blueprint('history', __name__,)
 @confirmed_required
 def historyFunction():    
 
+    # Force flash() to get the messages on the same page as the redirect.
+    get_flashed_messages()
+
+
+    # Get variable
+    user_id = session["user_id"]
+
+
+    # Query database for plants
+    orders = Orders.query.filter_by(user_id=user_id).all()
+
+
+    # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
 
-        print("history")
+        print("History")
+
+
+
+    else:
     
-    return render_template("history.html", name=getUserName(), picture=getUserPicture(), role=getUserRole())
+        return render_template("history.html", name=getUserName(), picture=getUserPicture(), role=getUserRole(), orders=orders, plants=plants)
