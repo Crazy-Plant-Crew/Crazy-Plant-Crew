@@ -30,15 +30,18 @@
 {% endblock %}
 
 {% block main %}
-    <div>
-        <input type="checkbox" id="pay" name="pay" value="pay">
-        <label for="pay"> Pay?</label>
-    </div>
-    <div>
-        <button id="submit" type="submit" name="submit" value="submit"><img src="/static/pay.svg" alt="pay" height="50"></button>
-    </div>
-    <br>
-    <div>
-        <a href="/pay"><img src="/static/back.svg" alt="back" height="50"></a>
-    </div>
+    <form action="/confirmation" method="post" enctype="multipart/form-data">
+        <div>
+            <input type="checkbox" id="pay" name="pay" value="pay">
+            <label for="pay"> Pay?</label>
+        </div>
+        <br>
+        <div>
+            <button id="submit" type="submit" name="submit" value="submit"><img src="/static/pay.svg" alt="pay" height="50"></button>
+        </div>
+        <br>
+        <div>
+            <a href="/pay"><img src="/static/back.svg" alt="back" height="50"></a>
+        </div>
+    </form>
 {% endblock %}

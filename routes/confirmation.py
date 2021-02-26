@@ -46,6 +46,7 @@ def confirmationFunction():
 
 
         if pay == "yes":
+
             # Insert pay and date into the table
             db.session.add(Orders(pay=pay, date=date, express=express, plants=plants, addresses=addresses))
             db.session.commit()
@@ -55,6 +56,7 @@ def confirmationFunction():
             return redirect("/history")
 
         if pay != "yes":
+            
             # Flash result & redirect
             flash("Payment unsuccessful ", "warning")
             return redirect(url_for("confirmation.confirmationFunction", express=express, plants=plants))
