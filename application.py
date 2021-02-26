@@ -110,7 +110,7 @@ class Orders(db.Model):
     date = db.Column(db.Integer, nullable=False, default=0)
     plants = db.Column(db.String(1024), nullable=True)
     boxes = db.Column(db.String(1024), nullable=True)
-    adresses = db.Column(db.String(1024), nullable=False)
+    addresses = db.Column(db.String(1024), nullable=False)
     express = db.Column(db.String(1024), nullable=False, default="No")
     pay = db.Column(db.String(1024), nullable=False, default="No")
     stage = db.Column(db.String(1024), nullable=False, default="In progress")
