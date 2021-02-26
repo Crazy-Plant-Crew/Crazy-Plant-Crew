@@ -57,7 +57,7 @@ def confirmationFunction():
         if pay != "yes":
             # Flash result & redirect
             flash("Payment unsuccessful ", "warning")
-            return redirect(url_for("confirmation.confirmationFunction", express=express, plants=plants)))
+            return redirect(url_for("confirmation.confirmationFunction", express=express, plants=plants))
 
 
     
