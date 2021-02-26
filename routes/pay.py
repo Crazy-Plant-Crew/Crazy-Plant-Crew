@@ -31,8 +31,7 @@ def payFunction():
         express = request.form.get("express")
         additional = request.form.get("additional")
         user_id = session["user_id"]
-        selection = Baskets.query.filter_by(user_id=user_id)
-
+        
 
         # Check length
         getInputLength(street, 100, "Street name is too long (100)", "danger", "/pay")
@@ -40,22 +39,6 @@ def payFunction():
         getInputLength(zipcode, 10, "Zip code is too big (10)", "danger", "/pay")
         getInputLength(country, 100, "Country name is too long (100)", "danger", "/pay")
         getInputLength(additional, 800, "Additional information is too long (800)", "danger", "/pay")
-
-
-        # Make plants array from selection
-        plants = []
-        for element in selection:
-
-            plants.append([str(element.id), str(element.name), str(element.quantity), str(element.price)])
- 
-
-        # Add to plants array the plants features
-        index = 0
-        while index < len(plants):
-
-            query = Plants.query.filter_by(id=int(plants[index][0])).first()
-            plants[index].extend([str(query.length), str(query.width), str(query.height), str(query.weight), str(query.express)])            
-            index += 1
 
 
         # Convert pay value to string
@@ -125,7 +108,7 @@ def payFunction():
 
         # Flash result & redirect
         flash("Parcel informations saved", "success")
-        return redirect(url_for("confirmation.confirmationFunction", express=express, plants=str(plants)))
+        return redirect(url_for("confirmation.confirmationFunction", express=express))
 
         
 

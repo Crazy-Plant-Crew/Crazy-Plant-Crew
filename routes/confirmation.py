@@ -2,7 +2,7 @@ import traceback
 import sys
 
 from flask import Blueprint, render_template, redirect, session, request, flash, get_flashed_messages, url_for
-from application import getUserName, getUserPicture, login_required, confirmed_required, getUserRole, role_required, db, Orders, Boxes, Users
+from application import getUserName, getUserPicture, login_required, confirmed_required, getUserRole, role_required, db, Orders, Boxes, Users, Plants
 from flask_sqlalchemy import SQLAlchemy
 from time import time
 
@@ -17,12 +17,7 @@ confirmation = Blueprint('confirmation', __name__,)
 def confirmationFunction():    
 
     # Force flash() to get the messages on the same page as the redirect.
-    get_flashed_messages()
-    
-
-    # Get arguments from url_for in pay
-    express = request.args.getlist("express")
-    plants = request.args.getlist("plants")
+    get_flashed_messages()  
 
 
     # User reached route via POST (as by submitting a form via POST)
@@ -31,6 +26,7 @@ def confirmationFunction():
         # Get variable
         date = int(time())
         user_id = session["user_id"]
+        express = request.args.getlist("express")
 
 
         # Make address array
@@ -54,6 +50,8 @@ def confirmationFunction():
         print(plants)
         print("ADDRESSES")
         print(addresses)
+        print("EXPRESS")
+        print(express)
 
 
         if pay == "Yes":
@@ -70,7 +68,7 @@ def confirmationFunction():
 
             # Flash result & redirect
             flash("Payment unsuccessful ", "warning")
-            return redirect(url_for("confirmation.confirmationFunction", express=express, plants=plants))
+            return redirect(url_for("confirmation.confirmationFunction", express=express))
 
 
     
@@ -78,7 +76,24 @@ def confirmationFunction():
 
         # Get variable
         user_id = session["user_id"]
+        selection = Baskets.query.filter_by(user_id=user_id)
         cost = 0
+
+
+        # Make plants array from selection
+        plants = []
+        for element in selection:
+
+            plants.append([str(element.id), str(element.name), str(element.quantity), str(element.price)])
+ 
+
+        # Add to plants array the plants features
+        index = 0
+        while index < len(plants):
+
+            query = Plants.query.filter_by(id=int(plants[index][0])).first()
+            plants[index].extend([str(query.length), str(query.width), str(query.height), str(query.weight), str(query.express)])            
+            index += 1
 
 
         # Make array with available boxes
