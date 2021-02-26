@@ -49,6 +49,9 @@ def confirmationFunction():
         if pay == "pay":
             pay = "Yes"
 
+        print("HERE")
+        print(pay)
+
 
         if pay == "yes":
 
