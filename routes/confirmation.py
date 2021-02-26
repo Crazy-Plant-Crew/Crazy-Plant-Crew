@@ -28,6 +28,11 @@ def confirmationFunction():
         user_id = session["user_id"]
 
 
+        # Get arguments from url_for in pay
+        express = request.args.getlist("express")
+        plants = request.args.getlist("plants")
+
+
         # Make address array
         addresses = []
         query = Users.query.filter_by(id=user_id).first()
