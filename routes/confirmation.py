@@ -25,6 +25,13 @@ def confirmationFunction():
 
         # Get variable
         date = int(time())
+        user_id = session["user_id"]
+
+
+        # Make address array
+        addresses = []
+        query = Users.query.filter_by(id=user_id).first()
+        addresses.extend([query.street, query.house, query.zipcode, query.additional])
 
            
         # Fake pay varibale
@@ -38,14 +45,20 @@ def confirmationFunction():
             pay = "Yes"
 
 
-        # Insert pay and date into the table
-        db.session.add(Orders(pay=pay, date=date))
-        db.session.commit()
+        if pay == "yes":
+            # Insert pay and date into the table
+            db.session.add(Orders(pay=pay, date=date, express=express, plants=plants, addresses=addresses))
+            db.session.commit()
 
+            # Flash result & redirect
+            flash("Plant(s) ordered", "success")
+            return redirect("/history")
 
-        # Flash result & redirect
-        flash("Plant(s) ordered", "success")
-        return redirect("/history")
+        if pay != "yes":
+            # Flash result & redirect
+            flash("Payment unsuccessful ", "warning")
+            return redirect(url_for("confirmation.confirmationFunction", express=express, plants=plants)))
+
 
     
 
@@ -56,9 +69,9 @@ def confirmationFunction():
         cost = 0
 
 
-        # Make array with selected plants of last order
-        query = Orders.query.filter_by(user_id=user_id).all()
-        plants = query[-1].plants
+        # Get arguments from url_for in pay
+        express = request.args.getlist("express")
+        plants = request.args.getlist("plants")
 
 
         # Make array with available boxes
@@ -75,7 +88,8 @@ def confirmationFunction():
 
         print(plants)
         print(packaging)
-        # print(packages)
+        print(packages)
+
 
 
 

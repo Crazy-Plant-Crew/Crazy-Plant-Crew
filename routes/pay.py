@@ -113,14 +113,19 @@ def payFunction():
             return redirect("/pay")
 
 
-        # Insert street name, house number, zipcode, country, additional information, pay and user_id into the table
-        db.session.add(Orders(street=street, house=house, zipcode=zipcode, country=country, express=express, additional=additional, user_id=user_id, plants=str(plants)))
+        # Insert street name, house number, zipcode, country, additional information into the users table
+        query = Users.query.filter_by(id=user_id).first()
+        query.street = street
+        query.house = house
+        query.zipcode = zipcode
+        query.country = country
+        query.additional = additional
         db.session.commit()
 
 
         # Flash result & redirect
         flash("Parcel informations saved", "success")
-        return redirect("/confirmation")
+        return redirect(url_for("confirmation.confirmationFunction", express=express, plants=str(plants))))
 
         
 

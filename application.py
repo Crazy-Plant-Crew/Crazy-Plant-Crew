@@ -53,6 +53,11 @@ class Users(db.Model):
     time = db.Column(db.Integer, nullable=False, default=0)
     pin = db.Column(db.Integer, nullable=False, default=0)
     newsletter = db.Column(db.String(1024), nullable=False, default="True")
+    street = db.Column(db.String(1024), nullable=False, default="No street")
+    house = db.Column(db.String(1024), nullable=False, default="No house")
+    zipcode = db.Column(db.String(1024), nullable=False, default="No zipcode")
+    country = db.Column(db.String(1024), nullable=False, default="No country")
+    additional = db.Column(db.String(1024), nullable=False, default="No additional")
 
 class Plants(db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=False, autoincrement=True, unique=True)
@@ -105,14 +110,10 @@ class Orders(db.Model):
     date = db.Column(db.Integer, nullable=False, default=0)
     plants = db.Column(db.String(1024), nullable=True)
     boxes = db.Column(db.String(1024), nullable=True)
-    street = db.Column(db.String(1024), nullable=False)
-    house = db.Column(db.String(1024), nullable=False)
-    zipcode = db.Column(db.String(1024), nullable=False)
-    country = db.Column(db.String(1024), nullable=False)
-    additional = db.Column(db.String(1024), nullable=False)
+    adresses = db.Column(db.String(1024), nullable=False)
     express = db.Column(db.String(1024), nullable=False, default="No")
     pay = db.Column(db.String(1024), nullable=False, default="No")
-    status = db.Column(db.String(1024), nullable=False, default="No")
+    stage = db.Column(db.String(1024), nullable=False, default="In progress")
     remark = db.Column(db.String(1024), nullable=False, default="No")  
 
 

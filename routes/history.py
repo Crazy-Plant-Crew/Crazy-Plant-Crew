@@ -27,13 +27,10 @@ def historyFunction():
     orders = Orders.query.filter_by(user_id=user_id).all()   
 
 
-    # Make array of plants in Orders
+    # Make array of arrays of plants in Orders
     plants = []
     for order in orders:
         plants.extend([eval(order.plants)])
-        print(order.plants)
-
-    print(plants)
   
 
     # User reached route via POST (as by submitting a form via POST)
