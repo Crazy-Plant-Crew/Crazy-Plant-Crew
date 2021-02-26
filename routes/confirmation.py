@@ -53,7 +53,7 @@ def confirmationFunction():
         print(pay)
 
 
-        if pay == "yes":
+        if pay == "Yes":
 
             # Insert pay and date into the table
             db.session.add(Orders(pay=pay, date=date, express=express, plants=plants, addresses=addresses))
@@ -63,7 +63,7 @@ def confirmationFunction():
             flash("Plant(s) ordered", "success")
             return redirect("/history")
 
-        if pay != "yes":
+        if pay != "Yes":
 
             # Flash result & redirect
             flash("Payment unsuccessful ", "warning")
