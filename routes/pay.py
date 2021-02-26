@@ -125,7 +125,7 @@ def payFunction():
 
         # Flash result & redirect
         flash("Parcel informations saved", "success")
-        return redirect(url_for("confirmation.confirmationFunction", express=express, plants=str(plants))))
+        return redirect(url_for("confirmation.confirmationFunction", express=express, plants=str(plants)))
 
         
 
