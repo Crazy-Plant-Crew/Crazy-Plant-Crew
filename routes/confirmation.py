@@ -61,7 +61,6 @@ def confirmationFunction():
 
 
     
-
     else:
 
         # Get variable
