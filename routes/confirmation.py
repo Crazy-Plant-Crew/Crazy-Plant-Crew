@@ -22,6 +22,7 @@ def confirmationFunction():
 
     # Get variable
     user_id = session["user_id"]
+    express = request.args.getlist("express")
     selection = Baskets.query.filter_by(user_id=user_id)
 
 
@@ -47,8 +48,7 @@ def confirmationFunction():
         # Get variable
         date = int(time())
         user_id = session["user_id"]
-        express = request.args.getlist("express")
-
+        
 
         # Make address array
         addresses = []
@@ -78,7 +78,7 @@ def confirmationFunction():
         if pay == "Yes":
 
             # Insert pay and date into the table
-            db.session.add(Orders(user_id=user_id, pay=pay, date=date, express=express, plants=plants, addresses=addresses))
+            db.session.add(Orders(user_id=user_id, pay=pay, date=date, express=express, plants=str(plants), addresses=str(addresses)))
             db.session.commit()
 
             # Flash result & redirect
