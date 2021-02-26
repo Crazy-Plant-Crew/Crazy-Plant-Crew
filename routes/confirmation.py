@@ -18,6 +18,11 @@ def confirmationFunction():
 
     # Force flash() to get the messages on the same page as the redirect.
     get_flashed_messages()
+    
+
+    # Get arguments from url_for in pay
+    express = request.args.getlist("express")
+    plants = request.args.getlist("plants")
 
 
     # User reached route via POST (as by submitting a form via POST)
@@ -26,11 +31,6 @@ def confirmationFunction():
         # Get variable
         date = int(time())
         user_id = session["user_id"]
-
-
-        # Get arguments from url_for in pay
-        express = request.args.getlist("express")
-        plants = request.args.getlist("plants")
 
 
         # Make address array
