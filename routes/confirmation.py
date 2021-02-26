@@ -36,7 +36,7 @@ def confirmationFunction():
         # Make address array
         addresses = []
         query = Users.query.filter_by(id=user_id).first()
-        addresses.extend([query.street, query.house, query.zipcode, query.additional])
+        addresses.extend([query.street, query.house, query.zipcode, query.country, query.additional])
 
            
         # Fake pay varibale
@@ -53,7 +53,7 @@ def confirmationFunction():
         if pay == "Yes":
 
             # Insert pay and date into the table
-            db.session.add(Orders(pay=pay, date=date, express=express, plants=plants, addresses=str(addresses)))
+            db.session.add(Orders(user_id=user_id, pay=pay, date=date, express=express, plants=str(plants), addresses=str(addresses)))
             db.session.commit()
 
             # Flash result & redirect
