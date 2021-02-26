@@ -81,11 +81,6 @@ def confirmationFunction():
         cost = 0
 
 
-        # Get arguments from url_for in pay
-        express = request.args.getlist("express")
-        plants = request.args.getlist("plants")
-
-
         # Make array with available boxes
         query = Boxes.query.all()
         packaging = []
