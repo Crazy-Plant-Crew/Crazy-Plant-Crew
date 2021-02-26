@@ -22,7 +22,7 @@ def confirmationFunction():
 
     # Get variable
     user_id = session["user_id"]
-    express = request.args.get("express")
+    express = request.values("express")
     selection = Baskets.query.filter_by(user_id=user_id)
 
 
