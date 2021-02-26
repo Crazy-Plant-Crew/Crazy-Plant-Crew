@@ -41,6 +41,16 @@ def confirmationFunction():
         index += 1
 
 
+    # Make address array
+    addresses = []
+    query = Users.query.filter_by(id=user_id).first()
+    addresses.extend([query.street, query.house, query.zipcode, query.country, query.additional])
+
+
+    # Make express variable
+    express = query.express
+
+
     # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
 
@@ -48,12 +58,6 @@ def confirmationFunction():
         date = int(time())
         user_id = session["user_id"]
         
-
-        # Make address array
-        addresses = []
-        query = Users.query.filter_by(id=user_id).first()
-        addresses.extend([query.street, query.house, query.zipcode, query.country, query.additional, query.express])
-
            
         # Fake pay varibale
         pay = request.form.get("pay")
@@ -64,14 +68,6 @@ def confirmationFunction():
             pay = "No"
         if pay == "pay":
             pay = "Yes"
-
-
-        print("PLANTS")
-        print(plants)
-        print("ADDRESSES")
-        print(addresses)
-        print("EXPRESS")
-        print(express)
 
 
         if pay == "Yes":
