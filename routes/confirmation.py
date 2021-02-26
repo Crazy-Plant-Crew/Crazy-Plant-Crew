@@ -2,7 +2,7 @@ import traceback
 import sys
 
 from flask import Blueprint, render_template, redirect, session, request, flash, get_flashed_messages, url_for
-from application import getUserName, getUserPicture, login_required, confirmed_required, getUserRole, role_required, db, Orders, Boxes
+from application import getUserName, getUserPicture, login_required, confirmed_required, getUserRole, role_required, db, Orders, Boxes, Users
 from flask_sqlalchemy import SQLAlchemy
 from time import time
 
@@ -56,7 +56,7 @@ def confirmationFunction():
             return redirect("/history")
 
         if pay != "yes":
-            
+
             # Flash result & redirect
             flash("Payment unsuccessful ", "warning")
             return redirect(url_for("confirmation.confirmationFunction", express=express, plants=plants))
