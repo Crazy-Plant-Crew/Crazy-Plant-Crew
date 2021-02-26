@@ -50,10 +50,16 @@ def confirmationFunction():
             pay = "Yes"
 
 
+        print("PLANTS")
+        print(plants)
+        print("ADDRESSES")
+        print(addresses)
+
+
         if pay == "Yes":
 
             # Insert pay and date into the table
-            db.session.add(Orders(user_id=user_id, pay=pay, date=date, express=express, plants=str(plants), addresses=str(addresses)))
+            db.session.add(Orders(user_id=user_id, pay=pay, date=date, express=express, plants=plants, addresses=addresses))
             db.session.commit()
 
             # Flash result & redirect
@@ -90,15 +96,6 @@ def confirmationFunction():
 
         # Make array with needed boxes
         packages = []
-
-
-        print(plants)
-        print(packaging)
-        print(packages)
-
-
-
-
 
     
         return render_template("confirmation.html", name=getUserName(), picture=getUserPicture(), role=getUserRole())
