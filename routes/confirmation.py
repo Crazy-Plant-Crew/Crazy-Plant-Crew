@@ -20,6 +20,27 @@ def confirmationFunction():
     get_flashed_messages()  
 
 
+    # Get variable
+    user_id = session["user_id"]
+    selection = Baskets.query.filter_by(user_id=user_id)
+
+
+    # Make plants array from selection
+    plants = []
+    for element in selection:
+
+        plants.append([str(element.id), str(element.name), str(element.quantity), str(element.price)])
+
+
+    # Add to plants array the plants features
+    index = 0
+    while index < len(plants):
+
+        query = Plants.query.filter_by(id=int(plants[index][0])).first()
+        plants[index].extend([str(query.length), str(query.width), str(query.height), str(query.weight), str(query.express)])            
+        index += 1
+
+
     # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
 
@@ -75,25 +96,7 @@ def confirmationFunction():
     else:
 
         # Get variable
-        user_id = session["user_id"]
-        selection = Baskets.query.filter_by(user_id=user_id)
         cost = 0
-
-
-        # Make plants array from selection
-        plants = []
-        for element in selection:
-
-            plants.append([str(element.id), str(element.name), str(element.quantity), str(element.price)])
- 
-
-        # Add to plants array the plants features
-        index = 0
-        while index < len(plants):
-
-            query = Plants.query.filter_by(id=int(plants[index][0])).first()
-            plants[index].extend([str(query.length), str(query.width), str(query.height), str(query.weight), str(query.express)])            
-            index += 1
 
 
         # Make array with available boxes
