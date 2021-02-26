@@ -22,7 +22,6 @@ def confirmationFunction():
 
     # Get variable
     user_id = session["user_id"]
-    express = request.args("express")
     selection = Baskets.query.filter_by(user_id=user_id)
 
 
@@ -53,7 +52,7 @@ def confirmationFunction():
         # Make address array
         addresses = []
         query = Users.query.filter_by(id=user_id).first()
-        addresses.extend([query.street, query.house, query.zipcode, query.country, query.additional])
+        addresses.extend([query.street, query.house, query.zipcode, query.country, query.additional, query.express])
 
            
         # Fake pay varibale

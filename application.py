@@ -58,6 +58,7 @@ class Users(db.Model):
     zipcode = db.Column(db.String(1024), nullable=False, default="No zipcode")
     country = db.Column(db.String(1024), nullable=False, default="No country")
     additional = db.Column(db.String(1024), nullable=False, default="No additional")
+    express = db.Column(db.String(1024), nullable=False, default="No")
 
 class Plants(db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=False, autoincrement=True, unique=True)

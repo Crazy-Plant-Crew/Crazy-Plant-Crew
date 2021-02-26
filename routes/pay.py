@@ -103,12 +103,13 @@ def payFunction():
         query.zipcode = zipcode
         query.country = country
         query.additional = additional
+        query.express = express
         db.session.commit()
 
 
         # Flash result & redirect
         flash("Parcel informations saved", "success")
-        return redirect(url_for("confirmation.confirmationFunction", express=express))
+        return redirect("/confirmation")
 
         
 
