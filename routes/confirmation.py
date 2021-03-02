@@ -100,7 +100,7 @@ def confirmationFunction():
         cost = 0
 
         # Make array with needed boxes
-        packages = []
+        boxes = []
 
         print("PLANTS")
         print(plants)
