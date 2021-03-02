@@ -112,6 +112,8 @@ def confirmationFunction():
                     print(plant)
                     print(package)
 
+                    continue
+
 
 
 
