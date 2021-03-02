@@ -126,11 +126,11 @@ def confirmationFunction():
                     boxes.append(packaging[indexPackaging])
 
                     indexPlants += 1
+                    indexPackaging = 0
 
                 else:
 
-                    indexPlants += 1
-                    indexPackaging = 0
+                    indexPackaging += 1
 
 
 
