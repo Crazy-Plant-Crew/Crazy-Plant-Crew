@@ -106,7 +106,9 @@ def confirmationFunction():
 
         # Checking plants sizes against boxes sizes, if bigger, select adapted box size
         for plant in plants:
-            print(plant)
+            for package in packaging:
+                print(plant[4])
+                print(package[1])
 
 
 
