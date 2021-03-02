@@ -102,12 +102,18 @@ def confirmationFunction():
 
         # Get variable
         cost = 0
+
+        print("PLANTS")
+        print(plants)
+        print("PACKAGING")
+        print(packaging)
+        print("DONE")
   
 
         # Checking plants sizes against boxes sizes, if bigger, select adapted box size
         for plant in plants:
             for package in packaging:
-                if plant[4] > package[1]:
+                if int(plant[4]) > int(package[1]):
                     print(plant)
                     print(package)
                     
