@@ -28,14 +28,12 @@ def confirmationFunction():
     # Make plants array from selection
     plants = []
     for element in selection:
-
         plants.append([str(element.id), str(element.name), str(element.quantity), str(element.price)])
 
 
     # Add to plants array the plants features
     index = 0
     while index < len(plants):
-
         query = Plants.query.filter_by(id=int(plants[index][0])).first()
         plants[index].extend([str(query.length), str(query.width), str(query.height), str(query.weight), str(query.express)])            
         index += 1
@@ -49,6 +47,13 @@ def confirmationFunction():
 
     # Make express variable
     express = query.express
+
+
+    # Make array with available boxes
+    query = Boxes.query.all()
+    packaging = []
+    for element in query:
+        packaging.append([str(element.name), str(element.length), str(element.width), str(element.height), str(element.weight_ne), str(element.weight_ex), str(element.price_de), str(element.price_eu), str(element.price_ex)])
 
 
     # User reached route via POST (as by submitting a form via POST)
@@ -72,19 +77,20 @@ def confirmationFunction():
 
         if pay == "Yes":
 
-            # Insert pay and date into the table
-            db.session.add(Orders(user_id=user_id, pay=pay, date=date, express=express, plants=str(plants), addresses=str(addresses)))
+            # Insert order informations into the orders table
+            db.session.add(Orders(user_id=user_id, pay=pay, date=date, express=express, plants=str(plants), addresses=str(addresses), boxes=str(boxes)))
             db.session.commit()
 
             # Flash result & redirect
             flash("Plant(s) ordered", "success")
             return redirect("/history")
 
+
         if pay != "Yes":
 
             # Flash result & redirect
-            flash("Payment unsuccessful ", "warning")
-            return redirect(url_for("confirmation.confirmationFunction", express=express))
+            flash("Payment not completed ", "warning")
+            return redirect("/confirmation")
 
 
     
@@ -93,17 +99,15 @@ def confirmationFunction():
         # Get variable
         cost = 0
 
-
-        # Make array with available boxes
-        query = Boxes.query.all()
-        packaging = []
-        for element in query:
-
-            packaging.append([str(element.name), str(element.length), str(element.width), str(element.height), str(element.weight_ne), str(element.weight_ex), str(element.price_de), str(element.price_eu), str(element.price_ex)])
-        
-
         # Make array with needed boxes
         packages = []
+
+        print("PLANTS")
+        print(plants)
+        print("ADDRESSES")
+        print(addresses)
+        print("EXPRESS")
+        print(express)
 
     
         return render_template("confirmation.html", name=getUserName(), picture=getUserPicture(), role=getUserRole())
