@@ -120,6 +120,8 @@ def confirmationFunction():
 
                     indexPackaging += 1
 
+            indexPlants += 1
+            
 
         print("PLANTS")
         print(plants)
