@@ -109,6 +109,9 @@ def confirmationFunction():
             for package in packaging:
                 if plant[4] > package[1]:
                     print(plant)
+                    
+                else:
+                    print("Nope")
                 
                 
                 
