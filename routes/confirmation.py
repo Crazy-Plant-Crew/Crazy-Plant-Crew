@@ -112,7 +112,8 @@ def confirmationFunction():
                     print(package)
                     
                 else:
-                    print("Nope")
+                    boxes.append(package)
+                    break
                 
                 
                 
