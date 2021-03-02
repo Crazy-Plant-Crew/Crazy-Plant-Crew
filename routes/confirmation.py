@@ -111,6 +111,8 @@ def confirmationFunction():
         print(addresses)
         print("EXPRESS")
         print(express)
+        print("PACKAGING")
+        print(packaging)
 
     
         return render_template("confirmation.html", name=getUserName(), picture=getUserPicture(), role=getUserRole())
