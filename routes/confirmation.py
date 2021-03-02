@@ -56,6 +56,10 @@ def confirmationFunction():
         packaging.append([str(element.name), str(element.length), str(element.width), str(element.height), str(element.weight_ne), str(element.weight_ex), str(element.price_de), str(element.price_eu), str(element.price_ex)])
 
 
+    # Make array with needed boxes
+    boxes = []
+
+
     # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
 
@@ -99,8 +103,7 @@ def confirmationFunction():
         # Get variable
         cost = 0
 
-        # Make array with needed boxes
-        boxes = []
+
 
         print("PLANTS")
         print(plants)
