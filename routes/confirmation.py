@@ -102,6 +102,20 @@ def confirmationFunction():
 
         # Get variable
         cost = 0
+  
+
+        # Checking plants sizes against boxes sizes, if bigger, select adapted box size
+        indexPlants = 0
+        indexPackaging = 0
+        while indexPlants < len(plants):
+            while indexPackaging < len(packaging):
+
+                if plants[indexPlants][4] < packaging[indexPackaging][1] and plants[indexPlants][5] < packaging[indexPackaging][2] and plants[indexPlants][6] < packaging[indexPackaging][3]:
+                    
+                    boxes.append(packaging[indexPackaging])
+
+
+
 
 
 
@@ -113,6 +127,8 @@ def confirmationFunction():
         print(express)
         print("PACKAGING")
         print(packaging)
+        print("BOXES")
+        print(boxes)
 
     
         return render_template("confirmation.html", name=getUserName(), picture=getUserPicture(), role=getUserRole())
