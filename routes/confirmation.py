@@ -109,13 +109,14 @@ def confirmationFunction():
 
             if plant[4] < package[1] and plant[5] < package[2] and plant[6] < package[3]:
 
+                print(plant)
                 print(package)
 
 
 
 
 
-
+        """
         print("PLANTS")
         print(plants)
         print("ADDRESSES")
@@ -126,6 +127,7 @@ def confirmationFunction():
         print(packaging)
         print("BOXES")
         print(boxes)
+        """
 
     
         return render_template("confirmation.html", name=getUserName(), picture=getUserPicture(), role=getUserRole())
