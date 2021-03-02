@@ -115,14 +115,13 @@ def confirmationFunction():
                     for package in packaging:
                         if int(plant[4]) < int(package[1]) and int(plant[5]) < int(package[2]) and int(plant[6]) < int(package[3]):
                             boxes.append(package)
-                            print(package)
                             plantTemp.remove(plant)
                             boxPick()
             else:
                 return
 
                 
-        
+        boxPick()
         print(boxes)
                 
                 
