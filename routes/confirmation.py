@@ -108,11 +108,6 @@ def confirmationFunction():
         indexPlants = 0
         indexPackaging = 0
 
-        print("lenPlants")
-        print(len(plants))
-        print("lenPackaging")
-        print(len(packaging))
-
         while indexPlants < len(plants):
             while indexPackaging < len(packaging):
 
@@ -131,6 +126,8 @@ def confirmationFunction():
                 else:
 
                     indexPackaging += 1
+
+            indexPlants += 1
 
 
 
