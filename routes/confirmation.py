@@ -108,7 +108,7 @@ def confirmationFunction():
         for plant in plants:
             for package in packaging:
                 if plant[4] > package[1] or plant[5] > package[2] or plant[6] > package[3]:
-                    print(plant)
+                    print(package)
 
 
 
