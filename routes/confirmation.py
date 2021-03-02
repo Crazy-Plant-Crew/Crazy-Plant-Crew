@@ -111,7 +111,7 @@ def confirmationFunction():
         # Checking plants sizes against boxes sizes, if it fits, append adapted box to array
         def boxPick():
             if len(plantTemp) > 0 :
-                for plant in plantTemp:
+                for plant in plantTemp[:]:
                     for package in packaging:
                         if int(plant[4]) < int(package[1]) and int(plant[5]) < int(package[2]) and int(plant[6]) < int(package[3]):
                             boxes.append(package)
