@@ -110,7 +110,7 @@ def confirmationFunction():
         while indexPlants < len(plants):
             while indexPackaging < len(packaging):
 
-                if plants[indexPlants][4] < packaging[indexPackaging][1] and plants[indexPlants][5] < packaging[indexPackaging][2] and plants[indexPlants][6] < packaging[indexPackaging][3]:
+                if plants[indexPlants][4] < packaging[indexPackaging][1]:
                     
                     boxes.append(packaging[indexPackaging])
                     print("indexPlants")
