@@ -113,13 +113,9 @@ def confirmationFunction():
                 if plants[indexPlants][4] < packaging[indexPackaging][1] and plants[indexPlants][5] < packaging[indexPackaging][2] and plants[indexPlants][6] < packaging[indexPackaging][3]:
                     
                     boxes.append(packaging[indexPackaging])
+                    indexPlants += 1
                     indexPackaging = 0
 
-                else:
-
-                    indexPackaging += 1
-
-            indexPlants += 1
 
 
         print("PLANTS")
