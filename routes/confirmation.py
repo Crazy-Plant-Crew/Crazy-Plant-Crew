@@ -126,8 +126,8 @@ def confirmationFunction():
                     if express == "Yes":
 
                         if int(plant[4]) < int(package[1]) and int(plant[5]) < int(package[2]) and int(plant[6]) < int(package[3]):
-                        boxesEX.append(package)
-                        break
+                            boxesEX.append(package)
+                            break
 
 
                 if addresses[3] != "Germany":
