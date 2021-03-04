@@ -113,6 +113,8 @@ def confirmationFunction():
                     boxes.append(packaging[inner])
                     inner = 0
                     outer += 1
+                else:
+                    inner += 1
 
             inner += 1
 
