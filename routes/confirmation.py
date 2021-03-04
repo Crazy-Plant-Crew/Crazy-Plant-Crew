@@ -57,7 +57,8 @@ def confirmationFunction():
 
 
     # Make array with needed boxes
-    boxes = []
+    boxesNE = []
+    boxesEX = []
 
 
     # User reached route via POST (as by submitting a form via POST)
@@ -107,28 +108,45 @@ def confirmationFunction():
         # Checking plants sizes against boxes sizes, if it fits, append adapted box to arra
         for plant in plants:
             for package in packaging:
-                if int(plant[4]) < int(package[1]) and int(plant[5]) < int(package[2]) and int(plant[6]) < int(package[3]):
-                    boxes.append(package)
-                    break
+
+                if addresses[3] == "Germany":
+
+                    if express == "No":
+
+                        if plant[8] == "No":
+                            if int(plant[4]) < int(package[1]) and int(plant[5]) < int(package[2]) and int(plant[6]) < int(package[3]):
+                                boxesNE.append(package)
+                                break
+
+                        if plant[8] == "Yes":
+                            if int(plant[4]) < int(package[1]) and int(plant[5]) < int(package[2]) and int(plant[6]) < int(package[3]):
+                                boxesEX.append(package)
+                                break
+
+                    if express == "Yes":
+
+                        if int(plant[4]) < int(package[1]) and int(plant[5]) < int(package[2]) and int(plant[6]) < int(package[3]):
+                        boxesEX.append(package)
+                        break
 
 
-        print(boxes)
-                
-                
-                
+                if addresses[3] != "Germany":
 
-        """
-        print("PLANTS")
+                    if plant[8] == "No":
+                        if int(plant[4]) < int(package[1]) and int(plant[5]) < int(package[2]) and int(plant[6]) < int(package[3]):
+                            boxesNE.append(package)
+                            break
+                        
+                    if plant[8] == "Yes":
+                        if int(plant[4]) < int(package[1]) and int(plant[5]) < int(package[2]) and int(plant[6]) < int(package[3]):
+                            boxesEX.append(package)
+                            break
+
+
         print(plants)
-        print("ADDRESSES")
-        print(addresses)
-        print("EXPRESS")
-        print(express)
-        print("PACKAGING")
-        print(packaging)
-        print("BOXES")
-        print(boxes)
-        """
+        print(boxesNE)
+        print(boxesEX)
+
 
     
         return render_template("confirmation.html", name=getUserName(), picture=getUserPicture(), role=getUserRole())
