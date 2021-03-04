@@ -111,12 +111,14 @@ def confirmationFunction():
             while inner < len(packaging):
                 if int(plants[outer][4]) < int(packaging[inner][1]) and int(plants[outer][5]) < int(packaging[inner][2]) and int(plants[outer][6]) < int(packaging[inner][3]):
                     boxes.append(packaging[inner])
-                    inner = 0
-                    outer += 1
-                else:
-                    inner += 1
 
-            inner += 1
+                inner += 1
+            
+            inner = 0
+            outer += 1
+            
+            
+
 
         print(boxes)
 
