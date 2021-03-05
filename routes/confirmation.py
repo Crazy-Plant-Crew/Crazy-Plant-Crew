@@ -34,7 +34,7 @@ def confirmationFunction():
     # Add to plants array the plants features
     index = 0
     for plant in plants:
-        query = Plants.query.filter_by(id=plant.id)
+        query = Plants.query.filter_by(id=plant[0])
         plants[index].extend([str(query.length), str(query.width), str(query.height), str(query.weight), str(query.express)])
         index += 1
 
