@@ -104,6 +104,8 @@ def confirmationFunction():
 
         # Get variable
         cost = 0
+
+        print(plants)
  
 
         # Checking plants sizes against boxes sizes, if it fits, append adapted box to arra
@@ -144,7 +146,7 @@ def confirmationFunction():
                             break
 
 
-        print(plants)
+        
         print(boxesNE)
         print(boxesEX)
 
