@@ -34,14 +34,8 @@ def confirmationFunction():
     # Add to plants array the plants features
     index = 0
     while index < len(plants):
-        print("INDEX")
-        print(index)
         query = Plants.query.filter_by(id=plants[index][0])
-        print("PLANT ID")
-        print(plants[index][0])
         for element in query:
-            print("ELEMENT")
-            print(element)
             plants[index].extend([str(element.length), str(element.width), str(element.height), str(element.weight), str(element.express)])            
         index += 1
 
@@ -111,9 +105,6 @@ def confirmationFunction():
         # Get variable
         cost = 0
 
-        print(plants)
- 
-
         # Checking plants sizes against boxes sizes, if it fits, append adapted box to arra
         for plant in plants:
             for package in packaging:
@@ -151,9 +142,12 @@ def confirmationFunction():
                             boxesEX.append(package)
                             break
 
-
         
+        print("PLANTS")
+        print(plants)
+        print("NON EXPRESS")
         print(boxesNE)
+        print("EXPRESS")
         print(boxesEX)
 
 
