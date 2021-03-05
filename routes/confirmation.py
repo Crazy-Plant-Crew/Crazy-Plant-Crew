@@ -106,31 +106,36 @@ def confirmationFunction():
         cost = 0
 
 
-        # Checking plants sizes and weight against boxes sizes and capacity, if it fits, append adapted box to array of possible needed box.
+        # Checking plants sizes and weight against boxes sizes and capacity, if it fits, append adapted box to array of possible needed box
         for plant in plants:
             for package in packaging:
 
+                # Express only works in Germany
                 if addresses[3] == "Germany":
 
+                    # Check if express is needed for the whole
                     if express == "No":
 
+                        # Check if express is needed on one plant
                         if plant[8] == "No":
                             if int(plant[4]) < int(package[1]) and int(plant[5]) < int(package[2]) and int(plant[6]) < int(package[3]) and int(plant[7]) < int(package[4]):
                                 boxesNE.append([package, plant])
                                 break
-
+                            
+                        # Check if express is needed on one plant
                         if plant[8] == "Yes":
                             if int(plant[4]) < int(package[1]) and int(plant[5]) < int(package[2]) and int(plant[6]) < int(package[3]) and int(plant[7]) < int(package[5]):
                                 boxesEX.append([package, plant])
                                 break
 
+                    # Check if express is needed for the whole
                     if express == "Yes":
 
                         if int(plant[4]) < int(package[1]) and int(plant[5]) < int(package[2]) and int(plant[6]) < int(package[3]) and int(plant[7]) < int(package[5]):
                             boxesEX.append([package, plant])
                             break
 
-
+                # Express only works in Germany
                 if addresses[3] != "Germany":
 
                     if int(plant[4]) < int(package[1]) and int(plant[5]) < int(package[2]) and int(plant[6]) < int(package[3]) and int(plant[7]) < int(package[4]):
@@ -142,10 +147,13 @@ def confirmationFunction():
 
         print("PLANTS")
         print(plants)
+        print(len(plant))
         print("NON EXPRESS")
         print(boxesNE)
+        print(len(boxesNE))
         print("EXPRESS")
         print(boxesEX)
+        print(len(boxesEX))
 
 
     
