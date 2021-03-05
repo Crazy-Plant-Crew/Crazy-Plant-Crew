@@ -22,25 +22,22 @@ def confirmationFunction():
 
     # Get variable
     user_id = session["user_id"]
-    selection = Baskets.query.filter_by(user_id=user_id)
+    query = Baskets.query.filter_by(user_id=user_id)
 
 
     # Make plants array from selection
     plants = []
-    for element in selection:
+    for element in query:
         plants.append([str(element.id), str(element.name), str(element.quantity), str(element.price)])
 
 
     # Add to plants array the plants features
     index = 0
-    print("PLANTS")
-    print(plants)
     while index < len(plants):
         query = Plants.query.filter_by(id=int(plants[index][0]))
-        print("ID")
-        print(int(plants[index][0]))
-        plants[index].extend([str(query.length), str(query.width), str(query.height), str(query.weight), str(query.express)])            
-        index += 1
+        for element in query:
+            plants[index].extend([str(element.length), str(element.width), str(element.height), str(element.weight), str(element.express)])            
+            index += 1
 
 
     # Make address array
