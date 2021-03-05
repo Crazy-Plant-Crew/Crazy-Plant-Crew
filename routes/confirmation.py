@@ -28,7 +28,7 @@ def confirmationFunction():
     # Make plants array from selection
     plants = []
     for element in query:
-        plants.append([str(element.id), str(element.name), str(element.quantity), str(element.price)])
+        plants.append([str(element.plant_id), str(element.name), str(element.quantity), str(element.price)])
 
 
     # Add to plants array the plants features
