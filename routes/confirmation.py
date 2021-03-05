@@ -36,7 +36,7 @@ def confirmationFunction():
     while index < len(plants):
         print("INDEX")
         print(index)
-        query = Plants.query.filter_by(id=int(plants[index][0]))
+        query = Plants.query.filter_by(id=plants[index][0])
         print("PLANT ID")
         print(plants[index][0])
         for element in query:
