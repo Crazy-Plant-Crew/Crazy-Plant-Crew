@@ -25,7 +25,7 @@ def confirmationFunction():
     query = Baskets.query.filter_by(user_id=user_id)
 
 
-    # Make plants array from selection
+    # Make plants array from basket
     plants = []
     for element in query:
         plants.append([str(element.plant_id), str(element.name), str(element.quantity), str(element.price)])
@@ -105,7 +105,8 @@ def confirmationFunction():
         # Get variable
         cost = 0
 
-        # Checking plants sizes against boxes sizes, if it fits, append adapted box to arra
+
+        # Checking plants sizes and weight against boxes sizes and capacity, if it fits, append adapted box to array of possible needed box.
         for plant in plants:
             for package in packaging:
 
@@ -114,35 +115,31 @@ def confirmationFunction():
                     if express == "No":
 
                         if plant[8] == "No":
-                            if int(plant[4]) < int(package[1]) and int(plant[5]) < int(package[2]) and int(plant[6]) < int(package[3]):
-                                boxesNE.append(package)
+                            if int(plant[4]) < int(package[1]) and int(plant[5]) < int(package[2]) and int(plant[6]) < int(package[3]) and int(plant[7]) < int(package[4]):
+                                boxesNE.append([package, plant])
                                 break
 
                         if plant[8] == "Yes":
-                            if int(plant[4]) < int(package[1]) and int(plant[5]) < int(package[2]) and int(plant[6]) < int(package[3]):
-                                boxesEX.append(package)
+                            if int(plant[4]) < int(package[1]) and int(plant[5]) < int(package[2]) and int(plant[6]) < int(package[3]) and int(plant[7]) < int(package[5]):
+                                boxesEX.append([package, plant])
                                 break
 
                     if express == "Yes":
 
-                        if int(plant[4]) < int(package[1]) and int(plant[5]) < int(package[2]) and int(plant[6]) < int(package[3]):
-                            boxesEX.append(package)
+                        if int(plant[4]) < int(package[1]) and int(plant[5]) < int(package[2]) and int(plant[6]) < int(package[3]) and int(plant[7]) < int(package[5]):
+                            boxesEX.append([package, plant])
                             break
 
 
                 if addresses[3] != "Germany":
 
-                    if plant[8] == "No":
-                        if int(plant[4]) < int(package[1]) and int(plant[5]) < int(package[2]) and int(plant[6]) < int(package[3]):
-                            boxesNE.append(package)
-                            break
-                        
-                    if plant[8] == "Yes":
-                        if int(plant[4]) < int(package[1]) and int(plant[5]) < int(package[2]) and int(plant[6]) < int(package[3]):
-                            boxesEX.append(package)
-                            break
+                    if int(plant[4]) < int(package[1]) and int(plant[5]) < int(package[2]) and int(plant[6]) < int(package[3]) and int(plant[7]) < int(package[4]):
+                        boxesNE.append([package, plant])
+                        break
 
         
+        # Check if both arrays are not empty, if yes, send warning to user to contact Glenn
+
         print("PLANTS")
         print(plants)
         print("NON EXPRESS")
