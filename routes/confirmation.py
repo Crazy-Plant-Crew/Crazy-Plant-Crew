@@ -37,7 +37,7 @@ def confirmationFunction():
         query = Plants.query.filter_by(id=int(plants[index][0]))
         for element in query:
             plants[index].extend([str(element.length), str(element.width), str(element.height), str(element.weight), str(element.express)])            
-            index += 1
+        index += 1
 
 
     # Make address array
