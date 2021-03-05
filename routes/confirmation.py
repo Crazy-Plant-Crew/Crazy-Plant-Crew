@@ -147,7 +147,7 @@ def confirmationFunction():
 
         print("PLANTS")
         print(plants)
-        print(len(plant))
+        print(len(plants))
         print("NON EXPRESS")
         print(boxesNE)
         print(len(boxesNE))
