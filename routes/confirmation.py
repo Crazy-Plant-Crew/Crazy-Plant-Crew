@@ -35,6 +35,7 @@ def confirmationFunction():
     index = 0
     for plant in plants:
         query = Plants.query.filter_by(id=plant[0])
+        print(query)
         plants[index].extend([str(query.length), str(query.width), str(query.height), str(query.weight), str(query.express)])
         index += 1
 
