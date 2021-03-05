@@ -33,20 +33,15 @@ def confirmationFunction():
 
     # Add to plants array the plants features
     index = 0
-    for plant in plants:
-        query = Plants.query.filter_by(id=plant[0])
-        print(query)
-        plants[index].extend([str(query.length), str(query.width), str(query.height), str(query.weight), str(query.express)])
-        index += 1
-
-    """
-    index = 0
+    print("PLANTS")
+    print(plants)
     while index < len(plants):
         query = Plants.query.filter_by(id=int(plants[index][0]))
-        print(query)
+        print("ID")
+        print(int(plants[index][0]))
         plants[index].extend([str(query.length), str(query.width), str(query.height), str(query.weight), str(query.express)])            
         index += 1
-    """
+
 
     # Make address array
     addresses = []
