@@ -156,8 +156,7 @@ def confirmationFunction():
 
 
         # Sort the boxes per size
-        if len(boxesEX) > 0:
-
+        
 
         # Delete basket items
 
