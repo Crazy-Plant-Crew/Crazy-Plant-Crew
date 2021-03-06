@@ -148,8 +148,8 @@ def confirmationFunction():
         """
 
         # Sort arrays boxes NE & RE
-        boxesNE = sorted(boxesNE, key=lambda x: (x[1][4], x[1][5], x[1][6]), reverse=True)
-        boxesEX = sorted(boxesEX, key=lambda x: (x[1][4], x[1][5], x[1][6]), reverse=True)
+        boxesNE = sorted(boxesNE, key=lambda x: (int(x[1][4]), int(x[1][5]), int(x[1][6]), reverse=True)
+        boxesEX = sorted(boxesEX, key=lambda x: (int(x[1][4]), int(x[1][5]), int(x[1][6]), reverse=True)
 
 
         # Make array with all the plants side-by-side and sort them 
@@ -159,11 +159,11 @@ def confirmationFunction():
                 plantItems.extend([plant])
                 index -= 1
 
-        plantItems = sorted(plantItems, key=lambda x: (x[4], x[5], x[6]), reverse=True)
+        plantItems = sorted(plantItems, key=lambda x: (int(x[4]), int(x[5]), int(x[6]), reverse=True)
 
 
         # Make a grid from the smallest plants length & width and use the biggest plant height as ceiling for this level
-        
+
         
 
         # Delete basket items
