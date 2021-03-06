@@ -148,8 +148,8 @@ def confirmationFunction():
         """
 
         # Sort arrays boxes NE & RE
-        boxesNE = sorted(boxesNE, key=lambda x: (x[0][1], x[0][2], x[0][3]), reverse=True)
-        boxesEX = sorted(boxesEX, key=lambda x: (x[0][1], x[0][2], x[0][3]), reverse=True)
+        boxesNE = sorted(boxesNE, key=lambda x: (x[0][1], x[0][2], x[0][3]))
+        boxesEX = sorted(boxesEX, key=lambda x: (x[0][1], x[0][2], x[0][3]))
 
 
         # Make array with all the plants side-by-side and sort them 
