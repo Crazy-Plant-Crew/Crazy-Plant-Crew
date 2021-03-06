@@ -162,11 +162,8 @@ def confirmationFunction():
         plantItems = sorted(plantItems, key=lambda x: (x[4], x[5], x[6]), reverse=True)
 
 
-        # Sort the boxes per size
-
-
         # Make a grid from the smallest plants length & width and use the biggest plant height as ceiling for this level
-
+        
         
 
         # Delete basket items
