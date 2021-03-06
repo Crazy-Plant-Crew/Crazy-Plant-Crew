@@ -151,7 +151,7 @@ def confirmationFunction():
         for plant in plants:
             index = int(plant[2])
             while index > 0:
-                plantItems.extend(plant)
+                plantItems.extend([plant])
                 index -= 1
 
 
