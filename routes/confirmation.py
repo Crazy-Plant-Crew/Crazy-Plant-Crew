@@ -147,12 +147,14 @@ def confirmationFunction():
         # Check if both arrays are not empty, if yes, send warning to user to contact Glenn
 
 
-        # Make array with all the plants side-by-side
+        # Make array with all the plants side-by-side and sort them 
         for plant in plants:
             index = int(plant[2])
             while index > 0:
                 plantItems.extend([plant])
                 index -= 1
+
+        plantItems = sorted(plantItems, key=lambda x: (x[4], x[5], x[6]))
 
 
         # Sort the boxes per size
