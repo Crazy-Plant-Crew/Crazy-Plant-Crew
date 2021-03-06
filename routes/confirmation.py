@@ -154,7 +154,7 @@ def confirmationFunction():
                 plantItems.extend([plant])
                 index -= 1
 
-        plantItems = sorted(plantItems, key=lambda x: (x[4], x[5], x[6]))
+        plantItems = sorted(plantItems, key=lambda x: (x[4], x[5], x[6]), reverse=True)
 
 
         # Sort the boxes per size
