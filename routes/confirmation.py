@@ -57,11 +57,6 @@ def confirmationFunction():
         packaging.append([str(element.name), str(element.length), str(element.width), str(element.height), str(element.weight_ne), str(element.weight_ex), str(element.price_de), str(element.price_eu), str(element.price_ex)])
 
 
-    # Make array with needed boxes
-    boxesNE = []
-    boxesEX = []
-
-
     # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
 
@@ -105,6 +100,12 @@ def confirmationFunction():
         # Get variable
         cost = 0
 
+        boxesNE = []
+        boxesEX = []
+        boxes = []
+
+        plantItems = []
+
 
         # Checking plants sizes and weight against boxes sizes and capacity, if it fits, append adapted box to array of possible needed box
         for plant in plants:
@@ -145,6 +146,24 @@ def confirmationFunction():
         
         # Check if both arrays are not empty, if yes, send warning to user to contact Glenn
 
+
+        # Make array with all the plants side-by-side
+        for plant in plants:
+            index = plant[2]
+            while index > 0:
+                plantItems.extend(plant)
+                index -= 1
+
+
+        # Sort the boxes per size
+        if len(boxesEX) > 0:
+
+
+        # Delete basket items
+
+
+        # Make the order valid
+
         print("PLANTS")
         print(plants)
         print(len(plants))
@@ -154,6 +173,9 @@ def confirmationFunction():
         print("EXPRESS")
         print(boxesEX)
         print(len(boxesEX))
+        print("PLANTITEM")
+        print(plantItems)
+        print(len(plantItems))
 
 
     
