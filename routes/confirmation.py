@@ -149,7 +149,7 @@ def confirmationFunction():
 
         # Make array with all the plants side-by-side
         for plant in plants:
-            index = plant[2]
+            index = int(plant[2])
             while index > 0:
                 plantItems.extend(plant)
                 index -= 1
