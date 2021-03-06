@@ -143,8 +143,13 @@ def confirmationFunction():
                         boxesNE.append([package, plant])
                         break
 
-        
+        """
         # Check if both arrays are not empty, if yes, send warning to user to contact Glenn
+        """
+
+        # Sort arrays boxes NE & RE
+        boxesNE = sorted(boxesNE, key=lambda x: (x[0][1], xx[0][2], xx[0][3]), reverse=True)
+        boxesEX = sorted(boxesEX, key=lambda x: (x[0][1], xx[0][2], xx[0][3]), reverse=True)
 
 
         # Make array with all the plants side-by-side and sort them 
@@ -158,6 +163,10 @@ def confirmationFunction():
 
 
         # Sort the boxes per size
+
+
+        # Make a grid from the smallest plants length & width and use the biggest plant height as ceiling for this level
+
         
 
         # Delete basket items
