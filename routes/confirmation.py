@@ -170,6 +170,7 @@ def confirmationFunction():
                         boxes.append(boxeEX[0])
                         break
 
+        plantLoop()
 
         # Delete basket items
 
