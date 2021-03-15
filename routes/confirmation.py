@@ -173,7 +173,7 @@ def confirmationFunction():
 
                 elif len(boxesNE) > 0 and len(plantItems) > 0:
                     for boxeNE in boxesNE:
-                        if int(plantItem[0]) == int(boxeNE[1][0])
+                        if int(plantItem[0]) == int(boxeNE[1][0]):
                             boxes.append(boxeNE[0])
                             return
 
