@@ -166,7 +166,7 @@ def confirmationFunction():
         def plantLoop():
             for plantItem in plantItems:
                 for boxeEX in boxesEX:
-                    if plantItem[0] == boxeEX[1][0]:
+                    if plantItem[0][0] == boxeEX[1][0]:
                         boxes.append(boxeEX[0])
                         break
 
