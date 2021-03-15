@@ -163,7 +163,13 @@ def confirmationFunction():
 
 
         # Make a grid from the smallest plants length & width and use the biggest plant height as ceiling for this level
-        
+        def plantLoop():
+            for plantItem in plantItems:
+                for boxeEX in boxesEX:
+                    if plantItem[0] == boxeEX[1][0]:
+                        boxes.append(boxeEX[0])
+                        break
+
 
         # Delete basket items
 
