@@ -162,15 +162,28 @@ def confirmationFunction():
         plantItems = sorted(plantItems, key=lambda x: (int(x[4]), int(x[5]), int(x[6])), reverse=True)
 
 
-        # Make a grid from the smallest plants length & width and use the biggest plant height as ceiling for this level
+        # Take the biggest boxe needed from the express group first, then the non express group
         def plantLoop():
             for plantItem in plantItems:
-                for boxeEX in boxesEX:
-                    if int(plantItem[0]) == int(boxeEX[1][0]):
-                        boxes.append(boxeEX[0])
-                        return
+                if len(boxesEX) > 0:
+                    for boxeEX in boxesEX:
+                        if int(plantItem[0]) == int(boxeEX[1][0]):
+                            boxes.append(boxeEX[0])
+                            return
+
+                elif len(boxesNE) > 0:
+                    for boxeNE in boxesNE:
+                        if int(plantItem[0]) == int(boxeNE[1][0])
+                            boxes.append(boxeNE[0])
+                            return
+
+                else:
+                    return False
 
         plantLoop()
+
+        # Make a grid from the smallest plants length & width and use the biggest plant height as ceiling for this level
+
 
         # Delete basket items
 
