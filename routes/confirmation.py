@@ -121,14 +121,12 @@ def confirmationFunction():
                         if plant[8] == "No":
                             if int(plant[4]) < int(package[1]) and int(plant[5]) < int(package[2]) and int(plant[6]) < int(package[3]) and int(plant[7]) < int(package[4]):
                                 boxesNE.append([package, plant])
-                                boxes.append(package)
                                 break
                             
                         # Check if express is needed on one plant
                         if plant[8] == "Yes":
                             if int(plant[4]) < int(package[1]) and int(plant[5]) < int(package[2]) and int(plant[6]) < int(package[3]) and int(plant[7]) < int(package[5]):
                                 boxesEX.append([package, plant])
-                                boxes.append(package)
                                 break
 
                     # Check if express is needed for the whole
@@ -136,7 +134,6 @@ def confirmationFunction():
 
                         if int(plant[4]) < int(package[1]) and int(plant[5]) < int(package[2]) and int(plant[6]) < int(package[3]) and int(plant[7]) < int(package[5]):
                             boxesEX.append([package, plant])
-                            boxes.append(package)
                             break
 
                 # Express only works in Germany
@@ -144,7 +141,6 @@ def confirmationFunction():
 
                     if int(plant[4]) < int(package[1]) and int(plant[5]) < int(package[2]) and int(plant[6]) < int(package[3]) and int(plant[7]) < int(package[4]):
                         boxesNE.append([package, plant])
-                        boxes.append(package)
                         break
 
         """
