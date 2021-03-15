@@ -165,13 +165,13 @@ def confirmationFunction():
         # Take the biggest boxe needed from the express group first, then the non express group
         def plantLoop():
             for plantItem in plantItems:
-                if len(boxesEX) > 0:
+                if len(boxesEX) > 0 and len(plantItems) > 0:
                     for boxeEX in boxesEX:
                         if int(plantItem[0]) == int(boxeEX[1][0]):
                             boxes.append(boxeEX[0])
                             return
 
-                elif len(boxesNE) > 0:
+                elif len(boxesNE) > 0 and len(plantItems) > 0:
                     for boxeNE in boxesNE:
                         if int(plantItem[0]) == int(boxeNE[1][0])
                             boxes.append(boxeNE[0])
