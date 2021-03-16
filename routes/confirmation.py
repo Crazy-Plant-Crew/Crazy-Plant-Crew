@@ -274,6 +274,9 @@ def confirmationFunction():
 
 
             def vertical(length, width):
+
+                print("GRIDLOOP VERTICAL")
+
                 index = 0
                 while index < len(thisBox):
                     if horizon(thisBox[index], length, width) == True:
