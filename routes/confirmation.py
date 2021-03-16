@@ -255,6 +255,9 @@ def confirmationFunction():
             y = 0
 
             def horizon(row, length, width):
+
+                print("GRIDLOOP HORIZON")
+
                 index = 0
                 while index < len(row):
                     if row[index] == 0:
