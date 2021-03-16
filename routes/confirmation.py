@@ -165,7 +165,10 @@ def confirmationFunction():
             """
             # Empty the boxes array
             boxes = []
+
+            # Check weight
             """
+
             # Loop through plants
             for plantItem in plantItems:
 
@@ -196,7 +199,7 @@ def confirmationFunction():
 
         plantLoop()
 
-        """
+
         # Make a grid from the needed box to represent its bottom
         thisBox = [[0] * int(boxes[0][1])] * int(boxes[0][2])
 
@@ -308,7 +311,6 @@ def confirmationFunction():
                 gridLoop(length, width)
             
             del plantItems[0]
-        """
 
 
         # Delete basket items
@@ -333,13 +335,11 @@ def confirmationFunction():
         print("BOXES")
         print(boxes)
         print(len(boxes))
-        """
         print("thisBox")
         print(thisBox)
         print(len(thisBox))
         print("COST")
         print(cost)
-        """
 
 
     
