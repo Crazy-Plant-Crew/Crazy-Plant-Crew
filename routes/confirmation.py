@@ -174,7 +174,7 @@ def confirmationFunction():
                     for boxEX in boxesEX:
                         if int(plantItem[0]) == int(boxEX[1][0]):
                             print("CASE1")
-                            boxes.append(boxEX[0])
+                            boxes.extend(boxEX[0])
                             return
 
                 # Non express but in Germany - Append needed box
@@ -182,7 +182,7 @@ def confirmationFunction():
                     for boxNE in boxesNE:
                         if int(plantItem[0]) == int(boxNE[1][0]):
                             print("CASE2")
-                            boxes.append(boxNE[0])
+                            boxes.extend(boxNE[0])
                             return
                 
                 # Non express in the EU - Append needed box
@@ -192,7 +192,7 @@ def confirmationFunction():
                             print("CASE3")
                             print("THIS")
                             print(boxNE[0])
-                            boxes.append(boxNE[0])
+                            boxes.extend(boxNE[0])
                             return
 
                 # Return False if there are no more plant to cover
