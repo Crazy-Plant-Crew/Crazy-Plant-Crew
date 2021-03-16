@@ -302,6 +302,21 @@ def confirmationFunction():
                 fillerLoop(x, y, length, width, rotation)
 
 
+        # Temp
+        def gridCounter():
+            total = 0
+            for y in thisBox:
+                for x in y:
+                    if x == 1:
+                        total += 1
+
+            return print("TOTAL IS: "+ total)
+
+        gridCounter()
+
+
+            
+        """
         # Fill up first plant in that box bottom
         while len(plantItems) > 0:
             for plantItem in plantItems:
@@ -310,7 +325,7 @@ def confirmationFunction():
                 gridLoop(length, width)
             
             del plantItems[0]
-
+        """
 
         # Delete basket items
 
