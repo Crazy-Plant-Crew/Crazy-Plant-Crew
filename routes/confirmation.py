@@ -331,6 +331,9 @@ def confirmationFunction():
         print("BOXES")
         print(boxes)
         print(len(boxes))
+        print("thisBox")
+        print(thisBox)
+        print(len(thisBox))
         print("COST")
         print(cost)
 
