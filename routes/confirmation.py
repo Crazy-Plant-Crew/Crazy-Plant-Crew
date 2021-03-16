@@ -196,9 +196,9 @@ def confirmationFunction():
 
         plantLoop()
 
-
+        """
         # Make a grid from the needed box to represent its bottom
-        thisBox = [[0] * int(boxes[1])] * int(boxes[2])
+        thisBox = [[0] * int(boxes[0][1])] * int(boxes[0][2])
 
 
         # Filler function
@@ -308,7 +308,7 @@ def confirmationFunction():
                 gridLoop(length, width)
             
             del plantItems[0]
-
+        """
 
 
         # Delete basket items
@@ -331,12 +331,13 @@ def confirmationFunction():
         print("BOXES")
         print(boxes)
         print(len(boxes))
+        """
         print("thisBox")
         print(thisBox)
         print(len(thisBox))
         print("COST")
         print(cost)
-
+        """
 
 
     
