@@ -178,6 +178,11 @@ def confirmationFunction():
 
                 # Non express but in Germany - Append needed box
                 elif len(boxesNE) > 0 and len(plantItems) > 0 and addresses[3] == "Germany":
+                    for boxEX in boxesEX:
+                        if int(plantItem[0]) == int(boxEX[1][0]):
+                            boxes.append(boxEX[0])
+                            return
+
                     for boxNE in boxesNE:
                         if int(plantItem[0]) == int(boxNE[1][0]):
                             boxes.append(boxNE[0])
