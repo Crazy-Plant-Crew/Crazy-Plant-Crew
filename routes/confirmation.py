@@ -296,7 +296,7 @@ def confirmationFunction():
                         index += 1
 
 
-            vertical()
+            vertical(length, width)
 
 
             if checkerVertical == True and checkerHorizonal == True:
