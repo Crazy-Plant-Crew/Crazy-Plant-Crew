@@ -190,6 +190,8 @@ def confirmationFunction():
                     for boxNE in boxesNE:
                         if int(plantItem[0]) == int(boxNE[1][0]):
                             print("CASE3")
+                            print("THIS")
+                            print(boxNE[0])
                             boxes.append(boxNE[0])
                             return
 
