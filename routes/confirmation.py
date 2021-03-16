@@ -176,21 +176,21 @@ def confirmationFunction():
                 if len(boxesEX) > 0 and len(plantItems) > 0 and addresses[3] == "Germany":
                     for boxEX in boxesEX:
                         if int(plantItem[0]) == int(boxEX[1][0]):
-                            boxes.extend(boxEX[0])
+                            boxes.extend([boxEX[0]])
                             return
 
                 # Non express but in Germany - Append needed box
                 elif len(boxesNE) > 0 and len(plantItems) > 0 and addresses[3] == "Germany":
                     for boxNE in boxesNE:
                         if int(plantItem[0]) == int(boxNE[1][0]):
-                            boxes.extend(boxEX[0])
+                            boxes.extend([boxEX[0]])
                             return
                 
                 # Non express in the EU - Append needed box
                 elif len(boxesNE) > 0 and len(plantItems) > 0 and addresses[3] != "Germany":
                     for boxNE in boxesNE:
                         if int(plantItem[0]) == int(boxNE[1][0]):
-                            boxes.extend(boxNE[0])
+                            boxes.extend([boxEX[0]])
                             return
 
                 # Return False if there are no more plant to cover
@@ -201,7 +201,7 @@ def confirmationFunction():
 
 
         # Make a grid from the needed box to represent its bottom
-        thisBox = [[0] * int(boxes[1])] * int(boxes[2])
+        thisBox = [[0] * int(boxes[-1][1])] * int(boxes[-1][2])
 
 
         # Filler function
@@ -334,9 +334,6 @@ def confirmationFunction():
         print("BOXES")
         print(boxes)
         print(len(boxes))
-        print("thisBox")
-        print(thisBox)
-        print(len(thisBox))
         print("COST")
         print(cost)
 
