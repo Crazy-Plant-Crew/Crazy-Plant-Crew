@@ -245,8 +245,6 @@ def confirmationFunction():
         # Grid looper
         def gridLoop(length, width):
 
-            print("GRIDLOOP STARTED")
-
             checkerHorizonal = False
             checkerVertical = False
             rotation = False
@@ -259,6 +257,7 @@ def confirmationFunction():
                 while index < len(row):
                     if row[index] == 0:
                         if index + length < len(row):
+                            checkerHorizonal = True
                             x = index
                             return True
 
@@ -274,15 +273,11 @@ def confirmationFunction():
 
 
             def vertical(length, width):
-
-                print("GRIDLOOP VERTICAL")
-
                 index = 0
                 while index < len(thisBox):
                     if horizon(thisBox[index], length, width) == True:
                         if index == width:
                             checkerVertical = True
-                            print("HORIZON RETURNS TRUE")
                             y = index
                             return
                         
