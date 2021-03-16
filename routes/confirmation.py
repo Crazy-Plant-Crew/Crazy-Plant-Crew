@@ -279,7 +279,8 @@ def confirmationFunction():
                         if index == width:
                             checkerVertical = True
                             y = index
-                            return
+                            if checkerVertical == True and checkerHorizonal == True:
+                                fillerLoop(x, y, length, width, rotation)
                         
                         else:
                             index += 1
@@ -300,9 +301,7 @@ def confirmationFunction():
 
             vertical(length, width)
 
-            if checkerVertical == True and checkerHorizonal == True:
-                print("IS IT REACHED?")
-                fillerLoop(x, y, length, width, rotation)
+
 
 
 
