@@ -310,7 +310,7 @@ def confirmationFunction():
                     if x == 1:
                         total += 1
 
-            return print("TOTAL IS: "+ total)
+            return print("TOTAL IS: " + str(total))
 
         gridCounter()
 
