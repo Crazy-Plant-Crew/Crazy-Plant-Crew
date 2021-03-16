@@ -162,27 +162,158 @@ def confirmationFunction():
         plantItems = sorted(plantItems, key=lambda x: (int(x[4]), int(x[5]), int(x[6])), reverse=True)
 
 
-        # Take the biggest boxe needed from the express group first, then the non express group
+        # Function to take the biggest box needed from the express group first, then from the non express group.
         def plantLoop():
+
+            # Empty the boxes array
+            boxes = []
+
+            # Loop through plants
             for plantItem in plantItems:
+
+                # Express can only be in Germany - Append needed box - Update cost
                 if len(boxesEX) > 0 and len(plantItems) > 0:
-                    for boxeEX in boxesEX:
-                        if int(plantItem[0]) == int(boxeEX[1][0]):
-                            boxes.append(boxeEX[0])
+                    for boxEX in boxesEX:
+                        if int(plantItem[0]) == int(boxEX[1][0]):
+                            boxes.append(boxEX[0])
+                            cost += int(boxEX[0][8])
                             return
 
-                elif len(boxesNE) > 0 and len(plantItems) > 0:
-                    for boxeNE in boxesNE:
-                        if int(plantItem[0]) == int(boxeNE[1][0]):
-                            boxes.append(boxeNE[0])
+                # Non express but in Germany - Append needed box - Update cost
+                elif len(boxesNE) > 0 and len(plantItems) > 0 and addresses[3] == "Germany":
+                    for boxNE in boxesNE:
+                        if int(plantItem[0]) == int(boxNE[1][0]):
+                            boxes.append(boxNE[0])
+                            cost += int(boxEX[0][6])
+                            return
+                
+                # Non express in the EU - Append needed box - Update cost
+                elif len(boxesNE) > 0 and len(plantItems) > 0 and addresses[3] != "Germany":
+                    for boxNE in boxesNE:
+                        if int(plantItem[0]) == int(boxNE[1][0]):
+                            boxes.append(boxNE[0])
+                            cost += int(boxEX[0][7])
                             return
 
+                # Return False if there are no more plant to cover
                 else:
                     return False
 
         plantLoop()
 
-        # Make a grid from the smallest plants length & width and use the biggest plant height as ceiling for this level
+
+        # Make a grid from the needed box to represent its bottom
+        thisBox = [[0] * int(boxes[0][1])] * int(boxes[0][2])
+
+
+        # Filler function
+        def fillerLoop(x, y, length, width, rotation):
+
+            def horizon(row, length, width, rotation):
+                index = 0
+                while index < len(row):
+                    if rotation == False and index >= x and index < x + length:
+                        row[index] = 1
+                        index += 1
+
+                    elif: rotation == True and index >= x and index < x + width:
+                        row[index] = 1
+                        index += 1
+
+                    else:
+                        index += 1 
+
+
+            def vertical():
+                index = 0
+                while index < len(thisBox):
+                    if rotation == False and index >= y and index < y + width:
+                        horizon(thisBox[index], length, width, rotation)
+                        index += 1
+
+                    elif rotation == True and index >= y and index < y + length:
+                        horizon(thisBox[index], length, width, rotation)
+                        index += 1
+
+                    else:
+                        index += 1
+
+
+            vertical()
+
+
+        # Grid looper
+        def gridLoop(length, width):
+
+            checkerHorizonal = False
+            checkerVertical = False
+            rotation = False
+
+            x = 0
+            y = 0
+
+            def horizon(row, length, width):
+                index = 0
+                while index < len(row):
+                    if row[index] == 0:
+                        if index + length < len(row):
+                            x = index
+                            return True
+
+                        elif index + width < len(row):
+                            x = index
+                            return "Rotation"
+
+                        else:
+                            return False
+
+                    else:
+                        index += 1
+
+
+            def vertical(length, width):
+                index = 0
+                while index < len(thisBox):
+                    if horizon(thisBox[index], length, width) == True:
+                        checkerHorizonal = True
+                        if index == width:
+                            checkerVertical = True
+                            y = index
+                            return
+                        
+                        else:
+                            index += 1
+
+                    elif horizon(thisBox[index], length, width) == "Rotation":
+                        if index == length:
+                            checkerVertical = True
+                            rotation = True
+                            y = index
+                            return
+
+                        else:
+                            index += 1
+
+                    else:
+                        index += 1
+
+
+            vertical()
+
+
+            if checkerVertical == True and checkerHorizonal == True:
+                fillerLoop(x, y, length, width, rotation)
+
+
+        # Fill up first plant in that box bottom
+        while len(plantItems) > 0:
+            for plantItem in plantItems:
+                length = int(plantItem[4])
+                width = int(plantItem[5])
+                gridLoop(length, width)
+            
+            del plantItems[0]
+
 
 
         # Delete basket items
@@ -199,12 +330,15 @@ def confirmationFunction():
         print("EXPRESS")
         print(boxesEX)
         print(len(boxesEX))
-        print("PLANTITEM")
+        print("PLANTITEMS")
         print(plantItems)
         print(len(plantItems))
         print("BOXES")
         print(boxes)
         print(len(boxes))
+        print("COST")
+        print(cost)
+
 
 
     
