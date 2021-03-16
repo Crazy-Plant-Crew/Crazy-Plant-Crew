@@ -302,18 +302,8 @@ def confirmationFunction():
                 fillerLoop(x, y, length, width, rotation)
 
 
-        # Temp
-        def gridCounter():
-            total = 0
-            for y in thisBox:
-                for x in y:
-                    if x == 1:
-                        total += 1
 
-            return print("TOTAL IS: " + str(total))
-
-        gridCounter()
-
+        gridLoop(70, 50)
 
             
         """
@@ -352,6 +342,17 @@ def confirmationFunction():
         print("COST")
         print(cost)
 
+        # Temp
+        def gridCounter():
+            total = 0
+            for y in thisBox:
+                for x in y:
+                    if x == 1:
+                        total += 1
+
+            return print("TOTAL IS: " + str(total))
+
+        gridCounter()
 
     
         return render_template("confirmation.html", name=getUserName(), picture=getUserPicture(), role=getUserRole())
