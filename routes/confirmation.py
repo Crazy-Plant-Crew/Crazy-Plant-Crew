@@ -255,9 +255,6 @@ def confirmationFunction():
             y = 0
 
             def horizon(row, length, width):
-
-                print("GRIDLOOP HORIZON")
-
                 index = 0
                 while index < len(row):
                     if row[index] == 0:
@@ -283,7 +280,7 @@ def confirmationFunction():
                 index = 0
                 while index < len(thisBox):
                     if horizon(thisBox[index], length, width) == True:
-                        checkerHorizonal = True
+                        print("HORIZON RETURNS TRUE")
                         if index == width:
                             checkerVertical = True
                             y = index
