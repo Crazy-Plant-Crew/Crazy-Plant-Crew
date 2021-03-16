@@ -298,7 +298,6 @@ def confirmationFunction():
 
             vertical(length, width)
 
-
             if checkerVertical == True and checkerHorizonal == True:
                 fillerLoop(x, y, length, width, rotation)
 
