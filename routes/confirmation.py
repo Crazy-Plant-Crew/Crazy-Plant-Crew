@@ -316,6 +316,9 @@ def confirmationFunction():
 
         # Make the order valid
 
+        print("ADDRESSES")
+        print(addresses)
+        print(len(addresses))
         print("PLANTS")
         print(plants)
         print(len(plants))
