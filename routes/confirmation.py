@@ -187,7 +187,7 @@ def confirmationFunction():
                 elif len(boxesNE) > 0 and len(plantItems) > 0 and addresses[3] != "Germany":
                     for boxNE in boxesNE:
                         if int(plantItem[0]) == int(boxNE[1][0]):
-                            boxes.extend(boxEX[0])
+                            boxes.extend(boxNE[0])
                             return
 
                 # Return False if there are no more plant to cover
