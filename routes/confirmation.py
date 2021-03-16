@@ -162,10 +162,10 @@ def confirmationFunction():
 
         # Function to take the biggest box needed from the express group first, then from the non express group.
         def plantLoop():
-
+            """
             # Empty the boxes array
             boxes = []
-
+            """
             # Loop through plants
             for plantItem in plantItems:
 
@@ -173,21 +173,21 @@ def confirmationFunction():
                 if len(boxesEX) > 0 and len(plantItems) > 0 and addresses[3] == "Germany":
                     for boxEX in boxesEX:
                         if int(plantItem[0]) == int(boxEX[1][0]):
-                            boxes.extend([boxEX[0]])
+                            boxes.extend(boxEX[0])
                             return
 
                 # Non express but in Germany - Append needed box
                 elif len(boxesNE) > 0 and len(plantItems) > 0 and addresses[3] == "Germany":
                     for boxNE in boxesNE:
                         if int(plantItem[0]) == int(boxNE[1][0]):
-                            boxes.extend([boxNE[0]])
+                            boxes.extend(boxEX[0])
                             return
                 
                 # Non express in the EU - Append needed box
                 elif len(boxesNE) > 0 and len(plantItems) > 0 and addresses[3] != "Germany":
                     for boxNE in boxesNE:
                         if int(plantItem[0]) == int(boxNE[1][0]):
-                            boxes.extend([boxNE[0]])
+                            boxes.extend(boxEX[0])
                             return
 
                 # Return False if there are no more plant to cover
