@@ -216,7 +216,7 @@ def confirmationFunction():
                         row[index] = 1
                         index += 1
 
-                    elif: rotation == True and index >= x and index < x + width:
+                    elif rotation == True and index >= x and index < x + width:
                         row[index] = 1
                         index += 1
 
