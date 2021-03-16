@@ -280,9 +280,9 @@ def confirmationFunction():
                 index = 0
                 while index < len(thisBox):
                     if horizon(thisBox[index], length, width) == True:
-                        print("HORIZON RETURNS TRUE")
                         if index == width:
                             checkerVertical = True
+                            print("HORIZON RETURNS TRUE")
                             y = index
                             return
                         
