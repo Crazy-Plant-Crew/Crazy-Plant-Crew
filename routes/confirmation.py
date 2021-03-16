@@ -315,9 +315,6 @@ def confirmationFunction():
 
 
         # Make the order valid
-
-        print("PLANTLOOP")
-        print(plantLoop())
         print("ADDRESSES")
         print(addresses)
         print(len(addresses))
