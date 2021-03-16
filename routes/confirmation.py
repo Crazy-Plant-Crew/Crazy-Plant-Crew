@@ -207,6 +207,8 @@ def confirmationFunction():
         # Filler function
         def fillerLoop(x, y, length, width, rotation):
 
+            print("FILLERLOOP STARTED")
+
             def horizon(row, length, width, rotation):
                 index = 0
                 while index < len(row):
@@ -242,6 +244,8 @@ def confirmationFunction():
 
         # Grid looper
         def gridLoop(length, width):
+
+            print("GRIDLOOP STARTED")
 
             checkerHorizonal = False
             checkerVertical = False
