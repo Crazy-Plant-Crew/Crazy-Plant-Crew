@@ -63,7 +63,7 @@ def confirmationFunction():
     boxesEX = []
     boxes = []
     plantItems = []
-    
+
 
     # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
@@ -169,28 +169,25 @@ def confirmationFunction():
             # Loop through plants
             for plantItem in plantItems:
 
-                # Express can only be in Germany - Append needed box - Update cost
+                # Express can only be in Germany - Append needed box
                 if len(boxesEX) > 0 and len(plantItems) > 0:
                     for boxEX in boxesEX:
                         if int(plantItem[0]) == int(boxEX[1][0]):
                             boxes.append(boxEX[0])
-                            cost += int(boxEX[0][8])
                             return
 
-                # Non express but in Germany - Append needed box - Update cost
+                # Non express but in Germany - Append needed box
                 elif len(boxesNE) > 0 and len(plantItems) > 0 and addresses[3] == "Germany":
                     for boxNE in boxesNE:
                         if int(plantItem[0]) == int(boxNE[1][0]):
                             boxes.append(boxNE[0])
-                            cost += int(boxEX[0][6])
                             return
                 
-                # Non express in the EU - Append needed box - Update cost
+                # Non express in the EU - Append needed box
                 elif len(boxesNE) > 0 and len(plantItems) > 0 and addresses[3] != "Germany":
                     for boxNE in boxesNE:
                         if int(plantItem[0]) == int(boxNE[1][0]):
                             boxes.append(boxNE[0])
-                            cost += int(boxEX[0][7])
                             return
 
                 # Return False if there are no more plant to cover
