@@ -215,33 +215,33 @@ def confirmationFunction():
           
 
             def horizon(x, y, length, width, rotation, row):
-                index = 0
-                while index < len(row):
-                    if rotation == False and index >= x and index < x + length:
-                        row[index] = 1
-                        index += 1
+                indexH = 0
+                while indexH < len(row):
+                    if rotation == False and indexH >= x and indexH < x + length:
+                        row[indexH] = 1
+                        indexH += 1
 
-                    elif rotation == True and index >= x and index < x + width:
-                        row[index] = 1
-                        index += 1
+                    elif rotation == True and indexH >= x and indexH < x + width:
+                        row[indexH] = 1
+                        indexH += 1
 
                     else:
-                        index += 1 
+                        indexH += 1 
 
 
             def vertical(x, y, length, width, rotation):
-                index = 0
-                while index < len(thisBox):
-                    if rotation == False and index >= y and index < y + width:
+                indexV = 0
+                while indexV < len(thisBox):
+                    if rotation == False and indexV >= y and indexV < y + width:
                         horizon(x, y, length, width, rotation, thisBox[index])
-                        index += 1
+                        indexV += 1
 
-                    elif rotation == True and index >= y and index < y + length:
+                    elif rotation == True and indexV >= y and indexV < y + length:
                         horizon(x, y, length, width, rotation, thisBox[index])
-                        index += 1
+                        indexV += 1
 
                     else:
-                        index += 1
+                        indexV += 1
 
 
             vertical(x, y, length, width, rotation)
@@ -358,6 +358,5 @@ def confirmationFunction():
             return print("TOTAL ZERO IS: " + str(total0) + "// TOTAL ONE IS: " + str(total1))
 
         gridCounter()
-        print(thisBox[-1])
     
         return render_template("confirmation.html", name=getUserName(), picture=getUserPicture(), role=getUserRole())
