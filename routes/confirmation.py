@@ -203,26 +203,16 @@ def confirmationFunction():
         # Make a grid from the last needed box to represent its bottom
         thisBox = [["0"] * int(boxes[-1][1])] * int(boxes[-1][2])
 
-        # Temp
-        def gridCounter():
-            total0 = 0
-            total1 = 0
-            for row in thisBox:
-                for unit in row:
-                    if unit == "1":
-                        total1 += 1
-                    else:
-                        total0 += 1
-
-            return print("TOTAL ZERO IS: " + str(total0) + "// TOTAL ONE IS: " + str(total1))
-
-        gridCounter()
-
 
         # Filler function
-        def drawLoop(x, y, length, width, rotation):         
+        def drawLoop(x, y, length, width, rotation):
+
+            print("DRAWLOOP")     
 
             def drawHorizon(x, y, length, width, rotation, row):
+
+                print("DRAWHORIZONTAL")
+
                 index = 0
                 while index < len(row):
                     if rotation == False and index >= x and index < x + length:
@@ -238,11 +228,8 @@ def confirmationFunction():
 
 
             def drawVertical(x, y, length, width, rotation):
-                drawHorizon(x, y, length, width, rotation, thisBox[index])
-                print(thisBox)
-                """
                 index = 0
-                while index < len(thisBox):
+                while index < 2:
                     if rotation == False and index >= y and index < y + width:
                         drawHorizon(x, y, length, width, rotation, thisBox[index])
                         index += 1
@@ -253,7 +240,6 @@ def confirmationFunction():
 
                     else:
                         index += 1
-                """
 
 
             drawVertical(x, y, length, width, rotation)
@@ -301,7 +287,7 @@ def confirmationFunction():
                         else:
                             index += 1
 
-                    elif horizon(length, width, x, y, rotation, checkerHorizonal, checkerVertical, thisBox[index]) == "Rotation":
+                    elif gridHorizon(length, width, x, y, rotation, checkerHorizonal, checkerVertical, thisBox[index]) == "Rotation":
                         if index == length:
                             checkerVertical = True
                             rotation = True
@@ -318,6 +304,21 @@ def confirmationFunction():
             gridVertical(length, width, x, y, rotation, checkerHorizonal, checkerVertical)
 
         gridLoop(70, 50)
+
+        # Temp
+        def gridCounter():
+            total0 = 0
+            total1 = 0
+            for row in thisBox:
+                for unit in row:
+                    if unit == "1":
+                        total1 += 1
+                    else:
+                        total0 += 1
+
+            return print("TOTAL ZERO IS: " + str(total0) + "// TOTAL ONE IS: " + str(total1))
+
+        gridCounter()
 
             
         """
