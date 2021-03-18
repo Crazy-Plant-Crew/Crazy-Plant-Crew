@@ -219,6 +219,7 @@ def confirmationFunction():
                 while index < len(row):
                     if rotation == False and index >= x and index < x + length:
                         row[index] = 1
+                        print(index)
                         index += 1
 
                     elif rotation == True and index >= x and index < x + width:
