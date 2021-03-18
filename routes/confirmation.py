@@ -203,6 +203,21 @@ def confirmationFunction():
         # Make a grid from the last needed box to represent its bottom
         thisBox = [[0] * int(boxes[-1][1])] * int(boxes[-1][2])
 
+        # Temp
+        def gridCounter():
+            total0 = 0
+            total1 = 0
+            for y in thisBox:
+                for x in y:
+                    if x == 1:
+                        total1 += 1
+                    else:
+                        total0 += 1
+
+            return print("TOTAL ZERO IS: " + str(total0) + "// TOTAL ONE IS: " + str(total1))
+
+        gridCounter()
+
 
         # Filler function
         def drawLoop(x, y, length, width, rotation):
@@ -344,20 +359,7 @@ def confirmationFunction():
         print("COST")
         print(cost)
 
-        # Temp
-        def gridCounter():
-            total0 = 0
-            total1 = 0
-            for y in thisBox:
-                for x in y:
-                    if x == 1:
-                        total1 += 1
-                    else:
-                        total0 += 1
-
-            return print("TOTAL ZERO IS: " + str(total0) + "// TOTAL ONE IS: " + str(total1))
 
         gridCounter()
-        print(thisBox)
     
         return render_template("confirmation.html", name=getUserName(), picture=getUserPicture(), role=getUserRole())
