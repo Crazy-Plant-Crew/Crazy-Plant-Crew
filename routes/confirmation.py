@@ -232,11 +232,11 @@ def confirmationFunction():
 
 
             def drawVertical(x, y, length, width, rotation):
+
                 drawIndexV = 0
                 while drawIndexV < len(thisBox):
 
                     if rotation == False and drawIndexV >= y and drawIndexV < y + width:
-                        print(drawIndexV)
                         drawHorizon(x, y, length, width, rotation, thisBox[drawIndexV])
                         drawIndexV += 1
 
@@ -290,6 +290,7 @@ def confirmationFunction():
                     if gridHorizon(length, width, x, y, rotation, checkerHorizonal, checkerVertical, thisBox[index]) == True:
                         if gridIndexV + y == width:
                             checkerVertical = True
+                            print("FUCKYOU")
                             return drawLoop(x, y, length, width, rotation)
                         
                         else:
