@@ -235,10 +235,14 @@ def confirmationFunction():
                     if rotation == False and index >= x and index < x + length:
                         row[index] = 1
                         index += 1
+                        if index > x + length:
+                            return
 
                     elif rotation == True and index >= x and index < x + width:
                         row[index] = 1
                         index += 1
+                        if index > x + width:
+                            return
 
                     else:
                         index += 1 
@@ -248,7 +252,6 @@ def confirmationFunction():
                 index = 0
                 while index < len(thisBox):
                     if rotation == False and index >= y and index < y + width:
-                        print(y + width)
                         drawHorizon(x, y, length, width, rotation, thisBox[index])
                         index += 1
 
