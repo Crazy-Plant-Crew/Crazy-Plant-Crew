@@ -246,7 +246,7 @@ def confirmationFunction():
 
             def drawVertical(x, y, length, width, rotation):
                 index = 0
-                while index < len(thisBox):
+                while index < 2:
                     if rotation == False and index >= y and index < y + width:
                         drawHorizon(x, y, length, width, rotation, thisBox[index])
                         gridCounter()
