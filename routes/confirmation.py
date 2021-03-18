@@ -219,7 +219,6 @@ def confirmationFunction():
                 while index < len(row):
                     if rotation == False and index >= x and index < x + length:
                         row[index] = 1
-                        print(index)
                         index += 1
 
                     elif rotation == True and index >= x and index < x + width:
@@ -235,7 +234,6 @@ def confirmationFunction():
                 while index < len(thisBox):
                     if rotation == False and index >= y and index < y + width:
                         horizon(x, y, length, width, rotation, thisBox[index])
-                        print("DRAWING ROW: " + str(index))
                         index += 1
 
                     elif rotation == True and index >= y and index < y + length:
@@ -289,6 +287,7 @@ def confirmationFunction():
                             return
                         
                         else:
+                            y = index
                             index += 1
 
                     elif horizon(length, width, x, y, rotation, checkerHorizonal, checkerVertical, thisBox[index]) == "Rotation":
@@ -299,6 +298,7 @@ def confirmationFunction():
                             return
 
                         else:
+                            y = index
                             index += 1
 
                     else:
