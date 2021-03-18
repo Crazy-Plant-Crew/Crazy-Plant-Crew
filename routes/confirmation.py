@@ -209,7 +209,12 @@ def confirmationFunction():
 
             print("FILLERLOOP STARTED")
 
-            def horizon(row, length, width, rotation):
+            """
+            INFINITE LOOP HERE
+
+            
+
+            def horizon(x, y, length, width, rotation, row):
                 index = 0
                 while index < len(row):
                     if rotation == False and index >= x and index < x + length:
@@ -224,22 +229,23 @@ def confirmationFunction():
                         index += 1 
 
 
-            def vertical():
+            def vertical(x, y, length, width, rotation):
                 index = 0
                 while index < len(thisBox):
                     if rotation == False and index >= y and index < y + width:
-                        horizon(thisBox[index], length, width, rotation)
+                        horizon(x, y, length, width, rotation, thisBox[index])
                         index += 1
 
                     elif rotation == True and index >= y and index < y + length:
-                        horizon(thisBox[index], length, width, rotation)
+                        horizon(x, y, length, width, rotation, thisBox[index])
                         index += 1
 
                     else:
                         index += 1
 
 
-            vertical()
+            vertical(x, y, length, width, rotation)
+            """
 
 
         # Grid looper
