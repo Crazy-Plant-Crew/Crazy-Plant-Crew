@@ -207,14 +207,17 @@ def confirmationFunction():
         # Filler function
         def drawLoop(x, y, length, width, rotation):
 
-            print("DRAWLOOP")     
-
             def drawHorizon(x, y, length, width, rotation, row):
 
                 print("DRAWHORIZONTAL")
 
                 index = 0
                 while index < len(row):
+
+                    print(row)
+                    print(len(row))
+
+
                     if rotation == False and index >= x and index < x + length:
                         row[index] = "1"
                         index += 1
