@@ -237,6 +237,7 @@ def confirmationFunction():
                     if rotation == False and drawIndexV >= y and drawIndexV < y + width:
                         drawHorizon(x, y, length, width, rotation, thisBox[index])
                         drawIndexV += 1
+                        break
 
                     elif rotation == True and drawIndexV >= y and drawIndexV < y + length:
                         drawHorizon(x, y, length, width, rotation, thisBox[index])
