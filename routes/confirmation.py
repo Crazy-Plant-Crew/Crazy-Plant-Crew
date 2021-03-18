@@ -247,6 +247,7 @@ def confirmationFunction():
             def drawVertical(x, y, length, width, rotation):
                 index = 0
                 while index < len(thisBox):
+                    gridCounter()
                     if rotation == False and index >= y and index < y + width:
                         drawHorizon(x, y, length, width, rotation, thisBox[index])
                         index += 1
@@ -332,7 +333,7 @@ def confirmationFunction():
                 gridLoop(length, width)
             
             del plantItems[0]
-        """
+
 
         # Delete basket items
 
@@ -358,6 +359,7 @@ def confirmationFunction():
         print(len(boxes))
         print("COST")
         print(cost)
+        """
 
 
         gridCounter()
