@@ -250,7 +250,7 @@ def confirmationFunction():
                     if rotation == False and index >= y and index < y + width:
                         drawHorizon(x, y, length, width, rotation, thisBox[index])
                         index += 1
-                        if index >= y + index:
+                        if index <= y + index:
                             print("FUCK ME HERE")
 
                     elif rotation == True and index >= y and index < y + length:
