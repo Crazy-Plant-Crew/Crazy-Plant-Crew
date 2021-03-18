@@ -216,34 +216,34 @@ def confirmationFunction():
 
             def drawHorizon(x, y, length, width, rotation, row):
 
-                index = 0
-                while index < len(row):
+                drawIndexH = 0
+                while drawIndexH < len(row):
 
-                    if rotation == False and index >= x and index < x + length:
-                        row[index] = "1"
-                        index += 1
+                    if rotation == False and drawIndexH >= x and drawIndexH < x + length:
+                        row[drawIndexH] = "1"
+                        drawIndexH += 1
 
-                    elif rotation == True and index >= x and index < x + width:
-                        row[index] = "1"
-                        index += 1
+                    elif rotation == True and drawIndexH >= x and drawIndexH < x + width:
+                        row[drawIndexH] = "1"
+                        drawIndexH += 1
 
                     else:
                         return
 
 
             def drawVertical(x, y, length, width, rotation):
-                index = 0
-                while index < len(thisBox):
-                    if rotation == False and index >= y and index < y + width:
+                drawIndexV = 0
+                while drawIndexV < len(thisBox):
+                    if rotation == False and drawIndexV >= y and drawIndexV < y + width:
                         drawHorizon(x, y, length, width, rotation, thisBox[index])
-                        index += 1
+                        drawIndexV += 1
 
-                    elif rotation == True and index >= y and index < y + length:
+                    elif rotation == True and drawIndexV >= y and drawIndexV < y + length:
                         drawHorizon(x, y, length, width, rotation, thisBox[index])
-                        index += 1
+                        drawIndexV += 1
 
                     else:
-                        index += 1
+                        drawIndexV += 1
 
 
             drawVertical(x, y, length, width, rotation)
@@ -262,50 +262,50 @@ def confirmationFunction():
 
             # Horizontal checker for free space
             def gridHorizon(length, width, x, y, rotation, checkerHorizonal, checkerVertical, row):
-                index = 0
-                while index < len(row):
-                    if row[index] == "0":
-                        if index + length < len(row):
+                gridIndexH = 0
+                while gridIndexH < len(row):
+                    if row[gridIndexH] == "0":
+                        if gridIndexH + length < len(row):
                             checkerHorizonal = True
-                            x = index
+                            x = gridIndexH
                             return True
 
-                        elif index + width < len(row):
-                            x = index
+                        elif gridIndexH + width < len(row):
+                            x = gridIndexH
                             return "Rotation"
 
                         else:
                             return False
 
                     else:
-                        index += 1
+                        gridIndexH += 1
 
 
             # Vertical checker for free space
             def gridVertical(length, width, x, y, rotation, checkerHorizonal, checkerVertical):
-                index = 0
-                while index < len(thisBox):
+                gridIndexV = 0
+                while gridIndexV < len(thisBox):
                     if gridHorizon(length, width, x, y, rotation, checkerHorizonal, checkerVertical, thisBox[index]) == True:
-                        if index + y == width:
+                        if gridIndexV + y == width:
                             checkerVertical = True
                             return drawLoop(x, y, length, width, rotation)
                         
                         else:
-                            index += 1
+                            gridIndexV += 1
 
                     elif gridHorizon(length, width, x, y, rotation, checkerHorizonal, checkerVertical, thisBox[index]) == "Rotation":
-                        if index + y == length:
+                        if gridIndexV + y == length:
                             checkerVertical = True
                             checkerHorizonal = True
                             rotation = True
                             return drawLoop(x, y, length, width, rotation)
 
                         else:
-                            index += 1
+                            gridIndexV += 1
 
                     else:
-                        y = index
-                        index += 1
+                        y = gridIndexV
+                        gridIndexV += 1
 
             gridVertical(length, width, x, y, rotation, checkerHorizonal, checkerVertical)
 
@@ -363,8 +363,5 @@ def confirmationFunction():
         print("COST")
         print(cost)
         """
-
-
-        gridCounter()
     
         return render_template("confirmation.html", name=getUserName(), picture=getUserPicture(), role=getUserRole())
