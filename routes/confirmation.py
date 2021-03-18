@@ -207,12 +207,12 @@ def confirmationFunction():
         # Filler function
         def fillerLoop(x, y, length, width, rotation):
 
-            print("FILLERLOOP STARTED")
-
-            """
-            INFINITE LOOP HERE
-
-            
+            print(x)
+            print(y)
+            print(length)
+            print(width)
+            print(rotation)
+          
 
             def horizon(x, y, length, width, rotation, row):
                 index = 0
@@ -245,7 +245,6 @@ def confirmationFunction():
 
 
             vertical(x, y, length, width, rotation)
-            """
 
 
         # Grid looper
