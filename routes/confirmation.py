@@ -250,15 +250,15 @@ def confirmationFunction():
 
         # Grid looper
         def gridLoop(length, width):
-
+            
+            x = 0
+            y = 0
             checkerHorizonal = False
             checkerVertical = False
             rotation = False
 
-            x = 0
-            y = 0
 
-            def horizon(row, length, width):
+            def horizon(length, width, x, y, rotation, checkerHorizonal, checkerVertical, row):
                 index = 0
                 while index < len(row):
                     if row[index] == 0:
@@ -278,10 +278,10 @@ def confirmationFunction():
                         index += 1
 
 
-            def vertical(length, width):
+            def vertical(length, width, x, y, rotation, checkerHorizonal, checkerVertical):
                 index = 0
                 while index < len(thisBox):
-                    if horizon(thisBox[index], length, width) == True:
+                    if horizon(length, width, x, y, rotation, checkerHorizonal, checkerVertical, thisBox[index]) == True:
                         if index == width:
                             checkerVertical = True
                             y = index
@@ -291,7 +291,7 @@ def confirmationFunction():
                         else:
                             index += 1
 
-                    elif horizon(thisBox[index], length, width) == "Rotation":
+                    elif horizon(length, width, x, y, rotation, checkerHorizonal, checkerVertical, thisBox[index]) == "Rotation":
                         if index == length:
                             checkerVertical = True
                             rotation = True
@@ -305,11 +305,7 @@ def confirmationFunction():
                     else:
                         index += 1
 
-            vertical(length, width)
-
-
-
-
+            vertical(length, width, x, y, rotation, checkerHorizonal, checkerVertical)
 
         gridLoop(70, 50)
 
