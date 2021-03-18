@@ -200,7 +200,7 @@ def confirmationFunction():
         plantLoop()
 
 
-        # Make a grid from the needed box to represent its bottom
+        # Make a grid from the last needed box to represent its bottom
         thisBox = [[0] * int(boxes[-1][1])] * int(boxes[-1][2])
 
 
@@ -252,10 +252,10 @@ def confirmationFunction():
             
             x = 0
             y = 0
+            rotation = False
             checkerHorizonal = False
             checkerVertical = False
-            rotation = False
-
+            
 
             def horizon(length, width, x, y, rotation, checkerHorizonal, checkerVertical, row):
                 index = 0
@@ -347,11 +347,14 @@ def confirmationFunction():
 
         # Temp
         def gridCounter():
-            total = 0
+            total0 = 0
+            total1 = 0
             for y in thisBox:
                 for x in y:
                     if x == 1:
-                        total += 1
+                        total1 += 1
+                    else:
+                        total0 += 1
 
             return print("TOTAL IS: " + str(total))
 
