@@ -220,14 +220,7 @@ def confirmationFunction():
 
 
         # Filler function
-        def drawLoop(x, y, length, width, rotation):
-
-            print(x)
-            print(y)
-            print(length)
-            print(width)
-            print(rotation)
-          
+        def drawLoop(x, y, length, width, rotation):         
 
             def drawHorizon(x, y, length, width, rotation, row):
                 index = 0
@@ -245,13 +238,13 @@ def confirmationFunction():
 
 
             def drawVertical(x, y, length, width, rotation):
+                drawHorizon(x, y, length, width, rotation, thisBox[index])
+                print(thisBox)
+                """
                 index = 0
-                while index < 2:
+                while index < len(thisBox):
                     if rotation == False and index >= y and index < y + width:
-                        print(thisBox[index])
-                        print(thisBox[3])
                         drawHorizon(x, y, length, width, rotation, thisBox[index])
-                        gridCounter()
                         index += 1
 
                     elif rotation == True and index >= y and index < y + length:
@@ -260,6 +253,7 @@ def confirmationFunction():
 
                     else:
                         index += 1
+                """
 
 
             drawVertical(x, y, length, width, rotation)
