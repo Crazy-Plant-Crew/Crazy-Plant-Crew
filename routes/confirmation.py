@@ -209,7 +209,7 @@ def confirmationFunction():
             total1 = 0
             for row in thisBox:
                 for unit in row:
-                    if unit == 1:
+                    if unit == "1":
                         total1 += 1
                     else:
                         total0 += 1
@@ -249,6 +249,7 @@ def confirmationFunction():
                 while index < len(thisBox):
                     if rotation == False and index >= y and index < y + width:
                         drawHorizon(x, y, length, width, rotation, thisBox[index])
+                        gridCounter()
                         index += 1
 
                     elif rotation == True and index >= y and index < y + length:
