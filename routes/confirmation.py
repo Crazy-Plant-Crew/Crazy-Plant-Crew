@@ -356,7 +356,7 @@ def confirmationFunction():
                     else:
                         total0 += 1
 
-            return print("TOTAL IS: " + str(total))
+            return print("TOTAL ZERO IS: " + str(total0) + "// TOTAL ONE IS: " + str(total1))
 
         gridCounter()
 
