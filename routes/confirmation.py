@@ -358,6 +358,6 @@ def confirmationFunction():
             return print("TOTAL ZERO IS: " + str(total0) + "// TOTAL ONE IS: " + str(total1))
 
         gridCounter()
-
+        print(thisBox[-1])
     
         return render_template("confirmation.html", name=getUserName(), picture=getUserPicture(), role=getUserRole())
