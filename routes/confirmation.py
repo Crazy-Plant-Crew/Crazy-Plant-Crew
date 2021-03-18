@@ -235,11 +235,13 @@ def confirmationFunction():
                 drawIndexV = 0
                 while drawIndexV < len(thisBox):
                     if rotation == False and drawIndexV >= y and drawIndexV < y + width:
-                        drawHorizon(x, y, length, width, rotation, *thisBox[drawIndexV])
+                        row = thisBox[drawIndexV]
+                        drawHorizon(x, y, length, width, rotation, row)
                         drawIndexV += 1
 
                     elif rotation == True and drawIndexV >= y and drawIndexV < y + length:
-                        drawHorizon(x, y, length, width, rotation, *thisBox[drawIndexV])
+                        row = thisBox[drawIndexV]
+                        drawHorizon(x, y, length, width, rotation, row)
                         drawIndexV += 1
 
                     else:
