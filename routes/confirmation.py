@@ -287,7 +287,6 @@ def confirmationFunction():
                             return
                         
                         else:
-                            y = index
                             index += 1
 
                     elif horizon(length, width, x, y, rotation, checkerHorizonal, checkerVertical, thisBox[index]) == "Rotation":
@@ -298,10 +297,10 @@ def confirmationFunction():
                             return
 
                         else:
-                            y = index
                             index += 1
 
                     else:
+                        y = index
                         index += 1
 
             vertical(length, width, x, y, rotation, checkerHorizonal, checkerVertical)
