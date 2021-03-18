@@ -236,6 +236,7 @@ def confirmationFunction():
                         row[index] = 1
                         index += 1
                         if index > x + length:
+                            print("HERE IS THE PROBLEM")
                             return
 
                     elif rotation == True and index >= x and index < x + width:
