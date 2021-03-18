@@ -207,9 +207,9 @@ def confirmationFunction():
         def gridCounter():
             total0 = 0
             total1 = 0
-            for y in thisBox:
-                for x in y:
-                    if x == 1:
+            for row in thisBox:
+                for unit in row:
+                    if unit == 1:
                         total1 += 1
                     else:
                         total0 += 1
@@ -241,7 +241,7 @@ def confirmationFunction():
                         index += 1
 
                     else:
-                        index += 1 
+                        return
 
 
             def drawVertical(x, y, length, width, rotation):
@@ -320,7 +320,7 @@ def confirmationFunction():
 
             gridVertical(length, width, x, y, rotation, checkerHorizonal, checkerVertical)
 
-        gridLoop(40, 50)
+        gridLoop(70, 50)
 
             
         """
