@@ -232,11 +232,11 @@ def confirmationFunction():
             def drawHorizon(x, y, length, width, rotation, row):
                 index = 0
                 while index < len(row):
-                    if rotation == False and index >= x and index < (x + length):
+                    if rotation == False and index >= x and index < x + length:
                         row[index] = 1
                         index += 1
 
-                    elif rotation == True and index >= x and index < (x + width):
+                    elif rotation == True and index >= x and index < x + width:
                         row[index] = 1
                         index += 1
 
@@ -247,11 +247,13 @@ def confirmationFunction():
             def drawVertical(x, y, length, width, rotation):
                 index = 0
                 while index < len(thisBox):
-                    if rotation == False and index >= y and index < (y + width):
+                    if rotation == False and index >= y and index < y + width:
                         drawHorizon(x, y, length, width, rotation, thisBox[index])
                         index += 1
+                        if index >= y + width:
+                            print("FUCK ME HERE: " + "Y = "str(y) + "AND width = " + str(width))
 
-                    elif rotation == True and index >= y and index < (y + length):
+                    elif rotation == True and index >= y and index < y + length:
                         drawHorizon(x, y, length, width, rotation, thisBox[index])
                         index += 1
 
