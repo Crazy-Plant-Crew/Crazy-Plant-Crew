@@ -215,33 +215,35 @@ def confirmationFunction():
           
 
             def horizon(x, y, length, width, rotation, row):
-                indexH = 0
-                while indexH < len(row):
-                    if rotation == False and indexH >= x and indexH < x + length:
-                        row[indexH] = 1
-                        indexH += 1
+                index = 0
+                while index < len(row):
+                    if rotation == False and index >= x and index < x + length:
+                        row[index] = 1
+                        index += 1
 
-                    elif rotation == True and indexH >= x and indexH < x + width:
-                        row[indexH] = 1
-                        indexH += 1
+                    elif rotation == True and index >= x and index < x + width:
+                        row[index] = 1
+                        index += 1
 
                     else:
-                        indexH += 1 
+                        index += 1 
 
 
             def vertical(x, y, length, width, rotation):
-                indexV = 0
-                while indexV < len(thisBox):
-                    if rotation == False and indexV >= y and indexV < y + width:
+                index = 0
+                while index < len(thisBox):
+                    if rotation == False and index >= y and index < y + width:
                         horizon(x, y, length, width, rotation, thisBox[index])
-                        indexV += 1
+                        print("DRAWING ROW: " + str(index))
+                        index += 1
 
-                    elif rotation == True and indexV >= y and indexV < y + length:
+                    elif rotation == True and index >= y and index < y + length:
                         horizon(x, y, length, width, rotation, thisBox[index])
-                        indexV += 1
+                        index += 1
 
                     else:
-                        indexV += 1
+                        print("NOT DRAWING ROW: " + str(index))
+                        index += 1
 
 
             vertical(x, y, length, width, rotation)
