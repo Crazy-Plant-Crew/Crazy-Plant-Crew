@@ -284,7 +284,6 @@ def confirmationFunction():
                     if horizon(length, width, x, y, rotation, checkerHorizonal, checkerVertical, thisBox[index]) == True:
                         if index == width:
                             checkerVertical = True
-                            y = index
                             fillerLoop(x, y, length, width, rotation)
                             return
                         
@@ -295,7 +294,6 @@ def confirmationFunction():
                         if index == length:
                             checkerVertical = True
                             rotation = True
-                            y = index
                             fillerLoop(x, y, length, width, rotation)
                             return
 
