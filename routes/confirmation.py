@@ -251,7 +251,7 @@ def confirmationFunction():
                         drawHorizon(x, y, length, width, rotation, thisBox[index])
                         index += 1
                         if index >= y + width:
-                            print("FUCK ME HERE: " + "Y = "str(y) + "AND width = " + str(width))
+                            print("FUCK ME HERE: " + "Y = " + str(y) + "AND width = " + str(width))
 
                     elif rotation == True and index >= y and index < y + length:
                         drawHorizon(x, y, length, width, rotation, thisBox[index])
