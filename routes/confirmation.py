@@ -214,10 +214,6 @@ def confirmationFunction():
                 index = 0
                 while index < len(row):
 
-                    print(row)
-                    print(len(row))
-
-
                     if rotation == False and index >= x and index < x + length:
                         row[index] = "1"
                         index += 1
@@ -232,7 +228,7 @@ def confirmationFunction():
 
             def drawVertical(x, y, length, width, rotation):
                 index = 0
-                while index < 2:
+                while index < len(thisBox):
                     if rotation == False and index >= y and index < y + width:
                         drawHorizon(x, y, length, width, rotation, thisBox[index])
                         index += 1
@@ -284,6 +280,7 @@ def confirmationFunction():
                     if gridHorizon(length, width, x, y, rotation, checkerHorizonal, checkerVertical, thisBox[index]) == True:
                         if index == width:
                             checkerVertical = True
+                            print("DRAWLOOP from gridVertical")
                             drawLoop(x, y, length, width, rotation)
                             return
                         
