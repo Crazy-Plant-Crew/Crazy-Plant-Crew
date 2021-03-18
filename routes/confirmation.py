@@ -212,10 +212,11 @@ def confirmationFunction():
             print(length)
             print(width)
             print(rotation)
-            print(thisBox[drawIndexV])
 
 
             def drawHorizon(x, y, length, width, rotation, row):
+
+                print(row)
 
                 drawIndexH = 0
                 while drawIndexH < len(row):
