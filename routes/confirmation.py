@@ -201,7 +201,7 @@ def confirmationFunction():
 
 
         # Make a grid from the last needed box to represent its bottom
-        thisBox = [[0] * int(boxes[-1][1])] * int(boxes[-1][2])
+        thisBox = [["0"] * int(boxes[-1][1])] * int(boxes[-1][2])
 
         # Temp
         def gridCounter():
@@ -233,11 +233,11 @@ def confirmationFunction():
                 index = 0
                 while index < len(row):
                     if rotation == False and index >= x and index < x + length:
-                        row[index] = 1
+                        row[index] = "1"
                         index += 1
 
                     elif rotation == True and index >= x and index < x + width:
-                        row[index] = 1
+                        row[index] = "1"
                         index += 1
 
                     else:
@@ -247,7 +247,6 @@ def confirmationFunction():
             def drawVertical(x, y, length, width, rotation):
                 index = 0
                 while index < len(thisBox):
-                    gridCounter()
                     if rotation == False and index >= y and index < y + width:
                         drawHorizon(x, y, length, width, rotation, thisBox[index])
                         index += 1
@@ -276,7 +275,7 @@ def confirmationFunction():
             def gridHorizon(length, width, x, y, rotation, checkerHorizonal, checkerVertical, row):
                 index = 0
                 while index < len(row):
-                    if row[index] == 0:
+                    if row[index] == "0":
                         if index + length < len(row):
                             checkerHorizonal = True
                             x = index
