@@ -298,7 +298,6 @@ def confirmationFunction():
 
 
         gridLoop(70, 50)
-        gridloop(10, 10)
 
         # Counter of 1's to check if results make sense
         def gridCounter():
