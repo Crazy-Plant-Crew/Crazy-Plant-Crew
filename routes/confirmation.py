@@ -201,7 +201,7 @@ def confirmationFunction():
 
 
         # Make a grid from the last needed box to represent its bottom
-        thisBox = [["0"] * int(boxes[-1][1])] * int(boxes[-1][2])
+        thisBox = [["0" for row in range(int(boxes[-1][1]))] for row in range(int(boxes[-1][2]))]
 
 
         # Filler function
@@ -221,7 +221,7 @@ def confirmationFunction():
                         drawIndexH += 1
 
                     else:
-                        return
+                        drawIndexH += 1
 
             drawIndexV = 0
             while drawIndexV < 1:
@@ -239,7 +239,7 @@ def confirmationFunction():
 
         drawLoop(0, 0, 50, 70, False)
 
-        """
+
         # Grid looper
         def gridLoop(length, width):
             
@@ -301,7 +301,7 @@ def confirmationFunction():
             gridVertical(length, width, x, y, rotation, checkerHorizonal, checkerVertical)
 
         gridLoop(70, 50)
-        """
+
         # Counter of 1's to check if results make sense
         def gridCounter():
             total0 = 0
