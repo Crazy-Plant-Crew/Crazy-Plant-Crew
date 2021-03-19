@@ -250,7 +250,9 @@ def confirmationFunction():
 
             drawVertical(x, y, length, width, rotation)
 
+        drawLoop(0, 0, 70, 50, False)
 
+        """
         # Grid looper
         def gridLoop(length, width):
             
@@ -282,7 +284,7 @@ def confirmationFunction():
                     else:
                         gridIndexH += 1
 
-
+        
             # Vertical checker for free space
             def gridVertical(length, width, x, y, rotation, checkerHorizonal, checkerVertical):
                 gridIndexV = 0
@@ -290,7 +292,6 @@ def confirmationFunction():
                     if gridHorizon(length, width, x, y, rotation, checkerHorizonal, checkerVertical, thisBox[index]) == True:
                         if gridIndexV + y == width:
                             checkerVertical = True
-                            print("FUCKYOU")
                             return drawLoop(x, y, length, width, rotation)
                         
                         else:
@@ -311,9 +312,9 @@ def confirmationFunction():
                         gridIndexV += 1
 
             gridVertical(length, width, x, y, rotation, checkerHorizonal, checkerVertical)
-
+        
         gridLoop(70, 50)
-
+        """
         # Counter of 1's to check if results make sense
         def gridCounter():
             total0 = 0
