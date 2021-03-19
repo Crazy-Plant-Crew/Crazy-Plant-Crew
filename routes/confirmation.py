@@ -207,15 +207,11 @@ def confirmationFunction():
         # Filler function
         def drawLoop(x, y, length, width, rotation):
 
-            print(x)
-            print(y)
-            print(length)
-            print(width)
-            print(rotation)
-
-
             def drawHorizon(x, y, length, width, rotation, row):
 
+                print("FUCK YOU !!!")
+
+                """
                 drawIndexH = 0
                 while drawIndexH < len(row):
 
@@ -229,6 +225,7 @@ def confirmationFunction():
 
                     else:
                         return
+                """
 
 
             def drawVertical(x, y, length, width, rotation):
@@ -250,7 +247,7 @@ def confirmationFunction():
 
             drawVertical(x, y, length, width, rotation)
 
-        drawLoop(0, 0, 70, 50, False)
+        drawLoop(0, 0, 50, 70, False)
 
         """
         # Grid looper
@@ -284,7 +281,7 @@ def confirmationFunction():
                     else:
                         gridIndexH += 1
 
-        
+
             # Vertical checker for free space
             def gridVertical(length, width, x, y, rotation, checkerHorizonal, checkerVertical):
                 gridIndexV = 0
@@ -312,9 +309,9 @@ def confirmationFunction():
                         gridIndexV += 1
 
             gridVertical(length, width, x, y, rotation, checkerHorizonal, checkerVertical)
-        
+
         gridLoop(70, 50)
-        """
+
         # Counter of 1's to check if results make sense
         def gridCounter():
             total0 = 0
@@ -330,8 +327,7 @@ def confirmationFunction():
 
         gridCounter()
 
-            
-        """
+
         # Fill up first plant in that box bottom
         while len(plantItems) > 0:
             for plantItem in plantItems:
