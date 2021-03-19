@@ -223,25 +223,19 @@ def confirmationFunction():
                     else:
                         return
 
+            drawIndexV = 0
+            while drawIndexV < 1:
 
-            def drawVertical():
+                if rotation == False and drawIndexV >= y and drawIndexV < y + width:
+                    drawHorizon(thisBox[drawIndexV])
+                    drawIndexV += 1
 
-                drawIndexV = 0
-                while drawIndexV < 1:
+                elif rotation == True and drawIndexV >= y and drawIndexV < y + length:
+                    drawHorizon(thisBox[drawIndexV])
+                    drawIndexV += 1
 
-                    if rotation == False and drawIndexV >= y and drawIndexV < y + width:
-                        drawHorizon(thisBox[drawIndexV])
-                        drawIndexV += 1
-
-                    elif rotation == True and drawIndexV >= y and drawIndexV < y + length:
-                        drawHorizon(thisBox[drawIndexV])
-                        drawIndexV += 1
-
-                    else:
-                        drawIndexV += 1
-
-
-            drawVertical()
+                else:
+                    drawIndexV += 1
 
         drawLoop(0, 0, 50, 70, False)
 
