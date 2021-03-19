@@ -209,14 +209,12 @@ def confirmationFunction():
 
             def drawHorizon(x, y, length, width, rotation, row):
 
-                print("FUCK YOU !!!")
-
-                """
                 drawIndexH = 0
                 while drawIndexH < len(row):
 
                     if rotation == False and drawIndexH >= x and drawIndexH < x + length:
                         row[drawIndexH] = "1"
+                        print("FUCK YOU !!!")
                         drawIndexH += 1
 
                     elif rotation == True and drawIndexH >= x and drawIndexH < x + width:
@@ -225,7 +223,6 @@ def confirmationFunction():
 
                     else:
                         return
-                """
 
 
             def drawVertical(x, y, length, width, rotation):
