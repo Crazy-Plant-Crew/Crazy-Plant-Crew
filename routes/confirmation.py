@@ -248,7 +248,6 @@ def confirmationFunction():
             rotation = False
             checkerHorizonal = False
             checkerVertical = False
-            
 
             # Horizontal checker for free space
             def gridHorizon(length, width, x, y, rotation, checkerHorizonal, checkerVertical, row):
@@ -298,21 +297,9 @@ def confirmationFunction():
 
 
         gridLoop(70, 50)
+        gridLoop(30, 10)
 
-        # Counter of 1's to check if results make sense
-        def gridCounter():
-            total0 = 0
-            total1 = 0
-            for row in thisBox:
-                for unit in row:
-                    if unit == "1":
-                        total1 += 1
-                    else:
-                        total0 += 1
 
-            return print("TOTAL ZERO IS: " + str(total0) + "// TOTAL ONE IS: " + str(total1))
-
-        gridCounter()
 
         """
         # Fill up first plant in that box bottom
@@ -350,5 +337,20 @@ def confirmationFunction():
         print("COST")
         print(cost)
         """
+
+        # Counter of 1's to check if results make sense
+        def gridCounter():
+            total0 = 0
+            total1 = 0
+            for row in thisBox:
+                for unit in row:
+                    if unit == "1":
+                        total1 += 1
+                    else:
+                        total0 += 1
+
+            return print("TOTAL ZERO IS: " + str(total0) + "// TOTAL ONE IS: " + str(total1))
+
+        gridCounter()
     
         return render_template("confirmation.html", name=getUserName(), picture=getUserPicture(), role=getUserRole())
