@@ -210,7 +210,7 @@ def confirmationFunction():
             def drawHorizon(x, y, length, width, rotation, row):
 
                 drawIndexH = 0
-                while drawIndexH < 51:
+                while drawIndexH < 30:
 
                     if rotation == False and drawIndexH >= x and drawIndexH < x + length:
                         row[drawIndexH] = "1"
