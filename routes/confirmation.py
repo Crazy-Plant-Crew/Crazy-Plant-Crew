@@ -210,11 +210,10 @@ def confirmationFunction():
             def drawHorizon(x, y, length, width, rotation, row):
 
                 drawIndexH = 0
-                while drawIndexH < len(row):
+                while drawIndexH < 1:
 
                     if rotation == False and drawIndexH >= x and drawIndexH < x + length:
                         row[drawIndexH] = "1"
-                        print("FUCK YOU !!!")
                         drawIndexH += 1
 
                     elif rotation == True and drawIndexH >= x and drawIndexH < x + width:
@@ -228,7 +227,7 @@ def confirmationFunction():
             def drawVertical(x, y, length, width, rotation):
 
                 drawIndexV = 0
-                while drawIndexV < 2:
+                while drawIndexV < 1:
 
                     if rotation == False and drawIndexV >= y and drawIndexV < y + width:
                         drawHorizon(x, y, length, width, rotation, thisBox[drawIndexV])
@@ -308,7 +307,7 @@ def confirmationFunction():
             gridVertical(length, width, x, y, rotation, checkerHorizonal, checkerVertical)
 
         gridLoop(70, 50)
-
+        """
         # Counter of 1's to check if results make sense
         def gridCounter():
             total0 = 0
@@ -324,7 +323,7 @@ def confirmationFunction():
 
         gridCounter()
 
-
+        """
         # Fill up first plant in that box bottom
         while len(plantItems) > 0:
             for plantItem in plantItems:
