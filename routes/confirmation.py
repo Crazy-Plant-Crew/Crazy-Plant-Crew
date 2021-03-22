@@ -65,20 +65,6 @@ def confirmationFunction():
     plantItems = []
 
 
-    # Get global variable
-    global x
-    global y
-    global rotation
-    global checkerHorizonal
-    global checkerVertical
-
-    x = 0
-    y = 0
-    rotation = False
-    checkerHorizonal = False
-    checkerVertical = False
-
-
     # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
 
@@ -261,6 +247,13 @@ def confirmationFunction():
 
         # Grid looper
         def gridLoop(length, width):
+            
+            # Set variables
+            x = 0
+            y = 0
+            rotation = False
+            checkerHorizonal = False
+            checkerVertical = False
 
             # Horizontal checker for free space
             def gridHorizon(row):
@@ -270,12 +263,11 @@ def confirmationFunction():
                         if gridIndexH + length < len(row):
                             checkerHorizonal = True
                             x = gridIndexH
-                            print("X is: " + str(x))
-                            return True
+                            return True, x
 
                         elif gridIndexH + width < len(row):
                             x = gridIndexH
-                            return "Rotation"
+                            return "Rotation", x
 
                         else:
                             return False
