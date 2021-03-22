@@ -262,7 +262,7 @@ def confirmationFunction():
             gridIndexV = 0
             while gridIndexV < len(thisBox):
                 x = gridHorizon(thisBox[gridIndexV])
-                if x <= int(len(thisBox[gridIndexV])) - length:
+                if int(x) <= len(thisBox[gridIndexV]) - length:
                     rotation = False
                     if gridIndexV == width:
                         y = gridIndexV
@@ -271,7 +271,7 @@ def confirmationFunction():
                     else:
                         gridIndexV += 1
 
-                elif x <= int(len(thisBox[gridIndexV])) - width:
+                elif int(x) <= len(thisBox[gridIndexV]) - width:
                     rotation = True
                     if gridIndexV == length:
                         y = gridIndexV
