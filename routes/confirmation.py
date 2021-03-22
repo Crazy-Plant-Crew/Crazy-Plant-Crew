@@ -63,11 +63,6 @@ def confirmationFunction():
     boxesEX = []
     boxes = []
     plantItems = []
-    x = 0
-    y = 0
-    rotation = False
-    checkerHorizonal = False
-    checkerVertical = False
 
 
     # User reached route via POST (as by submitting a form via POST)
@@ -253,31 +248,12 @@ def confirmationFunction():
         # Grid looper
         def gridLoop(length, width):
 
-            global x
-            global y
-            global rotation
-            global checkerHorizonal
-            global checkerVertical
-
             # Horizontal checker for free space
             def gridHorizon(row):
-
                 gridIndexH = 0
-                
                 while gridIndexH < len(row):
                     if row[gridIndexH] == "0":
-                        if gridIndexH + length < len(row):
-                            checkerHorizonal = True
-                            x = gridIndexH
-                            return True
-
-                        elif gridIndexH + width < len(row):
-                            x = gridIndexH
-                            return "Rotation"
-
-                        else:
-                            return False
-
+                        return gridIndexH
                     else:
                         gridIndexH += 1
 
@@ -285,27 +261,22 @@ def confirmationFunction():
             # Vertical checker for free space
             gridIndexV = 0
             while gridIndexV < len(thisBox):
-                if gridHorizon(thisBox[index]) == True:
-                    if gridIndexV + y == width:
-                        checkerVertical = True
-                        return drawLoop(x, y, length, width, rotation)
-                    
-                    else:
-                        gridIndexV += 1
+                x = gridHorizon(thisBox[gridIndexV])
+                if x <= len(thisBox[gridIndexV]) - length:
+                    rotation = False
+                    if gridIndexV == width:
+                        y = gridIndexV
+                        drawLoop(x, y, length, width, rotation)
 
-                elif gridHorizon(thisBox[index]) == "Rotation":
-                    if gridIndexV + y == length:
-                        checkerVertical = True
-                        checkerHorizonal = True
-                        rotation = True
-                        return drawLoop(x, y, length, width, rotation)
-
-                    else:
-                        gridIndexV += 1
+                elif x <= len(thisBox[gridIndexV]) - width:
+                    rotation = True
+                    if gridIndexV == length:
+                        y = gridIndexV
+                        drawLoop(x, y, length, width, rotation)
 
                 else:
-                    y = gridIndexV
                     gridIndexV += 1
+
 
 
         gridLoop(70, 50)
