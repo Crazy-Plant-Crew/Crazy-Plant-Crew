@@ -261,8 +261,8 @@ def confirmationFunction():
             # Vertical checker for free space
             gridIndexV = 0
             while gridIndexV < len(thisBox):
-                x = gridHorizon(thisBox[gridIndexV])
-                if int(x) <= len(thisBox[gridIndexV]) - length:
+                x = int(gridHorizon(thisBox[gridIndexV]))
+                if x <= len(thisBox[gridIndexV]) - length:
                     rotation = False
                     if gridIndexV == width:
                         y = gridIndexV
@@ -271,7 +271,7 @@ def confirmationFunction():
                     else:
                         gridIndexV += 1
 
-                elif int(x) <= len(thisBox[gridIndexV]) - width:
+                elif x <= len(thisBox[gridIndexV]) - width:
                     rotation = True
                     if gridIndexV == length:
                         y = gridIndexV
