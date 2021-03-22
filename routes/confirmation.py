@@ -268,11 +268,17 @@ def confirmationFunction():
                         y = gridIndexV
                         drawLoop(x, y, length, width, rotation)
 
+                    else:
+                        gridIndexV += 1
+
                 elif x <= len(thisBox[gridIndexV]) - width:
                     rotation = True
                     if gridIndexV == length:
                         y = gridIndexV
                         drawLoop(x, y, length, width, rotation)
+                    
+                    else:
+                        gridIndexV += 1
 
                 else:
                     gridIndexV += 1
