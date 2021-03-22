@@ -262,9 +262,7 @@ def confirmationFunction():
             gridIndexV = 0
             while gridIndexV < len(thisBox):
                 x = gridHorizon(thisBox[gridIndexV])
-                print("X is:" + str(x))
-                print(type(x))
-                if x <= len(thisBox[gridIndexV]) - length:
+                if x <= int(len(thisBox[gridIndexV]) - length):
                     rotation = False
                     if gridIndexV == width:
                         y = gridIndexV
@@ -273,7 +271,7 @@ def confirmationFunction():
                     else:
                         gridIndexV += 1
 
-                elif x <= len(thisBox[gridIndexV]) - width:
+                elif x <= int(len(thisBox[gridIndexV]) - width):
                     rotation = True
                     if gridIndexV == length:
                         y = gridIndexV
@@ -288,10 +286,11 @@ def confirmationFunction():
 
 
         gridLoop(70, 50)
+        """
         gridLoop(30, 10)
 
 
-        """
+
         # Fill up first plant in that box bottom
         while len(plantItems) > 0:
             for plantItem in plantItems:
