@@ -63,6 +63,11 @@ def confirmationFunction():
     boxesEX = []
     boxes = []
     plantItems = []
+    x = 0
+    y = 0
+    rotation = False
+    checkerHorizonal = False
+    checkerVertical = False
 
 
     # User reached route via POST (as by submitting a form via POST)
@@ -247,13 +252,6 @@ def confirmationFunction():
 
         # Grid looper
         def gridLoop(length, width):
-            
-            # Set variables
-            x = 0
-            y = 0
-            rotation = False
-            checkerHorizonal = False
-            checkerVertical = False
 
             # Horizontal checker for free space
             def gridHorizon(length, width, x, y, rotation, checkerHorizonal, checkerVertical, row):
