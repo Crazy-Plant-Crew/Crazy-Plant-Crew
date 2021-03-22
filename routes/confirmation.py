@@ -262,7 +262,7 @@ def confirmationFunction():
                     if row[gridIndexH] == "0":
                         if gridIndexH + length < len(row):
                             checkerHorizonal = True
-                            print("TEST")
+                            print(x)
                             x = gridIndexH
                             return True
 
