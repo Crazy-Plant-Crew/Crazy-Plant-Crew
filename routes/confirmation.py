@@ -207,6 +207,12 @@ def confirmationFunction():
         # Filler function
         def drawLoop(x, y, length, width, rotation):
 
+            print(x)
+            print(y)
+            print(length)
+            print(width)
+            print(rotation)
+
             # Fill up horizontally
             def drawHorizon(row):
                 drawIndexH = 0
@@ -298,7 +304,6 @@ def confirmationFunction():
 
         gridLoop(70, 50)
         gridLoop(30, 10)
-
 
 
         """
