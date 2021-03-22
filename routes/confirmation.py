@@ -249,11 +249,11 @@ def confirmationFunction():
         def gridLoop(length, width):
             
             # Set variables
-            x = 0
-            y = 0
-            rotation = False
-            checkerHorizonal = False
-            checkerVertical = False
+            global x = 0
+            global y = 0
+            global rotation = False
+            global checkerHorizonal = False
+            global checkerVertical = False
 
             # Horizontal checker for free space
             def gridHorizon(row):
@@ -263,7 +263,6 @@ def confirmationFunction():
                         if gridIndexH + length < len(row):
                             checkerHorizonal = True
                             x = gridIndexH
-                            print("X equals: " + str(x))
                             return True
 
                         elif gridIndexH + width < len(row):
