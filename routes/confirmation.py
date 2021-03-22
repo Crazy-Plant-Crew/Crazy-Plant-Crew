@@ -248,12 +248,18 @@ def confirmationFunction():
         # Grid looper
         def gridLoop(length, width):
             
-            # Set variables
-            global x = 0
-            global y = 0
-            global rotation = False
-            global checkerHorizonal = False
-            global checkerVertical = False
+            # Set global variables
+            global x
+            global y
+            global rotation
+            global checkerHorizonal
+            global checkerVertical
+
+            x = 0
+            y = 0
+            rotation = False
+            checkerHorizonal = False
+            checkerVertical = False
 
             # Horizontal checker for free space
             def gridHorizon(row):
