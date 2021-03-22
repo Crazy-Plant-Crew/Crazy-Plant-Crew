@@ -257,17 +257,25 @@ def confirmationFunction():
 
             # Horizontal checker for free space
             def gridHorizon(row):
+
                 gridIndexH = 0
+                
+                global x
+                global y
+                global rotation
+                global checkerHorizonal
+                global checkerVertical
+
                 while gridIndexH < len(row):
                     if row[gridIndexH] == "0":
                         if gridIndexH + length < len(row):
                             checkerHorizonal = True
                             x = gridIndexH
-                            return True, x
+                            return True
 
                         elif gridIndexH + width < len(row):
                             x = gridIndexH
-                            return "Rotation", x
+                            return "Rotation"
 
                         else:
                             return False
