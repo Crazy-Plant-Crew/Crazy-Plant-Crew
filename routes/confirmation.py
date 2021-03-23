@@ -201,7 +201,7 @@ def confirmationFunction():
         def makeGrid():
             if len(boxes) > 0:
                 return [["0" for row in range(int(boxes[-1][1]))] for row in range(int(boxes[-1][2]))]
-                
+
             else:
                 return False
 
@@ -338,7 +338,7 @@ def confirmationFunction():
                 if makeGrid() != False:
                     if sizeLoop() != False:
                         if gridLoop(length, width) != False:                           
-                            if deleteLoop() != False:
+                            if deleteLoop(0) != False:
                                 if fillBox() == False:
                                     mainLoop()
 
