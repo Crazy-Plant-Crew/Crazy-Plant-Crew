@@ -264,21 +264,28 @@ def confirmationFunction():
                 x = gridHorizon(thisBox[gridIndexV])
                 if x <= int(len(thisBox[gridIndexV]) - length):
                     rotation = False
-                    if thisBox[gridIndexV + width][x] == "0":
-                        y = gridIndexV
-                        drawLoop(x, y, length, width, rotation)
+                    if gridIndexV + width <= len(thisBox):
+                        if thisBox[gridIndexV + width][x] == "0":
+                            y = gridIndexV
+                            return drawLoop(x, y, length, width, rotation)
 
+                        else:
+                            gridIndexV += 1
                     else:
-                        gridIndexV += 1
+                        return False
 
                 elif x <= int(len(thisBox[gridIndexV]) - width):
                     rotation = True
-                    if thisBox[gridIndexV + length][x] == "0":
-                        y = gridIndexV
-                        drawLoop(x, y, length, width, rotation)
-                    
+                    if gridIndexV + length <= len(thisBox):
+                        if thisBox[gridIndexV + length][x] == "0":
+                            y = gridIndexV
+                            drawLoop(x, y, length, width, rotation)
+                        
+                        else:
+                            gridIndexV += 1
+
                     else:
-                        gridIndexV += 1
+                        return False
 
                 else:
                     gridIndexV += 1
