@@ -201,6 +201,7 @@ def confirmationFunction():
         def makeGrid():
             if len(boxes) > 0:
                 return [["0" for row in range(int(boxes[-1][1]))] for row in range(int(boxes[-1][2]))]
+                
             else:
                 return False
 
@@ -211,6 +212,7 @@ def confirmationFunction():
                 length = plantItems[index][4]
                 width = plantItems[index][5]
                 return length, width
+
             else:
                 return False
 
@@ -265,6 +267,7 @@ def confirmationFunction():
                 while gridIndexH < len(row):
                     if row[gridIndexH] == "0":
                         return gridIndexH
+
                     else:
                         gridIndexH += 1
 
@@ -304,7 +307,9 @@ def confirmationFunction():
 
         def deleteLoop(index):
             if len(plantItems) > 0:
-                return del plantItems[index]
+                del plantItems[index]
+                return
+
             else:
                 return False
 
@@ -378,7 +383,7 @@ def confirmationFunction():
 
             return print("TOTAL ZERO IS: " + str(total0) + "// TOTAL ONE IS: " + str(total1))
         """
-        
+
         mainLoop()
     
         return render_template("confirmation.html", name=getUserName(), picture=getUserPicture(), role=getUserRole())
