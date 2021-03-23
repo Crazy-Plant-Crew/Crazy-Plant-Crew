@@ -293,7 +293,7 @@ def confirmationFunction():
 
 
         gridLoop(70, 50)
-        gridLoop(60, 10)
+        gridLoop(50, 10)
         """
 
 
