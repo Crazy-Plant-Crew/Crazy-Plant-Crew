@@ -294,21 +294,6 @@ def confirmationFunction():
 
         gridLoop(70, 50)
         gridLoop(55, 10)
-        """
-
-
-
-        # Fill up first plant in that box bottom
-        while len(plantItems) > 0:
-            for plantItem in plantItems:
-                length = int(plantItem[4])
-                width = int(plantItem[5])
-                gridLoop(length, width)
-            
-            del plantItems[0]
-
-
-        # Delete basket items
 
 
         # Make the order valid
@@ -332,7 +317,7 @@ def confirmationFunction():
         print(len(boxes))
         print("COST")
         print(cost)
-        """
+        
 
         # Counter of 1's to check if results make sense
         def gridCounter():
