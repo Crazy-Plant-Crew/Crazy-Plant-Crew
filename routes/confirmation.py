@@ -167,6 +167,8 @@ def confirmationFunction():
             boxes = []
 
             # Check weight
+
+            # Check cost
             """
 
             # Loop through plants
@@ -176,32 +178,41 @@ def confirmationFunction():
                 if len(boxesEX) > 0 and len(plantItems) > 0 and addresses[3] == "Germany":
                     for boxEX in boxesEX:
                         if int(plantItem[0]) == int(boxEX[1][0]):
-                            boxes.extend([boxEX[0]])
-                            return
+                            return boxes.extend([boxEX[0]])
 
                 # Non express but in Germany - Append needed box
                 elif len(boxesNE) > 0 and len(plantItems) > 0 and addresses[3] == "Germany":
                     for boxNE in boxesNE:
                         if int(plantItem[0]) == int(boxNE[1][0]):
-                            boxes.extend([boxNE[0]])
-                            return
+                            return boxes.extend([boxNE[0]])                            
                 
                 # Non express in the EU - Append needed box
                 elif len(boxesNE) > 0 and len(plantItems) > 0 and addresses[3] != "Germany":
                     for boxNE in boxesNE:
                         if int(plantItem[0]) == int(boxNE[1][0]):
-                            boxes.extend([boxNE[0]])
-                            return
+                            return boxes.extend([boxNE[0]])            
 
                 # Return False if there are no more plant to cover
                 else:
                     return False
 
-        plantLoop()
-
 
         # Make a grid from the last needed box to represent its bottom
-        thisBox = [["0" for row in range(int(boxes[-1][1]))] for row in range(int(boxes[-1][2]))]
+        def makeGrid():
+            if len(boxes) > 0:
+                return [["0" for row in range(int(boxes[-1][1]))] for row in range(int(boxes[-1][2]))]
+            else:
+                return False
+
+
+        # Take plants length and width
+        def sizeLoop(index):
+            if len(plantItems) > 0:
+                length = plantItems[index][4]
+                width = plantItems[index][5]
+                return length, width
+            else:
+                return False
 
 
         # Filler function
@@ -237,12 +248,12 @@ def confirmationFunction():
                     drawHorizon(thisBox[drawIndexV])
                     drawIndexV += 1
 
-                elif rotation == True and drawIndexV >= y and drawIndexV < y + length:
-                    drawHorizon(thisBox[drawIndexV])
-                    drawIndexV += 1
+                elif rotation == True and drawIndexH >= x and drawIndexH < x + width:
+                    row[drawIndexH] = "1"
+                    drawIndexH += 1
 
                 else:
-                    drawIndexV += 1
+                    drawIndexH += 1
 
 
         # Grid looper
@@ -291,24 +302,59 @@ def confirmationFunction():
                     gridIndexV += 1
 
 
+        def deleteLoop(index):
+            if len(plantItems) > 0:
+                return del plantItems[index]
+            else:
+                return False
 
-        gridLoop(70, 50)
-        gridLoop(55, 10)
+
+        # Main loop for the sending costs
+        def mainLoop():
+
+            def fillBox():
+                index = 0
+                while index > len(plantItems):
+                    if sizeLoop(index) != False:
+                        if gridLoop(length, width) == True:
+                            if deleteLoop(index) != False:
+                                index = 0
+                                fillBox()
+                            else:
+                                return False
+                        else:
+                            index += 1
+                    else:
+                        return False
+
+
+
+            if plantLoop() != False:
+                if makeGrid() != False:
+                    if sizeLoop() != False:
+                        if gridLoop(length, width) != False:                           
+                            if deleteLoop() != False:
+                                if fillBox() == False:
+                                    mainLoop()
+
+                                else:
+                                    return
+                            else:
+                                return
+                        else:
+                            return
+                    else:
+                        return
+                else:
+                    return
+            else:
+                return                    
+                
+
+
 
 
         # Make the order valid
-        print("ADDRESSES")
-        print(addresses)
-        print(len(addresses))
-        print("PLANTS")
-        print(plants)
-        print(len(plants))
-        print("NON EXPRESS")
-        print(boxesNE)
-        print(len(boxesNE))
-        print("EXPRESS")
-        print(boxesEX)
-        print(len(boxesEX))
         print("PLANTITEMS")
         print(plantItems)
         print(len(plantItems))
@@ -318,7 +364,7 @@ def confirmationFunction():
         print("COST")
         print(cost)
         
-
+        """
         # Counter of 1's to check if results make sense
         def gridCounter():
             total0 = 0
@@ -331,7 +377,8 @@ def confirmationFunction():
                         total0 += 1
 
             return print("TOTAL ZERO IS: " + str(total0) + "// TOTAL ONE IS: " + str(total1))
-
-        gridCounter()
+        """
+        
+        mainLoop()
     
         return render_template("confirmation.html", name=getUserName(), picture=getUserPicture(), role=getUserRole())
