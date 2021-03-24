@@ -228,7 +228,7 @@ def confirmationFunction():
             print(rotation)
 
             # Fill up horizontally
-            def drawHorizon(row, thisBox):
+            def drawHorizon(row):
                 drawIndexH = 0
                 while drawIndexH < len(row):
 
