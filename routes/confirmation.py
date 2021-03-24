@@ -319,7 +319,7 @@ def confirmationFunction():
 
             def fillBox():
                 index = 0
-                while index > len(plantItems):
+                while index < len(plantItems):
                     if sizeLoop(index) != False:
                         if gridLoop(length, width) == True:
                             if deleteLoop(index) != False:
