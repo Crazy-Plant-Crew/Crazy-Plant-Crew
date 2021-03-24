@@ -200,7 +200,8 @@ def confirmationFunction():
         # Make a grid from the last needed box to represent its bottom
         def makeGrid():
             if len(boxes) > 0:
-                return [["0" for row in range(int(boxes[-1][1]))] for row in range(int(boxes[-1][2]))]
+                thisBox = [["0" for row in range(int(boxes[-1][1]))] for row in range(int(boxes[-1][2]))]
+                return thisBox
 
             else:
                 return False
@@ -259,7 +260,7 @@ def confirmationFunction():
 
 
         # Grid looper
-        def gridLoop(length, width):
+        def gridLoop(length, width, thisBox):
 
             # Horizontal checker for free space
             def gridHorizon(row):
@@ -322,7 +323,7 @@ def confirmationFunction():
                 while index < len(plantItems):
                     if sizeLoop(index) != False:
                         length, width = sizeLoop(index)
-                        if gridLoop(length, width) == True:
+                        if gridLoop(length, width, thisBox) == True:
                             if deleteLoop(index) != False:
                                 index = 0
                                 fillBox()
@@ -336,9 +337,10 @@ def confirmationFunction():
 
             if plantLoop() != False:
                 if makeGrid() != False:
+                    thisBox = makeGrid()
                     if sizeLoop(0) != False:
                         length, width = sizeLoop(0)
-                        if gridLoop(length, width) != False:                           
+                        if gridLoop(length, width, thisBox) != False:                           
                             if deleteLoop(0) != False:
                                 if fillBox() == False:
                                     mainLoop()
