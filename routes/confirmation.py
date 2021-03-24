@@ -228,7 +228,7 @@ def confirmationFunction():
             print(rotation)
 
             # Fill up horizontally
-            def drawHorizon(row):
+            def drawHorizon(row, thisBox):
                 drawIndexH = 0
                 while drawIndexH < len(row):
 
@@ -282,7 +282,7 @@ def confirmationFunction():
                     if gridIndexV + int(width) < len(thisBox):
                         if thisBox[gridIndexV + int(width)][x] == "0":
                             y = gridIndexV
-                            return drawLoop(x, y, length, width, rotation)
+                            return drawLoop(x, y, length, width, rotation, thisBox)
 
                         else:
                             gridIndexV += 1
