@@ -321,7 +321,7 @@ def confirmationFunction():
         print(len(boxes))
 
 
-        while len(plantItems) > 0
+        while len(plantItems) > 0:
             plantLoop()
             thisBox = makeGrid()
             innerIndex = 0
