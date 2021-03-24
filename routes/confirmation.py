@@ -364,7 +364,7 @@ def confirmationFunction():
                 
 
 
-
+        mainLoop()
 
         # Make the order valid
         print("PLANTITEMS")
@@ -391,6 +391,6 @@ def confirmationFunction():
             return print("TOTAL ZERO IS: " + str(total0) + "// TOTAL ONE IS: " + str(total1))
         """
 
-        mainLoop()
+        
     
         return render_template("confirmation.html", name=getUserName(), picture=getUserPicture(), role=getUserRole())
