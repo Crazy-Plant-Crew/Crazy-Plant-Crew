@@ -321,6 +321,7 @@ def confirmationFunction():
                 index = 0
                 while index < len(plantItems):
                     if sizeLoop(index) != False:
+                        length, width = sizeLoop(index)
                         if gridLoop(length, width) == True:
                             if deleteLoop(index) != False:
                                 index = 0
@@ -336,6 +337,7 @@ def confirmationFunction():
             if plantLoop() != False:
                 if makeGrid() != False:
                     if sizeLoop(0) != False:
+                        length, width = sizeLoop(0)
                         if gridLoop(length, width) != False:                           
                             if deleteLoop(0) != False:
                                 if fillBox() == False:
