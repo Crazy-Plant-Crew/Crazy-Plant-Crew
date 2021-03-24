@@ -298,9 +298,6 @@ def confirmationFunction():
 
                 else:
                     gridIndexV += 1
-                
-                else:
-                    return False
 
 
         def deleteLoop(index):
