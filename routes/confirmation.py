@@ -232,11 +232,11 @@ def confirmationFunction():
                 drawIndexH = 0
                 while drawIndexH < len(row):
 
-                    if rotation == False and drawIndexH >= x and drawIndexH < x + length:
+                    if rotation == False and drawIndexH >= x and drawIndexH < x + int(length):
                         row[drawIndexH] = "1"
                         drawIndexH += 1
 
-                    elif rotation == True and drawIndexH >= x and drawIndexH < x + width:
+                    elif rotation == True and drawIndexH >= x and drawIndexH < x + int(width):
                         row[drawIndexH] = "1"
                         drawIndexH += 1
 
@@ -247,11 +247,11 @@ def confirmationFunction():
             drawIndexV = 0
             while drawIndexV < len(thisBox):
 
-                if rotation == False and drawIndexV >= y and drawIndexV < y + width:
+                if rotation == False and drawIndexV >= y and drawIndexV < y + int(width):
                     drawHorizon(thisBox[drawIndexV])
                     drawIndexV += 1
 
-                elif rotation == True and drawIndexH >= x and drawIndexH < x + width:
+                elif rotation == True and drawIndexH >= x and drawIndexH < x + int(width):
                     row[drawIndexH] = "1"
                     drawIndexH += 1
 
