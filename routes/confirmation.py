@@ -347,7 +347,7 @@ def confirmationFunction():
         print(len(boxes))
 
         
-
+        """
         # Counter of 1's to check if results make sense
         def gridCounter():
             total0 = 0
@@ -362,7 +362,7 @@ def confirmationFunction():
             return print("TOTAL ZERO IS: " + str(total0) + "// TOTAL ONE IS: " + str(total1))
 
         gridCounter()
-        
+        """
 
         
     
