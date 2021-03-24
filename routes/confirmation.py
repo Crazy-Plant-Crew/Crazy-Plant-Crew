@@ -319,9 +319,17 @@ def confirmationFunction():
 
         plantLoop()
         thisBox = makeGrid()
-        length, width = sizeLoop(0)
-        gridLoop(length, width, thisBox)
-        deleteLoop(0)
+
+        index = 0
+        while index < len(plantItems):
+
+            length, width = sizeLoop(index)
+            gridLoop(length, width, thisBox)
+            deleteLoop(index)
+
+            index += 1
+
+        
         
 
 
