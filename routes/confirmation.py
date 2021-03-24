@@ -221,12 +221,6 @@ def confirmationFunction():
         # Filler function
         def drawLoop(x, y, length, width, rotation, thisBox):
 
-            print(x)
-            print(y)
-            print(length)
-            print(width)
-            print(rotation)
-
             # Fill up horizontally
             def drawHorizon(row):
                 drawIndexH = 0
@@ -277,34 +271,33 @@ def confirmationFunction():
             gridIndexV = 0
             while gridIndexV < len(thisBox):
                 x = gridHorizon(thisBox[gridIndexV])
-                if x != None:
-                    if x <= int(len(thisBox[gridIndexV]) - int(length)):
-                        rotation = False
-                        if gridIndexV + int(width) < len(thisBox):
-                            if thisBox[gridIndexV + int(width)][x] == "0":
-                                y = gridIndexV
-                                return drawLoop(x, y, length, width, rotation, thisBox)
-
-                            else:
-                                gridIndexV += 1
-                        else:
-                            return False
-
-                    elif x <= int(len(thisBox[gridIndexV]) - int(width)):
-                        rotation = True
-                        if gridIndexV + int(length) < len(thisBox):
-                            if thisBox[gridIndexV + int(length)][x] == "0":
-                                y = gridIndexV
-                                return drawLoop(x, y, length, width, rotation)
-                            
-                            else:
-                                gridIndexV += 1
+                if x <= int(len(thisBox[gridIndexV]) - int(length)):
+                    rotation = False
+                    if gridIndexV + int(width) < len(thisBox):
+                        if thisBox[gridIndexV + int(width)][x] == "0":
+                            y = gridIndexV
+                            return drawLoop(x, y, length, width, rotation, thisBox)
 
                         else:
-                            return False
+                            gridIndexV += 1
+                    else:
+                        return False
+
+                elif x <= int(len(thisBox[gridIndexV]) - int(width)):
+                    rotation = True
+                    if gridIndexV + int(length) < len(thisBox):
+                        if thisBox[gridIndexV + int(length)][x] == "0":
+                            y = gridIndexV
+                            return drawLoop(x, y, length, width, rotation)
+                        
+                        else:
+                            gridIndexV += 1
 
                     else:
-                        gridIndexV += 1
+                        return False
+
+                else:
+                    gridIndexV += 1
                 
                 else:
                     return False
@@ -319,76 +312,31 @@ def confirmationFunction():
                 return False
 
 
-        # Main loop for the sending costs
-        def mainLoop():
-
-            def fillBox():
-                index = 0
-                while index < len(plantItems):
-                    if sizeLoop(index) != False:
-                        print("sizeloop")
-                        length, width = sizeLoop(index)
-                        if gridLoop(length, width, thisBox) == True:
-                            print("gridloop")
-                            if deleteLoop(index) != False:
-                                index = 0
-                                print("deleteloop")
-                                fillBox()
-                            else:
-                                return False
-                        else:
-                            index += 1
-                    else:
-                        return False
-
-
-            if plantLoop() != False:
-                print("PLANTLOOP")
-                if makeGrid() != False:
-                    thisBox = makeGrid()
-                    print("MAKEGRID")
-                    if sizeLoop(0) != False:
-                        length, width = sizeLoop(0)
-                        print("SIZELOOP")
-                        if gridLoop(length, width, thisBox) != False:   
-                            print("GRIDLOOP")                        
-                            if deleteLoop(0) != False:
-                                print("DELETELOOP")
-                                if fillBox() == False:
-                                    print("MAINLOOP")
-                                    mainLoop()
-
-                                else:
-                                    return
-                            else:
-                                return
-                        else:
-                            return
-                    else:
-                        return
-                else:
-                    return
-            else:
-                return                    
-
-        print("PLANTITEMS BEFORE")
-        print(plantItems)
-        print(len(plantItems))
-
-
-        mainLoop()
-
-        # Make the order valid
-        print("PLANTITEMS AFTER")
+        print("PLANTITEMS before")
         print(plantItems)
         print(len(plantItems))
         print("BOXES")
         print(boxes)
         print(len(boxes))
-        print("COST")
-        print(cost)
+
+
+        plantLoop()
+        thisBox = makeGrid()
+        length, width = sizeLoop(0)
+        gridLoop(length, width, thisBox)
+        deleteLoop(0)
         
-        """
+
+
+        print("PLANTITEMS after")
+        print(plantItems)
+        print(len(plantItems))
+        print("BOXES")
+        print(boxes)
+        print(len(boxes))
+
+        
+
         # Counter of 1's to check if results make sense
         def gridCounter():
             total0 = 0
@@ -401,7 +349,9 @@ def confirmationFunction():
                         total0 += 1
 
             return print("TOTAL ZERO IS: " + str(total0) + "// TOTAL ONE IS: " + str(total1))
-        """
+
+        gridCounter()
+        
 
         
     
