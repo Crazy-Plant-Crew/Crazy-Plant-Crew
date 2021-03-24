@@ -346,7 +346,7 @@ def confirmationFunction():
                 print("PLANTLOOP")
                 if makeGrid() != False:
                     thisBox = makeGrid()
-                    print("MAKEGRID)
+                    print("MAKEGRID")
                     if sizeLoop(0) != False:
                         length, width = sizeLoop(0)
                         print("SIZELOOP")
