@@ -251,12 +251,12 @@ def confirmationFunction():
                     drawHorizon(thisBox[drawIndexV])
                     drawIndexV += 1
 
-                elif rotation == True and drawIndexH >= x and drawIndexH < x + int(width):
-                    row[drawIndexH] = "1"
-                    drawIndexH += 1
+                elif rotation == True and drawIndexV >= x and drawIndexV < x + int(width):
+                    drawHorizon(thisBox[drawIndexV])
+                    drawIndexV += 1
 
                 else:
-                    drawIndexH += 1
+                    drawIndexV += 1
 
 
         # Grid looper
