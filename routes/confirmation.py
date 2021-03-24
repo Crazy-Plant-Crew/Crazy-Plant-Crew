@@ -219,7 +219,7 @@ def confirmationFunction():
 
 
         # Filler function
-        def drawLoop(x, y, length, width, rotation):
+        def drawLoop(x, y, length, width, rotation, thisBox):
 
             print(x)
             print(y)
