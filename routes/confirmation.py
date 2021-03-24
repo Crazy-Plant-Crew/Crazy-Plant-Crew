@@ -321,8 +321,7 @@ def confirmationFunction():
         print(len(boxes))
 
 
-        outerIndex = 0
-        while outerIndex > len(plantItems):
+        while len(plantItems) > 0
             plantLoop()
             thisBox = makeGrid()
             innerIndex = 0
@@ -333,7 +332,6 @@ def confirmationFunction():
                 deleteLoop(innerIndex)
                 innerIndex += 1
             
-            outerIndex += 1
 
         
         
