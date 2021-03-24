@@ -326,10 +326,13 @@ def confirmationFunction():
                 index = 0
                 while index < len(plantItems):
                     if sizeLoop(index) != False:
+                        print("printloop")
                         length, width = sizeLoop(index)
                         if gridLoop(length, width, thisBox) == True:
+                            print("gridloop")
                             if deleteLoop(index) != False:
                                 index = 0
+                                print("deleteloop")
                                 fillBox()
                             else:
                                 return False
@@ -340,13 +343,19 @@ def confirmationFunction():
 
 
             if plantLoop() != False:
+                print("PLANTLOOP")
                 if makeGrid() != False:
                     thisBox = makeGrid()
+                    print("MAKEGRID)
                     if sizeLoop(0) != False:
                         length, width = sizeLoop(0)
-                        if gridLoop(length, width, thisBox) != False:                           
+                        print("SIZELOOP")
+                        if gridLoop(length, width, thisBox) != False:   
+                            print("GRIDLOOP")                        
                             if deleteLoop(0) != False:
+                                print("DELETELOOP")
                                 if fillBox() == False:
+                                    print("MAINLOOP")
                                     mainLoop()
 
                                 else:
