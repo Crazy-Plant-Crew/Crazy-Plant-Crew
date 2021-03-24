@@ -361,13 +361,16 @@ def confirmationFunction():
                     return
             else:
                 return                    
-                
+
+        print("PLANTITEMS BEFORE")
+        print(plantItems)
+        print(len(plantItems))
 
 
         mainLoop()
 
         # Make the order valid
-        print("PLANTITEMS")
+        print("PLANTITEMS AFTER")
         print(plantItems)
         print(len(plantItems))
         print("BOXES")
