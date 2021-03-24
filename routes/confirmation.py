@@ -333,7 +333,6 @@ def confirmationFunction():
                         return False
 
 
-
             if plantLoop() != False:
                 if makeGrid() != False:
                     if sizeLoop(0) != False:
