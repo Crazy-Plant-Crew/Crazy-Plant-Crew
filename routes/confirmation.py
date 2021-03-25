@@ -319,18 +319,16 @@ def confirmationFunction():
 
 
         # Main loop
+        innerIndex = 0
         while len(plantItems) > 0:
 
             plantLoop()
             print("plantLoop")
             thisBox = makeGrid()
             print("makeGrid")
-            innerIndex = 0
 
             while innerIndex < len(plantItems):
 
-                print("Inner LOOP")
-                print(len(plantItems))
                 length, width = sizeLoop(innerIndex)
                 print("sizeLoop")
                 gridLoop(length, width, thisBox)
