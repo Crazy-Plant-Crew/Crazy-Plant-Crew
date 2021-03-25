@@ -321,7 +321,8 @@ def confirmationFunction():
         # Main loop
         innerIndex = 0
         outerIndex = 0
-        while outerIndex < len(plantItems):
+        counter = len(plantItems)
+        while outerIndex < counter:
 
             plantLoop()
             print("plantLoop")
