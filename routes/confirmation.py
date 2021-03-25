@@ -325,7 +325,7 @@ def confirmationFunction():
         print("makeGrid")
 
         index = 0
-        while index <= len(plantItems):
+        while len(plantItems) > 0:
 
             length, width = sizeLoop(index)
             print("sizeLoop")
