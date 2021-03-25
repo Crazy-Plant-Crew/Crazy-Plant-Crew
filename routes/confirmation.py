@@ -329,7 +329,7 @@ def confirmationFunction():
             thisBox = makeGrid()
             print("makeGrid")
 
-            while innerIndex < counter:
+            while innerIndex <= len(plantItems):
 
                 length, width = sizeLoop(innerIndex)
                 print("sizeLoop")
