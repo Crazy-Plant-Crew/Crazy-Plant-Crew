@@ -329,6 +329,8 @@ def confirmationFunction():
 
             while innerIndex < len(plantItems):
 
+                print("Inner LOOP")
+                print(len(plantItems))
                 length, width = sizeLoop(innerIndex)
                 print("sizeLoop")
                 gridLoop(length, width, thisBox)
