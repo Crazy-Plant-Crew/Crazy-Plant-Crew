@@ -277,12 +277,6 @@ def confirmationFunction():
                         if gridIndexV + int(width) < len(thisBox):
                             if thisBox[gridIndexV + int(width)][x] == "0":
                                 y = gridIndexV
-                                print("NO ROTATION")
-                                print(x)
-                                print(y)
-                                print(length)
-                                print(width)
-                                print(rotation)
                                 return drawLoop(x, y, length, width, rotation, thisBox)
 
                             else:
@@ -295,12 +289,6 @@ def confirmationFunction():
                         if gridIndexV + int(length) < len(thisBox):
                             if thisBox[gridIndexV + int(length)][x] == "0":
                                 y = gridIndexV
-                                print("ROTATION")
-                                print(x)
-                                print(y)
-                                print(length)
-                                print(width)
-                                print(rotation)
                                 return drawLoop(x, y, length, width, rotation)
                             
                             else:
@@ -334,14 +322,19 @@ def confirmationFunction():
         while len(plantItems) > 0:
 
             plantLoop()
+            print("plantLoop")
             thisBox = makeGrid()
+            print("makeGrid")
             innerIndex = 0
 
             while innerIndex < len(plantItems):
 
                 length, width = sizeLoop(innerIndex)
+                print("sizeLoop")
                 gridLoop(length, width, thisBox)
+                print("gridLoop")
                 deleteLoop(innerIndex)
+                print("deleteLoop")
                 innerIndex += 1
             
 
