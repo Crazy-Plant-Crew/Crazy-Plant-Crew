@@ -336,6 +336,9 @@ def confirmationFunction():
                 print("gridLoop")
                 deleteLoop(innerIndex)
                 print("deleteLoop")
+                innerIndex += 1
+
+            outerIndex += 1
             
 
         
