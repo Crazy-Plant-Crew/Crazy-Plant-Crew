@@ -320,7 +320,8 @@ def confirmationFunction():
 
         # Main loop
         innerIndex = 0
-        while len(plantItems) > 0:
+        outerIndex = 0
+        while outerIndex < len(plantItems):
 
             plantLoop()
             print("plantLoop")
@@ -337,6 +338,7 @@ def confirmationFunction():
                 print("deleteLoop")
                 innerIndex += 1
             
+            outerIndex += 1
 
         
         
