@@ -323,18 +323,40 @@ def confirmationFunction():
 
         plantItemsCopy = plantItems[:]
 
-        # Main loop
-        thisPlant = plantLoop()
-        print("plantLoop")
-        thisBox = makeGrid()
-        print("makeGrid")
-        length, width = sizeLoop(thisPlant)
-        print("sizeLoop")
-        gridLoop(length, width, thisBox)
-        print("gridLoop")
-        deleteLoop(thisPlant)
-        print("deleteLoop")
-        
+
+        def masterLoop():
+            if len(plantItems) > 0:
+
+                thisPlant = plantLoop()
+                print("1plantLoop")
+                thisBox = makeGrid()
+                print("1makeGrid")
+                length, width = sizeLoop(thisPlant)
+                print("1sizeLoop")
+                gridLoop(length, width, thisBox)
+                print("1gridLoop")
+                deleteLoop(thisPlant)
+                print("1deleteLoop")
+                slaveLoop()
+
+            def slaveLoop():
+                if len(plantItems) > 0:
+                    for plantItem in plantItems:
+
+                        length, width = sizeLoop(plantItem)
+                        print("2sizeLoop")
+
+                        if gridLoop(length, width, plantItem):
+                            print("2gridLoop")
+                            deleteLoop(plantItem)
+                            print("2deleteLoop")
+                            slaveLoop()
+
+                        else: 
+                            masterLoop()
+
+                else:
+                    return
 
         
         
