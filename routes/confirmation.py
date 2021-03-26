@@ -304,6 +304,7 @@ def confirmationFunction():
                         gridIndexV += 1
 
                 else:
+                    print("gridLoop has returned False")
                     return False
 
 
