@@ -197,6 +197,7 @@ def confirmationFunction():
 
                 # Return False if there are no more plant to cover
                 else:
+                    print("plantLoop returns False")
                     return False
 
 
