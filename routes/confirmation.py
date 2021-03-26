@@ -358,6 +358,9 @@ def confirmationFunction():
                 else:
                     return
 
+
+        masterLoop()
+
         
         
 
