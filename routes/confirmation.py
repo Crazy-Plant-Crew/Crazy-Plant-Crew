@@ -197,7 +197,6 @@ def confirmationFunction():
 
                 # Return False if there are no more plant to cover
                 else:
-                    print("plantLoop returns False")
                     return False
 
 
@@ -344,8 +343,11 @@ def confirmationFunction():
                 deleteLoop(thisPlant)
                 slaveLoop(thisBox)
 
-        masterLoop()
-
+        #masterLoop()
+        thisPlant = plantLoop()
+        print(thisPlant)
+        thisPlant = plantLoop()
+        print(thisPlant)
 
         print("boxes")
         print(boxes)
