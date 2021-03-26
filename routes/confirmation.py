@@ -304,7 +304,6 @@ def confirmationFunction():
                         gridIndexV += 1
 
                 else:
-                    print("gridLoop has returned False")
                     return False
 
 
@@ -327,18 +326,18 @@ def confirmationFunction():
 
         def masterLoop():
 
-            def slaveLoop():
+            def slaveLoop(thisBox):
                 if len(plantItems) > 0:
                     for plantItem in plantItems:
 
                         length, width = sizeLoop(plantItem)
                         print("2sizeLoop")
 
-                        if gridLoop(length, width, plantItem) != False:
+                        if gridLoop(length, width, thisBox) != False:
                             print("2gridLoop")
                             deleteLoop(plantItem)
                             print("2deleteLoop")
-                            slaveLoop()
+                            slaveLoop(thisBox)
 
                         else: 
                             masterLoop()
