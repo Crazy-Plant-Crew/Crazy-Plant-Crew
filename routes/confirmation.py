@@ -349,8 +349,6 @@ def confirmationFunction():
         print(boxesEX)
         print("boxesNE")
         print(boxesNE)
-        print("thisPlants") 
-        print(thisPlants)
         print("boxes")
         print(boxes)
 
