@@ -316,12 +316,6 @@ def confirmationFunction():
                 return False
 
 
-        print("boxesEX")
-        print(boxesEX)
-        print("boxesNE")
-        print(boxesNE)
-
-
         # Master loop
         def masterLoop():
 
@@ -342,6 +336,7 @@ def confirmationFunction():
 
             if len(plantItems) > 0:
                 thisPlant = plantLoop()
+                print(thisPlant)
                 thisBox = makeGrid()
                 length, width = sizeLoop(thisPlant)
                 gridLoop(length, width, thisBox)
