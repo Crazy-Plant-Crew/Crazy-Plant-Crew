@@ -358,7 +358,7 @@ def confirmationFunction():
                 print("1gridLoop")
                 deleteLoop(thisPlant)
                 print("1deleteLoop")
-                slaveLoop()
+                slaveLoop(thisBox)
 
         masterLoop()
 
