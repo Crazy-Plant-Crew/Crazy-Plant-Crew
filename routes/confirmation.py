@@ -336,6 +336,7 @@ def confirmationFunction():
 
             if len(plantItems) > 0:
                 thisPlant = plantLoop()
+                print(thisPlant)
                 thisBox = makeGrid()
                 length, width = sizeLoop(thisPlant)
                 gridLoop(length, width, thisBox)
