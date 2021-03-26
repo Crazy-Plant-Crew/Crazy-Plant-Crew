@@ -346,6 +346,7 @@ def confirmationFunction():
         #masterLoop()
         thisPlant = plantLoop()
         print(thisPlant)
+        plantItems.remove(thisPlant)
         thisPlant = plantLoop()
         print(thisPlant)
 
