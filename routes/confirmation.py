@@ -320,23 +320,16 @@ def confirmationFunction():
         print(plantItems)
         print(len(plantItems))
 
-
-        plantItemsCopy = plantItems[:]
-
-
+        # Master loop
         def masterLoop():
 
+            # Check for other plants to fit present box
             def slaveLoop(thisBox):
                 if len(plantItems) > 0:
                     for plantItem in plantItems:
-
                         length, width = sizeLoop(plantItem)
-                        print("2sizeLoop")
-
-                        if gridLoop(length, width, thisBox) != False:
-                            print("2gridLoop")
+                        if gridLoop(length, width, thisBox) != False:                            
                             deleteLoop(plantItem)
-                            print("2deleteLoop")
                             slaveLoop(thisBox)
 
                         else: 
@@ -345,19 +338,12 @@ def confirmationFunction():
                 else:
                     return
 
-
             if len(plantItems) > 0:
-
                 thisPlant = plantLoop()
-                print("1plantLoop")
                 thisBox = makeGrid()
-                print("1makeGrid")
                 length, width = sizeLoop(thisPlant)
-                print("1sizeLoop")
                 gridLoop(length, width, thisBox)
-                print("1gridLoop")
                 deleteLoop(thisPlant)
-                print("1deleteLoop")
                 slaveLoop(thisBox)
 
         masterLoop()
@@ -373,23 +359,6 @@ def confirmationFunction():
         print(boxes)
         print(len(boxes))
 
-        
-        """
-        # Counter of 1's to check if results make sense
-        def gridCounter():
-            total0 = 0
-            total1 = 0
-            for row in thisBox:
-                for unit in row:
-                    if unit == "1":
-                        total1 += 1
-                    else:
-                        total0 += 1
-
-            return print("TOTAL ZERO IS: " + str(total0) + "// TOTAL ONE IS: " + str(total1))
-
-        gridCounter()
-        """
 
         
     
