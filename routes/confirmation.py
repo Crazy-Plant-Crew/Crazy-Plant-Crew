@@ -345,6 +345,10 @@ def confirmationFunction():
 
         masterLoop()
 
+        print("boxesEX")
+        print(boxesEX)
+        print("boxesNE")
+        print(boxesNE)
         print("thisPlants") 
         print(thisPlants)
         print("boxes")
