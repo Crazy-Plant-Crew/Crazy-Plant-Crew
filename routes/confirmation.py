@@ -325,19 +325,6 @@ def confirmationFunction():
 
 
         def masterLoop():
-            if len(plantItems) > 0:
-
-                thisPlant = plantLoop()
-                print("1plantLoop")
-                thisBox = makeGrid()
-                print("1makeGrid")
-                length, width = sizeLoop(thisPlant)
-                print("1sizeLoop")
-                gridLoop(length, width, thisBox)
-                print("1gridLoop")
-                deleteLoop(thisPlant)
-                print("1deleteLoop")
-                slaveLoop()
 
             def slaveLoop():
                 if len(plantItems) > 0:
@@ -358,6 +345,20 @@ def confirmationFunction():
                 else:
                     return
 
+
+            if len(plantItems) > 0:
+
+                thisPlant = plantLoop()
+                print("1plantLoop")
+                thisBox = makeGrid()
+                print("1makeGrid")
+                length, width = sizeLoop(thisPlant)
+                print("1sizeLoop")
+                gridLoop(length, width, thisBox)
+                print("1gridLoop")
+                deleteLoop(thisPlant)
+                print("1deleteLoop")
+                slaveLoop()
 
         masterLoop()
 
