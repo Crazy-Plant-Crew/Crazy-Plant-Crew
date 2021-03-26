@@ -349,10 +349,10 @@ def confirmationFunction():
         thisPlant = plantLoop()
         print(thisPlant)
         plantItems.remove(thisPlant)
-        print("plantItems")
-        print(plantItems)
         thisPlant = plantLoop()
         print(thisPlant)
+        print("plantItems")
+        print(plantItems)
 
         print("boxes")
         print(boxes)
