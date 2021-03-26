@@ -178,19 +178,22 @@ def confirmationFunction():
                 if len(boxesEX) > 0 and len(plantItems) > 0 and addresses[3] == "Germany":
                     for boxEX in boxesEX:
                         if int(plantItem[0]) == int(boxEX[1][0]):
-                            return boxes.extend([boxEX[0]])
+                            boxes.extend([boxEX[0]])
+                            return plantItem
 
                 # Non express but in Germany - Append needed box
                 elif len(boxesNE) > 0 and len(plantItems) > 0 and addresses[3] == "Germany":
                     for boxNE in boxesNE:
                         if int(plantItem[0]) == int(boxNE[1][0]):
-                            return boxes.extend([boxNE[0]])                            
+                            boxes.extend([boxNE[0]])
+                            return plantItem                        
                 
                 # Non express in the EU - Append needed box
                 elif len(boxesNE) > 0 and len(plantItems) > 0 and addresses[3] != "Germany":
                     for boxNE in boxesNE:
                         if int(plantItem[0]) == int(boxNE[1][0]):
-                            return boxes.extend([boxNE[0]])            
+                            boxes.extend([boxNE[0]])
+                            return plantItem        
 
                 # Return False if there are no more plant to cover
                 else:
@@ -208,10 +211,10 @@ def confirmationFunction():
 
 
         # Take plants length and width
-        def sizeLoop(index):
+        def sizeLoop(thisPlant):
             if len(plantItems) > 0:
-                length = plantItems[index][4]
-                width = plantItems[index][5]
+                length = thisPlant[4]
+                width = thisPlant[5]
                 return length, width
 
             else:
@@ -304,9 +307,9 @@ def confirmationFunction():
                     return False
 
 
-        def deleteLoop(index):
+        def deleteLoop(thisPlant):
             if len(plantItems) > 0:
-                del plantItems[index]
+                plantItems.remove(thisPlant)
                 return
 
             else:
@@ -318,23 +321,20 @@ def confirmationFunction():
         print(len(plantItems))
 
 
+        plantItemsCopy = plantItems[:]
+
         # Main loop
-        plantLoop()
+        thisPlant = plantLoop()
         print("plantLoop")
         thisBox = makeGrid()
         print("makeGrid")
-
-        index = 0
-        while len(plantItems) > 0:
-
-            length, width = sizeLoop(index)
-            print("sizeLoop")
-            gridLoop(length, width, thisBox)
-            print("gridLoop")
-            deleteLoop(index)
-            print("deleteLoop")
-            index += 1
-            
+        length, width = sizeLoop(thisPlant)
+        print("sizeLoop")
+        gridLoop(length, width, thisBox)
+        print("gridLoop")
+        deleteLoop(thisPlant)
+        print("deleteLoop")
+        
 
         
         
