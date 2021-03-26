@@ -333,7 +333,7 @@ def confirmationFunction():
                         length, width = sizeLoop(plantItem)
                         print("2sizeLoop")
 
-                        if gridLoop(length, width, plantItem):
+                        if gridLoop(length, width, plantItem) != False:
                             print("2gridLoop")
                             deleteLoop(plantItem)
                             print("2deleteLoop")
