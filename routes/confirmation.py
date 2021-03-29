@@ -355,7 +355,7 @@ def confirmationFunction():
 
             return cost
 
-        masterLoop()
+        cost = masterLoop()
 
         print("COST")
         print(cost)
