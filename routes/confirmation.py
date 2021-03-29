@@ -58,7 +58,6 @@ def confirmationFunction():
 
 
     # Get variable
-    cost = 0
     boxesNE = []
     boxesEX = []
     boxes = []
@@ -325,7 +324,10 @@ def confirmationFunction():
 
 
         # Master loop
-        def masterLoop(cost):
+        def masterLoop():
+
+            # Get variable
+            cost = 0
 
             # Check for other plants to fit present box
             def slaveLoop(thisBox):
@@ -344,14 +346,16 @@ def confirmationFunction():
 
             if len(plantItems) > 0:
                 for plantItem in plantItems:
-                    plantLoop(plantItem)
+                    plantLoop(plantItem, cost)
                     thisBox = makeGrid()
                     length, width = takeSize(plantItem)
                     gridLoop(length, width, thisBox)
                     deleteLoop(plantItem)
                     slaveLoop(thisBox)
 
-        masterLoop(cost)
+            return cost
+
+        masterLoop()
 
         print("COST")
         print(cost)
