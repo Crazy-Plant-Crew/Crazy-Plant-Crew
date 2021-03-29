@@ -351,7 +351,7 @@ def confirmationFunction():
                     deleteLoop(plantItem)
                     slaveLoop(thisBox)
 
-        masterLoop()
+        masterLoop(cost)
 
         print("COST")
         print(cost)
