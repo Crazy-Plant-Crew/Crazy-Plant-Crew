@@ -161,7 +161,7 @@ def confirmationFunction():
 
 
         # Function to take the biggest box needed from the express group first, then from the non express group. Increment sending costs.
-        def plantLoop(plantItem, cost):
+        def plantLoop(plantItem):
             """
             # Check weight
 
@@ -172,7 +172,7 @@ def confirmationFunction():
                 for boxEX in boxesEX:
                     if int(plantItem[0]) == int(boxEX[1][0]):
                         thisCost = float(boxEX[0][8])
-                        takeCost(cost, thisCost)
+                        takeCost(thisCost)
                         boxes.extend([boxEX[0]])
                         return plantItem
 
@@ -181,7 +181,7 @@ def confirmationFunction():
                 for boxNE in boxesNE:
                     if int(plantItem[0]) == int(boxNE[1][0]):
                         thisCost = float(boxNE[0][7])
-                        takeCost(cost, thisCost)
+                        takeCost(thisCost)
                         boxes.extend([boxNE[0]])
                         return plantItem                        
             
@@ -190,7 +190,7 @@ def confirmationFunction():
                 for boxNE in boxesNE:
                     if int(plantItem[0]) == int(boxNE[1][0]):
                         thisCost = float(boxNE[0][6])
-                        takeCost(cost, thisCost)
+                        takeCost(thisCost)
                         boxes.extend([boxNE[0]])
                         return plantItem        
 
@@ -224,7 +224,7 @@ def confirmationFunction():
             print("shit")
 
 
-        def takeCost(cost, thisCost):
+        def takeCost(thisCost):
             cost += thisCost
             return cost
 
@@ -325,7 +325,7 @@ def confirmationFunction():
 
 
         # Master loop
-        def masterLoop():
+        def masterLoop(cost):
 
             # Check for other plants to fit present box
             def slaveLoop(thisBox):
@@ -344,7 +344,7 @@ def confirmationFunction():
 
             if len(plantItems) > 0:
                 for plantItem in plantItems:
-                    plantLoop(plantItem, cost)
+                    plantLoop(plantItem)
                     thisBox = makeGrid()
                     length, width = takeSize(plantItem)
                     gridLoop(length, width, thisBox)
