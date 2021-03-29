@@ -340,16 +340,7 @@ def confirmationFunction():
                     deleteLoop(thisPlant)
                     slaveLoop(thisBox)
 
-        #masterLoop()
-        print("plantItems")
-        print(plantItems)
-        thisPlant = plantLoop()
-        print(thisPlant)
-        plantItems.remove(thisPlant)
-        thisPlant = plantLoop()
-        print(thisPlant)
-        print("plantItems")
-        print(plantItems)
+        masterLoop()
 
         print("boxes")
         print(boxes)
