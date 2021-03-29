@@ -171,7 +171,7 @@ def confirmationFunction():
             if len(boxesEX) > 0 and plantItem != None and addresses[3] == "Germany":
                 for boxEX in boxesEX:
                     if int(plantItem[0]) == int(boxEX[1][0]):
-                        thisCost = int(boxEX[0][8])
+                        thisCost = float(boxEX[0][8])
                         takeCost(cost, thisCost)
                         boxes.extend([boxEX[0]])
                         return plantItem
@@ -180,7 +180,7 @@ def confirmationFunction():
             elif len(boxesNE) > 0 and plantItem != None and addresses[3] == "Germany":
                 for boxNE in boxesNE:
                     if int(plantItem[0]) == int(boxNE[1][0]):
-                        thisCost = int(boxNE[0][7])
+                        thisCost = float(boxNE[0][7])
                         takeCost(cost, thisCost)
                         boxes.extend([boxNE[0]])
                         return plantItem                        
@@ -189,7 +189,7 @@ def confirmationFunction():
             elif len(boxesNE) > 0 and plantItem != None and addresses[3] != "Germany":
                 for boxNE in boxesNE:
                     if int(plantItem[0]) == int(boxNE[1][0]):
-                        thisCost = int(boxNE[0][6])
+                        thisCost = float(boxNE[0][6])
                         takeCost(cost, thisCost)
                         boxes.extend([boxNE[0]])
                         return plantItem        
