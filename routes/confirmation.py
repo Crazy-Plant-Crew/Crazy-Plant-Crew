@@ -160,7 +160,7 @@ def confirmationFunction():
 
 
         # Function to take the biggest box needed from the express group first, then from the non express group. Increment sending costs.
-        def plantLoop(plantItem):
+        def plantLoop(plantItem, cost):
             """
             # Check weight
 
