@@ -160,8 +160,8 @@ def confirmationFunction():
         plantItems = sorted(plantItems, key=lambda x: (int(x[4]), int(x[5]), int(x[6])), reverse=True)
 
 
-        # Function to take the biggest box needed from the express group first, then from the non express group.
-        def plantLoop(plantItem):
+        # Function to take the biggest box needed from the express group first, then from the non express group. Increment sending costs.
+        def plantLoop(plantItem, cost):
             """
             # Check weight
 
@@ -344,7 +344,7 @@ def confirmationFunction():
 
             if len(plantItems) > 0:
                 for plantItem in plantItems:
-                    plantLoop(plantItem)
+                    plantLoop(plantItem, cost)
                     thisBox = makeGrid()
                     length, width = takeSize(plantItem)
                     gridLoop(length, width, thisBox)
