@@ -171,7 +171,7 @@ def confirmationFunction():
                 for boxEX in boxesEX:
                     if int(plantItem[0]) == int(boxEX[1][0]):
                         thisCost = float(boxEX[0][8])
-                        takeCost(thisCost)
+                        takeCost(cost, thisCost)
                         boxes.extend([boxEX[0]])
                         return plantItem
 
@@ -180,7 +180,7 @@ def confirmationFunction():
                 for boxNE in boxesNE:
                     if int(plantItem[0]) == int(boxNE[1][0]):
                         thisCost = float(boxNE[0][7])
-                        takeCost(thisCost)
+                        takeCost(cost, thisCost)
                         boxes.extend([boxNE[0]])
                         return plantItem                        
             
@@ -189,7 +189,7 @@ def confirmationFunction():
                 for boxNE in boxesNE:
                     if int(plantItem[0]) == int(boxNE[1][0]):
                         thisCost = float(boxNE[0][6])
-                        takeCost(thisCost)
+                        takeCost(cost, thisCost)
                         boxes.extend([boxNE[0]])
                         return plantItem        
 
@@ -223,7 +223,7 @@ def confirmationFunction():
             print("shit")
 
 
-        def takeCost(thisCost):
+        def takeCost(cost, thisCost):
             cost += thisCost
             return cost
 
@@ -328,7 +328,7 @@ def confirmationFunction():
 
             # Get variable
             cost = 0
-
+        
             # Check for other plants to fit present box
             def slaveLoop(thisBox):
                 if len(plantItems) > 0:
