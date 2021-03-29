@@ -23,10 +23,18 @@ def confirmationFunction():
     # Get variable
     user_id = session["user_id"]
     query = Baskets.query.filter_by(user_id=user_id)
+    express = query.express
+    addresses = []
+    plants = []
+    plantItems = []
+    boxesNE = []
+    boxesEX = []
+    boxes = []
+    packaging = []
+
 
 
     # Make plants array from basket
-    plants = []
     for element in query:
         plants.append([str(element.plant_id), str(element.name), str(element.quantity), str(element.price)])
 
@@ -41,27 +49,14 @@ def confirmationFunction():
 
 
     # Make address array
-    addresses = []
     query = Users.query.filter_by(id=user_id).first()
     addresses.extend([query.street, query.house, query.zipcode, query.country, query.additional])
 
 
-    # Make express variable
-    express = query.express
-
-
     # Make array with available boxes
     query = Boxes.query.all()
-    packaging = []
     for element in query:
         packaging.append([str(element.name), str(element.length), str(element.width), str(element.height), str(element.weight_ne), str(element.weight_ex), str(element.price_de), str(element.price_eu), str(element.price_ex)])
-
-
-    # Get variable
-    boxesNE = []
-    boxesEX = []
-    boxes = []
-    plantItems = []
 
 
     # User reached route via POST (as by submitting a form via POST)
@@ -160,7 +155,7 @@ def confirmationFunction():
 
 
         # Function to take the biggest box needed from the express group first, then from the non express group. Increment sending costs.
-        def plantLoop(plantItem, cost):
+        def plantLoop(plantItem):
             """
             # Check weight
 
@@ -170,28 +165,22 @@ def confirmationFunction():
             if len(boxesEX) > 0 and plantItem != None and addresses[3] == "Germany":
                 for boxEX in boxesEX:
                     if int(plantItem[0]) == int(boxEX[1][0]):
-                        thisCost = float(boxEX[0][8])
-                        takeCost(cost, thisCost)
                         boxes.extend([boxEX[0]])
-                        return plantItem
+                        return float(boxEX[0][8])
 
             # Non express but in Germany - Append needed box
             elif len(boxesNE) > 0 and plantItem != None and addresses[3] == "Germany":
                 for boxNE in boxesNE:
                     if int(plantItem[0]) == int(boxNE[1][0]):
-                        thisCost = float(boxNE[0][7])
-                        takeCost(cost, thisCost)
                         boxes.extend([boxNE[0]])
-                        return plantItem                        
+                        return float(boxNE[0][7])                        
             
             # Non express in the EU - Append needed box
             elif len(boxesNE) > 0 and plantItem != None and addresses[3] != "Germany":
                 for boxNE in boxesNE:
                     if int(plantItem[0]) == int(boxNE[1][0]):
-                        thisCost = float(boxNE[0][6])
-                        takeCost(cost, thisCost)
                         boxes.extend([boxNE[0]])
-                        return plantItem        
+                        return float(boxNE[0][6])        
 
             # Return False if there are no more plant to cover
             else:
@@ -217,15 +206,6 @@ def confirmationFunction():
 
             else:
                 return False
-
-
-        def takeWeight():
-            print("shit")
-
-
-        def takeCost(cost, thisCost):
-            cost += thisCost
-            return cost
 
 
         # Filler function
@@ -326,7 +306,6 @@ def confirmationFunction():
         # Master loop
         def masterLoop():
 
-            # Get variable
             cost = 0
         
             # Check for other plants to fit present box
@@ -346,7 +325,7 @@ def confirmationFunction():
 
             if len(plantItems) > 0:
                 for plantItem in plantItems:
-                    plantLoop(plantItem, cost)
+                    cost += plantLoop(plantItem)
                     thisBox = makeGrid()
                     length, width = takeSize(plantItem)
                     gridLoop(length, width, thisBox)
@@ -355,10 +334,8 @@ def confirmationFunction():
 
             return cost
 
-        cost = masterLoop()
+        print(masterLoop())
 
-        print("COST")
-        print(cost)
         
     
         return render_template("confirmation.html", name=getUserName(), picture=getUserPicture(), role=getUserRole())
