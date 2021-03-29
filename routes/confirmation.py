@@ -161,7 +161,7 @@ def confirmationFunction():
 
 
         # Function to take the biggest box needed from the express group first, then from the non express group.
-        def plantLoop():
+        def plantLoop(plantItem):
             """
             # Empty the boxes array
             boxes = []
@@ -170,34 +170,30 @@ def confirmationFunction():
 
             # Check cost
             """
+            # Express only can only be in Germany - Append needed box
+            if len(boxesEX) > 0 and plantItem != None and addresses[3] == "Germany":
+                for boxEX in boxesEX:
+                    if int(plantItem[0]) == int(boxEX[1][0]):
+                        boxes.extend([boxEX[0]])
+                        return plantItem
 
-            # Loop through plants
-            for plantItem in plantItems:
+            # Non express but in Germany - Append needed box
+            elif len(boxesNE) > 0 and plantItem != None and addresses[3] == "Germany":
+                for boxNE in boxesNE:
+                    if int(plantItem[0]) == int(boxNE[1][0]):
+                        boxes.extend([boxNE[0]])
+                        return plantItem                        
+            
+            # Non express in the EU - Append needed box
+            elif len(boxesNE) > 0 and plantItem != None and addresses[3] != "Germany":
+                for boxNE in boxesNE:
+                    if int(plantItem[0]) == int(boxNE[1][0]):
+                        boxes.extend([boxNE[0]])
+                        return plantItem        
 
-                # Express only can only be in Germany - Append needed box
-                if len(boxesEX) > 0 and len(plantItems) > 0 and addresses[3] == "Germany":
-                    for boxEX in boxesEX:
-                        if int(plantItem[0]) == int(boxEX[1][0]):
-                            boxes.extend([boxEX[0]])
-                            return plantItem
-
-                # Non express but in Germany - Append needed box
-                elif len(boxesNE) > 0 and len(plantItems) > 0 and addresses[3] == "Germany":
-                    for boxNE in boxesNE:
-                        if int(plantItem[0]) == int(boxNE[1][0]):
-                            boxes.extend([boxNE[0]])
-                            return plantItem                        
-                
-                # Non express in the EU - Append needed box
-                elif len(boxesNE) > 0 and len(plantItems) > 0 and addresses[3] != "Germany":
-                    for boxNE in boxesNE:
-                        if int(plantItem[0]) == int(boxNE[1][0]):
-                            boxes.extend([boxNE[0]])
-                            return plantItem        
-
-                # Return False if there are no more plant to cover
-                else:
-                    return False
+            # Return False if there are no more plant to cover
+            else:
+                return False
 
 
         # Make a grid from the last needed box to represent its bottom
@@ -335,13 +331,14 @@ def confirmationFunction():
                     return
 
             if len(plantItems) > 0:
-                thisPlant = plantLoop()
-                print(thisPlant)
-                thisBox = makeGrid()
-                length, width = sizeLoop(thisPlant)
-                gridLoop(length, width, thisBox)
-                deleteLoop(thisPlant)
-                slaveLoop(thisBox)
+                for plantItem in plantItems:
+                    thisPlant = plantLoop(plantItem)
+                    print(thisPlant)
+                    thisBox = makeGrid()
+                    length, width = sizeLoop(thisPlant)
+                    gridLoop(length, width, thisBox)
+                    deleteLoop(thisPlant)
+                    slaveLoop(thisBox)
 
         #masterLoop()
         print("plantItems")
