@@ -163,9 +163,6 @@ def confirmationFunction():
         # Function to take the biggest box needed from the express group first, then from the non express group.
         def plantLoop(plantItem):
             """
-            # Empty the boxes array
-            boxes = []
-
             # Check weight
 
             # Check cost
@@ -174,6 +171,8 @@ def confirmationFunction():
             if len(boxesEX) > 0 and plantItem != None and addresses[3] == "Germany":
                 for boxEX in boxesEX:
                     if int(plantItem[0]) == int(boxEX[1][0]):
+                        thisCost = int(boxEX[0][8])
+                        takeCost(cost, thisCost)
                         boxes.extend([boxEX[0]])
                         return plantItem
 
@@ -181,6 +180,8 @@ def confirmationFunction():
             elif len(boxesNE) > 0 and plantItem != None and addresses[3] == "Germany":
                 for boxNE in boxesNE:
                     if int(plantItem[0]) == int(boxNE[1][0]):
+                        thisCost = int(boxNE[0][7])
+                        takeCost(cost, thisCost)
                         boxes.extend([boxNE[0]])
                         return plantItem                        
             
@@ -188,6 +189,8 @@ def confirmationFunction():
             elif len(boxesNE) > 0 and plantItem != None and addresses[3] != "Germany":
                 for boxNE in boxesNE:
                     if int(plantItem[0]) == int(boxNE[1][0]):
+                        thisCost = int(boxNE[0][6])
+                        takeCost(cost, thisCost)
                         boxes.extend([boxNE[0]])
                         return plantItem        
 
@@ -207,7 +210,7 @@ def confirmationFunction():
 
 
         # Take plants length and width
-        def sizeLoop(thisPlant):
+        def takeSize(thisPlant):
             if len(plantItems) > 0:
                 length = thisPlant[4]
                 width = thisPlant[5]
@@ -215,6 +218,15 @@ def confirmationFunction():
 
             else:
                 return False
+
+
+        def takeWeight():
+            print("shit")
+
+
+        def takeCost(cost, thisCost):
+            cost += thisCost
+            return cost
 
 
         # Filler function
@@ -319,7 +331,7 @@ def confirmationFunction():
             def slaveLoop(thisBox):
                 if len(plantItems) > 0:
                     for plantItem in plantItems:
-                        length, width = sizeLoop(plantItem)
+                        length, width = takeSize(plantItem)
                         if gridLoop(length, width, thisBox) != False:                            
                             deleteLoop(plantItem)
                             slaveLoop(thisBox)
@@ -333,19 +345,16 @@ def confirmationFunction():
             if len(plantItems) > 0:
                 for plantItem in plantItems:
                     plantLoop(plantItem)
-                    print(plantItem)
                     thisBox = makeGrid()
-                    length, width = sizeLoop(plantItem)
+                    length, width = takeSize(plantItem)
                     gridLoop(length, width, thisBox)
                     deleteLoop(plantItem)
                     slaveLoop(thisBox)
 
         masterLoop()
 
-        print("boxes")
-        print(boxes)
-
-
+        print("COST")
+        print(cost)
         
     
         return render_template("confirmation.html", name=getUserName(), picture=getUserPicture(), role=getUserRole())
