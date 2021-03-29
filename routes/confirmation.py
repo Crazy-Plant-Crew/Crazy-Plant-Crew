@@ -47,13 +47,13 @@ def confirmationFunction():
         index += 1
 
 
-    # Make express variable
-    express = query.express
-
-
     # Make address array
     query = Users.query.filter_by(id=user_id).first()
     addresses.extend([query.street, query.house, query.zipcode, query.country, query.additional])
+
+
+    # Make express variable
+    express = query.express
 
 
     # Make array with available boxes
