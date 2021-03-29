@@ -23,7 +23,6 @@ def confirmationFunction():
     # Get variable
     user_id = session["user_id"]
     query = Baskets.query.filter_by(user_id=user_id)
-    express = query.express
     addresses = []
     plants = []
     plantItems = []
@@ -46,6 +45,10 @@ def confirmationFunction():
         for element in query:
             plants[index].extend([str(element.length), str(element.width), str(element.height), str(element.weight), str(element.express)])            
         index += 1
+
+
+    # Make express variable
+    express = query.express
 
 
     # Make address array
