@@ -340,12 +340,13 @@ def confirmationFunction():
 
             return cost
 
+        masterLoop(cost)
+        
 
-        print("masterLoop")
-        print(masterLoop(cost))
         print("boxes")
         print(boxes)
-
+        print("cost")
+        print(cost)
         
     
         return render_template("confirmation.html", name=getUserName(), picture=getUserPicture(), role=getUserRole())
