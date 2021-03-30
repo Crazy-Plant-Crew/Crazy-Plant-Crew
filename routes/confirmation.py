@@ -348,12 +348,16 @@ def confirmationFunction():
         print(boxesNE)
         print("boxesEX")
         print(boxesEX)
-        print("boxes")
-        print(boxes)
-        print("plantItems")
+
+        print("plantItems before")
         print(plantItems)
 
         print(masterLoop())
+
+        print("plantItems after")
+        print(plantItems)
+        print("boxes")
+        print(boxes)
 
         
     
