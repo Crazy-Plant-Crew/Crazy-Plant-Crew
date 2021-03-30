@@ -343,6 +343,8 @@ def confirmationFunction():
                     deleteLoop(plantItem)
                     slaveLoop(thisBox)
 
+                print("thisCost final")
+                print(thisCost)
                 return thisCost
 
 
