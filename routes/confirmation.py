@@ -325,7 +325,7 @@ def confirmationFunction():
                             slaveLoop(thisBox)
 
                         else: 
-                            masterLoop()
+                            masterLoop(cost)
 
                 else:
                     return
@@ -347,7 +347,7 @@ def confirmationFunction():
 
 
         print("masterLoop")
-        print(masterLoop())
+        print(masterLoop(cost))
         print("boxes")
         print(boxes)
 
