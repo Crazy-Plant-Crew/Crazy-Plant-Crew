@@ -312,7 +312,7 @@ def confirmationFunction():
 
     
         # Master loop
-        def masterLoop(cost):
+        def masterLoop(thisCost):
 
             # Check for other plants to fit present box
             def slaveLoop(thisBox):
