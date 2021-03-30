@@ -346,7 +346,8 @@ def confirmationFunction():
 
         print("masterLoop")
         print(masterLoop())
-
+        print("boxes")
+        print(boxes)
 
         
     
