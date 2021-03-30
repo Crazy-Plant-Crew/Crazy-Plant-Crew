@@ -335,6 +335,8 @@ def confirmationFunction():
                     print("plantItem")
                     print(plantItem)
                     cost += plantLoop(plantItem)
+                    print("cost")
+                    print(cost)
                     thisBox = makeGrid()
                     length, width = takeSize(plantItem)
                     gridLoop(length, width, thisBox)
