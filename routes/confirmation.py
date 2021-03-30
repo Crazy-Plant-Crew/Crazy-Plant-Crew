@@ -324,7 +324,7 @@ def confirmationFunction():
                             slaveLoop(thisBox)
 
                         else: 
-                            masterLoop(thisCost)
+                            masterLoop(cost)
 
                 else:
                     return thisCost
