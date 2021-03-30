@@ -315,8 +315,7 @@ def confirmationFunction():
         def masterLoop(thisCost):
 
             # Check for other plants to fit present box
-            def slaveLoop(thisBox):
-                newCost = thisCost
+            def slaveLoop(thisBox, newCost):
                 if len(plantItems) > 0:
                     for plantItem in plantItems:
                         length, width = takeSize(plantItem)
@@ -336,13 +335,14 @@ def confirmationFunction():
                     print("thisCost before")
                     print(thisCost)
                     thisCost += plantLoop(plantItem)
+                    newCost = thisCost
                     print("thisCost after")
                     print(thisCost)
                     thisBox = makeGrid()
                     length, width = takeSize(plantItem)
                     gridLoop(length, width, thisBox)
                     deleteLoop(plantItem)
-                    slaveLoop(thisBox)
+                    slaveLoop(thisBox, newCost)
 
             print("thisCost final")
             print(thisCost)
