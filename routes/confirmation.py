@@ -327,7 +327,7 @@ def confirmationFunction():
                             masterLoop(thisCost)
 
                 else:
-                    return
+                    return thisCost
 
             if len(plantItems) > 0:
                 for plantItem in plantItems:
@@ -342,7 +342,7 @@ def confirmationFunction():
                     deleteLoop(plantItem)
                     slaveLoop(thisBox)
 
-                return thisCost
+
 
         cost += masterLoop(cost)
 
