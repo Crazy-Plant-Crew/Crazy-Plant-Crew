@@ -32,7 +32,6 @@ def confirmationFunction():
     packaging = []
 
 
-
     # Make plants array from basket
     for element in query:
         plants.append([str(element.plant_id), str(element.name), str(element.quantity), str(element.price)])
@@ -165,21 +164,21 @@ def confirmationFunction():
             # Check cost
             """
             # Express only can only be in Germany - Append needed box
-            if len(boxesEX) > 0 and plantItem != None and addresses[3] == "Germany":
+            if len(boxesEX) > 0 and plantItem[8] == "Yes" and addresses[3] == "Germany":
                 for boxEX in boxesEX:
                     if int(plantItem[0]) == int(boxEX[1][0]):
                         boxes.extend([boxEX[0]])
                         return float(boxEX[0][8])
 
             # Non express but in Germany - Append needed box
-            elif len(boxesNE) > 0 and plantItem != None and addresses[3] == "Germany":
+            elif len(boxesNE) > 0 and plantItem[8] == "No" and addresses[3] == "Germany":
                 for boxNE in boxesNE:
                     if int(plantItem[0]) == int(boxNE[1][0]):
                         boxes.extend([boxNE[0]])
                         return float(boxNE[0][7])                        
             
             # Non express in the EU - Append needed box
-            elif len(boxesNE) > 0 and plantItem != None and addresses[3] != "Germany":
+            elif len(boxesNE) > 0 and plantItem[8] == "No" and addresses[3] != "Germany":
                 for boxNE in boxesNE:
                     if int(plantItem[0]) == int(boxNE[1][0]):
                         boxes.extend([boxNE[0]])
