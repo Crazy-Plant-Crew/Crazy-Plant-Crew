@@ -327,7 +327,7 @@ def confirmationFunction():
                             masterLoop(thisCost)
 
                 else:
-                    return False
+                    return
 
             if len(plantItems) > 0:
                 for plantItem in plantItems:
