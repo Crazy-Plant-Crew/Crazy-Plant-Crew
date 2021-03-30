@@ -344,20 +344,9 @@ def confirmationFunction():
             return cost
 
 
-        print("boxesNE")
-        print(boxesNE)
-        print("boxesEX")
-        print(boxesEX)
-
-        print("plantItems before")
-        print(plantItems)
-
+        print("masterLoop")
         print(masterLoop())
 
-        print("plantItems after")
-        print(plantItems)
-        print("boxes")
-        print(boxes)
 
         
     
