@@ -331,16 +331,16 @@ def confirmationFunction():
 
             if len(plantItems) > 0:
                 for plantItem in plantItems:
-                    cost += plantLoop(plantItem)
+                    thisCost += plantLoop(plantItem)
                     thisBox = makeGrid()
                     length, width = takeSize(plantItem)
                     gridLoop(length, width, thisBox)
                     deleteLoop(plantItem)
                     slaveLoop(thisBox)
 
-            print("this cost")
-            print(cost)
-            return cost
+            print("thisCost")
+            print(thisCost)
+            return thisCost
 
         cost += masterLoop(cost)
 
