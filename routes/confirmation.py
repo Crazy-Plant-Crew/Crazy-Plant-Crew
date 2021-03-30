@@ -309,11 +309,11 @@ def confirmationFunction():
             else:
                 return False
 
-
+        cost = 0
         # Master loop
-        def masterLoop():
+        def masterLoop(cost):
 
-            cost = 0
+            
         
             # Check for other plants to fit present box
             def slaveLoop(thisBox):
