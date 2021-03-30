@@ -341,8 +341,6 @@ def confirmationFunction():
                     gridLoop(length, width, thisBox)
                     deleteLoop(plantItem)
                     slaveLoop(thisBox)
-                
-                return thisCost
 
         cost += masterLoop(cost)
 
