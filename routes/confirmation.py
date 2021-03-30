@@ -23,6 +23,7 @@ def confirmationFunction():
     # Get variable
     user_id = session["user_id"]
     query = Baskets.query.filter_by(user_id=user_id)
+    cost = 0
     addresses = []
     plants = []
     plantItems = []
@@ -309,12 +310,10 @@ def confirmationFunction():
             else:
                 return False
 
-        cost = 0
+    
         # Master loop
         def masterLoop(cost):
 
-            
-        
             # Check for other plants to fit present box
             def slaveLoop(thisBox):
                 if len(plantItems) > 0:
@@ -332,11 +331,7 @@ def confirmationFunction():
 
             if len(plantItems) > 0:
                 for plantItem in plantItems:
-                    print("plantItem")
-                    print(plantItem)
                     cost += plantLoop(plantItem)
-                    print("cost")
-                    print(cost)
                     thisBox = makeGrid()
                     length, width = takeSize(plantItem)
                     gridLoop(length, width, thisBox)
