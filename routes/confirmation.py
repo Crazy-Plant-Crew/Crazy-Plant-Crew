@@ -162,14 +162,21 @@ def confirmationFunction():
             # Check weight
             """
             # Express only can only be in Germany - Append needed box
-            if len(boxesEX) > 0 and express == "Yes" and addresses[3] == "Germany":
+            if len(boxesEX) > 0 and express == "Yes" and plantItem[8] == "Yes" addresses[3] == "Germany":
+                for boxEX in boxesEX:
+                    if int(plantItem[0]) == int(boxEX[1][0]):
+                        boxes.extend([boxEX[0]])
+                        return float(boxEX[0][8])
+
+            # Express only can only be in Germany - Append needed box
+            if len(boxesEX) > 0 and express == "Yes" and plantItem[8] == "No" addresses[3] == "Germany":
                 for boxEX in boxesEX:
                     if int(plantItem[0]) == int(boxEX[1][0]):
                         boxes.extend([boxEX[0]])
                         return float(boxEX[0][8])
 
             # Non express but in Germany - Append needed box
-            elif len(boxesNE) > 0 and express == "No" and addresses[3] == "Germany":
+            elif len(boxesNE) > 0 and express == "No" and plantItem[8] == "No" and addresses[3] == "Germany":
                 for boxNE in boxesNE:
                     if int(plantItem[0]) == int(boxNE[1][0]):
                         boxes.extend([boxNE[0]])
