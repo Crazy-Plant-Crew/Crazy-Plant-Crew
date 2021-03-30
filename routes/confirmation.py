@@ -325,6 +325,9 @@ def confirmationFunction():
 
                         else: 
                             masterLoop(thisCost)
+                
+                else:
+                    return False
 
 
             if len(plantItems) > 0:
@@ -338,8 +341,9 @@ def confirmationFunction():
                     length, width = takeSize(plantItem)
                     gridLoop(length, width, thisBox)
                     deleteLoop(plantItem)
-                    slaveLoop(thisBox)
-                    
+                    if slaveLoop(thisBox) == False:
+                        return thisCost
+
             else:
                 return thisCost
 
