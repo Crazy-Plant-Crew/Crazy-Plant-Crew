@@ -351,7 +351,7 @@ def confirmationFunction():
         print("boxes")
         print(boxes)
         print("plantItems")
-        print(planItems)
+        print(plantItems)
 
         print(masterLoop())
 
