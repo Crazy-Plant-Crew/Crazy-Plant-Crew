@@ -316,6 +316,7 @@ def confirmationFunction():
 
             # Check for other plants to fit present box
             def slaveLoop(thisBox):
+                newCost = thisCost
                 if len(plantItems) > 0:
                     for plantItem in plantItems:
                         length, width = takeSize(plantItem)
@@ -324,7 +325,7 @@ def confirmationFunction():
                             slaveLoop(thisBox)
 
                         else: 
-                            masterLoop(thisCost)
+                            masterLoop(newCost)
                 
                 else:
                     return
