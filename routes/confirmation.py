@@ -209,6 +209,8 @@ def confirmationFunction():
                         del boxes[-1][6]
                         del boxes[-1][7]
                         """
+                        print("TEST")
+                        print(boxes[0][7])
                         return     
 
             # Return False if there are no more plant to cover
