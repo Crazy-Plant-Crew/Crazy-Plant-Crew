@@ -216,11 +216,12 @@ def confirmationFunction():
 
 
         # Take plants length and width
-        def getSize(thisPlant):
+        def getAttributes(thisPlant):
             if len(plantItems) > 0:
                 length = thisPlant[4]
                 width = thisPlant[5]
-                return length, width
+                mass = thisPlant[7]
+                return length, width, mass
 
             else:
                 return False
@@ -328,14 +329,18 @@ def confirmationFunction():
             def slaveLoop(thisBox):
                 if len(plantItems) > 0:
                     for plantItem in plantItems:
-                        length, width = getSize(plantItem)
-                        if gridLoop(length, width, thisBox) != False:                            
-                            deleteLoop(plantItem)
-                            slaveLoop(thisBox)
+                        length, width, mass = getAttributes(plantItem)
+                        if weight[-1] - mass > 0:
+                            weight[-1] -= mass
+                            if gridLoop(length, width, thisBox) != False:                            
+                                deleteLoop(plantItem)
+                                slaveLoop(thisBox)
 
-                        else: 
+                            else: 
+                                masterLoop()
+                        else:
                             masterLoop()
-                
+                    
                 else:
                     return
 
@@ -344,10 +349,14 @@ def confirmationFunction():
                 for plantItem in plantItems:
                     plantLoop(plantItem)
                     thisBox = makeGrid()
-                    length, width = getSize(plantItem)
-                    gridLoop(length, width, thisBox)
-                    deleteLoop(plantItem)
-                    slaveLoop(thisBox)
+                    length, width, mass = getAttributes(plantItem)
+                    if weight[-1] - mass > 0:
+                        weight[-1] -= mass
+                        gridLoop(length, width, thisBox)
+                        deleteLoop(plantItem)
+                        slaveLoop(thisBox)
+                    else:
+                        return
 
             return
 
