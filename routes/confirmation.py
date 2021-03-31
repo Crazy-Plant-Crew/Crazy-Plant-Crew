@@ -343,7 +343,7 @@ def confirmationFunction():
                     length, width = takeSize(plantItem)
                     gridLoop(length, width, thisBox)
                     deleteLoop(plantItem)
-                    slaveLoop(thisBox)
+                    thisCost += slaveLoop(thisBox)
 
             print("thisCost final")
             print(thisCost)
