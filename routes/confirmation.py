@@ -172,8 +172,8 @@ def confirmationFunction():
                         cost.append(float(boxEX[0][8]))
                         boxes.extend([boxEX[0]])
                         del boxes[-1][4]
+                        del boxes[-1][5]
                         del boxes[-1][6]
-                        del boxes[-1][8]
                         return
 
             # Express only can only be in Germany - Append needed box - Append to cost
@@ -183,8 +183,8 @@ def confirmationFunction():
                         cost.append(float(boxEX[0][8]))
                         boxes.extend([boxEX[0]])
                         del boxes[-1][4]
+                        del boxes[-1][5]
                         del boxes[-1][6]
-                        del boxes[-1][8]
                         return
 
             # Non express but in Germany - Append needed box - Append to cost
@@ -194,8 +194,8 @@ def confirmationFunction():
                         cost.append(float(boxNE[0][7]))
                         boxes.extend([boxNE[0]])
                         del boxes[-1][5]
-                        del boxes[-1][7]
-                        del boxes[-1][8]
+                        del boxes[-1][6]
+                        del boxes[-1][6]
                         return                      
             
             # Non express in the EU - Append needed box - Append to cost
@@ -204,13 +204,9 @@ def confirmationFunction():
                     if int(plantItem[0]) == int(boxNE[1][0]):
                         cost.append(float(boxNE[0][6]))
                         boxes.extend([boxNE[0]])
-                        """
                         del boxes[-1][5]
-                        del boxes[-1][6]
-                        del boxes[-1][7]
-                        """
-                        print("TEST")
-                        print(boxes[0][7])
+                        del boxes[-1][5]
+                        del boxes[-1][5]
                         return     
 
             # Return False if there are no more plant to cover
