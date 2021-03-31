@@ -204,9 +204,11 @@ def confirmationFunction():
                     if int(plantItem[0]) == int(boxNE[1][0]):
                         cost.append(float(boxNE[0][6]))
                         boxes.extend([boxNE[0]])
+                        """
                         del boxes[-1][5]
                         del boxes[-1][6]
                         del boxes[-1][7]
+                        """
                         return     
 
             # Return False if there are no more plant to cover
