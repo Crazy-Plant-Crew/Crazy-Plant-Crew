@@ -360,12 +360,8 @@ def confirmationFunction():
 
             return
 
-        """
         masterLoop()
-        """
 
-        for plantItem in plantItems:
-            plantLoop(plantItem)
 
         print("boxes")
         print(boxes)
@@ -373,8 +369,7 @@ def confirmationFunction():
         print(cost)
         print("weight")
         print(weight)
-        print(boxesNE)
-        print(boxesEX)
+
         
     
         return render_template("confirmation.html", name=getUserName(), picture=getUserPicture(), role=getUserRole())
