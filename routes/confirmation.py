@@ -20,9 +20,7 @@ def confirmationFunction():
     get_flashed_messages()  
 
 
-    # Get variable
-    user_id = session["user_id"]
-    query = Baskets.query.filter_by(user_id=user_id)
+    # Make needed arrays
     cost = []
     addresses = []
     plants = []
@@ -31,6 +29,11 @@ def confirmationFunction():
     boxesEX = []
     boxes = []
     packaging = []
+
+
+    # Get variable
+    user_id = session["user_id"]
+    query = Baskets.query.filter_by(user_id=user_id)
 
 
     # Make plants array from basket
@@ -162,36 +165,48 @@ def confirmationFunction():
             """
             # Check weight
             """
-            # Express only can only be in Germany - Append needed box
+            # Express only can only be in Germany - Append needed box - Append to cost
             if len(boxesEX) > 0 and express == "Yes" and plantItem[8] == "Yes" and addresses[3] == "Germany":
                 for boxEX in boxesEX:
                     if int(plantItem[0]) == int(boxEX[1][0]):
-                        boxes.extend([boxEX[0]])
                         cost.append(float(boxEX[0][8]))
+                        boxes.extend([boxEX[0]])
+                        del boxes[-1][4]
+                        del boxes[-1][6]
+                        del boxes[-1][8]
                         return
 
-            # Express only can only be in Germany - Append needed box
+            # Express only can only be in Germany - Append needed box - Append to cost
             if len(boxesEX) > 0 and express == "No" and plantItem[8] == "Yes" and addresses[3] == "Germany":
                 for boxEX in boxesEX:
                     if int(plantItem[0]) == int(boxEX[1][0]):
-                        boxes.extend([boxEX[0]])
                         cost.append(float(boxEX[0][8]))
+                        boxes.extend([boxEX[0]])
+                        del boxes[-1][4]
+                        del boxes[-1][6]
+                        del boxes[-1][8]
                         return
 
-            # Non express but in Germany - Append needed box
+            # Non express but in Germany - Append needed box - Append to cost
             elif len(boxesNE) > 0 and express == "No" and plantItem[8] == "No" and addresses[3] == "Germany":
                 for boxNE in boxesNE:
                     if int(plantItem[0]) == int(boxNE[1][0]):
-                        boxes.extend([boxNE[0]])
                         cost.append(float(boxNE[0][7]))
+                        boxes.extend([boxNE[0]])
+                        del boxes[-1][5]
+                        del boxes[-1][7]
+                        del boxes[-1][8]
                         return                      
             
-            # Non express in the EU - Append needed box
+            # Non express in the EU - Append needed box - Append to cost
             elif len(boxesNE) > 0 and express == "No" and addresses[3] != "Germany":
                 for boxNE in boxesNE:
                     if int(plantItem[0]) == int(boxNE[1][0]):
-                        boxes.extend([boxNE[0]])
                         cost.append(float(boxNE[0][6]))
+                        boxes.extend([boxNE[0]])
+                        del boxes[-1][5]
+                        del boxes[-1][6]
+                        del boxes[-1][7]
                         return     
 
             # Return False if there are no more plant to cover
@@ -210,7 +225,7 @@ def confirmationFunction():
 
 
         # Take plants length and width
-        def takeSize(thisPlant):
+        def getSize(thisPlant):
             if len(plantItems) > 0:
                 length = thisPlant[4]
                 width = thisPlant[5]
@@ -322,7 +337,7 @@ def confirmationFunction():
             def slaveLoop(thisBox):
                 if len(plantItems) > 0:
                     for plantItem in plantItems:
-                        length, width = takeSize(plantItem)
+                        length, width = getSize(plantItem)
                         if gridLoop(length, width, thisBox) != False:                            
                             deleteLoop(plantItem)
                             slaveLoop(thisBox)
@@ -338,7 +353,7 @@ def confirmationFunction():
                 for plantItem in plantItems:
                     plantLoop(plantItem)
                     thisBox = makeGrid()
-                    length, width = takeSize(plantItem)
+                    length, width = getSize(plantItem)
                     gridLoop(length, width, thisBox)
                     deleteLoop(plantItem)
                     slaveLoop(thisBox)
