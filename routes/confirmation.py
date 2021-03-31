@@ -346,7 +346,7 @@ def confirmationFunction():
             return
 
 
-        masterLoop(cost)
+        masterLoop()
 
 
         print("boxes")
