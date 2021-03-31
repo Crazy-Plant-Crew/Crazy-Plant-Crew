@@ -364,6 +364,9 @@ def confirmationFunction():
         masterLoop()
         """
 
+        for plantItem in plantItems:
+            plantLoop(plantItem)
+
         print("boxes")
         print(boxes)
         print("cost")
