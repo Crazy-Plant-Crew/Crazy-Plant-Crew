@@ -23,7 +23,7 @@ def confirmationFunction():
     # Get variable
     user_id = session["user_id"]
     query = Baskets.query.filter_by(user_id=user_id)
-    cost = 0
+    cost = []
     addresses = []
     plants = []
     plantItems = []
@@ -167,28 +167,32 @@ def confirmationFunction():
                 for boxEX in boxesEX:
                     if int(plantItem[0]) == int(boxEX[1][0]):
                         boxes.extend([boxEX[0]])
-                        return float(boxEX[0][8])
+                        cost.append(float(boxEX[0][8]))
+                        return
 
             # Express only can only be in Germany - Append needed box
             if len(boxesEX) > 0 and express == "No" and plantItem[8] == "Yes" and addresses[3] == "Germany":
                 for boxEX in boxesEX:
                     if int(plantItem[0]) == int(boxEX[1][0]):
                         boxes.extend([boxEX[0]])
-                        return float(boxEX[0][8])
+                        cost.append(float(boxEX[0][8]))
+                        return
 
             # Non express but in Germany - Append needed box
             elif len(boxesNE) > 0 and express == "No" and plantItem[8] == "No" and addresses[3] == "Germany":
                 for boxNE in boxesNE:
                     if int(plantItem[0]) == int(boxNE[1][0]):
                         boxes.extend([boxNE[0]])
-                        return float(boxNE[0][7])                        
+                        cost.append(float(boxNE[0][7]))
+                        return                      
             
             # Non express in the EU - Append needed box
             elif len(boxesNE) > 0 and express == "No" and addresses[3] != "Germany":
                 for boxNE in boxesNE:
                     if int(plantItem[0]) == int(boxNE[1][0]):
                         boxes.extend([boxNE[0]])
-                        return float(boxNE[0][6])        
+                        cost.append(float(boxNE[0][6]))
+                        return     
 
             # Return False if there are no more plant to cover
             else:
@@ -312,7 +316,7 @@ def confirmationFunction():
 
     
         # Master loop
-        def masterLoop(thisCost):
+        def masterLoop():
 
             # Check for other plants to fit present box
             def slaveLoop(thisBox):
@@ -324,30 +328,22 @@ def confirmationFunction():
                             slaveLoop(thisBox)
 
                         else: 
-                            masterLoop(thisCost)
+                            masterLoop()
                 
                 else:
-                    print("slaveLoop thisCost")
-                    print(thisCost)
-                    return thisCost
+                    return
 
 
             if len(plantItems) > 0:
                 for plantItem in plantItems:
-                    print("thisCost before")
-                    print(thisCost)
                     thisCost += plantLoop(plantItem)
-                    print("thisCost after")
-                    print(thisCost)
                     thisBox = makeGrid()
                     length, width = takeSize(plantItem)
                     gridLoop(length, width, thisBox)
                     deleteLoop(plantItem)
-                    thisCost += slaveLoop(thisBox)
+                    slaveLoop(thisBox)
 
-            print("thisCost final")
-            print(thisCost)
-            return thisCost
+            return
 
 
         cost = masterLoop(cost)
