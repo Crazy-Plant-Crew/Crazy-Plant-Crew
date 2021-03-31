@@ -184,7 +184,7 @@ def confirmationFunction():
                 for boxNE in boxesNE:
                     if int(plantItem[0]) == int(boxNE[1][0]):
                         boxes.extend([boxNE[0]])
-                        cost.append(float(boxNE[0][7]))
+                        cost.append(float(boxNE[0][6]))
                         weight.append(int(boxNE[0][4]))
                         return                      
             
@@ -193,7 +193,7 @@ def confirmationFunction():
                 for boxNE in boxesNE:
                     if int(plantItem[0]) == int(boxNE[1][0]):
                         boxes.extend([boxNE[0]])
-                        cost.append(float(boxNE[0][6]))
+                        cost.append(float(boxNE[0][7]))
                         weight.append(int(boxNE[0][4]))
                         return     
 
