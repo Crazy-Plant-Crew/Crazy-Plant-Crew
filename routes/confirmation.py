@@ -170,7 +170,7 @@ def confirmationFunction():
                     if int(plantItem[0]) == int(boxEX[1][0]):
                         cost.append(float(boxEX[0][8]))
                         boxes.extend([boxEX[0]])
-                        weight.append(int(boxEX[0][4]))
+                        weight.append(int(boxEX[0][5]))
                         return
 
             # Express only can only be in Germany - Append needed box - Append to cost
@@ -179,7 +179,7 @@ def confirmationFunction():
                     if int(plantItem[0]) == int(boxEX[1][0]):
                         boxes.extend([boxEX[0]])
                         cost.append(float(boxEX[0][8]))
-                        weight.append(int(boxEX[0][4]))
+                        weight.append(int(boxEX[0][5]))
                         return
 
             # Non express but in Germany - Append needed box - Append to cost
@@ -188,7 +188,7 @@ def confirmationFunction():
                     if int(plantItem[0]) == int(boxNE[1][0]):
                         boxes.extend([boxNE[0]])
                         cost.append(float(boxNE[0][7]))
-                        weight.append(int(boxNE[0][5]))
+                        weight.append(int(boxNE[0][4]))
                         return                      
             
             # Non express in the EU - Append needed box - Append to cost
@@ -197,7 +197,7 @@ def confirmationFunction():
                     if int(plantItem[0]) == int(boxNE[1][0]):
                         boxes.extend([boxNE[0]])
                         cost.append(float(boxNE[0][6]))
-                        weight.append(int(boxNE[0][5]))
+                        weight.append(int(boxNE[0][4]))
                         return     
 
             # Return False if there are no more plant to cover
