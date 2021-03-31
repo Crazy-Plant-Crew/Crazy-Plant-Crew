@@ -29,6 +29,7 @@ def confirmationFunction():
     boxesEX = []
     boxes = []
     packaging = []
+    weight = []
 
 
     # Get variable
@@ -162,16 +163,14 @@ def confirmationFunction():
 
         # Function to take the biggest box needed from the express group first, then from the non express group. Increment sending costs.
         def plantLoop(plantItem):
-            """
-            # Check weight
-            """
+ 
             # Express only can only be in Germany - Append needed box - Append to cost
             if len(boxesEX) > 0 and express == "Yes" and plantItem[8] == "Yes" and addresses[3] == "Germany":
                 for boxEX in boxesEX:
                     if int(plantItem[0]) == int(boxEX[1][0]):
                         cost.append(float(boxEX[0][8]))
                         boxes.extend([boxEX[0]])
-                        
+                        weight.append(int(boxEX[0][4]))
                         return
 
             # Express only can only be in Germany - Append needed box - Append to cost
@@ -180,6 +179,7 @@ def confirmationFunction():
                     if int(plantItem[0]) == int(boxEX[1][0]):
                         boxes.extend([boxEX[0]])
                         cost.append(float(boxEX[0][8]))
+                        weight.append(int(boxEX[0][4]))
                         return
 
             # Non express but in Germany - Append needed box - Append to cost
@@ -188,6 +188,7 @@ def confirmationFunction():
                     if int(plantItem[0]) == int(boxNE[1][0]):
                         boxes.extend([boxNE[0]])
                         cost.append(float(boxNE[0][7]))
+                        weight.append(int(boxEX[0][5]))
                         return                      
             
             # Non express in the EU - Append needed box - Append to cost
@@ -196,6 +197,7 @@ def confirmationFunction():
                     if int(plantItem[0]) == int(boxNE[1][0]):
                         boxes.extend([boxNE[0]])
                         cost.append(float(boxNE[0][6]))
+                        weight.append(int(boxEX[0][5]))
                         return     
 
             # Return False if there are no more plant to cover
@@ -357,6 +359,8 @@ def confirmationFunction():
         print(boxes)
         print("cost")
         print(cost)
+        print("weight")
+        print(weight)
         
     
         return render_template("confirmation.html", name=getUserName(), picture=getUserPicture(), role=getUserRole())
