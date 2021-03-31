@@ -142,9 +142,6 @@ def confirmationFunction():
                         boxesNE.append([package, plant])
                         break
 
-        """
-        # Check if both arrays are not empty, if yes, send warning to user to contact Glenn
-        """
 
         # Sort arrays boxes NE & RE
         boxesNE = sorted(boxesNE, key=lambda x: (int(x[1][4]), int(x[1][5]), int(x[1][6])), reverse=True)
@@ -312,7 +309,7 @@ def confirmationFunction():
                 else:
                     return False
 
-
+        # Delete dealt plants
         def deleteLoop(thisPlant):
             if len(plantItems) > 0:
                 plantItems.remove(thisPlant)
@@ -329,11 +326,23 @@ def confirmationFunction():
             def slaveLoop(thisBox):
                 if len(plantItems) > 0:
                     for plantItem in plantItems:
+
+                        # Get needed attributes
                         length, width, mass = getAttributes(plantItem)
+
+                        # Check if there is enough available weight
                         if weight[-1] - int(mass) > 0:
+
+                            # Update available weight
                             weight[-1] -= int(mass)
-                            if gridLoop(length, width, thisBox) != False:                            
+
+                            # Check if possible to draw an other plant in the grib
+                            if gridLoop(length, width, thisBox) != False:      
+
+                                # Delete dealt plant                      
                                 deleteLoop(plantItem)
+
+                                # Recursively try again
                                 slaveLoop(thisBox)
 
                             else: 
@@ -344,22 +353,38 @@ def confirmationFunction():
                 else:
                     return
 
-
+            # Start dealing with every plants
             if len(plantItems) > 0:
                 for plantItem in plantItems:
+
+                    # Take needed box
                     plantLoop(plantItem)
+
+                    # Make a grid and get needed attributes
                     thisBox = makeGrid()
                     length, width, mass = getAttributes(plantItem)
+
+                    # Check if there is enough available weight
                     if weight[-1] - int(mass) > 0:
+
+                        # Update available weight
                         weight[-1] -= int(mass)
+
+                        # Fill up grid
                         gridLoop(length, width, thisBox)
+
+                        # Delete dealt plants
                         deleteLoop(plantItem)
+
+                        # Start slaveLoop to check if other plants can fit in that box
                         slaveLoop(thisBox)
+
                     else:
                         return
 
             return
 
+        # Start main loop
         masterLoop()
 
 
