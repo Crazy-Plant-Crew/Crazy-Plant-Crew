@@ -171,42 +171,31 @@ def confirmationFunction():
                     if int(plantItem[0]) == int(boxEX[1][0]):
                         cost.append(float(boxEX[0][8]))
                         boxes.extend([boxEX[0]])
-                        del boxes[-1][4]
-                        del boxes[-1][5]
-                        del boxes[-1][6]
+                        
                         return
 
             # Express only can only be in Germany - Append needed box - Append to cost
             if len(boxesEX) > 0 and express == "No" and plantItem[8] == "Yes" and addresses[3] == "Germany":
                 for boxEX in boxesEX:
                     if int(plantItem[0]) == int(boxEX[1][0]):
-                        cost.append(float(boxEX[0][8]))
                         boxes.extend([boxEX[0]])
-                        del boxes[-1][4]
-                        del boxes[-1][5]
-                        del boxes[-1][6]
+                        cost.append(float(boxEX[0][8]))
                         return
 
             # Non express but in Germany - Append needed box - Append to cost
             elif len(boxesNE) > 0 and express == "No" and plantItem[8] == "No" and addresses[3] == "Germany":
                 for boxNE in boxesNE:
                     if int(plantItem[0]) == int(boxNE[1][0]):
-                        cost.append(float(boxNE[0][7]))
                         boxes.extend([boxNE[0]])
-                        del boxes[-1][5]
-                        del boxes[-1][6]
-                        del boxes[-1][6]
+                        cost.append(float(boxNE[0][7]))
                         return                      
             
             # Non express in the EU - Append needed box - Append to cost
             elif len(boxesNE) > 0 and express == "No" and addresses[3] != "Germany":
                 for boxNE in boxesNE:
                     if int(plantItem[0]) == int(boxNE[1][0]):
-                        cost.append(float(boxNE[0][6]))
                         boxes.extend([boxNE[0]])
-                        del boxes[-1][5]
-                        del boxes[-1][5]
-                        del boxes[-1][5]
+                        cost.append(float(boxNE[0][6]))
                         return     
 
             # Return False if there are no more plant to cover
