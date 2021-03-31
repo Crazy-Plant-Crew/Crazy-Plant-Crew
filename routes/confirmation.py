@@ -330,8 +330,8 @@ def confirmationFunction():
                 if len(plantItems) > 0:
                     for plantItem in plantItems:
                         length, width, mass = getAttributes(plantItem)
-                        if weight[-1] - mass > 0:
-                            weight[-1] -= mass
+                        if weight[-1] - int(mass) > 0:
+                            weight[-1] -= int(mass)
                             if gridLoop(length, width, thisBox) != False:                            
                                 deleteLoop(plantItem)
                                 slaveLoop(thisBox)
@@ -350,8 +350,8 @@ def confirmationFunction():
                     plantLoop(plantItem)
                     thisBox = makeGrid()
                     length, width, mass = getAttributes(plantItem)
-                    if weight[-1] - mass > 0:
-                        weight[-1] -= mass
+                    if weight[-1] - int(mass) > 0:
+                        weight[-1] -= int(mass)
                         gridLoop(length, width, thisBox)
                         deleteLoop(plantItem)
                         slaveLoop(thisBox)
