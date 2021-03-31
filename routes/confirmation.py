@@ -266,7 +266,11 @@ def confirmationFunction():
             def gridHorizon(row):
                 gridIndexH = 0
                 while gridIndexH < len(row):
+
+                    # Search of a "0"
                     if row[gridIndexH] == "0":
+
+                        # Return first available "0"
                         return gridIndexH
 
                     else:
@@ -276,13 +280,29 @@ def confirmationFunction():
             # Vertical checker for free space
             gridIndexV = 0
             while gridIndexV < len(thisBox):
+
+                # Get free space horizontally
                 x = gridHorizon(thisBox[gridIndexV])
+
+                # X must exist otherwise the plant never fits
                 if x != None:
+
+                    # Check if fits with the length horizontally
                     if x <= int(len(thisBox[gridIndexV]) - int(length)):
+
+                        # Set roation flag
                         rotation = False
+
+                        # Check if fits with width vertically
                         if gridIndexV + int(width) < len(thisBox):
+
+                            # Check if we find a "0" to be sure there is enough space
                             if thisBox[gridIndexV + int(width)][x] == "0":
+
+                                # Set the y axis
                                 y = gridIndexV
+
+                                # Start drawing
                                 return drawLoop(x, y, length, width, rotation, thisBox)
 
                             else:
@@ -290,11 +310,22 @@ def confirmationFunction():
                         else:
                             return False
 
+                    # Check if fits with width horizontally (flipped)
                     elif x <= int(len(thisBox[gridIndexV]) - int(width)):
+
+                        # Set rotation flag
                         rotation = True
+
+                        # Check if fits with length vertically
                         if gridIndexV + int(length) < len(thisBox):
+
+                            # Check if we find a "0" to be sure there is enough space
                             if thisBox[gridIndexV + int(length)][x] == "0":
+
+                                # Set the y axis
                                 y = gridIndexV
+
+                                 # Start drawing
                                 return drawLoop(x, y, length, width, rotation)
                             
                             else:
