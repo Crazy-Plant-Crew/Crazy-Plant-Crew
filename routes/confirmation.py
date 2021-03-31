@@ -327,6 +327,8 @@ def confirmationFunction():
                             masterLoop(thisCost)
                 
                 else:
+                    print("slaveLoop thisCost")
+                    print(thisCost)
                     return thisCost
 
 
