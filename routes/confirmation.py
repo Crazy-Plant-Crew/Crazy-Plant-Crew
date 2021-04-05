@@ -35,6 +35,7 @@ def confirmationFunction():
     # Get variable
     user_id = session["user_id"]
     query = Baskets.query.filter_by(user_id=user_id)
+    shipping = 0
 
 
     # Make plants array from basket
@@ -419,13 +420,11 @@ def confirmationFunction():
         masterLoop()
 
 
-        print("boxes")
-        print(boxes)
-        print("cost")
-        print(cost)
-        print("weight")
-        print(weight)
+        # Get total shipping cost
+        for element in cost:
+            shipping += element
+
 
         
     
-        return render_template("confirmation.html", name=getUserName(), picture=getUserPicture(), role=getUserRole())
+        return render_template("confirmation.html", name=getUserName(), picture=getUserPicture(), role=getUserRole(), shipping=shipping)

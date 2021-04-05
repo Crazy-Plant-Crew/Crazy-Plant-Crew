@@ -32,6 +32,9 @@
 {% block main %}
     <form action="/confirmation" method="post" enctype="multipart/form-data">
         <div>
+            Shipping cost: {{ shipping }}
+        </div>
+        <div>
             <input type="checkbox" id="pay" name="pay" value="pay">
             <label for="pay"> Pay?</label>
         </div>
