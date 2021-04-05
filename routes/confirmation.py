@@ -20,7 +20,10 @@ def confirmationFunction():
     get_flashed_messages()  
 
 
-    # Make needed arrays
+    # Get variable
+    user_id = session["user_id"]
+    shipping = 0
+    total = 0
     cost = []
     addresses = []
     plants = []
@@ -32,15 +35,11 @@ def confirmationFunction():
     weight = []
 
 
-    # Get variable
-    user_id = session["user_id"]
-    query = Baskets.query.filter_by(user_id=user_id)
-    shipping = 0
-
-
     # Make plants array from basket
+    query = Baskets.query.filter_by(user_id=user_id)
     for element in query:
         plants.append([str(element.plant_id), str(element.name), str(element.quantity), str(element.price)])
+        total += element.subtotal
 
 
     # Add to plants array the plants features
@@ -89,7 +88,7 @@ def confirmationFunction():
         if pay == "Yes":
 
             # Insert order informations into the orders table
-            db.session.add(Orders(user_id=user_id, pay=pay, date=date, express=express, plants=str(plants), addresses=str(addresses), boxes=str(boxes)))
+            db.session.add(Orders(user_id=user_id, date=date, plants=str(plants), boxes=str(boxes), addresses=str(addresses), express=express, pay=pay, shipping=shipping, total=total))
             db.session.commit()
 
             # Flash result & redirect
@@ -424,7 +423,9 @@ def confirmationFunction():
         for element in cost:
             shipping += element
 
+        total += shipping
+
 
         
     
-        return render_template("confirmation.html", name=getUserName(), picture=getUserPicture(), role=getUserRole(), shipping=shipping)
+        return render_template("confirmation.html", name=getUserName(), picture=getUserPicture(), role=getUserRole(), shipping=shipping, total=total)

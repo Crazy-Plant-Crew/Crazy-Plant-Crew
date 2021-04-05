@@ -113,6 +113,8 @@ class Orders(db.Model):
     boxes = db.Column(db.String(1024), nullable=True)
     addresses = db.Column(db.String(1024), nullable=False)
     express = db.Column(db.String(1024), nullable=False, default="No")
+    shipping = db.Column(db.Float, nullable=False, default=0)
+    total = db.Column(db.Float, nullable=False, default=0)
     pay = db.Column(db.String(1024), nullable=False, default="No")
     stage = db.Column(db.String(1024), nullable=False, default="In progress")
     remark = db.Column(db.String(1024), nullable=False, default="No")  
