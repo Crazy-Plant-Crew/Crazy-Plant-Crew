@@ -429,4 +429,4 @@ def confirmationFunction():
 
         
     
-        return render_template("confirmation.html", name=getUserName(), picture=getUserPicture(), role=getUserRole(), totalPlant=totalPlant, shipping=shipping, total=total)
+        return render_template("confirmation.html", name=getUserName(), picture=getUserPicture(), role=getUserRole(), subtotal=subtotal, shipping=shipping, total=total)
