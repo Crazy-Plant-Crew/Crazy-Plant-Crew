@@ -86,6 +86,13 @@ def confirmationFunction():
             pay = "Yes"
 
 
+        # Get total shipping cost
+        for element in cost:
+            shipping += element
+
+        total = shipping + subtotal
+
+
         if pay == "Yes":
 
             # Insert order informations into the orders table
@@ -425,8 +432,6 @@ def confirmationFunction():
             shipping += element
 
         total = shipping + subtotal
-
-
         
     
         return render_template("confirmation.html", name=getUserName(), picture=getUserPicture(), role=getUserRole(), subtotal=subtotal, shipping=shipping, total=total)
