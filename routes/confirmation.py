@@ -287,7 +287,7 @@ def confirmationFunction():
                             y = gridIndexV
 
                                 # Start drawing
-                            return drawLoop(x, y, length, width, rotation)
+                            return drawLoop(x, y, length, width, rotation, thisBox)
                         
                         else:
                             gridIndexV += 1
