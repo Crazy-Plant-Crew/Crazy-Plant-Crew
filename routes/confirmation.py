@@ -4,7 +4,7 @@ import sys
 from flask import Blueprint, render_template, redirect, session, request, flash, get_flashed_messages, url_for
 from application import getUserName, getUserPicture, login_required, confirmed_required, getUserRole, role_required, db, Orders, Boxes, Users, Plants, Baskets
 from flask_sqlalchemy import SQLAlchemy
-from time import time
+from time import time, ctime
 
 
 # Set Blueprints
@@ -22,7 +22,7 @@ def confirmationFunction():
 
     # Get variable
     user_id = session["user_id"]
-    totalPlant = 0
+    subtotal = 0
     shipping = 0
     total = 0
     cost = []
@@ -40,7 +40,7 @@ def confirmationFunction():
     query = Baskets.query.filter_by(user_id=user_id)
     for element in query:
         plants.append([str(element.plant_id), str(element.name), str(element.quantity), str(element.price)])
-        totalPlant += element.subtotal
+        subtotal += element.subtotal
 
 
     # Add to plants array the plants features
@@ -71,7 +71,7 @@ def confirmationFunction():
     if request.method == "POST":
 
         # Get variable
-        date = int(time())
+        date = ctime(time())
         user_id = session["user_id"]
         
            
@@ -89,7 +89,7 @@ def confirmationFunction():
         if pay == "Yes":
 
             # Insert order informations into the orders table
-            db.session.add(Orders(user_id=user_id, date=date, plants=str(plants), boxes=str(boxes), addresses=str(addresses), express=express, pay=pay, shipping=shipping, total=total))
+            db.session.add(Orders(user_id=user_id, date=date, plants=str(plants), boxes=str(boxes), addresses=str(addresses), express=express, pay=pay, shipping=shipping, subtotal=subtotal, total=total))
             db.session.commit()
 
             # Flash result & redirect
@@ -424,7 +424,7 @@ def confirmationFunction():
         for element in cost:
             shipping += element
 
-        total = shipping + totalPlant
+        total = shipping + subtotal
 
 
         
