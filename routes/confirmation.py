@@ -375,6 +375,7 @@ def confirmationFunction():
                     return
 
         return
+        
 
     # Start main loop
     masterLoop()
@@ -412,6 +413,13 @@ def confirmationFunction():
             db.session.add(Orders(user_id=user_id, date=date, plants=str(plants), boxes=str(boxes), addresses=str(addresses), express=express, pay=pay, shipping=shipping, subtotal=subtotal, total=total))
             db.session.commit()
 
+            """
+            Update basket
+            Update stocks
+            Send mail(s)
+
+            """
+
             # Flash result & redirect
             flash("Plant(s) ordered", "success")
             return redirect("/history")
@@ -426,8 +434,5 @@ def confirmationFunction():
 
     
     else:
-
-
-        
     
         return render_template("confirmation.html", name=getUserName(), picture=getUserPicture(), role=getUserRole(), subtotal=subtotal, shipping=shipping, total=total)

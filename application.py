@@ -81,7 +81,7 @@ class Plants(db.Model):
 class News(db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=False, autoincrement=True, unique=True)
     title = db.Column(db.String(1024), nullable=False, default="No title")
-    body = db.Column(db.String(1024), nullable=False, default="No body")
+    body = db.Column(db.Text, nullable=False, default="No body")
 
 class Baskets(db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=False, autoincrement=True, unique=True)
