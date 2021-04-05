@@ -375,7 +375,7 @@ def confirmationFunction():
                     return
 
         return
-        
+
 
     # Start main loop
     masterLoop()
@@ -411,6 +411,11 @@ def confirmationFunction():
 
             # Insert order informations into the orders table
             db.session.add(Orders(user_id=user_id, date=date, plants=str(plants), boxes=str(boxes), addresses=str(addresses), express=express, pay=pay, shipping=shipping, subtotal=subtotal, total=total))
+            db.session.commit()
+
+
+            # Delete basket in DB
+            Baskets.query.filter_by(user_id=user_id).delete()
             db.session.commit()
 
             """

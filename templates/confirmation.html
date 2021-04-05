@@ -31,29 +31,31 @@
 
 {% block main %}
     <form action="/confirmation" method="post" enctype="multipart/form-data">
-        <div>
-            Plant(s) cost: {{ '%0.2f'|format(subtotal) }}€
-        </div>
-        <br>
-        <div>
-            Shipping cost: {{ '%0.2f'|format(shipping) }}€
-        </div>
-        <br>
-        <div>
-            Total price: {{ '%0.2f'|format(total) }}€
-        </div>
-        <br>
-        <div>
-            <input type="checkbox" id="pay" name="pay" value="pay">
-            <label for="pay"> Pay?</label>
-        </div>
-        <br>
-        <div>
-            <button id="submit" type="submit" name="submit" value="submit"><img src="/static/pay.svg" alt="pay" height="50"></button>
-        </div>
-        <br>
-        <div>
-            <a href="/pay"><img src="/static/back.svg" alt="back" height="50"></a>
+        <div class="ConfirmationMain">
+            <div>
+                Plant(s) cost: {{ '%0.2f'|format(subtotal) }}€
+            </div>
+            <br>
+            <div>
+                Shipping cost: {{ '%0.2f'|format(shipping) }}€
+            </div>
+            <br>
+            <div>
+                Total price: {{ '%0.2f'|format(total) }}€
+            </div>
+            <br>
+            <div>
+                <input type="checkbox" id="pay" name="pay" value="pay">
+                <label for="pay"> Pay?</label>
+            </div>
+            <br>
+            <div>
+                <button id="submit" type="submit" name="submit" value="submit"><img src="/static/pay.svg" alt="pay" height="50"></button>
+            </div>
         </div>
     </form>
+    <br>
+    <div>
+        <a href="/pay"><img src="/static/back.svg" alt="back" height="50"></a>
+    </div>
 {% endblock %}

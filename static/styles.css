@@ -697,3 +697,14 @@ button {
 	align-content: center;
 }
 
+
+/*  CONFIRMATION  */
+
+
+.ConfirmationMain {
+	height: 500px;
+	border-radius: 25px;
+	border: 2px solid #E8E8E8;
+	padding: 20px; 	
+	width: 750px;
+}
