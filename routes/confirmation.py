@@ -39,7 +39,7 @@ def confirmationFunction():
     query = Baskets.query.filter_by(user_id=user_id)
     for element in query:
         plants.append([str(element.plant_id), str(element.name), str(element.quantity), str(element.price)])
-        total += element.subtotal
+        totalPlant += element.subtotal
 
 
     # Add to plants array the plants features
@@ -423,9 +423,9 @@ def confirmationFunction():
         for element in cost:
             shipping += element
 
-        total += shipping
+        total = shipping + totalPlant
 
 
         
     
-        return render_template("confirmation.html", name=getUserName(), picture=getUserPicture(), role=getUserRole(), shipping=shipping, total=total)
+        return render_template("confirmation.html", name=getUserName(), picture=getUserPicture(), role=getUserRole(), totalPlant=totalPlant, shipping=shipping, total=total)
