@@ -22,6 +22,7 @@ def confirmationFunction():
 
     # Get variable
     user_id = session["user_id"]
+    totalPlant = 0
     shipping = 0
     total = 0
     cost = []
