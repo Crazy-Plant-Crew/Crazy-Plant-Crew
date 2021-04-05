@@ -419,7 +419,6 @@ def confirmationFunction():
             db.session.commit()
 
             """
-            Update basket
             Update stocks
             Send mail(s)
 
