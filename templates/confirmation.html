@@ -32,7 +32,7 @@
 {% block main %}
     <form action="/confirmation" method="post" enctype="multipart/form-data">
         <div>
-            Plant(s) cost: {{ '%0.2f'|format(totalPlant) }}€
+            Plant(s) cost: {{ '%0.2f'|format(subtotal) }}€
         </div>
         <br>
         <div>
