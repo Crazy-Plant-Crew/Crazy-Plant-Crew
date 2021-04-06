@@ -69,7 +69,7 @@ def basketFunction():
                 if item.quantity > query.stock:
 
                     # Adapting basket to stock 
-                    query.stock = item.quantity
+                    item.quantity = query.stock
                     db.session.commit()
 
                     # Flash result & redirect
