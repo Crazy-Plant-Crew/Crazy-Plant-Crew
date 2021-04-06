@@ -33,6 +33,7 @@ def basketFunction():
     # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
 
+        # Check if user deletes an item in the basket
         if "delete" in request.form:
         
             # Loop through the record list to match plant ID when delete button is pressed
@@ -67,8 +68,13 @@ def basketFunction():
                 # If user orders too much 
                 if item.quantity > query.stock:
 
+                    # Adapting basket to stock 
+                    query.stock = item.quantity
+                    db.session.commit()
+
                     # Flash result & redirect
                     flash("Not enough stock of: " + str(item.name), "warning")
+                    flash("Adapting, only " + str(query.stock) + " available", "warning")
                     return redirect("/basket")
 
                 # If user does not order too much
