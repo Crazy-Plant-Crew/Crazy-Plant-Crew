@@ -62,12 +62,8 @@ def basketFunction():
             for item in thisBasket:
 
                 # Check with respective id's against Plants
-                query = Plants.query.filter_by(id=item.id).all()
+                query = Plants.query.filter_by(id=item.plant_id).all()
 
-                print(query)
-                print(item)
-                print(thisBasket)
-                """
                 # If user orders too much 
                 if item.quantity > query.stock:
 
@@ -78,7 +74,6 @@ def basketFunction():
                 # If user does not order too much
                 else:
                     return redirect("/pay")
-                """
 
 
     else:
