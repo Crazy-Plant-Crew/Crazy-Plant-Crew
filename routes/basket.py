@@ -68,8 +68,9 @@ def basketFunction():
                 # If user orders too much 
                 if item.quantity > query.stock:
 
-                    # Adapting basket to stock 
+                    # Adapting basket to stock quantity and correct basket subtotal
                     item.quantity = query.stock
+                    item.subtotal = int(query.stock) * int(item.price)
                     db.session.commit()
 
                     # Flash result & redirect
