@@ -2,7 +2,7 @@ import traceback
 import sys
 
 from flask import Blueprint, render_template, redirect, session, request, flash, get_flashed_messages
-from application import getUserName, getUserPicture, login_required, confirmed_required, getUserRole, role_required, db, Baskets
+from application import getUserName, getUserPicture, login_required, confirmed_required, getUserRole, role_required, db, Baskets, Plants
 from flask_sqlalchemy import SQLAlchemy
 
 
@@ -53,6 +53,27 @@ def basketFunction():
                 else:
 
                     index += 1
+
+
+        # Check for available quantities
+        if "pay" in request.form:
+
+            # Loop through the user basket
+            for item in thisBasket:
+
+                # Check with respective id's against Plants
+                query = Plants.query.filter_by(id=item.id).first()
+
+                # If user orders too much 
+                if item.quantity > query.stock:
+
+                    # Flash result & redirect
+                    flash("Not enough stock of: " + str(item.name), "warning")
+                    return redirect("/basket")
+
+                # If user does not order too much
+                else:
+                    return redirect("/pay")
 
 
     else:

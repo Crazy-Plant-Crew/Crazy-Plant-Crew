@@ -428,9 +428,7 @@ def confirmationFunction():
             db.session.commit()
 
             """
-            Update stocks
             Send mail(s)
-
             """
 
             # Flash result & redirect
