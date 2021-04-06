@@ -28,7 +28,7 @@ def confirmationFunction():
     cost = []
     addresses = []
     plants = []
-    plantItems = []
+    items = []
     boxesNE = []
     boxesEX = []
     boxes = []
@@ -113,37 +113,37 @@ def confirmationFunction():
     for plant in plants:
         index = int(plant[2])
         while index > 0:
-            plantItems.extend([plant])
+            items.extend([plant])
             index -= 1
 
-    plantItems = sorted(plantItems, key=lambda x: (int(x[4]), int(x[5]), int(x[6])), reverse=True)
+    items = sorted(items, key=lambda x: (int(x[4]), int(x[5]), int(x[6])), reverse=True)
 
 
     # Function to take the biggest box needed from the express group first, then from the non express group. Increment sending costs.
-    def plantLoop(plantItem):
+    def plantLoop(item):
 
         # Express only can only be in Germany - Append needed box - Append to cost
         if len(boxesEX) > 0 and express == "Yes" and addresses[3] == "Germany":
             for boxEX in boxesEX:
-                if int(plantItem[0]) == int(boxEX[1][0]):
+                if int(item[0]) == int(boxEX[1][0]):
                     cost.append(float(boxEX[0][8]))
                     boxes.extend([boxEX[0]])
                     weight.append(int(boxEX[0][5]))
                     return
 
         # Express only can only be in Germany - Append needed box - Append to cost
-        if len(boxesEX) > 0 and express == "No" and plantItem[8] == "Yes" and addresses[3] == "Germany":
+        if len(boxesEX) > 0 and express == "No" and item[8] == "Yes" and addresses[3] == "Germany":
             for boxEX in boxesEX:
-                if int(plantItem[0]) == int(boxEX[1][0]):
+                if int(item[0]) == int(boxEX[1][0]):
                     boxes.extend([boxEX[0]])
                     cost.append(float(boxEX[0][8]))
                     weight.append(int(boxEX[0][5]))
                     return
 
         # Non express but in Germany - Append needed box - Append to cost
-        elif len(boxesNE) > 0 and express == "No" and plantItem[8] == "No" and addresses[3] == "Germany":
+        elif len(boxesNE) > 0 and express == "No" and item[8] == "No" and addresses[3] == "Germany":
             for boxNE in boxesNE:
-                if int(plantItem[0]) == int(boxNE[1][0]):
+                if int(item[0]) == int(boxNE[1][0]):
                     boxes.extend([boxNE[0]])
                     cost.append(float(boxNE[0][6]))
                     weight.append(int(boxNE[0][4]))
@@ -152,7 +152,7 @@ def confirmationFunction():
         # Non express in the EU - Append needed box - Append to cost
         elif len(boxesNE) > 0 and express == "No" and addresses[3] != "Germany":
             for boxNE in boxesNE:
-                if int(plantItem[0]) == int(boxNE[1][0]):
+                if int(item[0]) == int(boxNE[1][0]):
                     boxes.extend([boxNE[0]])
                     cost.append(float(boxNE[0][7]))
                     weight.append(int(boxNE[0][4]))
@@ -175,7 +175,7 @@ def confirmationFunction():
 
     # Take plants length and width
     def getAttributes(thisPlant):
-        if len(plantItems) > 0:
+        if len(items) > 0:
             length = thisPlant[4]
             width = thisPlant[5]
             mass = thisPlant[7]
@@ -303,8 +303,8 @@ def confirmationFunction():
 
     # Delete dealt plants
     def deleteLoop(thisPlant):
-        if len(plantItems) > 0:
-            plantItems.remove(thisPlant)
+        if len(items) > 0:
+            items.remove(thisPlant)
             return
 
         else:
@@ -316,11 +316,11 @@ def confirmationFunction():
 
         # Check for other plants to fit present box
         def slaveLoop(thisBox):
-            if len(plantItems) > 0:
-                for plantItem in plantItems:
+            if len(items) > 0:
+                for item in items:
 
                     # Get needed attributes
-                    length, width, mass = getAttributes(plantItem)
+                    length, width, mass = getAttributes(item)
 
                     # Check if there is enough available weight
                     if weight[-1] - int(mass) > 0:
@@ -332,7 +332,7 @@ def confirmationFunction():
                         if gridLoop(length, width, thisBox) != False:      
 
                             # Delete dealt plant                      
-                            deleteLoop(plantItem)
+                            deleteLoop(item)
 
                             # Recursively try again
                             slaveLoop(thisBox)
@@ -346,15 +346,15 @@ def confirmationFunction():
                 return
 
         # Start dealing with every plants
-        if len(plantItems) > 0:
-            for plantItem in plantItems:
+        if len(items) > 0:
+            for item in items:
 
                 # Take needed box
-                plantLoop(plantItem)
+                plantLoop(item)
 
                 # Make a grid and get needed attributes
                 thisBox = makeGrid()
-                length, width, mass = getAttributes(plantItem)
+                length, width, mass = getAttributes(item)
 
                 # Check if there is enough available weight
                 if weight[-1] - int(mass) > 0:
@@ -366,7 +366,7 @@ def confirmationFunction():
                     gridLoop(length, width, thisBox)
 
                     # Delete dealt plants
-                    deleteLoop(plantItem)
+                    deleteLoop(item)
 
                     # Start slaveLoop to check if other plants can fit in that box
                     slaveLoop(thisBox)
