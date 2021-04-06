@@ -301,11 +301,20 @@ def confirmationFunction():
             else:
                 return False
 
-    # Delete dealt plants
+
+    # Delete dealt plants and update corresponding stock
     def deleteLoop(thisPlant):
         if len(items) > 0:
-            items.remove(thisPlant)
-            return
+            query = Plants.query.filter_by(id=thisPlant[0]).first()
+            stock = int(query.stock)
+
+            if stock - 1 >= 0:
+                query.stock = str(stock - 1)
+                db.session.commit()
+                return items.remove(thisPlant)
+
+            else:
+                return False
 
         else:
             return False
