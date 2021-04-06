@@ -65,7 +65,8 @@ def basketFunction():
                 query = Plants.query.filter_by(id=item.id).all()
 
                 print(query)
-
+                print(item)
+                print(thisBasket)
                 """
                 # If user orders too much 
                 if item.quantity > query.stock:
