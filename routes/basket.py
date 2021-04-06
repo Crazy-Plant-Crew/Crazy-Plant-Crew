@@ -62,7 +62,7 @@ def basketFunction():
             for item in thisBasket:
 
                 # Check with respective id's against Plants
-                query = Plants.query.filter_by(plant_id=item.id).first()
+                query = Plants.query.filter_by(id=item.id).first()
 
                 # If user orders too much 
                 if item.quantity > query.stock:
