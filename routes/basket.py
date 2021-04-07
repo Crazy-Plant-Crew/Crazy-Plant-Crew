@@ -76,12 +76,15 @@ def basketFunction():
 
                     # Adapting basket to stock quantity and correct basket subtotal
                     item.quantity = query.stock
-                    item.subtotal = int(query.stock) * int(item.price)
+                    item.subtotal = float(query.stock) * float(item.price)
                     db.session.commit()
 
                     # Flash result & redirect
                     flash("Not enough stock of: " + str(item.name), "warning")
                     flash("Adapting, only " + str(query.stock) + " available", "warning")
+
+                else:
+                    flag = False
 
             # Check for flag status
             if flag == True:
