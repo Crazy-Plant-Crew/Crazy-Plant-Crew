@@ -305,10 +305,10 @@ def confirmationFunction():
     def deleteLoop(thisPlant):
         if len(items) > 0:
             query = Plants.query.filter_by(id=thisPlant[0]).first()
-            stock = int(query.stock)
+            stock = query.stock
 
             if stock - 1 >= 0:
-                query.stock = str(stock - 1)
+                query.stock = stock - 1
                 db.session.commit()
                 return items.remove(thisPlant)
 
