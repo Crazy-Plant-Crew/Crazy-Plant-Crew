@@ -307,8 +307,11 @@ def confirmationFunction():
             query = Plants.query.filter_by(id=thisPlant[0]).first()
 
             if query.stock >= 1:
-                #query.stock -= 1
-                #db.session.commit()
+                print(thisPlant)
+                print("BEFORE: " + str(query.stock))
+                query.stock -= 1
+                db.session.commit()
+                print("AFTER: " + str(query.stock))
                 return items.remove(thisPlant)
 
             else:
