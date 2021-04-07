@@ -309,7 +309,7 @@ def confirmationFunction():
             print("BEFORE: " + str(query.stock))
 
             if query.stock >= 1:
-                query.stock -= 0
+                query.stock -= 1
                 print("MIDDLE: " + str(query.stock))
                 db.session.commit()
                 print("AFTER: " + str(query.stock))
