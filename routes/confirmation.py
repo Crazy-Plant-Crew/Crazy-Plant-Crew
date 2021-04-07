@@ -1,5 +1,6 @@
 import traceback
 import sys
+import os
 
 from flask import Blueprint, render_template, redirect, session, request, flash, get_flashed_messages, url_for
 from application import getUserName, getUserPicture, login_required, confirmed_required, getUserRole, role_required, sendMail, db, Orders, Boxes, Users, Plants, Baskets
@@ -422,11 +423,17 @@ def confirmationFunction():
             Baskets.query.filter_by(user_id=user_id).delete()
             db.session.commit()
 
-            # Send order confirmation to client 
+            # Send order confirmation email to client 
             subject = "Your order from the Crazy Plant Crew"
             query = Users.query.filter_by(id=user_id).first()
             email = query.email
             body = render_template('order.html', name=getUserName(), addresses=addresses, plants=plants, total=total, date=date)
+            sendMail(subject, email, body)
+
+            # Send closed deal email to Glenn 
+            subject = "You closed a deal!"
+            email = os.environ["EMAIL_SEND"]
+            body = render_template('deal.html', name=getUserName(), addresses=addresses, total=total, date=date)
             sendMail(subject, email, body)
 
             # Flash result & redirect
