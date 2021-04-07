@@ -303,13 +303,14 @@ def confirmationFunction():
 
     # Delete dealt plants and update corresponding stock
     def deleteLoop(thisPlant):
+        print("DELETE IS ON")
         if len(items) > 0:
             query = Plants.query.filter_by(id=thisPlant[0]).first()
+            print("BEFORE: " + str(query.stock))
 
             if query.stock >= 1:
-                print(thisPlant)
-                print("BEFORE: " + str(query.stock))
-                query.stock -= 1
+                query.stock -= 0
+                print("MIDDLE: " + str(query.stock))
                 db.session.commit()
                 print("AFTER: " + str(query.stock))
                 return items.remove(thisPlant)
