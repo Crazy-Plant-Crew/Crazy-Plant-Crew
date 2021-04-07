@@ -59,14 +59,20 @@ def basketFunction():
         # Check for available quantities
         if "pay" in request.form:
 
+            # Set flag
+            flag = False
+
             # Loop through the user basket
             for item in thisBasket:
 
                 # Check with respective id's against Plants
                 query = Plants.query.filter_by(id=item.plant_id).first()
-
+[
                 # If user orders too much 
                 if item.quantity > query.stock:
+
+                    # Set flag to True
+                    flag = True
 
                     # Adapting basket to stock quantity and correct basket subtotal
                     item.quantity = query.stock
@@ -76,11 +82,15 @@ def basketFunction():
                     # Flash result & redirect
                     flash("Not enough stock of: " + str(item.name), "warning")
                     flash("Adapting, only " + str(query.stock) + " available", "warning")
-                    return redirect("/basket")
 
-                # If user does not order too much
-                else:
-                    return redirect("/pay")
+            # Check for flag status
+            if flag == True:
+                return redirect("/basket")
+
+            else:
+                return redirect("/pay")
+
+
 
 
     else:
