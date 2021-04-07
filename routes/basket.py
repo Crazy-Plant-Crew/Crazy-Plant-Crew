@@ -76,7 +76,7 @@ def basketFunction():
 
                     # Adapting basket to stock quantity and correct basket subtotal
                     item.quantity = query.stock
-                    item.subtotal = float(query.stock) * float(item.price)
+                    item.subtotal = int(query.stock) * float(item.price)
                     db.session.commit()
 
                     # Flash result & redirect
