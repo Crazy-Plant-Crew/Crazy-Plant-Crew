@@ -5,14 +5,16 @@ Here is the summary of your order today ({{ date }}):
 
 
 Address: 
-{{ addresses[0] }} {{ addresses[1] }} 
-{{ addresses[2] }} 
+{{ addresses[0] }} {{ addresses[1] }}
+{% if addresses[2] is not "" %}   
+    {{ addresses[2] }}
+{% endif %}
 {{ addresses[3] }} {{ addresses[4] }}
 {{ addresses[5] }} {{ addresses[6] }}
 {{ addresses[7] }}
 
 Additional information(s):
-{{ addresses[7] }}
+{{ addresses[8] }}
 
 
 Order:
