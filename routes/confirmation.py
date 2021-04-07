@@ -2,7 +2,7 @@ import traceback
 import sys
 
 from flask import Blueprint, render_template, redirect, session, request, flash, get_flashed_messages, url_for
-from application import getUserName, getUserPicture, login_required, confirmed_required, getUserRole, role_required, db, Orders, Boxes, Users, Plants, Baskets
+from application import getUserName, getUserPicture, login_required, confirmed_required, getUserRole, role_required, sendMail, db, Orders, Boxes, Users, Plants, Baskets
 from flask_sqlalchemy import SQLAlchemy
 from time import time, ctime
 
@@ -422,14 +422,16 @@ def confirmationFunction():
             db.session.add(Orders(user_id=user_id, date=date, plants=str(plants), boxes=str(boxes), addresses=str(addresses), express=express, pay=pay, shipping=shipping, subtotal=subtotal, total=total))
             db.session.commit()
 
-
             # Delete basket in DB
             Baskets.query.filter_by(user_id=user_id).delete()
             db.session.commit()
 
-            """
-            Send mail(s)
-            """
+            # Send order confirmation to client 
+            subject = "Your order from the Crazy Plant Crew"
+            body = render_template('order.html', name=getUserName(), addresses=addresses, plants=plants, total=total)
+            email = "hage.benoit@gmail.com"
+            messsage = Message(subject=subject, recipients=[email], body=body)
+            mail.send(messsage)    
 
             # Flash result & redirect
             flash("Plant(s) ordered", "success")

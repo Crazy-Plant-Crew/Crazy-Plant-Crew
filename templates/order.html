@@ -1,0 +1,22 @@
+Hello {{ name }},
+
+Thank you for your Crazy-Plant-Crew order! We will let you know as soon as your item(s) have been dispatched.
+
+Address:
+{% for address in addresses %}
+{{ address }}
+{% endfor %}
+
+Order:
+{% for plant in plants %}
+{{ plant[1], plant[2] }}x
+{% endfor %}
+
+Total:
+{{ '%0.2f'|format(total) }}€
+
+We kindly ask you to verify these information. Should there be any problem, please contact us at crazyplantcrew@gmail.com. 
+
+Sincerly, 
+
+the CPC team.
