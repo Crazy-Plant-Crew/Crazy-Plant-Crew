@@ -61,9 +61,9 @@ def indexFunction():
             # Sum up the quantities
             newQuantity = existingQuantity + int(quantity)
             user_id = session["user_id"]
-            subtotal = float(newQuantity) * float(price)
+            subtotal = int(newQuantity) * float(price)
             
-            # Update database with quantity
+            # Update database with quantity and subtotal
             query = Baskets.query.filter_by(plant_id=plant_id).filter_by(user_id=user_id).first()
             query.quantity = newQuantity
             query.subtotal = subtotal
@@ -74,7 +74,7 @@ def indexFunction():
         else:
 
             user_id = session["user_id"]
-            subtotal = float(quantity) * float(price)
+            subtotal = int(quantity) * float(price)
             
             # Add quantity to database
             db.session.add(Baskets(plant_id=plant_id, user_id=user_id, quantity=quantity, name=name, picture=picture, price=price, subtotal=subtotal))
