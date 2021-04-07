@@ -304,13 +304,13 @@ def confirmationFunction():
     # Delete dealt plants and update corresponding stock
     def deleteLoop(thisPlant):
         if len(items) > 0:
+
+            # Query for plant stock of corresponding id
             query = Plants.query.filter_by(id=thisPlant[0]).first()
-            print("BEFORE: " + str(query.stock))
 
             if query.stock >= 1:
-                query.stock -= 2
+                query.stock -= 1
                 db.session.commit()
-                print("AFTER: " + str(query.stock))
                 return items.remove(thisPlant)
 
             else:
@@ -386,10 +386,6 @@ def confirmationFunction():
         return
 
 
-    # Start main loop
-    masterLoop()
-
-
     # Get total shipping cost
     for element in cost:
         shipping += element
@@ -447,5 +443,8 @@ def confirmationFunction():
 
     
     else:
+
+        # Start main loop
+        masterLoop()
     
         return render_template("confirmation.html", name=getUserName(), picture=getUserPicture(), role=getUserRole(), subtotal=subtotal, shipping=shipping, total=total)
