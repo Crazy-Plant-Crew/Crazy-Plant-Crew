@@ -1,10 +1,13 @@
 Hello {{ name }},
 
 Thank you for your Crazy-Plant-Crew order! We will let you know as soon as your item(s) have been dispatched.
+Here is the summary of your order today ({{ date }}):
 
 
 Address:
-{% for address in addresses %}{{ address }}{% endfor %}
+{% for address in addresses %}
+- {{ address }}
+{% endfor %}
 
 
 Order:

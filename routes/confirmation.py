@@ -427,8 +427,9 @@ def confirmationFunction():
 
             # Send order confirmation to client 
             subject = "Your order from the Crazy Plant Crew"
-            email = "hage.benoit@gmail.com"
-            body = render_template('order.html', name=getUserName(), addresses=addresses, plants=plants, total=total)
+            query = Users.query.filter_by(id=user_id).first()
+            email = query.email
+            body = render_template('order.html', name=getUserName(), addresses=addresses, plants=plants, total=total, date=date)
             sendMail(subject, email, body)
 
             # Flash result & redirect
