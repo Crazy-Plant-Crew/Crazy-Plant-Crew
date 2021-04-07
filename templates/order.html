@@ -6,7 +6,7 @@ Here is the summary of your order today ({{ date }}):
 
 Address: 
 {{ addresses[0] }} {{ addresses[1] }}
-{% if addresses[2] is not "" %}   
+{% if addresses[2] is not "None" %}   
     {{ addresses[2] }}
 {% endif %}
 {{ addresses[3] }} {{ addresses[4] }}
