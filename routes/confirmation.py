@@ -308,7 +308,7 @@ def confirmationFunction():
             print("BEFORE: " + str(query.stock))
 
             if query.stock >= 1:
-                query.stock -= 0
+                query.stock -= 2
                 db.session.commit()
                 print("AFTER: " + str(query.stock))
                 return items.remove(thisPlant)
