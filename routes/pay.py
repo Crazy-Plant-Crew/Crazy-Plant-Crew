@@ -56,6 +56,11 @@ def payFunction():
             express = "Yes"
 
 
+        # Convert caresof value to string
+        if caresof == None:
+            caresof = "No C/O"
+
+
         # Ensure the first name was submitted
         if not first:
             flash("must provide first name", "warning")
