@@ -305,7 +305,6 @@ def confirmationFunction():
     def deleteLoop(thisPlant):
         print("DELETE IS ON")
         if len(items) > 0:
-            print("INIT: " + str(query))
             query = Plants.query.filter_by(id=thisPlant[0]).first()
             print("BEFORE: " + str(query.stock))
 
