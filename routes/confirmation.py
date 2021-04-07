@@ -5,7 +5,7 @@ from flask import Blueprint, render_template, redirect, session, request, flash,
 from application import getUserName, getUserPicture, login_required, confirmed_required, getUserRole, role_required, sendMail, db, Orders, Boxes, Users, Plants, Baskets
 from flask_sqlalchemy import SQLAlchemy
 from time import time, ctime
-
+from flask_mail import Message, Mail
 
 # Set Blueprints
 confirmation = Blueprint('confirmation', __name__,)
@@ -430,8 +430,8 @@ def confirmationFunction():
             subject = "Your order from the Crazy Plant Crew"
             body = render_template('order.html', name=getUserName(), addresses=addresses, plants=plants, total=total)
             email = "hage.benoit@gmail.com"
-            messsage = Message(subject=subject, recipients=[email], body=body)
-            mail.send(messsage)    
+            message = Message(subject=subject, recipients=[email], body=body)
+            mail.send(message)    
 
             # Flash result & redirect
             flash("Plant(s) ordered", "success")

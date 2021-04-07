@@ -305,8 +305,8 @@ def sendPin(email):
     date = int(time())
 
     # Send email with new PIN
-    messsage = Message(subject=subject, recipients=[email], body=body)
-    mail.send(messsage)    
+    message = Message(subject=subject, recipients=[email], body=body)
+    mail.send(message)    
 
     # Update DB
     query = Users.query.filter_by(id=user_id).first()
