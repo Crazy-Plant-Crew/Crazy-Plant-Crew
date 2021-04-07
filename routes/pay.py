@@ -58,7 +58,7 @@ def payFunction():
 
         # Convert caresof value to string
         if caresof == None:
-            caresof = "No C/O"
+            caresof = ""
 
 
         # Ensure the first name was submitted
@@ -86,7 +86,7 @@ def payFunction():
 
 
         # Ensure the caresof name fits server-side
-        if not re.search("^[a-zA-Z 0-9/]{1,100}$", caresof):
+        if not re.search("^[a-zA-Z 0-9]{1,100}$", caresof):
             flash("Invalid C/O name", "danger")
             return redirect("/pay")
 
