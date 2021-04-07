@@ -57,7 +57,7 @@ def payFunction():
 
 
         # Convert caresof value to string
-        if caresof == None:
+        if caresof == "":
             caresof = "None"
 
 
