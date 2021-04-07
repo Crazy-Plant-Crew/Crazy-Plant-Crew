@@ -53,7 +53,7 @@ def confirmationFunction():
 
     # Make address array
     query = Users.query.filter_by(id=user_id).first()
-    addresses.extend([query.street, query.house, query.zipcode, query.country, query.additional])
+    addresses.extend([query.first, query.last, query.caresof, query.street, query.house, query.zipcode, query.city, query.country, query.additional])
 
 
     # Make express variable
@@ -71,7 +71,7 @@ def confirmationFunction():
         for package in packaging:
 
             # Express only works in Germany
-            if addresses[3] == "Germany":
+            if addresses[7] == "Germany":
 
                 # Check if express is needed for the whole
                 if express == "No":
@@ -96,7 +96,7 @@ def confirmationFunction():
                         break
 
             # Express only works in Germany
-            if addresses[3] != "Germany":
+            if addresses[7] != "Germany":
 
                 if int(plant[4]) < int(package[1]) and int(plant[5]) < int(package[2]) and int(plant[6]) < int(package[3]) and int(plant[7]) < int(package[4]):
                     boxesNE.append([package, plant])
@@ -122,7 +122,7 @@ def confirmationFunction():
     def plantLoop(item):
 
         # Express only can only be in Germany - Append needed box - Append to cost
-        if len(boxesEX) > 0 and express == "Yes" and addresses[3] == "Germany":
+        if len(boxesEX) > 0 and express == "Yes" and addresses[7] == "Germany":
             for boxEX in boxesEX:
                 if int(item[0]) == int(boxEX[1][0]):
                     cost.append(float(boxEX[0][8]))
@@ -131,7 +131,7 @@ def confirmationFunction():
                     return
 
         # Express only can only be in Germany - Append needed box - Append to cost
-        if len(boxesEX) > 0 and express == "No" and item[8] == "Yes" and addresses[3] == "Germany":
+        if len(boxesEX) > 0 and express == "No" and item[8] == "Yes" and addresses[7] == "Germany":
             for boxEX in boxesEX:
                 if int(item[0]) == int(boxEX[1][0]):
                     boxes.extend([boxEX[0]])
@@ -140,7 +140,7 @@ def confirmationFunction():
                     return
 
         # Non express but in Germany - Append needed box - Append to cost
-        elif len(boxesNE) > 0 and express == "No" and item[8] == "No" and addresses[3] == "Germany":
+        elif len(boxesNE) > 0 and express == "No" and item[8] == "No" and addresses[7] == "Germany":
             for boxNE in boxesNE:
                 if int(item[0]) == int(boxNE[1][0]):
                     boxes.extend([boxNE[0]])
@@ -149,7 +149,7 @@ def confirmationFunction():
                     return                      
         
         # Non express in the EU - Append needed box - Append to cost
-        elif len(boxesNE) > 0 and express == "No" and addresses[3] != "Germany":
+        elif len(boxesNE) > 0 and express == "No" and addresses[7] != "Germany":
             for boxNE in boxesNE:
                 if int(item[0]) == int(boxNE[1][0]):
                     boxes.extend([boxNE[0]])
