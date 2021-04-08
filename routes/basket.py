@@ -61,11 +61,11 @@ def basketFunction():
             # Check if there are plants in the basket
             for item in thisBasket:
                 print(item)
-                    """
-                    # Flash result & redirect
-                    flash("There are no plants to order", "danger")
-                    return redirect("/basket")
-                    """
+                """
+                # Flash result & redirect
+                flash("There are no plants to order", "danger")
+                return redirect("/basket")
+                """
 
             # Set flag
             flag = False
