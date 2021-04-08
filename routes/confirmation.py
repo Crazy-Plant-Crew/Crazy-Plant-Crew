@@ -71,7 +71,7 @@ def confirmationFunction():
     if len(packaging) == 0:
         
         # Flash result & redirect
-        flash("There are no boxes available", "danger")
+        flash("There are no box available", "danger")
         return redirect("/basket")
 
 
