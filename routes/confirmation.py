@@ -23,33 +23,12 @@ def confirmationFunction():
     # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
 
-        # Get variable
-        date = ctime(time())
-        user_id = session["user_id"]
-
-
-        # Set variable locally
-        subtotal = subtotal
-        shipping = shipping
-        total = total
-        cost = cost
-        addresses = addresses
-        plants = plants
-        items = items
-        boxesNE = boxesNE
-        boxesEX = boxesEX
-        boxes = boxes
-        packaging = packaging
-        weight = weight
-        itemsCopy = itemsCopy
-
-        # Get express
-        query = Users.query.filter_by(id=user_id).first()
-        express = query.express
-        
-           
         # Fake pay varibale
         pay = request.form.get("pay")
+
+
+        # Get variable
+        user_id = session["user_id"]
 
 
         # Convert pay value to string
@@ -61,10 +40,11 @@ def confirmationFunction():
 
         if pay == "Yes":
 
-            # Insert order informations into the orders table
-            db.session.add(Orders(user_id=user_id, date=date, plants=str(plants), boxes=str(boxes), addresses=str(addresses), express=express, pay=pay, shipping=shipping, subtotal=subtotal, total=total))
+            # Update pay variable
+            query = Orders.query.filter_by(user_id=user_id).all()
+            query[-1].pay = "Yes"
             db.session.commit()
-
+            
 
             # Delete basket in DB
             Baskets.query.filter_by(user_id=user_id).delete()
@@ -124,6 +104,8 @@ def confirmationFunction():
 
         # Get variable
         user_id = session["user_id"]
+        date = ctime(time())
+        pay = "No"
         subtotal = 0
         shipping = 0
         total = 0
@@ -502,6 +484,12 @@ def confirmationFunction():
             shipping += element
 
         total = shipping + subtotal
+
+
+        # Insert order informations into the orders table
+        db.session.add(Orders(user_id=user_id, date=date, plants=str(plants), boxes=str(boxes), addresses=str(addresses), express=express, pay=pay, shipping=shipping, subtotal=subtotal, total=total))
+        db.session.commit()
+
 
     
         return render_template("confirmation.html", name=getUserName(), picture=getUserPicture(), role=getUserRole(), subtotal=subtotal, shipping=shipping, total=total)
