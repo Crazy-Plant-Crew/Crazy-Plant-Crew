@@ -29,8 +29,11 @@ def confirmationFunction():
 
         # Get variable
         user_id = session["user_id"]
+        date = ctime(time())
         plants = []
         items = []
+        addresses = []
+        total = 0
 
 
         # Convert pay value to string
@@ -45,6 +48,7 @@ def confirmationFunction():
             # Update pay variable
             query = Orders.query.filter_by(user_id=user_id).all()
             query[-1].pay = "Yes"
+            total = query[-1].total
             db.session.commit()
 
 
@@ -69,6 +73,11 @@ def confirmationFunction():
                 while index > 0:
                     items.extend([plant])
                     index -= 1
+
+
+            # Make address array
+            query = Users.query.filter_by(id=user_id).first()
+            addresses.extend([query.first, query.last, query.caresof, query.street, query.house, query.zipcode, query.city, query.country, query.additional])
 
 
             # Delete basket in DB
