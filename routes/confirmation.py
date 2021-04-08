@@ -113,13 +113,13 @@ def confirmationFunction():
             body = render_template('order.html', name=getUserName(), addresses=addresses, plants=plants, total=total, date=date)
             sendMail(subject, email, body)
 
-            """
+
             # Send closed deal email to Glenn 
             subject = "You closed a deal!"
             email = os.environ["EMAIL_SEND"]
             body = render_template('deal.html', name=getUserName(), addresses=addresses, total=total, date=date)
             sendMail(subject, email, body)
-            """
+
 
             # Flash result & redirect
             flash("Plant(s) ordered", "success")
