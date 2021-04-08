@@ -29,6 +29,8 @@ def confirmationFunction():
 
         # Get variable
         user_id = session["user_id"]
+        plants = []
+        items = []
 
 
         # Convert pay value to string
