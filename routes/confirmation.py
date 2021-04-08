@@ -29,7 +29,6 @@ def confirmationFunction():
 
 
         # Set variable locally
-        express = express
         subtotal = subtotal
         shipping = shipping
         total = total
@@ -43,6 +42,10 @@ def confirmationFunction():
         packaging = packaging
         weight = weight
         itemsCopy = itemsCopy
+
+        # Get express
+        query = Users.query.filter_by(id=user_id).first()
+        express = query.express
         
            
         # Fake pay varibale
@@ -96,13 +99,13 @@ def confirmationFunction():
             body = render_template('order.html', name=getUserName(), addresses=addresses, plants=plants, total=total, date=date)
             sendMail(subject, email, body)
 
-
+            """
             # Send closed deal email to Glenn 
             subject = "You closed a deal!"
             email = os.environ["EMAIL_SEND"]
             body = render_template('deal.html', name=getUserName(), addresses=addresses, total=total, date=date)
             sendMail(subject, email, body)
-
+            """
 
             # Flash result & redirect
             flash("Plant(s) ordered", "success")
@@ -121,7 +124,6 @@ def confirmationFunction():
 
         # Get variable
         user_id = session["user_id"]
-        express = "No"
         subtotal = 0
         shipping = 0
         total = 0
