@@ -23,7 +23,7 @@ def basketFunction():
     
 
     # Query database for plants
-    thisBasket = Baskets.query.filter_by(user_id=user_id)
+    thisBasket = Baskets.query.filter_by(user_id=user_id).all()
 
 
     # Query database for plants
@@ -59,11 +59,12 @@ def basketFunction():
         if "pay" in request.form:
 
             # Check if there are plants in the basket
-            if not thisBasket:
+            for item in thisBasket:
+                if not item.name:
             
-                # Flash result & redirect
-                flash("There are no plants to order", "danger")
-                return redirect("/basket")
+                    # Flash result & redirect
+                    flash("There are no plants to order", "danger")
+                    return redirect("/basket")
 
 
             # Set flag
