@@ -60,6 +60,7 @@ def basketFunction():
 
             # Check if there are plants in the basket
             for item in thisBasket:
+                print("item")
                 print(item)
                 """
                 # Flash result & redirect
