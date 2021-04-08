@@ -18,24 +18,6 @@ def confirmationFunction():
 
     # Force flash() to get the messages on the same page as the redirect.
     get_flashed_messages()
-    
-
-    # Get variable
-    user_id = session["user_id"]
-    express = "No"
-    subtotal = 0
-    shipping = 0
-    total = 0
-    cost = []
-    addresses = []
-    plants = []
-    items = []
-    boxesNE = []
-    boxesEX = []
-    boxes = []
-    packaging = []
-    weight = []
-    itemsCopy = []
 
 
     # User reached route via POST (as by submitting a form via POST)
@@ -44,6 +26,23 @@ def confirmationFunction():
         # Get variable
         date = ctime(time())
         user_id = session["user_id"]
+
+
+        # Get variable
+        global express
+        global subtotal
+        global shipping
+        global total
+        global cost
+        global addresses
+        global plants
+        global items
+        global boxesNE
+        global boxesEX
+        global boxes
+        global packaging
+        global weight
+        global itemsCopy
         
            
         # Fake pay varibale
@@ -119,6 +118,24 @@ def confirmationFunction():
 
     
     else:
+
+        # Get variable
+        user_id = session["user_id"]
+        express = "No"
+        subtotal = 0
+        shipping = 0
+        total = 0
+        cost = []
+        addresses = []
+        plants = []
+        items = []
+        boxesNE = []
+        boxesEX = []
+        boxes = []
+        packaging = []
+        weight = []
+        itemsCopy = []
+
 
         # Make plants array from basket
         query = Baskets.query.filter_by(user_id=user_id)
