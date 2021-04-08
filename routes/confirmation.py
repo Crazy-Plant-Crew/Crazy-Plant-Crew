@@ -44,7 +44,30 @@ def confirmationFunction():
             query = Orders.query.filter_by(user_id=user_id).all()
             query[-1].pay = "Yes"
             db.session.commit()
-            
+
+
+            # Make plants array from basket
+            query = Baskets.query.filter_by(user_id=user_id)
+            for element in query:
+                plants.append([str(element.plant_id), str(element.name), str(element.quantity), str(element.price)])
+
+
+            # Add to plants array the plants features
+            index = 0
+            while index < len(plants):
+                query = Plants.query.filter_by(id=plants[index][0])
+                for element in query:
+                    plants[index].extend([str(element.length), str(element.width), str(element.height), str(element.weight), str(element.express)])            
+                index += 1
+
+
+            # Make array with all the plants side-by-side and sort them 
+            for plant in plants:
+                index = int(plant[2])
+                while index > 0:
+                    items.extend([plant])
+                    index -= 1
+
 
             # Delete basket in DB
             Baskets.query.filter_by(user_id=user_id).delete()
@@ -52,10 +75,10 @@ def confirmationFunction():
 
 
             # Update stock in Plants
-            for itemCopy in itemsCopy:
+            for item in items:
 
                 # Query for plant stock of corresponding id
-                query = Plants.query.filter_by(id=itemCopy[0]).first()
+                query = Plants.query.filter_by(id=item[0]).first()
 
                 # Check if there is still at least one unit
                 if query.stock >= 1:
@@ -118,7 +141,6 @@ def confirmationFunction():
         boxes = []
         packaging = []
         weight = []
-        itemsCopy = []
 
 
         # Make plants array from basket
@@ -210,10 +232,6 @@ def confirmationFunction():
                 index -= 1
 
         items = sorted(items, key=lambda x: (int(x[4]), int(x[5]), int(x[6])), reverse=True)
-
-
-        # Make a copy of items
-        itemsCopy = items[:]
 
 
         # Function to take the biggest box needed from the express group first, then from the non express group. Increment sending costs.
