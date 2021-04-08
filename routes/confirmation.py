@@ -18,6 +18,22 @@ def confirmationFunction():
 
     # Force flash() to get the messages on the same page as the redirect.
     get_flashed_messages() 
+    
+
+    # Get variable
+    user_id = session["user_id"]
+    subtotal = 0
+    shipping = 0
+    total = 0
+    cost = []
+    addresses = []
+    plants = []
+    items = []
+    boxesNE = []
+    boxesEX = []
+    boxes = []
+    packaging = []
+    weight = []
 
 
     # User reached route via POST (as by submitting a form via POST)
@@ -101,22 +117,6 @@ def confirmationFunction():
 
     
     else:
-
-        # Get variable
-        user_id = session["user_id"]
-        subtotal = 0
-        shipping = 0
-        total = 0
-        cost = []
-        addresses = []
-        plants = []
-        items = []
-        boxesNE = []
-        boxesEX = []
-        boxes = []
-        packaging = []
-        weight = []
-
 
         # Make plants array from basket
         query = Baskets.query.filter_by(user_id=user_id)
