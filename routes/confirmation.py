@@ -45,9 +45,32 @@ def confirmationFunction():
             db.session.add(Orders(user_id=user_id, date=date, plants=str(plants), boxes=str(boxes), addresses=str(addresses), express=express, pay=pay, shipping=shipping, subtotal=subtotal, total=total))
             db.session.commit()
 
+
             # Delete basket in DB
             Baskets.query.filter_by(user_id=user_id).delete()
             db.session.commit()
+
+
+            # Update stock in Plants
+            for itemCopy in itemsCopy:
+
+                # Query for plant stock of corresponding id
+                query = Plants.query.filter_by(id=itemCopy[0]).first()
+
+                # Check if there is still at least one unit
+                if query.stock >= 1:
+
+                    # decrement by one & commit
+                    query.stock -= 1
+                    db.session.commit()
+
+                else:
+
+                    # Flash result & redirect
+                    flash("Not enough stock of " + str(itemCopy[1]), "danger")
+                    return redirect("/basket")
+
+
 
             # Send order confirmation email to client 
             subject = "Your order from the Crazy Plant Crew"
@@ -56,11 +79,13 @@ def confirmationFunction():
             body = render_template('order.html', name=getUserName(), addresses=addresses, plants=plants, total=total, date=date)
             sendMail(subject, email, body)
 
+
             # Send closed deal email to Glenn 
             subject = "You closed a deal!"
             email = os.environ["EMAIL_SEND"]
             body = render_template('deal.html', name=getUserName(), addresses=addresses, total=total, date=date)
             sendMail(subject, email, body)
+
 
             # Flash result & redirect
             flash("Plant(s) ordered", "success")
@@ -182,6 +207,10 @@ def confirmationFunction():
                 index -= 1
 
         items = sorted(items, key=lambda x: (int(x[4]), int(x[5]), int(x[6])), reverse=True)
+
+
+        # Make a copy of items
+        itemsCopy = items[:]
 
 
         # Function to take the biggest box needed from the express group first, then from the non express group. Increment sending costs.
@@ -371,16 +400,7 @@ def confirmationFunction():
         def deleteLoop(thisPlant):
             if len(items) > 0:
 
-                # Query for plant stock of corresponding id
-                query = Plants.query.filter_by(id=thisPlant[0]).first()
-
-                if query.stock >= 1:
-                    query.stock -= 1
-                    db.session.commit()
-                    return items.remove(thisPlant)
-
-                else:
-                    return False
+                return items.remove(thisPlant)
 
             else:
                 return False
@@ -462,12 +482,5 @@ def confirmationFunction():
 
         total = shipping + subtotal
 
-
-
-
-        print('cost')
-        print(cost)
-        print('boxes')
-        print(boxes)
     
         return render_template("confirmation.html", name=getUserName(), picture=getUserPicture(), role=getUserRole(), subtotal=subtotal, shipping=shipping, total=total)
