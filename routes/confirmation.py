@@ -396,7 +396,11 @@ def confirmationFunction():
 
 
     # Get total shipping cost
+    print("cost")
+    print(cost)
     for element in cost:
+        print("element")
+        print(element)
         shipping += element
 
     total = shipping + subtotal
