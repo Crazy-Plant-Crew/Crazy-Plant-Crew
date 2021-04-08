@@ -128,30 +128,30 @@ def confirmationFunction():
 
 
     # Function to take the biggest box needed from the express group first, then from the non express group. Increment sending costs.
-    def plantLoop(item):
+    def plantLoop(thisPlant):
 
         # Express only can only be in Germany - Append needed box - Append to cost
         if len(boxesEX) > 0 and express == "Yes" and addresses[7] == "Germany":
             for boxEX in boxesEX:
-                if int(item[0]) == int(boxEX[1][0]):
+                if int(thisPlant[0]) == int(boxEX[1][0]):
                     cost.append(float(boxEX[0][8]))
                     boxes.extend([boxEX[0]])
                     weight.append(int(boxEX[0][5]))
                     return
 
         # Express only can only be in Germany - Append needed box - Append to cost
-        if len(boxesEX) > 0 and express == "No" and item[8] == "Yes" and addresses[7] == "Germany":
+        if len(boxesEX) > 0 and express == "No" and thisPlant[8] == "Yes" and addresses[7] == "Germany":
             for boxEX in boxesEX:
-                if int(item[0]) == int(boxEX[1][0]):
+                if int(thisPlant[0]) == int(boxEX[1][0]):
                     boxes.extend([boxEX[0]])
                     cost.append(float(boxEX[0][8]))
                     weight.append(int(boxEX[0][5]))
                     return
 
         # Non express but in Germany - Append needed box - Append to cost
-        elif len(boxesNE) > 0 and express == "No" and item[8] == "No" and addresses[7] == "Germany":
+        elif len(boxesNE) > 0 and express == "No" and thisPlant[8] == "No" and addresses[7] == "Germany":
             for boxNE in boxesNE:
-                if int(item[0]) == int(boxNE[1][0]):
+                if int(thisPlant[0]) == int(boxNE[1][0]):
                     boxes.extend([boxNE[0]])
                     cost.append(float(boxNE[0][6]))
                     weight.append(int(boxNE[0][4]))
@@ -160,7 +160,7 @@ def confirmationFunction():
         # Non express in the EU - Append needed box - Append to cost
         elif len(boxesNE) > 0 and express == "No" and addresses[7] != "Germany":
             for boxNE in boxesNE:
-                if int(item[0]) == int(boxNE[1][0]):
+                if int(thisPlant[0]) == int(boxNE[1][0]):
                     boxes.extend([boxNE[0]])
                     cost.append(float(boxNE[0][7]))
                     weight.append(int(boxNE[0][4]))
