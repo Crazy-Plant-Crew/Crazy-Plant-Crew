@@ -17,7 +17,8 @@ confirmation = Blueprint('confirmation', __name__,)
 def confirmationFunction():    
 
     # Force flash() to get the messages on the same page as the redirect.
-    get_flashed_messages() 
+    get_flashed_messages()
+    
 
     # Get variable
     user_id = session["user_id"]
@@ -34,6 +35,7 @@ def confirmationFunction():
     boxes = []
     packaging = []
     weight = []
+    itemsCopy = []
 
 
     # User reached route via POST (as by submitting a form via POST)
