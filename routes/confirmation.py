@@ -18,10 +18,10 @@ def confirmationFunction():
 
     # Force flash() to get the messages on the same page as the redirect.
     get_flashed_messages() 
-    
 
     # Get variable
     user_id = session["user_id"]
+    express = "No"
     subtotal = 0
     shipping = 0
     total = 0
