@@ -453,18 +453,19 @@ def confirmationFunction():
 
 
         # Get total shipping cost
-        print("items")
-        print(items)
-        print("cost")
-        print(cost)
         for element in cost:
-            print("element")
-            print(element)
             shipping += element
 
         total = shipping + subtotal
 
+
         # Start main loop
         masterLoop()
+
+
+        print('cost')
+        print(cost)
+        print('boxes')
+        print(boxes)
     
         return render_template("confirmation.html", name=getUserName(), picture=getUserPicture(), role=getUserRole(), subtotal=subtotal, shipping=shipping, total=total)
