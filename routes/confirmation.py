@@ -452,6 +452,10 @@ def confirmationFunction():
             return
 
 
+        # Start main loop
+        masterLoop()
+
+
         # Get total shipping cost
         for element in cost:
             shipping += element
@@ -459,8 +463,6 @@ def confirmationFunction():
         total = shipping + subtotal
 
 
-        # Start main loop
-        masterLoop()
 
 
         print('cost')
