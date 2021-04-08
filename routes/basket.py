@@ -46,7 +46,6 @@ def basketFunction():
                     Baskets.query.filter(Baskets.id == baskets[index].id).delete()
                     db.session.commit()
 
-
                     # Flash result & redirect
                     flash("Item deleted", "success")
                     return redirect("/basket")
@@ -61,6 +60,13 @@ def basketFunction():
 
             # Set flag
             flag = False
+
+            # Check if there are plants in the basket
+            if len(thisBasket) == 0:
+            
+                # Flash result & redirect
+                flash("There are no plants to order", "success")
+                return redirect("/basket")
 
             # Loop through the user basket
             for item in thisBasket:

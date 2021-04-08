@@ -67,6 +67,14 @@ def confirmationFunction():
         packaging.append([str(element.name), str(element.length), str(element.width), str(element.height), str(element.weight_ne), str(element.weight_ex), str(element.price_de), str(element.price_eu), str(element.price_ex)])
 
 
+    # Check if boxes are in the system
+    if len(packaging) == 0:
+        
+        # Flash result & redirect
+        flash("There are no boxes available", "danger")
+        return redirect("/basket")
+
+
     # Checking plants sizes and weight against boxes sizes and capacity, if it fits, append adapted box to array of possible needed box
     for plant in plants:
         for package in packaging:
