@@ -20,6 +20,7 @@ def basketFunction():
 
     # Get variable
     user_id = session["user_id"]
+    thisBasketItems = []
     
 
     # Query database for plants
@@ -46,9 +47,11 @@ def basketFunction():
                     Baskets.query.filter(Baskets.id == baskets[index].id).delete()
                     db.session.commit()
 
+
                     # Flash result & redirect
                     flash("Item deleted", "success")
                     return redirect("/basket")
+
 
                 else:
 
@@ -60,16 +63,19 @@ def basketFunction():
 
             # Check if there are plants in the basket
             for item in thisBasket:
-                print("item")
-                print(item)
-                """
+                thisBasketItems.append(item.name)
+
+
+            if len(thisBasketItems) == 0:
+
                 # Flash result & redirect
                 flash("There are no plants to order", "danger")
                 return redirect("/basket")
-                """
+
 
             # Set flag
             flag = False
+
 
             # Loop through the user basket
             for item in thisBasket:
@@ -83,10 +89,12 @@ def basketFunction():
                     # Set flag to True
                     flag = True
 
+
                     # Adapting basket to stock quantity and correct basket subtotal
                     item.quantity = query.stock
                     item.subtotal = int(query.stock) * float(item.price)
                     db.session.commit()
+
 
                     # Flash result & redirect
                     flash("Not enough stock of: " + str(item.name), "warning")
@@ -94,6 +102,7 @@ def basketFunction():
 
                 else:
                     flag = False
+
 
             # Check for flag status
             if flag == True:
