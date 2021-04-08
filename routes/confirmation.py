@@ -28,21 +28,21 @@ def confirmationFunction():
         user_id = session["user_id"]
 
 
-        # Get variable
-        global express
-        global subtotal
-        global shipping
-        global total
-        global cost
-        global addresses
-        global plants
-        global items
-        global boxesNE
-        global boxesEX
-        global boxes
-        global packaging
-        global weight
-        global itemsCopy
+        # Set variable locally
+        express = express
+        subtotal = subtotal
+        shipping = shipping
+        total = total
+        cost = cost
+        addresses = addresses
+        plants = plants
+        items = items
+        boxesNE = boxesNE
+        boxesEX = boxesEX
+        boxes = boxes
+        packaging = packaging
+        weight = weight
+        itemsCopy = itemsCopy
         
            
         # Fake pay varibale
