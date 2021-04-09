@@ -30,9 +30,41 @@
 {% endblock %}
 
 {% block main %}
-    Transaction page
-    <br>
-    <div>
-        <a href="/"><img src="/static/back.svg" alt="back" height="50"></a>
-    </div>
+<form action="/transaction" method="post">
+    <div class="TableBorder">
+        <table class="TableMain">
+            <thead>
+                <tr>
+                    <th scope="col">Date</th>
+                    <th scope="col">Plants</th>
+                    <th scope="col">Total</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Pay</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for order, plant in zip %}
+                    <tr>
+                        <td>{{ order.date | safe }}</td>
+                        <td>{% for item in plant %}
+                            {{ item[1] | safe }} x{{ item[2] | safe }}<br>
+                            {% endfor %}</td>
+                        <td>{{ '%0.2f'|format(order.total) }}€</td>
+                        <td>{{ order.stage | safe }}</td>
+                        <td>{{ order.pay | safe }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>      
+</form>
+<br>
+<div>
+    <a href="/"><img src="/static/back.svg" alt="back" height="50"></a>
+</div>
+
+<script>
+
+</script>
 {% endblock %}
