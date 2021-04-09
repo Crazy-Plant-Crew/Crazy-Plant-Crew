@@ -35,6 +35,7 @@
         <table class="TableMain">
             <thead>
                 <tr>
+                    <th scope="col">Name</th>
                     <th scope="col">Date</th>
                     <th scope="col">Plants</th>
                     <th scope="col">Total</th>
@@ -44,8 +45,9 @@
             </thead>
 
             <tbody>
-                {% for order, plant in zip %}
+                {% for order, plant, address in zip %}
                     <tr>
+                        <td>{{ address[0] | safe }} {{ address[1] | safe }}</td>
                         <td>{{ order.date | safe }}</td>
                         <td>{% for item in plant %}
                             {{ item[1] | safe }} x{{ item[2] | safe }}<br>

@@ -31,7 +31,13 @@ def transactionFunction():
     plants = []
     for order in orders:
         plants.extend([eval(order.plants)])
-  
+
+
+    # Make array of arrays of addresses in Orders
+    addresses = []
+    for order in orders:
+        addresses.extend([eval(order.addresses)])
+
 
     # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
@@ -41,4 +47,4 @@ def transactionFunction():
 
 
     
-    return render_template("transaction.html", name=getUserName(), picture=getUserPicture(), role=getUserRole(), zip=zip(orders, plants))
+    return render_template("transaction.html", name=getUserName(), picture=getUserPicture(), role=getUserRole(), zip=zip(orders, plants, addresses))
