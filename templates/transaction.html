@@ -37,6 +37,7 @@
                 <tr>
                     <th scope="col">Name</th>
                     <th scope="col">Date</th>
+                    <th scope="col">Address</th>
                     <th scope="col">Plants</th>
                     <th scope="col">Total</th>
                     <th scope="col">Status</th>
@@ -49,6 +50,7 @@
                     <tr>
                         <td>{{ address[0] | safe }} {{ address[1] | safe }}</td>
                         <td>{{ order.date | safe }}</td>
+                        <td>{{ address[3] | safe }} {{ address[4] | safe }},<br>{{ address[5] | safe }} - {{ address[6] | safe }}<br>{{ address[7] | safe }}</td>
                         <td>{% for item in plant %}
                             {{ item[1] | safe }} x{{ item[2] | safe }}<br>
                             {% endfor %}</td>
