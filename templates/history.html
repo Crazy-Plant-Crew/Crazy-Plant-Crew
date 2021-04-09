@@ -47,7 +47,9 @@
                     {% for order, plant in zip %}
                         <tr>
                             <td>{{ order.date | safe }}</td>
-                            <td>{% for item in plant %} {{ item[1] | safe }} x{{ item[2] | safe }} {% endfor %}</td>
+                            <td>{% for item in plant %}
+                                {{ item[1] | safe }} x{{ item[2] | safe }}<br>
+                                {% endfor %}</td>
                             <td>{{ '%0.2f'|format(order.total) }}€</td>
                             <td>{{ order.stage | safe }}</td>
                             <td>{{ order.pay | safe }}</td>
