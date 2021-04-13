@@ -394,8 +394,9 @@ def confirmationFunction():
 
                             else:
                                 gridIndexV += 1
+
                         else:
-                            return False
+                            gridIndexV += 1
 
                     # Check if fits with width horizontally (flipped)
                     elif x <= int(len(thisBox[gridIndexV]) - int(width)):
@@ -419,7 +420,7 @@ def confirmationFunction():
                                 gridIndexV += 1
 
                         else:
-                            return False
+                            gridIndexV += 1
 
                     else:
                         gridIndexV += 1
