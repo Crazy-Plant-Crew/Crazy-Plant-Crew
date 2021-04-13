@@ -372,6 +372,8 @@ def confirmationFunction():
                 x = gridHorizon(thisBox[gridIndexV])
                 print("x")
                 print(x)
+                print("gridIndexV")
+                print(gridIndexV)
 
                 # X must exist otherwise the plant never fits
                 if x != None:
