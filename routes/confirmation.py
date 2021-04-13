@@ -426,7 +426,6 @@ def confirmationFunction():
                         gridIndexV += 1
 
                 else:
-                    print("return FALSE here")
                     return False
 
 
@@ -458,6 +457,8 @@ def confirmationFunction():
                             weight[-1] -= int(mass)
 
                             # Check if possible to draw an other plant in the grib
+                            print("Fuckery?")
+                            print(gridLoop(length, width, thisBox))
                             if gridLoop(length, width, thisBox) != False:      
 
                                 # Delete dealt plant                      
