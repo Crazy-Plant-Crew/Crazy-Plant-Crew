@@ -396,7 +396,7 @@ def confirmationFunction():
                                 gridIndexV += 1
                                 
                         else:
-                            print("here")
+                            return False
 
                     # Check if fits with width horizontally (flipped)
                     elif x <= int(len(thisBox[gridIndexV]) - int(width)):
@@ -420,13 +420,13 @@ def confirmationFunction():
                                 gridIndexV += 1
 
                         else:
-                            print("over there")
+                            return False
 
                     else:
                         gridIndexV += 1
 
                 else:
-                    print("there")
+                    return False
 
 
         # Delete dealt plants and update corresponding stock
