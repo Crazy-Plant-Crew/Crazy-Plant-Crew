@@ -396,7 +396,7 @@ def confirmationFunction():
                                 gridIndexV += 1
                                 
                         else:
-                            return False
+                            print("here")
 
                     # Check if fits with width horizontally (flipped)
                     elif x <= int(len(thisBox[gridIndexV]) - int(width)):
@@ -426,7 +426,7 @@ def confirmationFunction():
                         gridIndexV += 1
 
                 else:
-                    return False
+                    print("there")
 
 
         # Delete dealt plants and update corresponding stock
@@ -456,20 +456,16 @@ def confirmationFunction():
                             # Update available weight
                             weight[-1] -= int(mass)
 
-                            # Check if possible to draw an other plant in the grib
-                            print("Fuckery?")
-                            print(gridLoop(length, width, thisBox))
+                            # Check if possible to draw an other plant in the grid
                             if gridLoop(length, width, thisBox) != False:      
 
                                 # Delete dealt plant                      
                                 deleteLoop(item)
 
                                 # Recursively try again
-                                print("slave")
                                 slaveLoop(thisBox)
 
                             else:
-                                print("master")
                                 masterLoop()
                         else:
                             masterLoop()
