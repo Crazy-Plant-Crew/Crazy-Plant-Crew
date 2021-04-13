@@ -420,7 +420,8 @@ def confirmationFunction():
                                 gridIndexV += 1
 
                         else:
-                            return False
+                            rotation = False
+                            gridIndexV += 1
 
                     else:
                         gridIndexV += 1
@@ -467,6 +468,7 @@ def confirmationFunction():
 
                             else:
                                 masterLoop()
+                                
                         else:
                             masterLoop()
                     
