@@ -388,19 +388,14 @@ def confirmationFunction():
                         # Check if fits with width vertically
                         if gridIndexV + int(width) < len(thisBox):
 
-                            print("fits vertical")
-
                             # Check if we find a "0" to be sure there is enough space
                             if thisBox[gridIndexV + int(width)][x] == "0":
 
                                 # Set the y axis
                                 y = gridIndexV
 
-                                print(y)
-                                print("y")
-
                                 # Start drawing
-                                return drawLoop(x, y, length, width, rotation, thisBox)
+                                drawLoop(x, y, length, width, rotation, thisBox)
 
                             else:
                                 gridIndexV += 1
@@ -423,7 +418,7 @@ def confirmationFunction():
                                 y = gridIndexV
 
                                 # Start drawing
-                                return drawLoop(x, y, length, width, rotation, thisBox)
+                                drawLoop(x, y, length, width, rotation, thisBox)
                             
                             else:
                                 gridIndexV += 1
