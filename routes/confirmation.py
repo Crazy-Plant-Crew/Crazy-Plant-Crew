@@ -378,7 +378,7 @@ def confirmationFunction():
                     if x <= int(len(thisBox[gridIndexV]) - int(length)):
 
                         # Check if fits with width vertically
-                        if gridIndexV + int(width) <= len(thisBox):
+                        if gridIndexV + int(width) < len(thisBox):
 
                             # Check if we find a "0" to be sure there is enough space
                             if thisBox[gridIndexV + int(width)][x] == "0":
@@ -402,7 +402,7 @@ def confirmationFunction():
                     elif x <= int(len(thisBox[gridIndexV]) - int(width)):
 
                         # Check if fits with length vertically
-                        if gridIndexV + int(length) <= len(thisBox):
+                        if gridIndexV + int(length) < len(thisBox):
 
                             # Check if we find a "0" to be sure there is enough space
                             if thisBox[gridIndexV + int(length)][x] == "0":
