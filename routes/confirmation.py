@@ -370,6 +370,7 @@ def confirmationFunction():
 
                 # Get free space horizontally
                 x = gridHorizon(thisBox[gridIndexV])
+
                 print("x")
                 print(x)
 
@@ -392,7 +393,7 @@ def confirmationFunction():
                                 y = gridIndexV
 
                                 # Start drawing
-                                drawLoop(x, y, length, width, rotation, thisBox)
+                                return drawLoop(x, y, length, width, rotation, thisBox)
 
                             else:
                                 gridIndexV += 1
@@ -416,7 +417,7 @@ def confirmationFunction():
                                 y = gridIndexV
 
                                 # Start drawing
-                                drawLoop(x, y, length, width, rotation, thisBox)
+                                return drawLoop(x, y, length, width, rotation, thisBox)
                             
                             else:
                                 gridIndexV += 1
