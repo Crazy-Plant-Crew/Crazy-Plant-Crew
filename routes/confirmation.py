@@ -396,7 +396,6 @@ def confirmationFunction():
                                 gridIndexV += 1
                                 
                         else:
-                            print("return FALSE here")
                             return False
 
                     # Check if fits with width horizontally (flipped)
@@ -427,6 +426,7 @@ def confirmationFunction():
                         gridIndexV += 1
 
                 else:
+                    print("return FALSE here")
                     return False
 
 
