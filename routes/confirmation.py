@@ -420,7 +420,7 @@ def confirmationFunction():
                                 gridIndexV += 1
 
                         else:
-                            return False
+                            print("over there")
 
                     else:
                         gridIndexV += 1
