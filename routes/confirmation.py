@@ -371,11 +371,6 @@ def confirmationFunction():
                 # Get free space horizontally
                 x = gridHorizon(thisBox[gridIndexV])
 
-                print("x")
-                print(x)
-                print("gridIndexV")
-                print(gridIndexV)
-
                 # X must exist otherwise the plant never fits
                 if x != None:
 
@@ -467,9 +462,11 @@ def confirmationFunction():
                                 deleteLoop(item)
 
                                 # Recursively try again
+                                print("slave")
                                 slaveLoop(thisBox)
 
-                            else: 
+                            else:
+                                print("master")
                                 masterLoop()
                         else:
                             masterLoop()
