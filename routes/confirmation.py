@@ -371,25 +371,20 @@ def confirmationFunction():
                 # Get free space horizontally
                 x = gridHorizon(thisBox[gridIndexV])
 
-                print("x")
-                print(x)
-                print("gridIndexV")
-                print(gridIndexV)
-
                 # X must exist otherwise the plant never fits
                 if x != None:
 
                     # Check if fits with the length horizontally
                     if x <= int(len(thisBox[gridIndexV]) - int(length)):
 
-                        # Set roation flag
-                        rotation = False
-
                         # Check if fits with width vertically
-                        if gridIndexV + int(width) < len(thisBox):
+                        if gridIndexV + int(width) <= len(thisBox):
 
                             # Check if we find a "0" to be sure there is enough space
                             if thisBox[gridIndexV + int(width)][x] == "0":
+
+                                # Set roation flag
+                                rotation = False
 
                                 # Set the y axis
                                 y = gridIndexV
@@ -406,14 +401,14 @@ def confirmationFunction():
                     # Check if fits with width horizontally (flipped)
                     elif x <= int(len(thisBox[gridIndexV]) - int(width)):
 
-                        # Set rotation flag
-                        rotation = True
-
                         # Check if fits with length vertically
-                        if gridIndexV + int(length) < len(thisBox):
+                        if gridIndexV + int(length) <= len(thisBox):
 
                             # Check if we find a "0" to be sure there is enough space
                             if thisBox[gridIndexV + int(length)][x] == "0":
+
+                                # Set rotation flag
+                                rotation = True
 
                                 # Set the y axis
                                 y = gridIndexV
@@ -425,7 +420,6 @@ def confirmationFunction():
                                 gridIndexV += 1
 
                         else:
-                            rotation = False
                             gridIndexV += 1
 
                     else:
