@@ -370,6 +370,8 @@ def confirmationFunction():
 
                 # Get free space horizontally
                 x = gridHorizon(thisBox[gridIndexV])
+                print("x")
+                print(x)
 
                 # X must exist otherwise the plant never fits
                 if x != None:
